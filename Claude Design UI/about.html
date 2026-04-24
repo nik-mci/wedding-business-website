@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Vows & Vedas</title>
+<link rel="stylesheet" href="global.css">
+<style>
+/* SPLIT HERO */
+#about-hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; padding-top: 0; padding: 0; }
+.hero-left { background: var(--bg); display: flex; flex-direction: column; justify-content: flex-end; padding: 80px 64px; padding-top: 140px; }
+.hero-left-eyebrow { font-size: 10px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; font-weight: 500; opacity: 0; animation: fadeUp .8s .3s both; }
+.hero-left-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px,6vw,88px); font-weight: 300; line-height: 1.05; opacity: 0; animation: fadeUp .9s .5s both; }
+.hero-right { position: relative; overflow: hidden; }
+.hero-right-img { position: absolute; inset: 0; background: url('uploads/real_images-1777026820855.jpg') center/cover; transition: transform .1s linear; }
+.hero-right-overlay { position: absolute; inset: 0; background: rgba(28,20,12,0.2); }
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+/* BRAND STORY */
+#brand-story { display: grid; grid-template-columns: 60px 1fr; gap: 48px; max-width: 900px; margin: 0 auto; }
+.story-line-wrap { position: relative; display: flex; justify-content: center; }
+.story-line { width: 1px; background: rgba(0,0,0,0.1); position: relative; }
+.story-line-fill { position: absolute; top: 0; left: 0; width: 1px; background: var(--gold); height: 0%; transition: height .1s linear; }
+.story-paragraphs { display: flex; flex-direction: column; gap: 40px; }
+.story-para { opacity: 0; transform: translateY(16px); transition: opacity .8s var(--ease), transform .8s var(--ease); font-size: 15px; line-height: 2; color: var(--ink2); font-weight: 300; }
+.story-para.visible { opacity: 1; transform: translateY(0); }
+.story-para strong { color: var(--ink); font-weight: 500; font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; }
+
+/* VALUES */
+#values { background: var(--ink); }
+#values .section-label { color: var(--gold); }
+#values .section-title { color: var(--white); }
+.values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 64px; }
+.value-card { background: #252220; padding: 56px 40px; border-bottom: 2px solid transparent; transition: border-color .3s, transform .3s; }
+.value-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+.value-num { font-family: 'Cormorant Garamond', serif; font-size: 64px; color: rgba(191,164,106,0.15); font-weight: 300; line-height: 1; margin-bottom: 24px; }
+.value-name { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--white); margin-bottom: 4px; position: relative; display: inline-block; }
+.value-name::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--gold); transition:width .4s var(--ease); }
+.value-card:hover .value-name::after { width: 100%; }
+.value-desc { font-size: 12px; line-height: 1.9; color: rgba(255,255,255,0.5); font-weight: 300; margin-top: 20px; }
+
+/* STATS */
+#stats { background: var(--bg); }
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 64px; }
+.stat-item { text-align: center; padding: 48px 24px; background: var(--white); }
+.stat-num { font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 300; color: var(--ink); line-height: 1; }
+.stat-num span { color: var(--gold); }
+.stat-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink2); margin-top: 12px; font-weight: 500; }
+
+/* TEAM */
+#team { background: var(--bg); border-top: 1px solid rgba(0,0,0,0.07); }
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 64px; }
+.team-card { position: relative; overflow: hidden; cursor: none; }
+.team-photo { aspect-ratio: 3/4; background: linear-gradient(135deg, #2a2518 0%, #1a1608 100%); position: relative; overflow: hidden; transition: filter .4s; }
+.team-photo::before { content:''; position:absolute; inset:0; background-image:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(191,164,106,0.05) 20px,rgba(191,164,106,0.05) 21px); }
+.team-card:hover .team-photo { filter: brightness(1.1); }
+.team-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%); opacity: 0; transition: opacity .4s; display: flex; align-items: flex-end; padding: 32px; }
+.team-card:hover .team-overlay { opacity: 1; }
+.team-info { transform: translateY(8px); transition: transform .4s; }
+.team-card:hover .team-info { transform: translateY(0); }
+.team-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--white); }
+.team-role { font-size: 10px; letter-spacing: 0.3em; color: var(--gold); margin-top: 4px; }
+.team-vibe { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 8px; font-weight: 300; font-style: italic; }
+.team-static { padding: 24px 0 8px; }
+.team-static h4 { font-family: 'Cormorant Garamond', serif; font-size: 24px; }
+.team-static p { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="loader"><div id="loader-text">✦ &nbsp; VOWS &amp; VEDAS &nbsp; ✦</div></div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">VOWS &amp; VEDAS</a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Weddings</a></li>
+    <li><a href="about.html" style="color:var(--gold)">About</a></li>
+    <li><a href="blog.html">Stories</a></li>
+    <li><a href="destinations.html">Destinations</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta"><span>Begin Your Journey</span></a>
+</nav>
+
+<!-- SPLIT HERO -->
+<section id="about-hero">
+  <div class="hero-left">
+    <p class="hero-left-eyebrow">Our Story</p>
+    <h1 class="hero-left-title">Where<br><em>Vision</em><br>Meets<br><em>Devotion</em></h1>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-img" id="hero-right-bg"></div>
+    <div class="hero-right-overlay"></div>
+  </div>
+</section>
+
+<!-- BRAND STORY -->
+<section style="padding:120px 48px">
+  <p class="section-label reveal" style="text-align:center;margin-bottom:48px">Our Journey</p>
+  <div id="brand-story">
+    <div class="story-line-wrap">
+      <div class="story-line"><div class="story-line-fill" id="story-line-fill"></div></div>
+    </div>
+    <div class="story-paragraphs">
+      <p class="story-para"><strong>Founded on love itself,</strong> Vows &amp; Vedas was born from a simple belief: that your wedding day should feel as extraordinary as the love that led you here.</p>
+      <p class="story-para">We began in 2015, with a small team and a single palace wedding in Udaipur. What started as a dream became a calling — and today we've crafted over 300 weddings across 40+ destinations worldwide.</p>
+      <p class="story-para">Our approach is deeply personal. We don't believe in templates. Every couple is a new story, every venue a new canvas. We listen before we plan, and we dream before we design.</p>
+      <p class="story-para"><strong>From the Himalayas to the Mediterranean,</strong> from intimate gardens to 1,000-guest palaces — we bring the same attention, creativity and care to every celebration we touch.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section id="values">
+  <p class="section-label reveal">What Drives Us</p>
+  <h2 class="section-title reveal">Our <em>Values</em></h2>
+  <div class="values-grid">
+    <div class="value-card reveal stagger-1">
+      <p class="value-num">01</p>
+      <h3 class="value-name">Intention</h3>
+      <p class="value-desc">Every decision we make is purposeful. From the colour of the marigolds to the sequencing of the evening — nothing is accidental.</p>
+    </div>
+    <div class="value-card reveal stagger-2">
+      <p class="value-num">02</p>
+      <h3 class="value-name">Craft</h3>
+      <p class="value-desc">We treat wedding design as an art form. Our team brings mastery, imagination and years of experience to every celebration.</p>
+    </div>
+    <div class="value-card reveal stagger-3">
+      <p class="value-num">03</p>
+      <h3 class="value-name">Devotion</h3>
+      <p class="value-desc">We fall a little in love with every couple we work with. Your joy is our purpose — and it shows in everything we do.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <p class="section-label reveal" style="text-align:center">In Numbers</p>
+  <h2 class="section-title reveal" style="text-align:center">A Decade of <em>Love Stories</em></h2>
+  <div class="stats-row">
+    <div class="stat-item reveal stagger-1"><p class="stat-num" data-count="300">0<span>+</span></p><p class="stat-label">Weddings Crafted</p></div>
+    <div class="stat-item reveal stagger-2"><p class="stat-num" data-count="40">0<span>+</span></p><p class="stat-label">Destinations</p></div>
+    <div class="stat-item reveal stagger-3"><p class="stat-num" data-count="10">0<span>+</span></p><p class="stat-label">Years of Excellence</p></div>
+    <div class="stat-item reveal stagger-4"><p class="stat-num" data-count="98">0<span>%</span></p><p class="stat-label">Couple Satisfaction</p></div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <p class="section-label reveal">The People Behind The Magic</p>
+  <h2 class="section-title reveal">Meet Our <em>Team</em></h2>
+  <div class="team-grid">
+    <div class="team-card reveal stagger-1">
+      <div class="team-photo"></div>
+      <div class="team-overlay"><div class="team-info"><p class="team-name">Ananya Sharma</p><p class="team-role">Founder &amp; Creative Director</p><p class="team-vibe">"Every wedding is a love letter to the future."</p></div></div>
+      <div class="team-static"><h4>Ananya Sharma</h4><p>Founder &amp; Creative Director</p></div>
+    </div>
+    <div class="team-card reveal stagger-2">
+      <div class="team-photo" style="background:linear-gradient(135deg,#1e2018,#0e1008)"></div>
+      <div class="team-overlay"><div class="team-info"><p class="team-name">Rahul Mehta</p><p class="team-role">Décor &amp; Design Lead</p><p class="team-vibe">"Beauty is in the details no one else notices."</p></div></div>
+      <div class="team-static"><h4>Rahul Mehta</h4><p>Décor &amp; Design Lead</p></div>
+    </div>
+    <div class="team-card reveal stagger-3">
+      <div class="team-photo" style="background:linear-gradient(135deg,#2a1a20,#1a0a10)"></div>
+      <div class="team-overlay"><div class="team-info"><p class="team-name">Priya Nair</p><p class="team-role">Destination Specialist</p><p class="team-vibe">"The world is full of perfect wedding venues — let me find yours."</p></div></div>
+      <div class="team-static"><h4>Priya Nair</h4><p>Destination Specialist</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><p class="footer-logo">Vows &amp; Vedas</p><p class="footer-tagline">India's premier luxury destination wedding studio.</p></div>
+    <div><p class="footer-heading">Navigate</p><ul class="footer-links"><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Real Weddings</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><p class="footer-heading">Services</p><ul class="footer-links"><li><a href="#">Destination Weddings</a></li><li><a href="#">Full Planning</a></li><li><a href="#">Photography</a></li><li><a href="#">Mehendi</a></li></ul></div>
+    <div><p class="footer-heading">Stay Connected</p><div class="newsletter-form"><input type="email" class="newsletter-input" placeholder="Your email address"><button class="newsletter-btn">→</button></div></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 Vows &amp; Vedas.</p><div class="social-icons"><a href="#">Instagram</a><a href="#">Pinterest</a><a href="#">YouTube</a></div><p>Privacy &nbsp;·&nbsp; Terms</p></div>
+</footer>
+
+<div id="chatbot">
+  <div id="chat-panel">
+    <div class="chat-header"><div class="chat-avatar">V</div><div><p class="chat-title">Vows &amp; Vedas</p><p class="chat-status">● Online Now</p></div></div>
+    <div class="chat-messages" id="chat-messages"><div class="chat-msg bot">Want to know more about our team or process? Happy to help!</div></div>
+    <div class="chat-input-wrap"><input type="text" class="chat-input" id="chat-input-field" placeholder="Type a message…"><button class="chat-send" id="chat-send-btn">→</button></div>
+    <a href="https://wa.me/" class="chat-whatsapp">💬 &nbsp; Continue on WhatsApp</a>
+  </div>
+  <button id="chat-btn" onclick="toggleChat()">
+    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+  </button>
+</div>
+
+<script src="global.js"></script>
+<script>
+// Parallax on right image
+window.addEventListener('scroll', () => {
+  const bg = document.getElementById('hero-right-bg');
+  if (bg) bg.style.transform = `translateY(${window.scrollY * 0.15}px)`;
+  // Story line
+  const section = document.getElementById('brand-story');
+  const fill = document.getElementById('story-line-fill');
+  if (section && fill) {
+    const rect = section.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const pct = Math.max(0, Math.min(1, (vh - rect.top) / (rect.height + vh)));
+    fill.style.height = (pct * 100) + '%';
+  }
+});
+
+// Story paragraphs reveal
+const paraIO = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.2 });
+document.querySelectorAll('.story-para').forEach((p, i) => {
+  p.style.transitionDelay = (i * 0.15) + 's';
+  paraIO.observe(p);
+});
+
+// Count-up animation
+const countIO = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = parseInt(el.dataset.count);
+    const suffix = el.querySelector('span').textContent;
+    let start = 0;
+    const duration = 1800;
+    const step = timestamp => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.innerHTML = Math.round(eased * target) + '<span>' + suffix + '</span>';
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+    countIO.unobserve(el);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => countIO.observe(el));
+</script>
+</body>
+</html>

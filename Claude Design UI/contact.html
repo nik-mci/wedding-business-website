@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Vows & Vedas</title>
+<link rel="stylesheet" href="global.css">
+<style>
+#contact-layout { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
+.contact-form-side { padding: 140px 72px 80px; display: flex; flex-direction: column; justify-content: center; }
+.contact-image-side { position: relative; overflow: hidden; }
+.contact-img-bg { position: absolute; inset: 0; background: url('uploads/real_images-1777026820855.jpg') center/cover; transition: transform .1s; }
+.contact-img-overlay { position: absolute; inset: 0; background: rgba(28,20,12,0.35); }
+
+/* FORM */
+.form-eyebrow { font-size: 10px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; font-weight: 500; opacity: 0; animation: fadeUp .8s .3s both; }
+.form-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px,5vw,64px); font-weight: 300; line-height: 1.1; margin-bottom: 48px; opacity: 0; animation: fadeUp .9s .5s both; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.form-group { position: relative; margin-bottom: 36px; }
+.form-input, .form-select, .form-textarea { width: 100%; border: none; border-bottom: 1px solid rgba(0,0,0,0.15); padding: 12px 0; font-size: 13px; font-family: 'Montserrat', sans-serif; background: transparent; color: var(--ink); outline: none; transition: border-color .3s; appearance: none; font-weight: 300; }
+.form-textarea { resize: none; height: 80px; }
+.form-label { position: absolute; top: 12px; left: 0; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(0,0,0,0.35); font-weight: 500; pointer-events: none; transition: all .3s var(--ease); }
+.form-underline { position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--gold); transition: width .4s var(--ease); }
+.form-input:focus ~ .form-underline,
+.form-select:focus ~ .form-underline,
+.form-textarea:focus ~ .form-underline { width: 100%; }
+.form-input:focus ~ .form-label,
+.form-input:not(:placeholder-shown) ~ .form-label,
+.form-textarea:focus ~ .form-label,
+.form-textarea:not(:placeholder-shown) ~ .form-label { top: -16px; font-size: 9px; color: var(--gold); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.form-submit { position: relative; padding: 18px 48px; background: var(--gold); border: none; color: var(--white); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 600; cursor: none; font-family: 'Montserrat', sans-serif; overflow: hidden; margin-top: 8px; transition: background .3s; }
+.form-submit:hover { background: #a8903c; }
+.form-submit.loading .submit-text { opacity: 0; }
+.form-submit.loading::after { content: ''; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.spinner { display: none; width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin .8s linear infinite; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+.form-submit.loading .spinner { display: block; }
+@keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+.checkmark { display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+.form-submit.success { background: #4CAF50; }
+.form-submit.success .submit-text { opacity: 0; }
+.form-submit.success .checkmark { display: block; color: white; font-size: 18px; }
+
+/* CONTACT OPTIONS */
+.contact-options { display: flex; gap: 32px; margin-top: 56px; padding-top: 48px; border-top: 1px solid rgba(0,0,0,0.08); }
+.contact-opt { display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none; color: var(--ink); transition: transform .3s; }
+.contact-opt:hover { transform: translateY(-6px); }
+.opt-icon { width: 52px; height: 52px; border: 1px solid rgba(0,0,0,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; transition: border-color .3s, background .3s; }
+.contact-opt:hover .opt-icon { border-color: var(--gold); background: var(--gold); }
+.opt-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; }
+
+/* RIGHT SIDE FLOATING TEXT */
+.contact-quote { position: absolute; bottom: 64px; left: 48px; right: 48px; z-index: 2; }
+.contact-quote blockquote { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px,3.5vw,48px); color: var(--white); font-weight: 300; font-style: italic; line-height: 1.3; }
+.contact-quote cite { display: block; font-size: 11px; letter-spacing: 0.3em; color: var(--gold); margin-top: 16px; font-style: normal; }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="loader"><div id="loader-text">✦ &nbsp; VOWS &amp; VEDAS &nbsp; ✦</div></div>
+
+<nav id="navbar" class="solid">
+  <a href="index.html" class="nav-logo">VOWS &amp; VEDAS</a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Weddings</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="blog.html">Stories</a></li>
+    <li><a href="destinations.html">Destinations</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta" style="border-color:var(--gold);color:var(--ink)"><span>Begin Your Journey</span></a>
+</nav>
+
+<div id="contact-layout">
+  <!-- FORM SIDE -->
+  <div class="contact-form-side">
+    <p class="form-eyebrow">Let's Begin</p>
+    <h1 class="form-title">Tell Us About<br>Your <em>Dream Day</em></h1>
+
+    <form id="contact-form" onsubmit="submitForm(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <input type="text" class="form-input" id="fname" placeholder=" " required>
+          <label class="form-label" for="fname">First Name</label>
+          <div class="form-underline"></div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-input" id="lname" placeholder=" " required>
+          <label class="form-label" for="lname">Last Name</label>
+          <div class="form-underline"></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <input type="email" class="form-input" id="email" placeholder=" " required>
+          <label class="form-label" for="email">Email Address</label>
+          <div class="form-underline"></div>
+        </div>
+        <div class="form-group">
+          <input type="tel" class="form-input" id="phone" placeholder=" ">
+          <label class="form-label" for="phone">Phone Number</label>
+          <div class="form-underline"></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <input type="date" class="form-input" id="date" placeholder=" ">
+          <label class="form-label" for="date" style="top:-16px;font-size:9px;color:var(--gold)">Wedding Date</label>
+          <div class="form-underline"></div>
+        </div>
+        <div class="form-group">
+          <select class="form-select" id="budget">
+            <option value="" disabled selected>Select Budget Range</option>
+            <option>₹8L – ₹15L</option>
+            <option>₹15L – ₹30L</option>
+            <option>₹30L – ₹60L</option>
+            <option>₹60L+</option>
+          </select>
+          <div class="form-underline"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-input" id="destination" placeholder=" ">
+        <label class="form-label" for="destination">Destination in Mind</label>
+        <div class="form-underline"></div>
+      </div>
+      <div class="form-group">
+        <textarea class="form-textarea" id="message" placeholder=" "></textarea>
+        <label class="form-label" for="message">Tell Us Your Vision</label>
+        <div class="form-underline"></div>
+      </div>
+
+      <button class="form-submit" type="submit" id="submit-btn">
+        <span class="submit-text">Send My Enquiry</span>
+        <div class="spinner"></div>
+        <span class="checkmark">✓</span>
+      </button>
+    </form>
+
+    <div class="contact-options">
+      <a href="https://wa.me/" class="contact-opt">
+        <div class="opt-icon">💬</div>
+        <span class="opt-label">WhatsApp</span>
+      </a>
+      <a href="mailto:hello@vowsandvedas.com" class="contact-opt">
+        <div class="opt-icon">✉</div>
+        <span class="opt-label">Email</span>
+      </a>
+      <a href="#" class="contact-opt" onclick="toggleChat();return false;">
+        <div class="opt-icon">📅</div>
+        <span class="opt-label">Book a Call</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- IMAGE SIDE -->
+  <div class="contact-image-side">
+    <div class="contact-img-bg" id="contact-img-bg"></div>
+    <div class="contact-img-overlay"></div>
+    <div class="contact-quote">
+      <blockquote>"The best weddings begin with a single conversation."</blockquote>
+      <cite>— Ananya Sharma, Founder</cite>
+    </div>
+  </div>
+</div>
+
+<div id="chatbot">
+  <div id="chat-panel">
+    <div class="chat-header"><div class="chat-avatar">V</div><div><p class="chat-title">Vows &amp; Vedas</p><p class="chat-status">● Online Now</p></div></div>
+    <div class="chat-messages" id="chat-messages"><div class="chat-msg bot">Ready to start planning? Fill in the form or ask me anything!</div></div>
+    <div class="chat-input-wrap"><input type="text" class="chat-input" id="chat-input-field" placeholder="Type a message…"><button class="chat-send" id="chat-send-btn">→</button></div>
+    <a href="https://wa.me/" class="chat-whatsapp">💬 &nbsp; Continue on WhatsApp</a>
+  </div>
+  <button id="chat-btn" onclick="toggleChat()">
+    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+  </button>
+</div>
+
+<script src="global.js"></script>
+<script>
+window.addEventListener('scroll', () => {
+  const bg = document.getElementById('contact-img-bg');
+  if (bg) bg.style.transform = `translateY(${window.scrollY * 0.2}px)`;
+});
+
+function submitForm(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  btn.classList.add('loading');
+  setTimeout(() => {
+    btn.classList.remove('loading');
+    btn.classList.add('success');
+    setTimeout(() => { btn.classList.remove('success'); }, 3000);
+  }, 2000);
+}
+</script>
+</body>
+</html>

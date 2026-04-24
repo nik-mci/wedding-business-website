@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stories — Vows & Vedas</title>
+<link rel="stylesheet" href="global.css">
+<style>
+/* FEATURED POST */
+.featured-post { display: grid; grid-template-columns: 1fr 1fr; gap: 0; min-height: 520px; margin-bottom: 2px; }
+.feat-image { position: relative; overflow: hidden; }
+.feat-img-inner { width: 100%; height: 100%; background: linear-gradient(135deg,#2a2518,#1a1208); position: relative; overflow: hidden; transition: transform .6s var(--ease); }
+.feat-image:hover .feat-img-inner { transform: scale(1.03); }
+.feat-img-inner img { width: 100%; height: 100%; object-fit: cover; }
+.feat-img-overlay { position: absolute; inset: 0; background: rgba(20,16,12,0.2); }
+.feat-content { background: var(--white); padding: 72px 64px; display: flex; flex-direction: column; justify-content: center; }
+.feat-label { font-size: 9px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; font-weight: 500; }
+.feat-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px,4vw,52px); font-weight: 300; line-height: 1.2; margin-bottom: 20px; }
+.feat-excerpt { font-size: 13px; line-height: 2; color: var(--ink2); font-weight: 300; margin-bottom: 36px; }
+.feat-meta { font-size: 10px; letter-spacing: 0.15em; color: rgba(0,0,0,0.35); margin-bottom: 32px; }
+
+/* CATEGORY TABS */
+.blog-tabs { display: flex; gap: 0; border-bottom: 1px solid rgba(0,0,0,0.1); margin-bottom: 56px; position: relative; }
+.blog-tab { padding: 14px 28px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; background: none; border: none; cursor: none; color: var(--ink2); transition: color .3s; }
+.blog-tab.active { color: var(--ink); }
+.blog-tab-indicator { position: absolute; bottom: -1px; height: 2px; background: var(--gold); transition: left .4s var(--ease), width .4s var(--ease); }
+
+/* BLOG GRID */
+.blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.blog-card { cursor: none; }
+.blog-img-wrap { overflow: hidden; aspect-ratio: 4/3; background: #2a2518; }
+.blog-img-inner { width: 100%; height: 100%; transition: transform .6s var(--ease); background: linear-gradient(135deg,#2a2518,#1a1208); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.blog-img-inner::before { content:''; position:absolute; inset:0; background-image:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(191,164,106,0.05) 20px,rgba(191,164,106,0.05) 21px); }
+.blog-card:hover .blog-img-inner { transform: scale(1.06); }
+.blog-body { padding: 28px 24px 36px; background: var(--white); }
+.blog-cat { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; font-weight: 500; }
+.blog-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; line-height: 1.3; margin-bottom: 12px; display: block; position: relative; transition: color .3s; }
+.blog-title::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:1px; background:var(--gold); transition:width .4s var(--ease); }
+.blog-card:hover .blog-title { color: var(--gold); }
+.blog-card:hover .blog-title::after { width: 100%; }
+.blog-excerpt { font-size: 12px; line-height: 1.8; color: var(--ink2); font-weight: 300; margin-bottom: 20px; }
+.blog-meta { font-size: 10px; color: rgba(0,0,0,0.35); letter-spacing: 0.1em; display: flex; gap: 16px; }
+
+/* READING PROGRESS (reused for page) */
+#reading-progress { position: fixed; top: 2px; left: 0; height: 2px; background: var(--gold); width: 0; z-index: 9999; transition: width .1s; }
+</style>
+</head>
+<body>
+
+<div id="reading-progress"></div>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="loader"><div id="loader-text">✦ &nbsp; VOWS &amp; VEDAS &nbsp; ✦</div></div>
+
+<nav id="navbar" class="solid">
+  <a href="index.html" class="nav-logo">VOWS &amp; VEDAS</a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Weddings</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="blog.html" style="color:var(--gold)">Stories</a></li>
+    <li><a href="destinations.html">Destinations</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta"><span>Begin Your Journey</span></a>
+</nav>
+
+<!-- FEATURED POST -->
+<div style="padding-top:82px">
+  <div class="featured-post">
+    <div class="feat-image">
+      <div class="feat-img-inner">
+        <img src="uploads/real_images-1777026820855.jpg" alt="Featured post">
+        <div class="feat-img-overlay"></div>
+      </div>
+    </div>
+    <div class="feat-content">
+      <p class="feat-label">Featured Story</p>
+      <h2 class="feat-title">Top 10 Destination Wedding Venues in India for 2025</h2>
+      <p class="feat-meta">April 10, 2025 &nbsp;·&nbsp; Destinations &nbsp;·&nbsp; 8 min read</p>
+      <p class="feat-excerpt">From the mirror-work palaces of Udaipur to the misty haveli gardens of Jodhpur — we've curated the most extraordinary venues for your celebration this year.</p>
+      <a href="#" class="btn-gold">Read Story</a>
+    </div>
+  </div>
+</div>
+
+<!-- ALL POSTS -->
+<section>
+  <div class="blog-tabs reveal" id="blog-tabs">
+    <button class="blog-tab active" data-cat="all">All</button>
+    <button class="blog-tab" data-cat="destinations">Destinations</button>
+    <button class="blog-tab" data-cat="styling">Styling</button>
+    <button class="blog-tab" data-cat="planning">Planning</button>
+    <button class="blog-tab" data-cat="real-weddings">Real Weddings</button>
+    <div class="blog-tab-indicator" id="blog-tab-indicator"></div>
+  </div>
+
+  <div class="blog-grid" id="blog-grid">
+    <div class="blog-card reveal stagger-1" data-cat="destinations">
+      <div class="blog-img-wrap"><div class="blog-img-inner"><span style="font-size:9px;letter-spacing:0.3em;color:rgba(191,164,106,0.4);position:relative">BLOG IMAGE</span></div></div>
+      <div class="blog-body">
+        <p class="blog-cat">Destinations</p>
+        <a href="#" class="blog-title">Why Santorini is the Ultimate Destination for Indian Couples Abroad</a>
+        <p class="blog-excerpt">The azure domes, cliff-edge terraces, and golden-hour light make Santorini a canvas unlike any other.</p>
+        <div class="blog-meta"><span>March 18, 2025</span><span>6 min read</span></div>
+      </div>
+    </div>
+    <div class="blog-card reveal stagger-2" data-cat="styling">
+      <div class="blog-img-wrap"><div class="blog-img-inner"><span style="font-size:9px;letter-spacing:0.3em;color:rgba(191,164,106,0.4);position:relative">BLOG IMAGE</span></div></div>
+      <div class="blog-body">
+        <p class="blog-cat">Styling</p>
+        <a href="#" class="blog-title">The Art of the Modern Mehendi: Traditions Reimagined</a>
+        <p class="blog-excerpt">From minimalist Arabic patterns to full bridal storytelling sleeves — how contemporary brides are approaching mehendi design.</p>
+        <div class="blog-meta"><span>February 28, 2025</span><span>5 min read</span></div>
+      </div>
+    </div>
+    <div class="blog-card reveal stagger-3" data-cat="planning">
+      <div class="blog-img-wrap"><div class="blog-img-inner"><span style="font-size:9px;letter-spacing:0.3em;color:rgba(191,164,106,0.4);position:relative">BLOG IMAGE</span></div></div>
+      <div class="blog-body">
+        <p class="blog-cat">Planning</p>
+        <a href="#" class="blog-title">How to Budget for a Luxury Destination Wedding Abroad</a>
+        <p class="blog-excerpt">A transparent breakdown of where couples typically spend — and where you can save without sacrificing magic.</p>
+        <div class="blog-meta"><span>January 22, 2025</span><span>7 min read</span></div>
+      </div>
+    </div>
+    <div class="blog-card reveal stagger-1" data-cat="real-weddings">
+      <div class="blog-img-wrap"><div class="blog-img-inner"><span style="font-size:9px;letter-spacing:0.3em;color:rgba(191,164,106,0.4);position:relative">BLOG IMAGE</span></div></div>
+      <div class="blog-body">
+        <p class="blog-cat">Real Weddings</p>
+        <a href="#" class="blog-title">Aanya & Rohan's Udaipur Palace Wedding: A Full Recap</a>
+        <p class="blog-excerpt">Three days, 400 guests, and a ceremony on the banks of Lake Pichola — every detail of this unforgettable celebration.</p>
+        <div class="blog-meta"><span>December 12, 2024</span><span>10 min read</span></div>
+      </div>
+    </div>
+    <div class="blog-card reveal stagger-2" data-cat="styling">
+      <div class="blog-img-wrap"><div class="blog-img-inner"><span style="font-size:9px;letter-spacing:0.3em;color:rgba(191,164,106,0.4);position:relative">BLOG IMAGE</span></div></div>
+      <div class="blog-body">
+        <p class="blog-cat">Styling</p>
+        <a href="#" class="blog-title">2025 Mandap Design Trends: Nature, Grandeur & Minimalism</a>
+        <p class="blog-excerpt">This year's mandap aesthetics are moving toward organic textures, cascading florals, and structural restraint.</p>
+        <div class="blog-meta"><span>November 5, 2024</span><span>4 min read</span></div>
+      </div>
+    </div>
+    <div class="blog-card reveal stagger-3" data-cat="destinations">
+      <div class="blog-img-wrap"><div class="blog-img-inner"><span style="font-size:9px;letter-spacing:0.3em;color:rgba(191,164,106,0.4);position:relative">BLOG IMAGE</span></div></div>
+      <div class="blog-body">
+        <p class="blog-cat">Destinations</p>
+        <a href="#" class="blog-title">Bali vs Maldives: Which Is Right for Your Destination Wedding?</a>
+        <p class="blog-excerpt">We compare two of Southeast Asia's most sought-after destinations across venue, budget, and guest experience.</p>
+        <div class="blog-meta"><span>October 18, 2024</span><span>6 min read</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><p class="footer-logo">Vows &amp; Vedas</p><p class="footer-tagline">India's premier luxury destination wedding studio.</p></div>
+    <div><p class="footer-heading">Navigate</p><ul class="footer-links"><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Real Weddings</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><p class="footer-heading">From the Journal</p><ul class="footer-links"><li><a href="#">Destinations</a></li><li><a href="#">Styling</a></li><li><a href="#">Planning Tips</a></li><li><a href="#">Real Weddings</a></li></ul></div>
+    <div><p class="footer-heading">Stay Connected</p><div class="newsletter-form"><input type="email" class="newsletter-input" placeholder="Your email address"><button class="newsletter-btn">→</button></div></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 Vows &amp; Vedas.</p><div class="social-icons"><a href="#">Instagram</a><a href="#">Pinterest</a><a href="#">YouTube</a></div><p>Privacy &nbsp;·&nbsp; Terms</p></div>
+</footer>
+
+<div id="chatbot">
+  <div id="chat-panel">
+    <div class="chat-header"><div class="chat-avatar">V</div><div><p class="chat-title">Vows &amp; Vedas</p><p class="chat-status">● Online Now</p></div></div>
+    <div class="chat-messages" id="chat-messages"><div class="chat-msg bot">Found something inspiring? Let's start planning your story.</div></div>
+    <div class="chat-input-wrap"><input type="text" class="chat-input" id="chat-input-field" placeholder="Type a message…"><button class="chat-send" id="chat-send-btn">→</button></div>
+    <a href="https://wa.me/" class="chat-whatsapp">💬 &nbsp; Continue on WhatsApp</a>
+  </div>
+  <button id="chat-btn" onclick="toggleChat()">
+    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+  </button>
+</div>
+
+<script src="global.js"></script>
+<script>
+// READING PROGRESS
+window.addEventListener('scroll', () => {
+  const p = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  document.getElementById('reading-progress').style.width = p + '%';
+});
+
+// BLOG TABS FILTER
+const blogTabs = document.querySelectorAll('.blog-tab');
+const blogIndicator = document.getElementById('blog-tab-indicator');
+
+function positionBlogIndicator(tab) {
+  blogIndicator.style.left = tab.offsetLeft + 'px';
+  blogIndicator.style.width = tab.offsetWidth + 'px';
+}
+positionBlogIndicator(document.querySelector('.blog-tab.active'));
+
+blogTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    blogTabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    positionBlogIndicator(tab);
+    const cat = tab.dataset.cat;
+    document.querySelectorAll('.blog-card').forEach(card => {
+      const show = cat === 'all' || card.dataset.cat === cat;
+      card.style.transition = 'opacity .4s, transform .4s';
+      card.style.opacity = show ? '1' : '0.15';
+      card.style.transform = show ? '' : 'scale(0.97)';
+    });
+  });
+});
+</script>
+</body>
+</html>

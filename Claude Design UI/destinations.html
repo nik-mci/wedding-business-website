@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destinations — Vows & Vedas</title>
+<link rel="stylesheet" href="global.css">
+<style>
+/* DESTINATIONS GRID */
+.dest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 64px; }
+.dest-card { position: relative; overflow: hidden; aspect-ratio: 4/5; cursor: none; }
+.dest-card:first-child { aspect-ratio: auto; grid-row: span 2; }
+.dest-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform .6s var(--ease); }
+.dest-card:hover .dest-bg { transform: scale(1.06); }
+.dest-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 60%); transition: background .4s; }
+.dest-card:hover .dest-overlay { background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%); }
+.dest-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px 28px; transform: translateY(8px); transition: transform .4s var(--ease); }
+.dest-card:hover .dest-info { transform: translateY(0); }
+.dest-region { font-size: 9px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; font-weight: 500; }
+.dest-name { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--white); font-weight: 300; margin-bottom: 8px; }
+.dest-count { font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; }
+.dest-cta { display: inline-block; margin-top: 16px; padding: 10px 24px; border: 1px solid rgba(255,255,255,0.5); color: var(--white); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0; transform: translateY(8px); transition: opacity .3s .1s, transform .3s .1s, background .3s; }
+.dest-card:hover .dest-cta { opacity: 1; transform: translateY(0); }
+.dest-cta:hover { background: var(--gold); border-color: var(--gold); }
+
+/* WHY US */
+#why-us { background: var(--ink); }
+#why-us .section-label { color: var(--gold); }
+#why-us .section-title { color: var(--white); }
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 64px; }
+.why-item { text-align: center; }
+.why-icon { width: 72px; height: 72px; margin: 0 auto 28px; position: relative; }
+.why-icon svg { width: 100%; height: 100%; }
+.why-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--white); margin-bottom: 16px; }
+.why-desc { font-size: 12px; line-height: 1.9; color: rgba(255,255,255,0.5); font-weight: 300; }
+
+/* DESTINATION STRIP */
+.dest-strip { background: var(--bg); padding: 64px 48px; overflow: hidden; }
+.strip-title { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; font-weight: 500; }
+.strip-track { display: flex; gap: 48px; align-items: center; animation: scrollStrip 20s linear infinite; width: max-content; }
+.strip-track:hover { animation-play-state: paused; }
+.strip-item { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--ink2); white-space: nowrap; display: flex; align-items: center; gap: 48px; }
+.strip-item::after { content: '✦'; color: var(--gold); font-size: 14px; }
+@keyframes scrollStrip { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="loader"><div id="loader-text">✦ &nbsp; VOWS &amp; VEDAS &nbsp; ✦</div></div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">VOWS &amp; VEDAS</a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Weddings</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="blog.html">Stories</a></li>
+    <li><a href="destinations.html" style="color:var(--gold)">Destinations</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta"><span>Begin Your Journey</span></a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('uploads/real_images-1777026820855.jpg');background-position:center 35%"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <p class="page-hero-eyebrow">Around the World</p>
+    <h1 class="page-hero-title">Our <em>Destinations</em></h1>
+  </div>
+</div>
+
+<!-- DESTINATIONS GRID -->
+<section>
+  <p class="section-label reveal">Where We Work</p>
+  <h2 class="section-title reveal">Extraordinary <em>Locations</em></h2>
+  <div class="dest-grid">
+    <div class="dest-card reveal stagger-1">
+      <div class="dest-bg" style="background:linear-gradient(135deg,#2a2018,#1a1208);background-image:url('uploads/real_images-1777026820855.jpg')"></div>
+      <div class="dest-overlay"></div>
+      <div class="dest-info">
+        <p class="dest-region">India</p>
+        <h3 class="dest-name">Rajasthan</h3>
+        <p class="dest-count">42 weddings celebrated</p>
+        <a href="contact.html" class="dest-cta">Explore →</a>
+      </div>
+    </div>
+    <div class="dest-card reveal stagger-2">
+      <div class="dest-bg" style="background:linear-gradient(135deg,#1e2830,#121c22)"></div>
+      <div class="dest-overlay"></div>
+      <div class="dest-info">
+        <p class="dest-region">Greece</p>
+        <h3 class="dest-name">Santorini</h3>
+        <p class="dest-count">18 weddings celebrated</p>
+        <a href="contact.html" class="dest-cta">Explore →</a>
+      </div>
+    </div>
+    <div class="dest-card reveal stagger-3">
+      <div class="dest-bg" style="background:linear-gradient(135deg,#201828,#12101e)"></div>
+      <div class="dest-overlay"></div>
+      <div class="dest-info">
+        <p class="dest-region">Italy</p>
+        <h3 class="dest-name">Tuscany</h3>
+        <p class="dest-count">14 weddings celebrated</p>
+        <a href="contact.html" class="dest-cta">Explore →</a>
+      </div>
+    </div>
+    <div class="dest-card reveal stagger-2">
+      <div class="dest-bg" style="background:linear-gradient(135deg,#18201a,#0a120c)"></div>
+      <div class="dest-overlay"></div>
+      <div class="dest-info">
+        <p class="dest-region">Indonesia</p>
+        <h3 class="dest-name">Bali</h3>
+        <p class="dest-count">22 weddings celebrated</p>
+        <a href="contact.html" class="dest-cta">Explore →</a>
+      </div>
+    </div>
+    <div class="dest-card reveal stagger-3">
+      <div class="dest-bg" style="background:linear-gradient(135deg,#281820,#18100a)"></div>
+      <div class="dest-overlay"></div>
+      <div class="dest-info">
+        <p class="dest-region">Maldives</p>
+        <h3 class="dest-name">Maldives</h3>
+        <p class="dest-count">11 weddings celebrated</p>
+        <a href="contact.html" class="dest-cta">Explore →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCROLLING STRIP -->
+<div class="dest-strip">
+  <p class="strip-title">And many more</p>
+  <div class="strip-track">
+    <span class="strip-item">Udaipur</span>
+    <span class="strip-item">Santorini</span>
+    <span class="strip-item">Tuscany</span>
+    <span class="strip-item">Bali</span>
+    <span class="strip-item">Goa</span>
+    <span class="strip-item">Paris</span>
+    <span class="strip-item">Maldives</span>
+    <span class="strip-item">Mussoorie</span>
+    <span class="strip-item">Sri Lanka</span>
+    <span class="strip-item">Rishikesh</span>
+    <span class="strip-item">Udaipur</span>
+    <span class="strip-item">Santorini</span>
+    <span class="strip-item">Tuscany</span>
+    <span class="strip-item">Bali</span>
+    <span class="strip-item">Goa</span>
+    <span class="strip-item">Paris</span>
+    <span class="strip-item">Maldives</span>
+    <span class="strip-item">Mussoorie</span>
+    <span class="strip-item">Sri Lanka</span>
+    <span class="strip-item">Rishikesh</span>
+  </div>
+</div>
+
+<!-- WHY US -->
+<section id="why-us">
+  <p class="section-label reveal">Why Choose Us</p>
+  <h2 class="section-title reveal">Experts in <em>Every Corner</em><br>of the World</h2>
+  <div class="why-grid">
+    <div class="why-item reveal stagger-1">
+      <div class="why-icon">
+        <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="36" cy="36" r="35" stroke="#BFA46A" stroke-width="1"/>
+          <path d="M20 36 L36 20 L52 36 L36 52 Z" stroke="#BFA46A" stroke-width="1" fill="none" class="draw-path"/>
+        </svg>
+      </div>
+      <h3 class="why-title">Global Network</h3>
+      <p class="why-desc">Trusted vendor partnerships in 40+ destinations mean better rates, reliable quality, and local expertise wherever you choose to celebrate.</p>
+    </div>
+    <div class="why-item reveal stagger-2">
+      <div class="why-icon">
+        <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="36" cy="36" r="35" stroke="#BFA46A" stroke-width="1"/>
+          <path d="M24 44 L30 38 L36 42 L44 28" stroke="#BFA46A" stroke-width="1.5" stroke-linecap="round" class="draw-path"/>
+        </svg>
+      </div>
+      <h3 class="why-title">Local Expertise</h3>
+      <p class="why-desc">We've celebrated in each destination we offer — understanding its seasons, suppliers, legal requirements, and hidden gem venues intimately.</p>
+    </div>
+    <div class="why-item reveal stagger-3">
+      <div class="why-icon">
+        <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="36" cy="36" r="35" stroke="#BFA46A" stroke-width="1"/>
+          <circle cx="36" cy="36" r="12" stroke="#BFA46A" stroke-width="1" class="draw-path"/>
+          <path d="M36 24 L36 12 M36 48 L36 60 M24 36 L12 36 M48 36 L60 36" stroke="#BFA46A" stroke-width="1" class="draw-path"/>
+        </svg>
+      </div>
+      <h3 class="why-title">End-to-End Care</h3>
+      <p class="why-desc">From visa guidance to guest logistics, welcome hampers to departure transfers — we manage every detail so you can be fully present.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:var(--bg);text-align:center">
+  <p class="section-label reveal">Your Destination Awaits</p>
+  <h2 class="section-title reveal">Can't Decide?<br><em>We'll Help You Choose.</em></h2>
+  <p class="reveal" style="font-size:13px;color:var(--ink2);font-weight:300;margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;line-height:2">Tell us your vibe, your guest count, your season — and we'll curate the perfect destination for your story.</p>
+  <a href="contact.html" class="btn-gold reveal">Start the Conversation</a>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><p class="footer-logo">Vows &amp; Vedas</p><p class="footer-tagline">India's premier luxury destination wedding studio.</p></div>
+    <div><p class="footer-heading">Navigate</p><ul class="footer-links"><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Real Weddings</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><p class="footer-heading">Destinations</p><ul class="footer-links"><li><a href="#">Rajasthan</a></li><li><a href="#">Santorini</a></li><li><a href="#">Tuscany</a></li><li><a href="#">Bali</a></li><li><a href="#">Maldives</a></li><li><a href="#">Goa</a></li></ul></div>
+    <div><p class="footer-heading">Stay Connected</p><div class="newsletter-form"><input type="email" class="newsletter-input" placeholder="Your email address"><button class="newsletter-btn">→</button></div></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 Vows &amp; Vedas.</p><div class="social-icons"><a href="#">Instagram</a><a href="#">Pinterest</a><a href="#">YouTube</a></div><p>Privacy &nbsp;·&nbsp; Terms</p></div>
+</footer>
+
+<div id="chatbot">
+  <div id="chat-panel">
+    <div class="chat-header"><div class="chat-avatar">V</div><div><p class="chat-title">Vows &amp; Vedas</p><p class="chat-status">● Online Now</p></div></div>
+    <div class="chat-messages" id="chat-messages"><div class="chat-msg bot">Dreaming of a destination? Tell me more and I'll help narrow it down.</div></div>
+    <div class="chat-input-wrap"><input type="text" class="chat-input" id="chat-input-field" placeholder="Type a message…"><button class="chat-send" id="chat-send-btn">→</button></div>
+    <a href="https://wa.me/" class="chat-whatsapp">💬 &nbsp; Continue on WhatsApp</a>
+  </div>
+  <button id="chat-btn" onclick="toggleChat()">
+    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+  </button>
+</div>
+
+<script src="global.js"></script>
+</body>
+</html>

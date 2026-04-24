@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real Weddings — Vows & Vedas</title>
+<link rel="stylesheet" href="global.css">
+<style>
+/* FILTER BAR */
+.filter-bar { display: flex; gap: 12px; flex-wrap: wrap; margin: 56px 0 48px; }
+.filter-pill { padding: 10px 24px; border: 1px solid rgba(0,0,0,0.15); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; cursor: none; background: transparent; color: var(--ink2); transition: all .35s var(--ease); position: relative; overflow: hidden; }
+.filter-pill::before { content:''; position:absolute; inset:0; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .35s var(--ease); z-index:0; }
+.filter-pill span { position: relative; z-index: 1; }
+.filter-pill.active, .filter-pill:hover { color: var(--white); border-color: var(--gold); }
+.filter-pill.active::before, .filter-pill:hover::before { transform: scaleX(1); }
+
+/* MASONRY GRID */
+.wedding-grid { columns: 3; column-gap: 8px; }
+.wedding-item { break-inside: avoid; margin-bottom: 8px; position: relative; overflow: hidden; cursor: none; }
+.wedding-item-inner { position: relative; overflow: hidden; }
+.wed-photo { width: 100%; display: block; filter: saturate(0) brightness(0.85); transition: filter .4s, transform .5s var(--ease); }
+.wedding-item:hover .wed-photo { filter: saturate(1) brightness(1); transform: scale(1.03); }
+.wed-placeholder { width: 100%; aspect-ratio: 4/5; background: linear-gradient(135deg, #2a2518 0%, #1a1608 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; filter: saturate(0) brightness(0.85); transition: filter .4s, transform .5s var(--ease); }
+.wed-placeholder::before { content:''; position:absolute; inset:0; background-image:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(191,164,106,0.05) 20px,rgba(191,164,106,0.05) 21px); }
+.wedding-item:hover .wed-placeholder { filter: saturate(1) brightness(1); transform: scale(1.03); }
+.wed-placeholder span { font-size: 9px; letter-spacing: 0.3em; color: rgba(191,164,106,0.4); position: relative; z-index: 1; }
+.wed-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%); opacity: 0; transition: opacity .4s; display: flex; align-items: flex-end; padding: 24px; }
+.wedding-item:hover .wed-overlay { opacity: 1; }
+.wed-info p { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.wed-info h4 { font-family: 'Cormorant Garamond', serif; color: var(--white); font-size: 22px; font-weight: 400; }
+/* Tall variants */
+.wedding-item:nth-child(3n+1) .wed-placeholder { aspect-ratio: 3/4; }
+.wedding-item:nth-child(3n+2) .wed-placeholder { aspect-ratio: 4/5; }
+.wedding-item:nth-child(3n) .wed-placeholder { aspect-ratio: 1/1; }
+
+/* MODAL */
+#wed-modal { position: fixed; inset: 0; z-index: 5000; display: flex; pointer-events: none; }
+#wed-modal.open { pointer-events: all; }
+#modal-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0); transition: background .4s; }
+#wed-modal.open #modal-overlay { background: rgba(0,0,0,0.75); }
+#modal-panel { position: absolute; right: 0; top: 0; bottom: 0; width: min(700px, 90vw); background: var(--bg); transform: translateX(100%); transition: transform .5s var(--ease); overflow-y: auto; }
+#wed-modal.open #modal-panel { transform: translateX(0); }
+.modal-hero { height: 50vh; position: relative; overflow: hidden; }
+.modal-hero-img { width: 100%; height: 100%; object-fit: cover; animation: kenBurns 8s ease-in-out infinite alternate; }
+.modal-hero-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, #2a2518, #1a1608); display: flex; align-items: center; justify-content: center; }
+@keyframes kenBurns { 0%{transform:scale(1.08)} 100%{transform:scale(1)} }
+.modal-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.6) 100%); }
+.modal-hero-caption { position: absolute; bottom: 32px; left: 40px; right: 40px; }
+.modal-hero-caption p { font-size: 10px; letter-spacing: 0.4em; color: var(--gold); margin-bottom: 8px; }
+.modal-hero-caption h2 { font-family: 'Cormorant Garamond', serif; color: var(--white); font-size: 42px; font-weight: 300; }
+.modal-body { padding: 48px 40px; }
+.modal-body p { font-size: 13px; line-height: 2; color: var(--ink2); font-weight: 300; margin-bottom: 24px; }
+.modal-close { position: fixed; top: 24px; right: 24px; width: 44px; height: 44px; background: var(--white); border: none; cursor: none; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--ink); z-index: 5001; transition: background .3s; }
+.modal-close:hover { background: var(--gold); color: var(--white); }
+.modal-gallery { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-top: 32px; }
+.modal-gallery-thumb { flex-shrink: 0; width: 120px; height: 90px; background: #2a2518; background-image: repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(191,164,106,0.06) 10px,rgba(191,164,106,0.06) 11px); }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="loader"><div id="loader-text">✦ &nbsp; VOWS &amp; VEDAS &nbsp; ✦</div></div>
+
+<nav id="navbar" class="solid">
+  <a href="index.html" class="nav-logo">VOWS &amp; VEDAS</a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html" style="color:var(--gold)">Weddings</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="blog.html">Stories</a></li>
+    <li><a href="destinations.html">Destinations</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta"><span>Begin Your Journey</span></a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('uploads/real_images-1777026820855.jpg');background-position:center 20%"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <p class="page-hero-eyebrow">Memory Space</p>
+    <h1 class="page-hero-title">Real <em>Weddings</em></h1>
+  </div>
+</div>
+
+<section style="padding-top:64px">
+  <div class="filter-bar reveal">
+    <button class="filter-pill active" data-filter="all"><span>All</span></button>
+    <button class="filter-pill" data-filter="india"><span>India</span></button>
+    <button class="filter-pill" data-filter="international"><span>International</span></button>
+    <button class="filter-pill" data-filter="palace"><span>Palace</span></button>
+    <button class="filter-pill" data-filter="beach"><span>Beach</span></button>
+    <button class="filter-pill" data-filter="garden"><span>Garden</span></button>
+  </div>
+
+  <div class="wedding-grid" id="wedding-grid">
+    <div class="wedding-item reveal" data-cat="india palace" onclick="openModal('Aanya & Rohan','Udaipur Palace, Rajasthan','A three-day palace celebration overlooking Lake Pichola. Marigold archways, mirror-work chandeliers, and a lakeside pheras ceremony that left no eye dry.')">
+      <div class="wedding-item-inner">
+        <img src="uploads/real_images-1777026820855.jpg" class="wed-photo" alt="Wedding">
+        <div class="wed-overlay"><div class="wed-info"><p>Udaipur, India</p><h4>Aanya &amp; Rohan</h4></div></div>
+      </div>
+    </div>
+    <div class="wedding-item reveal stagger-1" data-cat="international beach" onclick="openModal('Meera & Kabir','Santorini, Greece','Against the white-washed backdrop of Oia, this sunset ceremony felt like a painting. From the flower-strewn aisle to the Aegean-blue horizon — pure magic.')">
+      <div class="wedding-item-inner">
+        <div class="wed-placeholder"><span>Santorini Wedding</span></div>
+        <div class="wed-overlay"><div class="wed-info"><p>Santorini, Greece</p><h4>Meera &amp; Kabir</h4></div></div>
+      </div>
+    </div>
+    <div class="wedding-item reveal stagger-2" data-cat="india garden" onclick="openModal('Priya & Arjun','Jim Corbett, Uttarakhand','Nestled in the foothills of the Himalayas, this intimate garden ceremony blended rustic elegance with forest magic.')">
+      <div class="wedding-item-inner">
+        <div class="wed-placeholder"><span>Forest Wedding</span></div>
+        <div class="wed-overlay"><div class="wed-info"><p>Corbett, India</p><h4>Priya &amp; Arjun</h4></div></div>
+      </div>
+    </div>
+    <div class="wedding-item reveal stagger-1" data-cat="india palace" onclick="openModal('Rhea & Dev','Jaisalmer Fort, Rajasthan','A desert wedding beneath ancient sandstone walls. Dunes, firelight, and folk music carried the night.')">
+      <div class="wedding-item-inner">
+        <div class="wed-placeholder"><span>Desert Wedding</span></div>
+        <div class="wed-overlay"><div class="wed-info"><p>Jaisalmer, India</p><h4>Rhea &amp; Dev</h4></div></div>
+      </div>
+    </div>
+    <div class="wedding-item reveal stagger-2" data-cat="international garden" onclick="openModal('Simran & Rishi','Tuscany, Italy','Rolling vineyard hills, terracotta urns, and the warm Tuscan sun — a dreamy Indo-Italian fusion celebration.')">
+      <div class="wedding-item-inner">
+        <div class="wed-placeholder"><span>Tuscany Wedding</span></div>
+        <div class="wed-overlay"><div class="wed-info"><p>Tuscany, Italy</p><h4>Simran &amp; Rishi</h4></div></div>
+      </div>
+    </div>
+    <div class="wedding-item reveal stagger-3" data-cat="india beach" onclick="openModal('Kavya & Vivaan','Goa, India','A beachside evening ceremony with lanterns, jasmine garlands, and waves as the soundtrack.')">
+      <div class="wedding-item-inner">
+        <div class="wed-placeholder"><span>Goa Beach Wedding</span></div>
+        <div class="wed-overlay"><div class="wed-info"><p>Goa, India</p><h4>Kavya &amp; Vivaan</h4></div></div>
+      </div>
+    </div>
+    <div class="wedding-item reveal stagger-2" data-cat="international palace" onclick="openModal('Nisha & Karan','Bali, Indonesia','A cliff-edge ceremony overlooking the Indian Ocean — where every moment felt suspended in time.')">
+      <div class="wedding-item-inner">
+        <div class="wed-placeholder"><span>Bali Wedding</span></div>
+        <div class="wed-overlay"><div class="wed-info"><p>Bali, Indonesia</p><h4>Nisha &amp; Karan</h4></div></div>
+      </div>
+    </div>
+    <div class="wedding-item reveal stagger-3" data-cat="india garden" onclick="openModal('Tara & Ishaan','Rishikesh, Uttarakhand','A soulful riverside ceremony surrounded by the Himalayas — a wedding that breathed as deeply as the landscape.')">
+      <div class="wedding-item-inner">
+        <div class="wed-placeholder"><span>Riverside Wedding</span></div>
+        <div class="wed-overlay"><div class="wed-info"><p>Rishikesh, India</p><h4>Tara &amp; Ishaan</h4></div></div>
+      </div>
+    </div>
+    <div class="wedding-item reveal stagger-1" data-cat="international beach" onclick="openModal('Ananya & Sid','Maldives','An overwater ceremony at golden hour — the lagoon shimmering below, infinity above.')">
+      <div class="wedding-item-inner">
+        <div class="wed-placeholder"><span>Maldives Wedding</span></div>
+        <div class="wed-overlay"><div class="wed-info"><p>Maldives</p><h4>Ananya &amp; Sid</h4></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div id="wed-modal">
+  <div id="modal-overlay" onclick="closeModal()"></div>
+  <div id="modal-panel">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-hero">
+      <div class="modal-hero-placeholder"></div>
+      <div class="modal-hero-overlay"></div>
+      <div class="modal-hero-caption">
+        <p id="modal-location">Location</p>
+        <h2 id="modal-name">Couple</h2>
+      </div>
+    </div>
+    <div class="modal-body">
+      <p id="modal-story">Story goes here.</p>
+      <a href="contact.html" class="btn-gold">Plan Your Wedding Like This</a>
+      <div class="modal-gallery">
+        <div class="modal-gallery-thumb"></div>
+        <div class="modal-gallery-thumb"></div>
+        <div class="modal-gallery-thumb"></div>
+        <div class="modal-gallery-thumb"></div>
+        <div class="modal-gallery-thumb"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div><p class="footer-logo">Vows &amp; Vedas</p><p class="footer-tagline">India's premier luxury destination wedding studio.</p></div>
+    <div><p class="footer-heading">Navigate</p><ul class="footer-links"><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Real Weddings</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><p class="footer-heading">Services</p><ul class="footer-links"><li><a href="#">Destination Weddings</a></li><li><a href="#">Full Planning</a></li><li><a href="#">Photography</a></li><li><a href="#">Mehendi</a></li></ul></div>
+    <div><p class="footer-heading">Stay Connected</p><div class="newsletter-form"><input type="email" class="newsletter-input" placeholder="Your email address"><button class="newsletter-btn">→</button></div></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 Vows &amp; Vedas.</p><div class="social-icons"><a href="#">Instagram</a><a href="#">Pinterest</a><a href="#">YouTube</a></div><p>Privacy &nbsp;·&nbsp; Terms</p></div>
+</footer>
+
+<div id="chatbot">
+  <div id="chat-panel">
+    <div class="chat-header"><div class="chat-avatar">V</div><div><p class="chat-title">Vows &amp; Vedas</p><p class="chat-status">● Online Now</p></div></div>
+    <div class="chat-messages" id="chat-messages"><div class="chat-msg bot">Inspired by what you see? Let's start planning yours.</div></div>
+    <div class="chat-input-wrap"><input type="text" class="chat-input" id="chat-input-field" placeholder="Type a message…"><button class="chat-send" id="chat-send-btn">→</button></div>
+    <a href="https://wa.me/" class="chat-whatsapp">💬 &nbsp; Continue on WhatsApp</a>
+  </div>
+  <button id="chat-btn" onclick="toggleChat()">
+    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+  </button>
+</div>
+
+<script src="global.js"></script>
+<script>
+// FILTER
+document.querySelectorAll('.filter-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    const filter = pill.dataset.filter;
+    document.querySelectorAll('.wedding-item').forEach(item => {
+      const cats = item.dataset.cat || '';
+      const show = filter === 'all' || cats.includes(filter);
+      item.style.transition = 'opacity .4s, transform .4s';
+      item.style.opacity = show ? '1' : '0.15';
+      item.style.transform = show ? '' : 'scale(0.96)';
+    });
+  });
+});
+
+// MODAL
+function openModal(name, location, story) {
+  document.getElementById('modal-name').textContent = name;
+  document.getElementById('modal-location').textContent = location;
+  document.getElementById('modal-story').textContent = story;
+  document.getElementById('wed-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('wed-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>

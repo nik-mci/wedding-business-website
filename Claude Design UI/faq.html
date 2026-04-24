@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Vows & Vedas</title>
+<link rel="stylesheet" href="global.css">
+<style>
+/* CATEGORY TABS */
+.faq-tabs { display: flex; gap: 0; border-bottom: 1px solid rgba(0,0,0,0.1); margin-bottom: 64px; position: relative; }
+.faq-tab { padding: 16px 32px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; background: none; border: none; cursor: none; color: var(--ink2); position: relative; transition: color .3s; }
+.faq-tab.active { color: var(--ink); }
+.tab-indicator { position: absolute; bottom: -1px; height: 2px; background: var(--gold); transition: left .4s var(--ease), width .4s var(--ease); }
+
+/* ACCORDION */
+.faq-group { display: none; }
+.faq-group.active { display: block; }
+.faq-item { border-bottom: 1px solid rgba(0,0,0,0.08); }
+.faq-question { display: flex; justify-content: space-between; align-items: center; padding: 28px 0; cursor: none; }
+.faq-question h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; line-height: 1.3; flex: 1; padding-right: 32px; transition: color .3s; }
+.faq-item.open .faq-question h3 { color: var(--gold); }
+.faq-icon { width: 32px; height: 32px; border: 1px solid rgba(0,0,0,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: border-color .3s, background .3s, transform .4s; font-size: 16px; color: var(--ink2); }
+.faq-item.open .faq-icon { transform: rotate(45deg); border-color: var(--gold); background: var(--gold); color: var(--white); }
+.faq-answer { overflow: hidden; height: 0; transition: height .4s var(--ease); position: relative; }
+.faq-answer::before { content: ''; position: absolute; left: 0; top: 0; width: 2px; background: var(--gold); height: 0; transition: height .4s var(--ease) .1s; }
+.faq-item.open .faq-answer::before { height: 100%; }
+.faq-answer-inner { padding: 0 0 28px 24px; font-size: 13px; line-height: 2; color: var(--ink2); font-weight: 300; }
+
+/* BOTTOM CTA */
+#faq-cta { background: var(--ink); text-align: center; }
+#faq-cta .section-title { color: var(--white); }
+#faq-cta .section-label { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="loader"><div id="loader-text">✦ &nbsp; VOWS &amp; VEDAS &nbsp; ✦</div></div>
+
+<nav id="navbar" class="solid">
+  <a href="index.html" class="nav-logo">VOWS &amp; VEDAS</a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Weddings</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="blog.html">Stories</a></li>
+    <li><a href="destinations.html">Destinations</a></li>
+    <li><a href="faq.html" style="color:var(--gold)">FAQ</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta"><span>Begin Your Journey</span></a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('uploads/real_images-1777026820855.jpg');background-position:center 40%"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <p class="page-hero-eyebrow">Everything You Need to Know</p>
+    <h1 class="page-hero-title">Frequently Asked<br><em>Questions</em></h1>
+  </div>
+</div>
+
+<section>
+  <div class="faq-tabs reveal" id="faq-tabs">
+    <button class="faq-tab active" data-group="general">General</button>
+    <button class="faq-tab" data-group="planning">Planning</button>
+    <button class="faq-tab" data-group="destinations">Destinations</button>
+    <button class="faq-tab" data-group="pricing">Pricing</button>
+    <div class="tab-indicator" id="tab-indicator"></div>
+  </div>
+
+  <!-- GENERAL -->
+  <div class="faq-group active reveal" id="group-general">
+    <div class="faq-item">
+      <div class="faq-question"><h3>What makes Vows & Vedas different from other wedding planners?</h3><span class="faq-icon">+</span></div>
+      <div class="faq-answer"><div class="faq-answer-inner">We combine deep cultural knowledge with an international design sensibility — and we treat each wedding as a one-of-a-kind story. Every detail is intentional, every vendor is trusted, and every couple feels genuinely cared for from the first call to the final farewell.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question"><h3>How early should we book?</h3><span class="faq-icon">+</span></div>
+      <div class="faq-answer"><div class="faq-answer-inner">For destination weddings, we recommend booking 12–18 months in advance to secure your ideal venue and dates. For local weddings, 6–12 months is usually sufficient. That said, we occasionally accommodate shorter timelines — reach out and we'll see what's possible.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question"><h3>Do you only plan Indian weddings?</h3><span class="faq-icon">+</span></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Not at all. While our roots are in South Asian traditions, we plan multicultural, fusion, and inter-faith weddings of all kinds. We've celebrated Hindu, Muslim, Sikh, Christian, civil, and bespoke secular ceremonies across the world.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question"><h3>Will we have a single point of contact?</h3><span class="faq-icon">+</span></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Yes. Every couple is assigned a dedicated wedding manager who becomes your single point of contact throughout the entire journey — from initial vision call to post-wedding wrap-up. You'll never feel passed around.</div></div>
+    </div>
+  </div>
+
+  <!-- PLANNING -->
+  <div class="faq-group reveal" id="group-planning">
+    <div class="faq-item">
+      <div class="faq-question"><h3>What does the planning process look like?</h3><span class="faq-icon">+</span></div>
+      <div class="faq-answer"><div class="faq-answer-inner">We begin with a discovery call to understand your vision, style, and priorities. From there, we build a tailored planning timeline, curate venue and vendor shortlists, and guide you through every decision — always at a pace that suits you.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question"><h3>Can we choose our own vendors, or do you have a preferred list?</h3><span class="faq-icon">+</span></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Both. We have a trusted global vendor network built over a decade — photographers, florists, caterers, musicians — and we'll always start with strong recommendations. That said, if you have vendors in mind or want to bring a specific photographer, we're completely flexible.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question"><h3>How involved will you be on the wedding day itself?</h3><span class="faq-icon">+</span></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Completely. On your wedding day, our on-site team arrives early, manages every vendor, handles every timeline, and troubleshoots anything so that you and your family can be fully present. You won't need to think about a single logistical detail.</div></div>
+    </div>
+  </div>
+
+  <!-- DESTINATIONS -->
+  <div class="faq-group reveal" id="group-destinations">
+    <div class="faq-item">
+      <div class="faq-question"><h3>Do you handle guest travel and accommodation?</h3><span class="faq-icon">+</span></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Yes. For destination weddings, we can coordinate room blocks, airport transfers, welcome hampers, and group excursions for your guests. We work with trusted travel partners to ensure every guest has a seamless experience from arrival to departure.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question"><h3>What destinations do you work in?</h3><span class="faq-icon">+</span></div>
+      <div class="faq-answer"><div class="faq-answer-inner">We have active vendor partnerships in 40+ destinations — including Rajasthan, Goa, Kerala, Rishikesh, and Mussoorie in India, and internationally in Santorini, Tuscany, Bali, Maldives, Sri Lanka, France, and more. If you have a dream location not on this list, we'll make it work.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question"><h3>Are legal ceremonies possible abroad?</h3><span class="faq-icon">+</span></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Absolutely. We have experience navigating legal marriage requirements in multiple countries. Alternatively, many couples do a legal registration at home and hold their celebration abroad — we'll guide you through what makes most sense for your situation.</div></div>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="faq-group reveal" id="group-pricing">
+    <div class="faq-item">
+      <div class="faq-question"><h3>What is your starting price?</h3><span class="faq-icon">+</span></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Our Pearl package starts from ₹8,00,000 for a single-day ceremony with essential services. Our Gold package (3-day multi-event) starts from ₹18,00,000. Bespoke destination weddings are fully tailored — we'll build a custom proposal based on your vision and guest count.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question"><h3>Is a deposit required to book?</h3><span class="faq-icon">+</span></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Yes — we require a 25% retainer to secure your date. The remaining balance is structured in milestones tied to planning checkpoints. We work transparently on all financials and provide a full budget tracker throughout your planning journey.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question"><h3>Are vendor costs included in your fee?</h3><span class="faq-icon">+</span></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Our planning fee covers our team's services. Vendor costs — venue hire, catering, photography, florals, etc. — are separate and managed transparently through a shared budget. We negotiate on your behalf and always seek the best value without compromising quality.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section id="faq-cta">
+  <p class="section-label reveal">Still Have Questions?</p>
+  <h2 class="section-title reveal">Let's <em>Talk</em></h2>
+  <p class="reveal" style="color:rgba(255,255,255,0.6);font-size:13px;font-weight:300;margin-bottom:40px;max-width:440px;margin-left:auto;margin-right:auto;line-height:2">Our team is happy to answer anything. Reach out directly or start a conversation with our assistant.</p>
+  <div class="reveal" style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap">
+    <a href="contact.html" class="btn-gold">Contact Us</a>
+    <a href="#" class="btn-ghost light" onclick="toggleChat();return false;">Chat With Us</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><p class="footer-logo">Vows &amp; Vedas</p><p class="footer-tagline">India's premier luxury destination wedding studio.</p></div>
+    <div><p class="footer-heading">Navigate</p><ul class="footer-links"><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Real Weddings</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><p class="footer-heading">Services</p><ul class="footer-links"><li><a href="#">Destination Weddings</a></li><li><a href="#">Full Planning</a></li><li><a href="#">Photography</a></li><li><a href="#">Mehendi</a></li></ul></div>
+    <div><p class="footer-heading">Stay Connected</p><div class="newsletter-form"><input type="email" class="newsletter-input" placeholder="Your email address"><button class="newsletter-btn">→</button></div></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 Vows &amp; Vedas.</p><div class="social-icons"><a href="#">Instagram</a><a href="#">Pinterest</a><a href="#">YouTube</a></div><p>Privacy &nbsp;·&nbsp; Terms</p></div>
+</footer>
+
+<div id="chatbot">
+  <div id="chat-panel">
+    <div class="chat-header"><div class="chat-avatar">V</div><div><p class="chat-title">Vows &amp; Vedas</p><p class="chat-status">● Online Now</p></div></div>
+    <div class="chat-messages" id="chat-messages"><div class="chat-msg bot">Have a question not covered here? I'm happy to help!</div></div>
+    <div class="chat-input-wrap"><input type="text" class="chat-input" id="chat-input-field" placeholder="Type a message…"><button class="chat-send" id="chat-send-btn">→</button></div>
+    <a href="https://wa.me/" class="chat-whatsapp">💬 &nbsp; Continue on WhatsApp</a>
+  </div>
+  <button id="chat-btn" onclick="toggleChat()">
+    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+  </button>
+</div>
+
+<script src="global.js"></script>
+<script>
+// TABS
+const tabs = document.querySelectorAll('.faq-tab');
+const indicator = document.getElementById('tab-indicator');
+
+function positionIndicator(tab) {
+  indicator.style.left = tab.offsetLeft + 'px';
+  indicator.style.width = tab.offsetWidth + 'px';
+}
+positionIndicator(document.querySelector('.faq-tab.active'));
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    positionIndicator(tab);
+    document.querySelectorAll('.faq-group').forEach(g => g.classList.remove('active'));
+    document.getElementById('group-' + tab.dataset.group).classList.add('active');
+  });
+});
+
+// ACCORDION
+document.querySelectorAll('.faq-question').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-answer').style.height = '0';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      const inner = answer.querySelector('.faq-answer-inner');
+      answer.style.height = inner.offsetHeight + 'px';
+    }
+  });
+});
+</script>
+</body>
+</html>

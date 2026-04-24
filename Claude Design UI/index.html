@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vows & Vedas — Luxury Destination Weddings</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F8F6F3;
+  --ink: #1C1C1C;
+  --ink2: #3D3D3D;
+  --gold: #BFA46A;
+  --gold-light: #D4BC8A;
+  --white: #FFFFFF;
+  --card-bg: #FFFFFF;
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; cursor: none; }
+body { font-family: 'Montserrat', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; }
+h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 400; }
+
+/* PROGRESS BAR */
+#progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--gold); width: 0%; z-index: 9999; transition: width 0.1s linear; }
+
+/* CURSOR */
+#cursor { position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: transform 0.1s, width 0.3s, height 0.3s, background 0.3s; }
+#cursor-ring { position: fixed; width: 32px; height: 32px; border: 1.5px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 9997; transform: translate(-50%, -50%); transition: transform 0.15s var(--ease), width 0.3s, height 0.3s, opacity 0.3s; opacity: 0.6; }
+body.cursor-hover #cursor { width: 12px; height: 12px; }
+body.cursor-hover #cursor-ring { width: 48px; height: 48px; opacity: 0.4; }
+
+/* LOADER */
+#loader { position: fixed; inset: 0; background: var(--ink); display: flex; align-items: center; justify-content: center; z-index: 99999; transition: opacity 0.7s ease; }
+#loader.hidden { opacity: 0; pointer-events: none; }
+#loader-text { font-family: 'Cormorant Garamond', serif; color: var(--gold); font-size: clamp(18px, 3vw, 28px); letter-spacing: 0.4em; font-weight: 300; animation: loaderPulse 0.8s ease-in-out; }
+@keyframes loaderPulse { 0%{opacity:0;transform:scale(0.96)} 50%{opacity:1;transform:scale(1)} 100%{opacity:1} }
+
+/* NAVBAR */
+nav { position: fixed; top: 2px; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s; }
+nav.scrolled { background: rgba(248,246,243,0.92); backdrop-filter: blur(16px); box-shadow: 0 1px 0 rgba(0,0,0,0.08); }
+.nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; letter-spacing: 0.12em; color: var(--white); font-weight: 400; text-decoration: none; transition: color 0.4s; }
+nav.scrolled .nav-logo { color: var(--ink); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; color: rgba(255,255,255,0.9); transition: color 0.3s; font-weight: 500; }
+nav.scrolled .nav-links a { color: var(--ink2); }
+.nav-links a:hover { color: var(--gold); }
+.nav-cta { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; padding: 10px 24px; border: 1px solid rgba(255,255,255,0.6); color: var(--white); text-decoration: none; font-weight: 500; transition: all 0.3s; position: relative; overflow: hidden; }
+nav.scrolled .nav-cta { border-color: var(--gold); color: var(--ink); }
+.nav-cta::before { content: ''; position: absolute; inset: 0; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.3s var(--ease); }
+.nav-cta:hover::before { transform: scaleX(1); }
+.nav-cta span { position: relative; z-index: 1; }
+.nav-cta:hover span { color: var(--white); }
+
+/* HERO */
+#hero { position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+#hero-bg { position: absolute; inset: -10%; background: url('uploads/real_images-1777026820855.jpg') center/cover no-repeat; transition: transform 0.1s linear; }
+#hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(20,16,12,0.45) 0%, rgba(20,16,12,0.2) 50%, rgba(20,16,12,0.6) 100%); }
+#hero-content { position: relative; z-index: 2; text-align: center; padding: 0 24px; }
+.hero-eyebrow { font-size: 11px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 28px; font-family: 'Montserrat', sans-serif; font-weight: 500; opacity: 0; animation: fadeUp 0.8s var(--ease) 1.2s forwards; }
+.hero-title { font-family: 'Cormorant Garamond', serif; color: var(--white); line-height: 1.05; margin-bottom: 32px; overflow: hidden; }
+.hero-title .word { display: inline-block; opacity: 0; transform: translateY(40px); font-size: clamp(52px, 8vw, 110px); font-weight: 300; }
+.hero-title .word.italic { font-style: italic; }
+.hero-subtitle { font-size: 13px; letter-spacing: 0.2em; color: rgba(255,255,255,0.75); margin-bottom: 48px; font-weight: 300; opacity: 0; animation: fadeUp 0.8s var(--ease) 2.4s forwards; }
+.hero-ctas { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s var(--ease) 2.8s forwards; }
+.btn-gold { position: relative; padding: 16px 40px; background: var(--gold); color: var(--white); text-decoration: none; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; overflow: hidden; }
+.btn-gold::after { content: ''; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%); transform: translateX(-100%); animation: shimmer 2.5s ease-in-out 3.5s infinite; }
+@keyframes shimmer { 0%{transform:translateX(-100%)} 100%{transform:translateX(200%)} }
+.btn-ghost { padding: 15px 40px; border: 1px solid rgba(255,255,255,0.7); color: var(--white); text-decoration: none; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500; transition: all 0.3s; }
+.btn-ghost:hover { background: rgba(255,255,255,0.1); }
+.hero-scroll { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.6); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 10px; animation: fadeUp 1s var(--ease) 3.2s both; }
+.scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollLine 2s ease-in-out 3.5s infinite; }
+@keyframes scrollLine { 0%,100%{transform:scaleY(1);opacity:0.6} 50%{transform:scaleY(1.3);opacity:1} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+/* SECTIONS */
+section { padding: 120px 48px; }
+.section-label { font-size: 10px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; font-weight: 500; }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 5vw, 68px); font-weight: 300; line-height: 1.1; margin-bottom: 24px; }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* HOW WE DO IT */
+#process { background: var(--ink); color: var(--white); }
+#process .section-label { color: var(--gold); }
+#process .section-title { color: var(--white); }
+.timeline { position: relative; margin-top: 80px; }
+.timeline-track { position: relative; display: flex; align-items: flex-start; }
+.timeline-svg { position: absolute; top: 32px; left: 0; width: 100%; height: 4px; overflow: visible; }
+.timeline-path { fill: none; stroke: var(--gold); stroke-width: 1.5; stroke-dasharray: 2000; stroke-dashoffset: 2000; transition: stroke-dashoffset 2s var(--ease); }
+.timeline-path.drawn { stroke-dashoffset: 0; }
+.timeline-steps { display: flex; justify-content: space-between; width: 100%; position: relative; z-index: 2; }
+.timeline-step { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 16px; }
+.step-circle { width: 64px; height: 64px; border-radius: 50%; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; background: var(--ink); color: var(--gold); font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; opacity: 0; transform: scale(0.6); transition: opacity 0.5s, transform 0.5s; }
+.step-circle.popped { opacity: 1; transform: scale(1); }
+.step-label { margin-top: 20px; opacity: 0; transition: opacity 0.5s 0.2s; }
+.step-label.visible { opacity: 1; }
+.step-title { font-size: 13px; letter-spacing: 0.1em; color: var(--white); margin-bottom: 8px; font-weight: 500; }
+.step-desc { font-size: 11px; color: rgba(255,255,255,0.45); line-height: 1.7; font-weight: 300; }
+
+/* SERVICES */
+#services { background: var(--bg); }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 64px; }
+.service-card { position: relative; overflow: hidden; aspect-ratio: 4/5; background: var(--ink2); cursor: none; }
+.service-card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease), filter 0.6s; filter: brightness(0.7); }
+.service-card:hover .service-card-img { transform: scale(1.06); filter: brightness(0.5); }
+.service-card-bg { width: 100%; height: 100%; background: var(--ink2); display: flex; align-items: center; justify-content: center; transition: transform 0.6s var(--ease); }
+.service-card:hover .service-card-bg { transform: scale(1.06); }
+.service-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px 28px; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%); transition: transform 0.4s var(--ease); }
+.service-card:hover .service-info { transform: translateY(-8px); }
+.service-number { font-size: 10px; letter-spacing: 0.4em; color: var(--gold); margin-bottom: 8px; }
+.service-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--white); font-weight: 400; margin-bottom: 12px; }
+.service-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.4s; }
+.service-card:hover .service-overlay { opacity: 1; }
+.service-cta { padding: 12px 28px; border: 1px solid rgba(255,255,255,0.7); color: var(--white); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; font-weight: 500; transition: all 0.3s; }
+.service-cta:hover { background: var(--gold); border-color: var(--gold); }
+.service-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%); display: flex; align-items: flex-end; }
+.service-stripe { position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(191,164,106,0.04) 20px, rgba(191,164,106,0.04) 21px); }
+
+/* PORTFOLIO */
+#portfolio { background: var(--ink); overflow: hidden; }
+#portfolio .section-title { color: var(--white); }
+.portfolio-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin-top: 64px; }
+.portfolio-item { position: relative; overflow: hidden; aspect-ratio: 3/4; }
+.portfolio-item:nth-child(1) { aspect-ratio: 3/5; }
+.portfolio-item:nth-child(3) { aspect-ratio: 2/3; }
+.port-img-wrap { width: 100%; height: 100%; background: #2a2a2a; position: relative; transition: transform 0.6s var(--ease); }
+.portfolio-item:hover .port-img-wrap { transform: scale(1.04); }
+.port-photo { width: 100%; height: 100%; object-fit: cover; filter: saturate(0) brightness(0.8); transition: filter 0.4s; }
+.portfolio-item:hover .port-photo { filter: saturate(1) brightness(1); }
+.port-stripe { position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(191,164,106,0.06) 20px, rgba(191,164,106,0.06) 21px); }
+.port-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%); opacity: 0; transition: opacity 0.4s; display: flex; align-items: flex-end; padding: 24px; }
+.portfolio-item:hover .port-overlay { opacity: 1; }
+.port-info p { font-size: 10px; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 4px; }
+.port-info h4 { font-family: 'Cormorant Garamond', serif; color: var(--white); font-size: 20px; }
+.portfolio-cta { text-align: center; margin-top: 48px; }
+.btn-underline { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); text-decoration: none; font-weight: 500; position: relative; display: inline-block; }
+.btn-underline::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.4s var(--ease); }
+.btn-underline:hover::after { width: 100%; }
+
+/* IDEAS */
+#ideas { background: var(--bg); }
+.ideas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 64px; }
+.ideas-text { }
+.ideas-body { font-size: 14px; line-height: 2; color: var(--ink2); font-weight: 300; margin-bottom: 32px; }
+.ideas-mosaic { display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 160px); gap: 8px; }
+.mosaic-card { border-radius: 2px; overflow: hidden; }
+.mosaic-card:nth-child(1) { grid-row: span 2; }
+.mosaic-inner { width: 100%; height: 100%; transition: transform 6s ease-in-out; }
+.mosaic-card:nth-child(odd) .mosaic-inner { animation: float1 6s ease-in-out infinite; }
+.mosaic-card:nth-child(even) .mosaic-inner { animation: float2 7s ease-in-out infinite; }
+@keyframes float1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes float2 { 0%,100%{transform:translateY(-4px)} 50%{transform:translateY(4px)} }
+.mosaic-bg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.mosaic-label { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.5); font-family: 'Montserrat', sans-serif; }
+
+/* TESTIMONIALS */
+#testimonials { background: var(--bg); padding: 120px 0; overflow: hidden; }
+#testimonials .section-label, #testimonials .section-title { padding-left: 48px; }
+.testimonials-track { display: flex; gap: 28px; margin-top: 56px; animation: scrollTrack 40s linear infinite; width: max-content; }
+.testimonials-track:hover { animation-play-state: paused; }
+.testi-card { width: 380px; flex-shrink: 0; background: var(--white); padding: 40px; border-bottom: 2px solid transparent; transition: border-color 0.3s; }
+.testi-card:hover { border-color: var(--gold); }
+.testi-stars { color: var(--gold); font-size: 13px; letter-spacing: 4px; margin-bottom: 20px; }
+.testi-quote { font-family: 'Cormorant Garamond', serif; font-size: 20px; line-height: 1.6; font-style: italic; color: var(--ink); margin-bottom: 28px; font-weight: 300; }
+.testi-author { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink2); font-weight: 500; }
+.testi-location { font-size: 10px; color: var(--gold); letter-spacing: 0.2em; margin-top: 4px; }
+@keyframes scrollTrack { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* BLOG */
+#blog { background: var(--bg); border-top: 1px solid rgba(0,0,0,0.07); }
+.blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 64px; }
+.blog-card { position: relative; overflow: hidden; cursor: none; }
+.blog-img { aspect-ratio: 4/3; overflow: hidden; }
+.blog-thumb { width: 100%; height: 100%; background: #d4c9b8; transition: transform 0.6s var(--ease); display: flex; align-items: center; justify-content: center; background-image: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(0,0,0,0.04) 20px, rgba(0,0,0,0.04) 21px); }
+.blog-card:hover .blog-thumb { transform: scale(1.06); }
+.blog-body { padding: 28px 24px 32px; background: var(--white); }
+.blog-tag { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; font-weight: 500; }
+.blog-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; line-height: 1.3; margin-bottom: 12px; transition: color 0.3s; position: relative; display: inline-block; }
+.blog-title::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.4s var(--ease); }
+.blog-card:hover .blog-title { color: var(--gold); }
+.blog-card:hover .blog-title::after { width: 100%; }
+.blog-date { font-size: 10px; color: #aaa; letter-spacing: 0.15em; }
+
+/* FINAL CTA */
+#final-cta { position: relative; overflow: hidden; padding: 160px 48px; text-align: center; }
+#cta-bg { position: absolute; inset: -10%; background: url('uploads/real_images-1777026820855.jpg') center 60%/cover; filter: brightness(0.3) saturate(0.5); transition: transform 0.1s linear; }
+#final-cta .section-title { color: var(--white); font-size: clamp(48px, 7vw, 96px); position: relative; z-index: 2; max-width: 900px; margin: 0 auto 16px; }
+#final-cta .subtitle { color: rgba(255,255,255,0.6); font-size: 13px; letter-spacing: 0.2em; margin-bottom: 48px; position: relative; z-index: 2; }
+.btn-pulse { position: relative; z-index: 2; animation: pulse 2.5s ease-in-out infinite; display: inline-block; }
+@keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(191,164,106,0.4)} 50%{box-shadow:0 0 0 16px rgba(191,164,106,0)} }
+
+/* FOOTER */
+footer { background: var(--ink); color: rgba(255,255,255,0.6); padding: 80px 48px 40px; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 48px; margin-bottom: 60px; }
+.footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--white); letter-spacing: 0.1em; margin-bottom: 16px; }
+.footer-tagline { font-size: 12px; line-height: 1.8; font-weight: 300; }
+.footer-heading { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; font-weight: 500; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 12px; color: rgba(255,255,255,0.55); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s; font-weight: 300; }
+.footer-links a:hover { color: var(--gold); }
+.newsletter-form { display: flex; margin-top: 4px; }
+.newsletter-input { flex: 1; background: rgba(255,255,255,0.07); border: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding: 12px 0; color: var(--white); font-size: 12px; font-family: 'Montserrat', sans-serif; outline: none; transition: border-color 0.3s; }
+.newsletter-input::placeholder { color: rgba(255,255,255,0.3); }
+.newsletter-input:focus { border-color: var(--gold); }
+.newsletter-btn { padding: 12px 20px; background: var(--gold); border: none; color: var(--white); font-size: 10px; letter-spacing: 0.2em; cursor: none; font-family: 'Montserrat', sans-serif; font-weight: 500; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; letter-spacing: 0.1em; }
+.social-icons { display: flex; gap: 20px; }
+.social-icons a { color: rgba(255,255,255,0.4); font-size: 13px; text-decoration: none; transition: color 0.3s; letter-spacing: 0.1em; font-size: 10px; }
+.social-icons a:hover { color: var(--gold); }
+
+/* CHATBOT */
+#chatbot { position: fixed; bottom: 32px; right: 32px; z-index: 2000; }
+#chat-btn { width: 56px; height: 56px; background: var(--gold); border-radius: 50%; border: none; cursor: none; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 24px rgba(191,164,106,0.4); transition: transform 0.3s, box-shadow 0.3s; }
+#chat-btn:hover { transform: scale(1.1); box-shadow: 0 8px 32px rgba(191,164,106,0.5); }
+#chat-btn svg { width: 22px; height: 22px; fill: white; }
+#chat-panel { position: absolute; bottom: 72px; right: 0; width: 320px; background: var(--white); border-radius: 2px; box-shadow: 0 8px 48px rgba(0,0,0,0.15); transform: translateY(16px) scale(0.96); opacity: 0; pointer-events: none; transition: all 0.35s var(--ease); overflow: hidden; }
+#chat-panel.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: all; }
+.chat-header { background: var(--ink); padding: 20px 24px; display: flex; align-items: center; gap: 12px; }
+.chat-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 16px; color: white; }
+.chat-title { font-family: 'Cormorant Garamond', serif; color: var(--white); font-size: 17px; }
+.chat-status { font-size: 10px; color: var(--gold); letter-spacing: 0.15em; }
+.chat-messages { padding: 20px; height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: var(--bg); }
+.chat-msg { font-size: 12px; line-height: 1.6; padding: 12px 16px; max-width: 85%; font-weight: 300; }
+.chat-msg.bot { background: var(--white); color: var(--ink); align-self: flex-start; border-left: 2px solid var(--gold); }
+.chat-msg.user { background: var(--gold); color: var(--white); align-self: flex-end; }
+.chat-input-wrap { display: flex; border-top: 1px solid rgba(0,0,0,0.07); }
+.chat-input { flex: 1; border: none; padding: 14px 16px; font-size: 12px; font-family: 'Montserrat', sans-serif; outline: none; background: var(--white); }
+.chat-send { padding: 14px 18px; background: none; border: none; color: var(--gold); cursor: none; font-size: 14px; }
+.chat-whatsapp { display: flex; align-items: center; gap: 8px; justify-content: center; padding: 12px; background: #25D366; color: white; font-size: 11px; letter-spacing: 0.1em; text-decoration: none; font-weight: 500; transition: background 0.3s; }
+.chat-whatsapp:hover { background: #128C7E; }
+
+/* STAGGER DELAYS */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }
+.stagger-6 { transition-delay: 0.6s; }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- LOADER -->
+<div id="loader"><div id="loader-text">✦ &nbsp; VOWS &amp; VEDAS &nbsp; ✦</div></div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">VOWS &amp; VEDAS</a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Weddings</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="blog.html">Stories</a></li>
+    <li><a href="destinations.html">Destinations</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta"><span>Begin Your Journey</span></a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div id="hero-bg"></div>
+  <div id="hero-overlay"></div>
+  <div id="hero-content">
+    <p class="hero-eyebrow">Luxury Destination Weddings</p>
+    <h1 class="hero-title">
+      <span class="word">Where</span>&nbsp;
+      <span class="word italic">Every</span>&nbsp;
+      <span class="word">Vow</span><br>
+      <span class="word italic">Becomes</span>&nbsp;
+      <span class="word">a</span>&nbsp;
+      <span class="word">Story</span>
+    </h1>
+    <p class="hero-subtitle">Crafting timeless ceremonies across the world's most extraordinary destinations</p>
+    <div class="hero-ctas">
+      <a href="contact.html" class="btn-gold">Plan Your Wedding</a>
+      <a href="portfolio.html" class="btn-ghost">View Our Work</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<!-- HOW WE DO IT -->
+<section id="process">
+  <p class="section-label reveal">Our Process</p>
+  <h2 class="section-title reveal">How We Craft<br><em>Your Day</em></h2>
+  <div class="timeline reveal">
+    <div class="timeline-track">
+      <svg class="timeline-svg" viewBox="0 0 100 4" preserveAspectRatio="none">
+        <line class="timeline-path" x1="4" y1="2" x2="96" y2="2"/>
+      </svg>
+      <div class="timeline-steps" id="timeline-steps">
+        <div class="timeline-step">
+          <div class="step-circle">01</div>
+          <div class="step-label">
+            <p class="step-title">Discovery</p>
+            <p class="step-desc">We listen to your vision, values &amp; dreams for the day</p>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-circle">02</div>
+          <div class="step-label">
+            <p class="step-title">Curation</p>
+            <p class="step-desc">We handpick venues, vendors &amp; experiences worldwide</p>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-circle">03</div>
+          <div class="step-label">
+            <p class="step-title">Design</p>
+            <p class="step-desc">Every detail is styled to reflect your story</p>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-circle">04</div>
+          <div class="step-label">
+            <p class="step-title">Execution</p>
+            <p class="step-desc">Flawless orchestration on the day itself</p>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-circle">05</div>
+          <div class="step-label">
+            <p class="step-title">Memories</p>
+            <p class="step-desc">We capture &amp; preserve every magical moment</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <p class="section-label reveal">What We Offer</p>
+  <h2 class="section-title reveal">Our <em>Services</em></h2>
+  <div class="services-grid">
+    <div class="service-card reveal stagger-1">
+      <div class="service-placeholder"><div class="service-stripe"></div></div>
+      <div class="service-info">
+        <p class="service-number">01</p>
+        <h3 class="service-name">Destination Weddings</h3>
+      </div>
+      <div class="service-overlay"><a href="services.html" class="service-cta">Explore</a></div>
+    </div>
+    <div class="service-card reveal stagger-2">
+      <div class="service-placeholder"><div class="service-stripe"></div></div>
+      <div class="service-info">
+        <p class="service-number">02</p>
+        <h3 class="service-name">Full Planning</h3>
+      </div>
+      <div class="service-overlay"><a href="services.html" class="service-cta">Explore</a></div>
+    </div>
+    <div class="service-card reveal stagger-3">
+      <div class="service-placeholder"><div class="service-stripe"></div></div>
+      <div class="service-info">
+        <p class="service-number">03</p>
+        <h3 class="service-name">Décor &amp; Florals</h3>
+      </div>
+      <div class="service-overlay"><a href="services.html" class="service-cta">Explore</a></div>
+    </div>
+    <div class="service-card reveal stagger-4">
+      <div class="service-placeholder"><div class="service-stripe"></div></div>
+      <div class="service-info">
+        <p class="service-number">04</p>
+        <h3 class="service-name">Photography</h3>
+      </div>
+      <div class="service-overlay"><a href="services.html" class="service-cta">Explore</a></div>
+    </div>
+    <div class="service-card reveal stagger-5">
+      <div class="service-placeholder"><div class="service-stripe"></div></div>
+      <div class="service-info">
+        <p class="service-number">05</p>
+        <h3 class="service-name">Mehendi &amp; Styling</h3>
+      </div>
+      <div class="service-overlay"><a href="services.html" class="service-cta">Explore</a></div>
+    </div>
+    <div class="service-card reveal stagger-6">
+      <div class="service-placeholder"><div class="service-stripe"></div></div>
+      <div class="service-info">
+        <p class="service-number">06</p>
+        <h3 class="service-name">Entertainment &amp; DJ</h3>
+      </div>
+      <div class="service-overlay"><a href="services.html" class="service-cta">Explore</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO PREVIEW -->
+<section id="portfolio">
+  <p class="section-label reveal" style="color:var(--gold)">Real Weddings</p>
+  <h2 class="section-title reveal" style="color:var(--white)">Our <em>Memory Space</em></h2>
+  <div class="portfolio-grid">
+    <div class="portfolio-item reveal stagger-1">
+      <div class="port-img-wrap">
+        <img src="uploads/real_images-1777026820855.jpg" class="port-photo" alt="Wedding">
+        <div class="port-overlay"><div class="port-info"><p>Mussoorie, India</p><h4>Aanya &amp; Rohan</h4></div></div>
+      </div>
+    </div>
+    <div class="portfolio-item reveal stagger-2">
+      <div class="port-img-wrap"><div class="port-stripe"></div></div>
+    </div>
+    <div class="portfolio-item reveal stagger-3">
+      <div class="port-img-wrap"><div class="port-stripe"></div></div>
+    </div>
+    <div class="portfolio-item reveal stagger-4">
+      <div class="port-img-wrap"><div class="port-stripe"></div></div>
+    </div>
+  </div>
+  <div class="portfolio-cta reveal">
+    <a href="portfolio.html" class="btn-underline">View All Weddings &nbsp;→</a>
+  </div>
+</section>
+
+<!-- IDEAS TEASER -->
+<section id="ideas">
+  <div class="ideas-grid">
+    <div class="reveal" style="transition-delay:0.1s">
+      <p class="section-label">Inspiration</p>
+      <h2 class="section-title">Wedding<br><em>Ideas &amp; Moods</em></h2>
+      <p class="ideas-body">From mandap silhouettes under Rajasthan skies to candlelit cliffside ceremonies in Santorini — explore our curated library of ideas, mood boards, and styling references.</p>
+      <a href="ideas.html" class="btn-underline">Explore Ideas &nbsp;→</a>
+    </div>
+    <div class="ideas-mosaic reveal" style="transition-delay:0.3s">
+      <div class="mosaic-card"><div class="mosaic-inner"><div class="mosaic-bg" style="background:linear-gradient(135deg,#2d2518,#1a1208);height:100%"><span class="mosaic-label">Mandap Design</span></div></div></div>
+      <div class="mosaic-card"><div class="mosaic-inner"><div class="mosaic-bg" style="background:linear-gradient(135deg,#1e2830,#121c22);height:100%"><span class="mosaic-label">Night Ceremony</span></div></div></div>
+      <div class="mosaic-card"><div class="mosaic-inner"><div class="mosaic-bg" style="background:linear-gradient(135deg,#2a1a1a,#1a1010);height:100%"><span class="mosaic-label">Floral Arch</span></div></div></div>
+      <div class="mosaic-card"><div class="mosaic-inner"><div class="mosaic-bg" style="background:linear-gradient(135deg,#241a2e,#16101e);height:100%"><span class="mosaic-label">Bridal Look</span></div></div></div>
+      <div class="mosaic-card" style="grid-column:span 2"><div class="mosaic-inner"><div class="mosaic-bg" style="background:linear-gradient(135deg,#181e14,#0e130a);height:100%;"><span class="mosaic-label">Reception Setup</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <p class="section-label reveal">Love Stories</p>
+  <h2 class="section-title reveal">What Our<br><em>Couples Say</em></h2>
+  <div style="overflow:hidden;margin-top:0">
+    <div class="testimonials-track" id="testi-track">
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"Vows &amp; Vedas turned our dream of a Rajasthan palace wedding into a breathtaking reality. Every detail was beyond what we imagined."</p><p class="testi-author">Priya &amp; Arjun</p><p class="testi-location">Udaipur Palace, India</p></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"From Santorini to Bali, they gave us the most cinematic wedding. The team was with us every step — we truly felt cared for."</p><p class="testi-author">Meera &amp; Kabir</p><p class="testi-location">Santorini, Greece</p></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"The décor was unreal — marigolds and mirror work set against the desert dunes. Our guests are still talking about it two years later."</p><p class="testi-author">Rhea &amp; Dev</p><p class="testi-location">Jaisalmer, India</p></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"Professional, creative, warm. They handled everything — from our 500-guest baraat to the intimate mehendi evening."</p><p class="testi-author">Simran &amp; Rishi</p><p class="testi-location">Tuscany, Italy</p></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"Vows &amp; Vedas turned our dream of a Rajasthan palace wedding into a breathtaking reality. Every detail was beyond what we imagined."</p><p class="testi-author">Priya &amp; Arjun</p><p class="testi-location">Udaipur Palace, India</p></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"From Santorini to Bali, they gave us the most cinematic wedding. The team was with us every step — we truly felt cared for."</p><p class="testi-author">Meera &amp; Kabir</p><p class="testi-location">Santorini, Greece</p></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"The décor was unreal — marigolds and mirror work set against the desert dunes. Our guests are still talking about it two years later."</p><p class="testi-author">Rhea &amp; Dev</p><p class="testi-location">Jaisalmer, India</p></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"Professional, creative, warm. They handled everything — from our 500-guest baraat to the intimate mehendi evening."</p><p class="testi-author">Simran &amp; Rishi</p><p class="testi-location">Tuscany, Italy</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <p class="section-label reveal">From Our Journal</p>
+  <h2 class="section-title reveal">Stories &amp; <em>Inspiration</em></h2>
+  <div class="blog-grid">
+    <div class="blog-card reveal stagger-1">
+      <div class="blog-img"><div class="blog-thumb"><span style="font-size:10px;letter-spacing:0.3em;color:#999">BLOG IMAGE</span></div></div>
+      <div class="blog-body">
+        <p class="blog-tag">Destinations</p>
+        <h3 class="blog-title">Top 10 Destination Wedding Venues in India for 2025</h3>
+        <p class="blog-date">March 18, 2025</p>
+      </div>
+    </div>
+    <div class="blog-card reveal stagger-2">
+      <div class="blog-img"><div class="blog-thumb"><span style="font-size:10px;letter-spacing:0.3em;color:#999">BLOG IMAGE</span></div></div>
+      <div class="blog-body">
+        <p class="blog-tag">Styling</p>
+        <h3 class="blog-title">The Art of the Modern Mehendi: Traditions Reimagined</h3>
+        <p class="blog-date">February 4, 2025</p>
+      </div>
+    </div>
+    <div class="blog-card reveal stagger-3">
+      <div class="blog-img"><div class="blog-thumb"><span style="font-size:10px;letter-spacing:0.3em;color:#999">BLOG IMAGE</span></div></div>
+      <div class="blog-body">
+        <p class="blog-tag">Planning</p>
+        <h3 class="blog-title">How to Budget for a Luxury Destination Wedding Abroad</h3>
+        <p class="blog-date">January 22, 2025</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="final-cta">
+  <div id="cta-bg"></div>
+  <p class="section-label reveal" style="color:var(--gold);position:relative;z-index:2">Your Story Awaits</p>
+  <h2 class="section-title reveal">Begin Your<br><em>Journey With Us</em></h2>
+  <p class="subtitle reveal">Let's craft the wedding you've always envisioned.</p>
+  <a href="contact.html" class="btn-gold btn-pulse reveal">Start Planning →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-logo">Vows &amp; Vedas</p>
+      <p class="footer-tagline">India's premier luxury destination wedding studio. We craft timeless ceremonies that become the story you tell forever.</p>
+    </div>
+    <div>
+      <p class="footer-heading">Navigate</p>
+      <ul class="footer-links">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Real Weddings</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="blog.html">Journal</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-heading">Services</p>
+      <ul class="footer-links">
+        <li><a href="#">Destination Weddings</a></li>
+        <li><a href="#">Full Planning</a></li>
+        <li><a href="#">Décor &amp; Florals</a></li>
+        <li><a href="#">Photography</a></li>
+        <li><a href="#">E-Invites</a></li>
+        <li><a href="#">Mehendi</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-heading">Stay Connected</p>
+      <p style="font-size:12px;margin-bottom:16px;font-weight:300">Receive inspiration, stories &amp; exclusive offers.</p>
+      <div class="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="Your email address">
+        <button class="newsletter-btn">→</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Vows &amp; Vedas. All rights reserved.</p>
+    <div class="social-icons">
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+      <a href="#">YouTube</a>
+      <a href="#">WhatsApp</a>
+    </div>
+    <p>Privacy &nbsp;·&nbsp; Terms</p>
+  </div>
+</footer>
+
+<!-- CHATBOT -->
+<div id="chatbot">
+  <div id="chat-panel">
+    <div class="chat-header">
+      <div class="chat-avatar">V</div>
+      <div><p class="chat-title">Vows &amp; Vedas</p><p class="chat-status">● Online Now</p></div>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="chat-msg bot">Welcome! I'm here to help you begin planning your dream wedding. What's the occasion?</div>
+    </div>
+    <div class="chat-input-wrap">
+      <input type="text" class="chat-input" id="chat-input-field" placeholder="Type a message…">
+      <button class="chat-send" id="chat-send-btn">→</button>
+    </div>
+    <a href="https://wa.me/" class="chat-whatsapp">💬 &nbsp; Continue on WhatsApp</a>
+  </div>
+  <button id="chat-btn" onclick="toggleChat()">
+    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+  </button>
+</div>
+
+<script>
+// ── LOADER ──
+function hideLoader() {
+  const loaderEl = document.getElementById('loader');
+  loaderEl.style.opacity = '0';
+  loaderEl.style.pointerEvents = 'none';
+  setTimeout(() => { loaderEl.style.display = 'none'; }, 750);
+}
+setTimeout(hideLoader, 900);
+window.addEventListener('load', () => setTimeout(hideLoader, 400));
+
+// ── CURSOR ──
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px'; });
+function animateRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animateRing); }
+animateRing();
+document.querySelectorAll('a, button, .service-card, .portfolio-item, .blog-card, .testi-card').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+});
+
+// ── SCROLL PROGRESS ──
+window.addEventListener('scroll', () => {
+  const p = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  document.getElementById('progress-bar').style.width = p + '%';
+
+  // Navbar
+  const nav = document.getElementById('navbar');
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+
+  // Parallax hero
+  const heroBg = document.getElementById('hero-bg');
+  const ctaBg = document.getElementById('cta-bg');
+  if (heroBg) heroBg.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+  if (ctaBg) {
+    const ctaEl = document.getElementById('final-cta');
+    const offset = ctaEl.getBoundingClientRect().top;
+    ctaBg.style.transform = `translateY(${-offset * 0.2}px)`;
+  }
+});
+
+// ── HERO WORDS ANIMATION ──
+const words = document.querySelectorAll('.hero-title .word');
+words.forEach((w, i) => {
+  w.style.animation = `fadeUp 0.7s cubic-bezier(0.25,0.46,0.45,0.94) ${1.4 + i * 0.15}s both`;
+});
+
+// ── INTERSECTION OBSERVER ──
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ── TIMELINE ANIMATION ──
+const timelineIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    // Draw SVG line
+    const path = document.querySelector('.timeline-path');
+    if (path) setTimeout(() => path.classList.add('drawn'), 200);
+    // Pop circles
+    const circles = document.querySelectorAll('.step-circle');
+    const labels = document.querySelectorAll('.step-label');
+    circles.forEach((c, i) => {
+      setTimeout(() => {
+        c.classList.add('popped');
+        labels[i].classList.add('visible');
+      }, 400 + i * 350);
+    });
+    timelineIO.unobserve(e.target);
+  });
+}, { threshold: 0.3 });
+const timeline = document.querySelector('.timeline');
+if (timeline) timelineIO.observe(timeline);
+
+// ── CHATBOT ──
+function toggleChat() {
+  document.getElementById('chat-panel').classList.toggle('open');
+}
+function sendChat() {
+  const input = document.getElementById('chat-input-field');
+  const val = input.value.trim();
+  if (!val) return;
+  const msgs = document.getElementById('chat-messages');
+  const userMsg = document.createElement('div');
+  userMsg.className = 'chat-msg user';
+  userMsg.textContent = val;
+  msgs.appendChild(userMsg);
+  input.value = '';
+  msgs.scrollTop = msgs.scrollHeight;
+  setTimeout(() => {
+    const botMsg = document.createElement('div');
+    botMsg.className = 'chat-msg bot';
+    botMsg.textContent = 'Thank you! One of our wedding consultants will be in touch shortly. Or connect on WhatsApp for instant help.';
+    msgs.appendChild(botMsg);
+    msgs.scrollTop = msgs.scrollHeight;
+  }, 800);
+}
+document.getElementById('chat-send-btn').addEventListener('click', sendChat);
+document.getElementById('chat-input-field').addEventListener('keydown', e => { if (e.key === 'Enter') sendChat(); });
+</script>
+</body>
+</html>

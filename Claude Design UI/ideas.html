@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Ideas — Vows & Vedas</title>
+<link rel="stylesheet" href="global.css">
+<style>
+/* SEARCH */
+.ideas-search-wrap { position: relative; max-width: 640px; margin: 0 auto 56px; }
+.ideas-search { width: 100%; padding: 20px 56px 20px 24px; border: none; border-bottom: 2px solid rgba(0,0,0,0.12); background: transparent; font-size: 18px; font-family: 'Cormorant Garamond', serif; font-weight: 300; color: var(--ink); outline: none; transition: border-color .3s; }
+.ideas-search:focus { border-color: var(--gold); }
+.search-icon { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 18px; color: var(--gold); pointer-events: none; }
+.search-placeholder { position: absolute; left: 24px; top: 50%; transform: translateY(-50%); font-size: 18px; font-family: 'Cormorant Garamond', serif; font-weight: 300; color: rgba(0,0,0,0.3); pointer-events: none; transition: opacity .4s; font-style: italic; }
+.ideas-search:focus ~ .search-placeholder,
+.ideas-search:not([value=""]) ~ .search-placeholder { opacity: 0; }
+
+/* FILTER CHIPS */
+.chip-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 56px; }
+.chip { padding: 9px 20px; border: 1px solid rgba(0,0,0,0.12); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; background: transparent; color: var(--ink2); cursor: none; transition: all .3s var(--ease); position: relative; overflow: hidden; }
+.chip::before { content:''; position:absolute; inset:0; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .3s var(--ease); z-index:0; }
+.chip span { position: relative; z-index: 1; }
+.chip.active, .chip:hover { color: var(--white); border-color: var(--gold); }
+.chip.active::before, .chip:hover::before { transform: scaleX(1); }
+
+/* MASONRY IDEAS GRID */
+.ideas-masonry { columns: 4; column-gap: 8px; }
+.idea-item { break-inside: avoid; margin-bottom: 8px; position: relative; overflow: hidden; cursor: none; }
+.idea-inner { position: relative; overflow: hidden; }
+.idea-bg { width: 100%; aspect-ratio: 3/4; background: linear-gradient(135deg,#2a2518,#1a1208); display: flex; align-items: flex-end; padding: 20px; position: relative; overflow: hidden; transition: transform .5s var(--ease); }
+.idea-item:nth-child(3n) .idea-bg { aspect-ratio: 1/1; }
+.idea-item:nth-child(5n) .idea-bg { aspect-ratio: 3/5; }
+.idea-bg::before { content:''; position:absolute; inset:0; background-image:repeating-linear-gradient(45deg,transparent,transparent 15px,rgba(191,164,106,0.04) 15px,rgba(191,164,106,0.04) 16px); }
+.idea-item:hover .idea-bg { transform: scale(1.03); }
+.idea-label { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(191,164,106,0.7); position: relative; z-index: 1; font-weight: 500; }
+.idea-overlay { position: absolute; inset: 0; background: linear-gradient(to top,rgba(0,0,0,0.75),transparent); opacity: 0; transition: opacity .4s; display: flex; align-items: flex-end; padding: 20px; }
+.idea-item:hover .idea-overlay { opacity: 1; }
+.idea-title { font-family: 'Cormorant Garamond', serif; color: var(--white); font-size: 18px; font-weight: 400; }
+
+/* SAVE BOOKMARK */
+.idea-save { position: absolute; top: 12px; right: 12px; z-index: 3; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); border-radius: 50%; opacity: 0; transform: translateY(-4px) scale(0.8); transition: opacity .3s, transform .3s; font-size: 14px; cursor: none; color: white; }
+.idea-item:hover .idea-save { opacity: 1; transform: translateY(0) scale(1); }
+.idea-save:hover { background: var(--gold); animation: bookmarkBounce .4s var(--ease); }
+@keyframes bookmarkBounce { 0%{transform:scale(1)} 40%{transform:scale(1.3)} 70%{transform:scale(0.9)} 100%{transform:scale(1)} }
+
+/* SAVED BORDER */
+.idea-item.saved .idea-inner { box-shadow: 0 0 0 2px var(--gold); }
+.idea-item.saved { animation: heartBurst .5s var(--ease); }
+@keyframes heartBurst { 0%{transform:scale(1)} 30%{transform:scale(1.03)} 60%{transform:scale(0.99)} 100%{transform:scale(1)} }
+
+/* LOAD MORE */
+.load-more-wrap { text-align: center; padding: 64px 0 0; }
+
+/* IDEA DRAWER */
+#idea-drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 100vw); background: var(--bg); z-index: 3000; transform: translateX(100%); transition: transform .5s var(--ease); box-shadow: -8px 0 48px rgba(0,0,0,0.12); overflow-y: auto; }
+#idea-drawer.open { transform: translateX(0); }
+#drawer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0); z-index: 2999; pointer-events: none; transition: background .4s; }
+#drawer-overlay.open { background: rgba(0,0,0,0.4); pointer-events: all; }
+.drawer-close { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; background: none; border: 1px solid rgba(0,0,0,0.12); cursor: none; display: flex; align-items: center; justify-content: center; font-size: 16px; transition: background .3s; }
+.drawer-close:hover { background: var(--gold); color: white; }
+.drawer-hero { height: 300px; background: linear-gradient(135deg,#2a2518,#1a1208); }
+.drawer-content { padding: 36px 32px; }
+.drawer-cat { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; font-weight: 500; }
+.drawer-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; margin-bottom: 20px; line-height: 1.2; }
+.drawer-desc { font-size: 13px; line-height: 2; color: var(--ink2); font-weight: 300; margin-bottom: 32px; }
+.drawer-related { margin-top: 40px; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 32px; }
+.drawer-related-title { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; font-weight: 500; }
+.related-strip { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; }
+.related-thumb { flex-shrink: 0; width: 100px; height: 80px; background: linear-gradient(135deg,#2a2518,#1a1208); cursor: none; }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="loader"><div id="loader-text">✦ &nbsp; VOWS &amp; VEDAS &nbsp; ✦</div></div>
+
+<nav id="navbar" class="solid">
+  <a href="index.html" class="nav-logo">VOWS &amp; VEDAS</a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Weddings</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="blog.html">Stories</a></li>
+    <li><a href="destinations.html">Destinations</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta"><span>Begin Your Journey</span></a>
+</nav>
+
+<section style="padding-top:140px;text-align:center">
+  <p class="section-label reveal">Get Inspired</p>
+  <h1 class="section-title reveal">Wedding <em>Ideas &amp; Moods</em></h1>
+
+  <!-- SEARCH -->
+  <div class="ideas-search-wrap reveal">
+    <input type="text" class="ideas-search" id="ideas-search" value="">
+    <span class="search-placeholder" id="search-placeholder">Search floral decor...</span>
+    <span class="search-icon">⌕</span>
+  </div>
+
+  <!-- CHIPS -->
+  <div class="chip-row reveal" style="justify-content:center">
+    <button class="chip active" data-tag="all"><span>All Ideas</span></button>
+    <button class="chip" data-tag="mandap"><span>Mandap</span></button>
+    <button class="chip" data-tag="florals"><span>Florals</span></button>
+    <button class="chip" data-tag="decor"><span>Décor</span></button>
+    <button class="chip" data-tag="bridal"><span>Bridal</span></button>
+    <button class="chip" data-tag="lighting"><span>Lighting</span></button>
+    <button class="chip" data-tag="table"><span>Tablescapes</span></button>
+    <button class="chip" data-tag="outdoor"><span>Outdoor</span></button>
+  </div>
+</section>
+
+<!-- MASONRY GRID -->
+<section style="padding-top:0">
+  <div class="ideas-masonry" id="ideas-grid">
+    <div class="idea-item reveal" data-tag="mandap" onclick="openDrawer('Mandap Design','Mandap','A floating canopy of white orchids and crystal pendants over a marble plinth — minimalist grandeur for the modern bride.')">
+      <div class="idea-inner">
+        <div class="idea-bg" style="background:linear-gradient(160deg,#2a2518,#1a1208)"><span class="idea-label">Mandap Design</span></div>
+        <div class="idea-overlay"><p class="idea-title">Crystal &amp; Orchid Canopy</p></div>
+        <button class="idea-save" onclick="saveIdea(event,this)">♡</button>
+      </div>
+    </div>
+    <div class="idea-item reveal stagger-1" data-tag="florals" onclick="openDrawer('Floral Arch','Florals','An archway entirely clad in cascading blush roses, garden roses and eucalyptus — a living frame for your ceremony.')">
+      <div class="idea-inner">
+        <div class="idea-bg" style="background:linear-gradient(160deg,#2a1a20,#1a0a10)"><span class="idea-label">Florals</span></div>
+        <div class="idea-overlay"><p class="idea-title">Rose Cascade Arch</p></div>
+        <button class="idea-save" onclick="saveIdea(event,this)">♡</button>
+      </div>
+    </div>
+    <div class="idea-item reveal stagger-2" data-tag="lighting" onclick="openDrawer('Night Lighting','Lighting','Thousands of suspended fairy lights above a terrace dining table — a sky recreated indoors.')">
+      <div class="idea-inner">
+        <div class="idea-bg" style="background:linear-gradient(160deg,#161820,#0a0c12)"><span class="idea-label">Lighting</span></div>
+        <div class="idea-overlay"><p class="idea-title">Fairy Light Canopy</p></div>
+        <button class="idea-save" onclick="saveIdea(event,this)">♡</button>
+      </div>
+    </div>
+    <div class="idea-item reveal stagger-3" data-tag="bridal" onclick="openDrawer('Bridal Look','Bridal','A sage green lehenga with hand-embroidered floral motifs — contemporary bridal dressing at its finest.')">
+      <div class="idea-inner">
+        <div class="idea-bg" style="background:linear-gradient(160deg,#182018,#0a1208)"><span class="idea-label">Bridal Look</span></div>
+        <div class="idea-overlay"><p class="idea-title">Sage Green Bridal</p></div>
+        <button class="idea-save" onclick="saveIdea(event,this)">♡</button>
+      </div>
+    </div>
+    <div class="idea-item reveal stagger-1" data-tag="table" onclick="openDrawer('Tablescape','Tablescapes','Lush garden centrepieces, linen runners, and gold flatware on raw marble tables — luxurious yet organic.')">
+      <div class="idea-inner">
+        <div class="idea-bg" style="background:linear-gradient(160deg,#201820,#120010)"><span class="idea-label">Tablescape</span></div>
+        <div class="idea-overlay"><p class="idea-title">Garden Marble Table</p></div>
+        <button class="idea-save" onclick="saveIdea(event,this)">♡</button>
+      </div>
+    </div>
+    <div class="idea-item reveal stagger-2" data-tag="outdoor" onclick="openDrawer('Outdoor Ceremony','Outdoor','A clifftop ceremony framed by the sea — simple white chairs, a garland altar, and nature does the rest.')">
+      <div class="idea-inner">
+        <div class="idea-bg" style="background:linear-gradient(160deg,#182028,#0a1018)"><span class="idea-label">Outdoor</span></div>
+        <div class="idea-overlay"><p class="idea-title">Clifftop Ceremony</p></div>
+        <button class="idea-save" onclick="saveIdea(event,this)">♡</button>
+      </div>
+    </div>
+    <div class="idea-item reveal stagger-3" data-tag="decor" onclick="openDrawer('Mirror Work Décor','Décor','Rajasthani mirror tiles catch the light from a thousand angles — an entrancing backdrop for any reception.')">
+      <div class="idea-inner">
+        <div class="idea-bg" style="background:linear-gradient(160deg,#282018,#181008)"><span class="idea-label">Décor</span></div>
+        <div class="idea-overlay"><p class="idea-title">Mirror Work Backdrop</p></div>
+        <button class="idea-save" onclick="saveIdea(event,this)">♡</button>
+      </div>
+    </div>
+    <div class="idea-item reveal stagger-1" data-tag="mandap" onclick="openDrawer('Forest Mandap','Mandap','A mandap woven from living branches and hanging moss — ceremony in nature, ceremony as nature.')">
+      <div class="idea-inner">
+        <div class="idea-bg" style="background:linear-gradient(160deg,#141e14,#0a140a)"><span class="idea-label">Mandap</span></div>
+        <div class="idea-overlay"><p class="idea-title">Forest &amp; Moss Mandap</p></div>
+        <button class="idea-save" onclick="saveIdea(event,this)">♡</button>
+      </div>
+    </div>
+    <div class="idea-item reveal stagger-2" data-tag="florals" onclick="openDrawer('Marigold Path','Florals','A petal-strewn aisle of marigolds in every shade — from pale cream to deep amber — a river of colour.')">
+      <div class="idea-inner">
+        <div class="idea-bg" style="background:linear-gradient(160deg,#281e08,#180e00)"><span class="idea-label">Florals</span></div>
+        <div class="idea-overlay"><p class="idea-title">Marigold Petal Aisle</p></div>
+        <button class="idea-save" onclick="saveIdea(event,this)">♡</button>
+      </div>
+    </div>
+    <div class="idea-item reveal stagger-3" data-tag="decor" onclick="openDrawer('Dune Setting','Décor','Low lanterns, desert roses and hand-knotted rugs at dusk in the Thar Desert — raw and romantic.')">
+      <div class="idea-inner">
+        <div class="idea-bg" style="background:linear-gradient(160deg,#261e10,#160e00)"><span class="idea-label">Décor</span></div>
+        <div class="idea-overlay"><p class="idea-title">Desert Dune Setting</p></div>
+        <button class="idea-save" onclick="saveIdea(event,this)">♡</button>
+      </div>
+    </div>
+    <div class="idea-item reveal stagger-1" data-tag="lighting" onclick="openDrawer('Candle Forest','Lighting','Hundreds of tapered candles at varying heights create a warm, flickering forest of light around the dining space.')">
+      <div class="idea-inner">
+        <div class="idea-bg" style="background:linear-gradient(160deg,#221810,#120800)"><span class="idea-label">Lighting</span></div>
+        <div class="idea-overlay"><p class="idea-title">Tapered Candle Forest</p></div>
+        <button class="idea-save" onclick="saveIdea(event,this)">♡</button>
+      </div>
+    </div>
+    <div class="idea-item reveal stagger-2" data-tag="bridal" onclick="openDrawer('Minimal Bridal','Bridal','Ivory silk, a single strand of pearls, hair adorned with mogra blossoms — pure, quiet beauty.')">
+      <div class="idea-inner">
+        <div class="idea-bg" style="background:linear-gradient(160deg,#201e1c,#100e0c)"><span class="idea-label">Bridal</span></div>
+        <div class="idea-overlay"><p class="idea-title">Ivory Minimal Bridal</p></div>
+        <button class="idea-save" onclick="saveIdea(event,this)">♡</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="load-more-wrap reveal">
+    <button class="btn-ghost" id="load-more-btn" onclick="loadMore()">Load More Ideas</button>
+  </div>
+</section>
+
+<!-- IDEA DRAWER -->
+<div id="drawer-overlay" onclick="closeDrawer()"></div>
+<div id="idea-drawer">
+  <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  <div class="drawer-hero" id="drawer-hero"></div>
+  <div class="drawer-content">
+    <p class="drawer-cat" id="drawer-cat">Category</p>
+    <h2 class="drawer-title" id="drawer-title">Idea Title</h2>
+    <p class="drawer-desc" id="drawer-desc">Description goes here.</p>
+    <a href="contact.html" class="btn-gold">Discuss This Idea</a>
+    <div class="drawer-related">
+      <p class="drawer-related-title">Related Ideas</p>
+      <div class="related-strip">
+        <div class="related-thumb"></div>
+        <div class="related-thumb" style="background:linear-gradient(135deg,#1e2830,#121c22)"></div>
+        <div class="related-thumb" style="background:linear-gradient(135deg,#2a1a20,#1a0a10)"></div>
+        <div class="related-thumb" style="background:linear-gradient(135deg,#182018,#0a1208)"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div><p class="footer-logo">Vows &amp; Vedas</p><p class="footer-tagline">India's premier luxury destination wedding studio.</p></div>
+    <div><p class="footer-heading">Navigate</p><ul class="footer-links"><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Real Weddings</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><p class="footer-heading">Explore</p><ul class="footer-links"><li><a href="#">Mandap Ideas</a></li><li><a href="#">Floral Design</a></li><li><a href="#">Décor Moods</a></li><li><a href="#">Bridal Looks</a></li></ul></div>
+    <div><p class="footer-heading">Stay Connected</p><div class="newsletter-form"><input type="email" class="newsletter-input" placeholder="Your email address"><button class="newsletter-btn">→</button></div></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 Vows &amp; Vedas.</p><div class="social-icons"><a href="#">Instagram</a><a href="#">Pinterest</a><a href="#">YouTube</a></div><p>Privacy &nbsp;·&nbsp; Terms</p></div>
+</footer>
+
+<div id="chatbot">
+  <div id="chat-panel">
+    <div class="chat-header"><div class="chat-avatar">V</div><div><p class="chat-title">Vows &amp; Vedas</p><p class="chat-status">● Online Now</p></div></div>
+    <div class="chat-messages" id="chat-messages"><div class="chat-msg bot">Saving ideas? Share your favourites with us and we'll bring them to life.</div></div>
+    <div class="chat-input-wrap"><input type="text" class="chat-input" id="chat-input-field" placeholder="Type a message…"><button class="chat-send" id="chat-send-btn">→</button></div>
+    <a href="https://wa.me/" class="chat-whatsapp">💬 &nbsp; Continue on WhatsApp</a>
+  </div>
+  <button id="chat-btn" onclick="toggleChat()">
+    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+  </button>
+</div>
+
+<script src="global.js"></script>
+<script>
+// SEARCH PLACEHOLDER CYCLING
+const placeholders = ['Search floral decor...','Search mandap designs...','Search bridal looks...','Search destination ideas...','Search lighting moods...'];
+let pIdx = 0;
+const phEl = document.getElementById('search-placeholder');
+const searchEl = document.getElementById('ideas-search');
+
+function cyclePlaceholder() {
+  pIdx = (pIdx + 1) % placeholders.length;
+  phEl.style.opacity = '0';
+  setTimeout(() => { phEl.textContent = placeholders[pIdx]; phEl.style.opacity = '1'; }, 400);
+}
+setInterval(cyclePlaceholder, 2200);
+
+searchEl.addEventListener('input', () => {
+  const q = searchEl.value.toLowerCase();
+  document.querySelectorAll('.idea-item').forEach(item => {
+    const label = item.querySelector('.idea-label')?.textContent.toLowerCase() || '';
+    const title = item.querySelector('.idea-title')?.textContent.toLowerCase() || '';
+    const show = !q || label.includes(q) || title.includes(q);
+    item.style.opacity = show ? '1' : '0.2';
+    item.style.transform = show ? '' : 'scale(0.96)';
+    item.style.transition = 'opacity .3s, transform .3s';
+  });
+});
+
+// FILTER CHIPS
+document.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    const tag = chip.dataset.tag;
+    document.querySelectorAll('.idea-item').forEach(item => {
+      const show = tag === 'all' || item.dataset.tag === tag;
+      item.style.transition = 'opacity .4s, transform .4s';
+      item.style.opacity = show ? '1' : '0.15';
+      item.style.transform = show ? '' : 'scale(0.96)';
+    });
+  });
+});
+
+// SAVE IDEA
+function saveIdea(e, btn) {
+  e.stopPropagation();
+  const item = btn.closest('.idea-item');
+  item.classList.toggle('saved');
+  btn.textContent = item.classList.contains('saved') ? '♥' : '♡';
+  btn.style.color = item.classList.contains('saved') ? '#e74c3c' : 'white';
+}
+
+// DRAWER
+function openDrawer(title, cat, desc) {
+  document.getElementById('drawer-title').textContent = title;
+  document.getElementById('drawer-cat').textContent = cat;
+  document.getElementById('drawer-desc').textContent = desc;
+  document.getElementById('idea-drawer').classList.add('open');
+  document.getElementById('drawer-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer() {
+  document.getElementById('idea-drawer').classList.remove('open');
+  document.getElementById('drawer-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+// LOAD MORE (simulated)
+function loadMore() {
+  const btn = document.getElementById('load-more-btn');
+  btn.textContent = 'Loading...';
+  setTimeout(() => { btn.textContent = 'All Ideas Loaded'; btn.disabled = true; btn.style.opacity = '0.4'; }, 1200);
+}
+</script>
+</body>
+</html>

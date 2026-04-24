@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Vows & Vedas</title>
+<link rel="stylesheet" href="global.css">
+<style>
+/* ALTERNATING SERVICE SECTIONS */
+.service-section { display: grid; grid-template-columns: 1fr 1fr; min-height: 600px; overflow: hidden; }
+.service-section.reverse { direction: rtl; }
+.service-section.reverse > * { direction: ltr; }
+.svc-image { position: relative; overflow: hidden; min-height: 500px; }
+.svc-img-inner { width: 100%; height: 100%; position: absolute; inset: 0; }
+.svc-img-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, #2a2518 0%, #1a1608 100%); position: relative; display: flex; align-items: flex-end; padding: 32px; }
+.svc-img-placeholder::before { content:''; position:absolute; inset:0; background-image:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(191,164,106,0.04) 20px,rgba(191,164,106,0.04) 21px); }
+.svc-img-real { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85); transition: filter .5s; }
+.svc-image:hover .svc-img-real { filter: brightness(1); }
+.svc-warm-overlay { position: absolute; inset: 0; background: rgba(191,130,60,0.25); opacity: 1; transition: opacity .5s; pointer-events: none; }
+.svc-image:hover .svc-warm-overlay { opacity: 0; }
+.svc-content { padding: 72px 64px; display: flex; flex-direction: column; justify-content: center; }
+.svc-number { font-size: 10px; letter-spacing: 0.5em; color: var(--gold); margin-bottom: 12px; font-weight: 500; }
+.svc-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px,4vw,56px); font-weight: 300; line-height: 1.1; margin-bottom: 24px; }
+.svc-desc { font-size: 13px; line-height: 2; color: var(--ink2); font-weight: 300; margin-bottom: 32px; }
+.svc-checklist { list-style: none; margin-bottom: 40px; display: flex; flex-direction: column; gap: 12px; }
+.svc-checklist li { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--ink2); letter-spacing: 0.05em; opacity: 0; transform: translateX(-12px); transition: opacity .5s, transform .5s; }
+.svc-checklist li.check-in { opacity: 1; transform: translateX(0); }
+.check-icon { width: 18px; height: 18px; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.check-icon::after { content: ''; width: 6px; height: 3px; border-left: 1px solid var(--gold); border-bottom: 1px solid var(--gold); transform: rotate(-45deg) translateY(-1px); }
+.svc-cta { position: relative; padding: 14px 36px; border: 1px solid var(--ink); color: var(--ink); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; display: inline-block; overflow: hidden; align-self: flex-start; }
+.svc-cta::before { content:''; position:absolute; inset:0; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .3s var(--ease); }
+.svc-cta:hover::before { transform: scaleX(1); }
+.svc-cta span { position: relative; z-index: 1; }
+.svc-cta:hover span { color: var(--white); }
+
+/* ADD-ONS */
+#addons { background: var(--ink); }
+#addons .section-label { color: var(--gold); }
+#addons .section-title { color: var(--white); }
+.addons-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 64px; }
+.addon-card { height: 220px; perspective: 800px; }
+.addon-inner { position: relative; width: 100%; height: 100%; transition: transform .6s var(--ease); transform-style: preserve-3d; }
+.addon-card:hover .addon-inner { transform: rotateY(180deg); }
+.addon-front, .addon-back { position: absolute; inset: 0; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; }
+.addon-front { background: #252220; border: 1px solid rgba(191,164,106,0.15); }
+.addon-back { background: var(--gold); transform: rotateY(180deg); justify-content: center; align-items: flex-start; gap: 12px; }
+.addon-icon { font-size: 28px; margin-bottom: 12px; font-family: 'Cormorant Garamond', serif; color: var(--gold); }
+.addon-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--white); }
+.addon-desc { font-size: 11px; line-height: 1.7; color: rgba(255,255,255,0.9); font-weight: 300; }
+.addon-back-cta { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.4); padding-bottom: 2px; }
+
+/* PACKAGES */
+#packages { background: var(--bg); text-align: center; }
+.packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 64px; }
+.pkg-card { background: var(--white); padding: 56px 40px; border-bottom: 3px solid transparent; transition: border-color .3s, transform .3s; }
+.pkg-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+.pkg-card.featured { background: var(--ink); color: var(--white); border-color: var(--gold); }
+.pkg-label { font-size: 9px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; font-weight: 500; }
+.pkg-name { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; margin-bottom: 8px; }
+.pkg-card.featured .pkg-name { color: var(--white); }
+.pkg-price { font-size: 13px; letter-spacing: 0.1em; color: var(--ink2); margin-bottom: 32px; font-weight: 300; }
+.pkg-card.featured .pkg-price { color: rgba(255,255,255,0.6); }
+.pkg-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; text-align: left; }
+.pkg-features li { font-size: 12px; color: var(--ink2); padding-left: 16px; position: relative; font-weight: 300; line-height: 1.6; }
+.pkg-card.featured .pkg-features li { color: rgba(255,255,255,0.7); }
+.pkg-features li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="loader"><div id="loader-text">✦ &nbsp; VOWS &amp; VEDAS &nbsp; ✦</div></div>
+
+<nav id="navbar" class="solid">
+  <a href="index.html" class="nav-logo">VOWS &amp; VEDAS</a>
+  <ul class="nav-links">
+    <li><a href="services.html" style="color:var(--gold)">Services</a></li>
+    <li><a href="portfolio.html">Weddings</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="blog.html">Stories</a></li>
+    <li><a href="destinations.html">Destinations</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta"><span>Begin Your Journey</span></a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('uploads/real_images-1777026820855.jpg');background-position:center 30%"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <p class="page-hero-eyebrow">What We Offer</p>
+    <h1 class="page-hero-title">Our <em>Services</em></h1>
+  </div>
+</div>
+
+<!-- SERVICE SECTIONS -->
+<div class="service-section" id="svc-1">
+  <div class="svc-image reveal">
+    <div class="svc-img-placeholder"><span style="font-size:9px;letter-spacing:0.3em;color:rgba(191,164,106,0.5);position:relative;z-index:1">DESTINATION WEDDING</span></div>
+    <div class="svc-warm-overlay"></div>
+  </div>
+  <div class="svc-content reveal stagger-2">
+    <p class="svc-number">01</p>
+    <h2 class="svc-title">Destination<br><em>Weddings</em></h2>
+    <p class="svc-desc">From Rajasthan palace gardens to Greek clifftops — we craft extraordinary ceremonies in the world's most breathtaking locations.</p>
+    <ul class="svc-checklist" data-checklist>
+      <li><span class="check-icon"></span>Venue scouting &amp; negotiation worldwide</li>
+      <li><span class="check-icon"></span>Guest travel &amp; logistics management</li>
+      <li><span class="check-icon"></span>Local vendor network in 40+ destinations</li>
+      <li><span class="check-icon"></span>Legal ceremony documentation</li>
+    </ul>
+    <a href="contact.html" class="svc-cta"><span>Enquire Now</span></a>
+  </div>
+</div>
+
+<div class="service-section reverse" id="svc-2" style="background:var(--bg)">
+  <div class="svc-image reveal">
+    <div class="svc-img-placeholder" style="background:linear-gradient(135deg,#1e2018,#0e1008)"><span style="font-size:9px;letter-spacing:0.3em;color:rgba(191,164,106,0.5);position:relative;z-index:1">FULL PLANNING</span></div>
+    <div class="svc-warm-overlay"></div>
+  </div>
+  <div class="svc-content reveal stagger-2">
+    <p class="svc-number">02</p>
+    <h2 class="svc-title">Full<br><em>Planning</em></h2>
+    <p class="svc-desc">End-to-end curation of your entire wedding journey — from the first vision call to the final farewell. You celebrate; we handle everything.</p>
+    <ul class="svc-checklist" data-checklist>
+      <li><span class="check-icon"></span>12-month planning timeline &amp; milestones</li>
+      <li><span class="check-icon"></span>Budget management &amp; vendor coordination</li>
+      <li><span class="check-icon"></span>Day-of coordination &amp; on-site team</li>
+      <li><span class="check-icon"></span>Dedicated wedding manager</li>
+    </ul>
+    <a href="contact.html" class="svc-cta"><span>Enquire Now</span></a>
+  </div>
+</div>
+
+<div class="service-section" id="svc-3">
+  <div class="svc-image reveal">
+    <div class="svc-img-placeholder" style="background:linear-gradient(135deg,#2a1a20,#1a0a10)"><span style="font-size:9px;letter-spacing:0.3em;color:rgba(191,164,106,0.5);position:relative;z-index:1">DÉCOR &amp; FLORALS</span></div>
+    <div class="svc-warm-overlay"></div>
+  </div>
+  <div class="svc-content reveal stagger-2">
+    <p class="svc-number">03</p>
+    <h2 class="svc-title">Décor &amp;<br><em>Florals</em></h2>
+    <p class="svc-desc">Immersive environments built from flowers, fabric, light and texture — every table, mandap, and aisle tells your story.</p>
+    <ul class="svc-checklist" data-checklist>
+      <li><span class="check-icon"></span>Custom mandap &amp; stage design</li>
+      <li><span class="check-icon"></span>Floral art &amp; installation</li>
+      <li><span class="check-icon"></span>Table centrepiece &amp; linen styling</li>
+      <li><span class="check-icon"></span>Lighting design &amp; draping</li>
+    </ul>
+    <a href="contact.html" class="svc-cta"><span>Enquire Now</span></a>
+  </div>
+</div>
+
+<div class="service-section reverse" id="svc-4" style="background:var(--bg)">
+  <div class="svc-image reveal">
+    <div class="svc-img-placeholder" style="background:linear-gradient(135deg,#18181e,#0a0a10)"><span style="font-size:9px;letter-spacing:0.3em;color:rgba(191,164,106,0.5);position:relative;z-index:1">PHOTOGRAPHY</span></div>
+    <div class="svc-warm-overlay"></div>
+  </div>
+  <div class="svc-content reveal stagger-2">
+    <p class="svc-number">04</p>
+    <h2 class="svc-title">Photography<br>&amp; <em>Film</em></h2>
+    <p class="svc-desc">Cinematic storytelling by India's finest photographers and filmmakers — capturing raw emotion with editorial precision.</p>
+    <ul class="svc-checklist" data-checklist>
+      <li><span class="check-icon"></span>Pre-wedding &amp; engagement shoots</li>
+      <li><span class="check-icon"></span>Multi-camera ceremony &amp; reception coverage</li>
+      <li><span class="check-icon"></span>Feature film &amp; same-day edit</li>
+      <li><span class="check-icon"></span>Aerial &amp; drone cinematography</li>
+    </ul>
+    <a href="contact.html" class="svc-cta"><span>Enquire Now</span></a>
+  </div>
+</div>
+
+<div class="service-section" id="svc-5">
+  <div class="svc-image reveal">
+    <div class="svc-img-placeholder" style="background:linear-gradient(135deg,#201818,#120a0a)"><span style="font-size:9px;letter-spacing:0.3em;color:rgba(191,164,106,0.5);position:relative;z-index:1">MEHENDI &amp; STYLING</span></div>
+    <div class="svc-warm-overlay"></div>
+  </div>
+  <div class="svc-content reveal stagger-2">
+    <p class="svc-number">05</p>
+    <h2 class="svc-title">Mehendi &amp;<br><em>Styling</em></h2>
+    <p class="svc-desc">From intricate bridal mehendi to head-to-toe wedding looks — our styling team creates beauty that's both traditional and timeless.</p>
+    <ul class="svc-checklist" data-checklist>
+      <li><span class="check-icon"></span>Bridal &amp; guest mehendi</li>
+      <li><span class="check-icon"></span>Hair &amp; makeup artistry</li>
+      <li><span class="check-icon"></span>Trousseau &amp; outfit styling</li>
+      <li><span class="check-icon"></span>Pre-wedding beauty prep</li>
+    </ul>
+    <a href="contact.html" class="svc-cta"><span>Enquire Now</span></a>
+  </div>
+</div>
+
+<div class="service-section reverse" id="svc-6" style="background:var(--bg)">
+  <div class="svc-image reveal">
+    <div class="svc-img-placeholder" style="background:linear-gradient(135deg,#18201a,#0a120c)"><span style="font-size:9px;letter-spacing:0.3em;color:rgba(191,164,106,0.5);position:relative;z-index:1">ENTERTAINMENT</span></div>
+    <div class="svc-warm-overlay"></div>
+  </div>
+  <div class="svc-content reveal stagger-2">
+    <p class="svc-number">06</p>
+    <h2 class="svc-title">Entertainment<br>&amp; <em>DJ</em></h2>
+    <p class="svc-desc">From sangeet choreography to curated playlists and live acts — we fill your celebrations with energy, soul, and unforgettable moments.</p>
+    <ul class="svc-checklist" data-checklist>
+      <li><span class="check-icon"></span>Live musicians &amp; dhol players</li>
+      <li><span class="check-icon"></span>DJ &amp; sound system setup</li>
+      <li><span class="check-icon"></span>Sangeet choreography coordination</li>
+      <li><span class="check-icon"></span>Fireworks &amp; special effects</li>
+    </ul>
+    <a href="contact.html" class="svc-cta"><span>Enquire Now</span></a>
+  </div>
+</div>
+
+<!-- ADD-ONS -->
+<section id="addons">
+  <p class="section-label reveal">Elevate Further</p>
+  <h2 class="section-title reveal">Add-<em>Ons</em></h2>
+  <div class="addons-grid">
+    <div class="addon-card reveal stagger-1">
+      <div class="addon-inner">
+        <div class="addon-front"><div class="addon-icon">E</div><p class="addon-name">E-Invites</p></div>
+        <div class="addon-back"><p class="addon-desc">Custom digital wedding invitations with RSVP tracking and animated reveals.</p><a href="contact.html" class="addon-back-cta">Learn more →</a></div>
+      </div>
+    </div>
+    <div class="addon-card reveal stagger-2">
+      <div class="addon-inner">
+        <div class="addon-front"><div class="addon-icon">C</div><p class="addon-name">Catering</p></div>
+        <div class="addon-back"><p class="addon-desc">Curated menus from Michelin-quality chefs — from traditional thalis to fusion feasts.</p><a href="contact.html" class="addon-back-cta">Learn more →</a></div>
+      </div>
+    </div>
+    <div class="addon-card reveal stagger-3">
+      <div class="addon-inner">
+        <div class="addon-front"><div class="addon-icon">W</div><p class="addon-name">Wedding Website</p></div>
+        <div class="addon-back"><p class="addon-desc">A bespoke website for your wedding — your story, schedule, and RSVP in one place.</p><a href="contact.html" class="addon-back-cta">Learn more →</a></div>
+      </div>
+    </div>
+    <div class="addon-card reveal stagger-4">
+      <div class="addon-inner">
+        <div class="addon-front"><div class="addon-icon">G</div><p class="addon-name">Guest Gifting</p></div>
+        <div class="addon-back"><p class="addon-desc">Handcrafted welcome boxes and luxury farewell gifts for every guest.</p><a href="contact.html" class="addon-back-cta">Learn more →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages">
+  <p class="section-label reveal">Choose Your Path</p>
+  <h2 class="section-title reveal">Our <em>Packages</em></h2>
+  <div class="packages-grid">
+    <div class="pkg-card reveal stagger-1">
+      <p class="pkg-label">Essentials</p>
+      <h3 class="pkg-name">Pearl</h3>
+      <p class="pkg-price">Starting from ₹8,00,000</p>
+      <ul class="pkg-features">
+        <li>1 day ceremony</li>
+        <li>Basic décor &amp; florals</li>
+        <li>Photography coverage</li>
+        <li>Coordination support</li>
+      </ul>
+      <a href="contact.html" class="btn-ghost">Get Started</a>
+    </div>
+    <div class="pkg-card featured reveal stagger-2">
+      <p class="pkg-label">Most Popular</p>
+      <h3 class="pkg-name">Gold</h3>
+      <p class="pkg-price">Starting from ₹18,00,000</p>
+      <ul class="pkg-features">
+        <li>3-day multi-event wedding</li>
+        <li>Full décor, florals &amp; lighting</li>
+        <li>Photography + cinematic film</li>
+        <li>Dedicated wedding manager</li>
+        <li>Mehendi &amp; styling</li>
+      </ul>
+      <a href="contact.html" class="btn-gold">Begin Planning</a>
+    </div>
+    <div class="pkg-card reveal stagger-3">
+      <p class="pkg-label">Bespoke</p>
+      <h3 class="pkg-name">Prestige</h3>
+      <p class="pkg-price">Fully tailored</p>
+      <ul class="pkg-features">
+        <li>5+ day destination wedding</li>
+        <li>All services included</li>
+        <li>International venues</li>
+        <li>Concierge guest management</li>
+        <li>White-glove experience</li>
+      </ul>
+      <a href="contact.html" class="btn-ghost">Enquire</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div><p class="footer-logo">Vows &amp; Vedas</p><p class="footer-tagline">India's premier luxury destination wedding studio. We craft timeless ceremonies that become the story you tell forever.</p></div>
+    <div><p class="footer-heading">Navigate</p><ul class="footer-links"><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Real Weddings</a></li><li><a href="about.html">About Us</a></li><li><a href="destinations.html">Destinations</a></li><li><a href="blog.html">Journal</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><p class="footer-heading">Services</p><ul class="footer-links"><li><a href="#">Destination Weddings</a></li><li><a href="#">Full Planning</a></li><li><a href="#">Décor &amp; Florals</a></li><li><a href="#">Photography</a></li><li><a href="#">E-Invites</a></li><li><a href="#">Mehendi</a></li></ul></div>
+    <div><p class="footer-heading">Stay Connected</p><p style="font-size:12px;margin-bottom:16px;font-weight:300">Receive inspiration, stories &amp; exclusive offers.</p><div class="newsletter-form"><input type="email" class="newsletter-input" placeholder="Your email address"><button class="newsletter-btn">→</button></div></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 Vows &amp; Vedas. All rights reserved.</p><div class="social-icons"><a href="#">Instagram</a><a href="#">Pinterest</a><a href="#">YouTube</a><a href="#">WhatsApp</a></div><p>Privacy &nbsp;·&nbsp; Terms</p></div>
+</footer>
+
+<div id="chatbot">
+  <div id="chat-panel">
+    <div class="chat-header"><div class="chat-avatar">V</div><div><p class="chat-title">Vows &amp; Vedas</p><p class="chat-status">● Online Now</p></div></div>
+    <div class="chat-messages" id="chat-messages"><div class="chat-msg bot">Hi! Looking to learn more about our services? I'm happy to help.</div></div>
+    <div class="chat-input-wrap"><input type="text" class="chat-input" id="chat-input-field" placeholder="Type a message…"><button class="chat-send" id="chat-send-btn">→</button></div>
+    <a href="https://wa.me/" class="chat-whatsapp">💬 &nbsp; Continue on WhatsApp</a>
+  </div>
+  <button id="chat-btn" onclick="toggleChat()">
+    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+  </button>
+</div>
+
+<script src="global.js"></script>
+<script>
+// Checklist animation
+const checkIO = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.querySelectorAll('li').forEach((li, i) => {
+      setTimeout(() => li.classList.add('check-in'), i * 150);
+    });
+    checkIO.unobserve(e.target);
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('[data-checklist]').forEach(el => checkIO.observe(el));
+</script>
+</body>
+</html>

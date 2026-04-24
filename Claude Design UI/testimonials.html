@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testimonials — Vows & Vedas</title>
+<link rel="stylesheet" href="global.css">
+<style>
+/* STATS BAR */
+#stats-bar { background: var(--ink); padding: 72px 48px; }
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+.stat-item { text-align: center; padding: 48px 24px; border-right: 1px solid rgba(255,255,255,0.06); }
+.stat-item:last-child { border-right: none; }
+.stat-num { font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 300; color: var(--white); line-height: 1; }
+.stat-num em { color: var(--gold); font-style: normal; }
+.stat-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 12px; font-weight: 500; }
+
+/* VIDEO TESTIMONIALS */
+#video-testimonials { background: var(--bg); }
+.video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 64px; }
+.video-thumb { position: relative; aspect-ratio: 16/9; overflow: hidden; cursor: none; }
+.video-bg { width: 100%; height: 100%; background: linear-gradient(135deg,#2a2518,#1a1208); display: flex; align-items: center; justify-content: center; transition: filter .4s; }
+.video-thumb:hover .video-bg { filter: brightness(1.15); }
+.play-btn { width: 64px; height: 64px; border-radius: 50%; background: rgba(191,164,106,0.15); border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; transition: background .3s, transform .3s; animation: pulsePB 2s ease-in-out infinite; }
+.video-thumb:hover .play-btn { background: var(--gold); transform: scale(1.1); animation: none; }
+.play-btn::after { content: ''; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 16px solid var(--gold); margin-left: 4px; transition: border-left-color .3s; }
+.video-thumb:hover .play-btn::after { border-left-color: white; }
+@keyframes pulsePB { 0%,100%{box-shadow:0 0 0 0 rgba(191,164,106,0.3)} 50%{box-shadow:0 0 0 12px rgba(191,164,106,0)} }
+.video-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 20px; background: linear-gradient(to top,rgba(0,0,0,0.8),transparent); }
+.video-name { font-family: 'Cormorant Garamond', serif; color: var(--white); font-size: 18px; }
+.video-loc { font-size: 10px; color: var(--gold); letter-spacing: 0.2em; margin-top: 2px; }
+
+/* MASONRY TESTIMONIALS */
+#all-testimonials { background: var(--bg); border-top: 1px solid rgba(0,0,0,0.06); }
+.testi-masonry { columns: 3; column-gap: 8px; margin-top: 64px; }
+.testi-item { break-inside: avoid; margin-bottom: 8px; background: var(--white); padding: 36px; border: 1px solid transparent; transition: border-color .3s; }
+.testi-item:hover { border-color: var(--gold); }
+.testi-stars { color: var(--gold); font-size: 12px; letter-spacing: 3px; margin-bottom: 16px; }
+.testi-quote-text { font-family: 'Cormorant Garamond', serif; font-size: 20px; line-height: 1.6; font-style: italic; color: var(--ink); margin-bottom: 20px; font-weight: 300; transition: color .3s; }
+.testi-item:hover .testi-quote-text { color: #111; }
+.testi-author { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink2); font-weight: 500; }
+.testi-location { font-size: 10px; color: var(--gold); letter-spacing: 0.15em; margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="loader"><div id="loader-text">✦ &nbsp; VOWS &amp; VEDAS &nbsp; ✦</div></div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">VOWS &amp; VEDAS</a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Weddings</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="blog.html">Stories</a></li>
+    <li><a href="destinations.html">Destinations</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta"><span>Begin Your Journey</span></a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('uploads/real_images-1777026820855.jpg');background-position:center 25%"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <p class="page-hero-eyebrow">Love Stories</p>
+    <h1 class="page-hero-title">What Our<br><em>Couples Say</em></h1>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div id="stats-bar">
+  <div class="stats-row">
+    <div class="stat-item"><p class="stat-num" data-count="300"><em>0</em>+</p><p class="stat-label">Weddings Crafted</p></div>
+    <div class="stat-item"><p class="stat-num" data-count="98"><em>0</em>%</p><p class="stat-label">Couple Satisfaction</p></div>
+    <div class="stat-item"><p class="stat-num" data-count="40"><em>0</em>+</p><p class="stat-label">Destinations</p></div>
+    <div class="stat-item"><p class="stat-num" data-count="10"><em>0</em>+</p><p class="stat-label">Years of Excellence</p></div>
+  </div>
+</div>
+
+<!-- VIDEO TESTIMONIALS -->
+<section id="video-testimonials">
+  <p class="section-label reveal">Hear From Them</p>
+  <h2 class="section-title reveal">Video <em>Stories</em></h2>
+  <div class="video-grid">
+    <div class="video-thumb reveal stagger-1">
+      <div class="video-bg"><div class="play-btn"></div></div>
+      <div class="video-caption"><p class="video-name">Aanya &amp; Rohan</p><p class="video-loc">Udaipur Palace, India</p></div>
+    </div>
+    <div class="video-thumb reveal stagger-2">
+      <div class="video-bg" style="background:linear-gradient(135deg,#1e2830,#121c22)"><div class="play-btn"></div></div>
+      <div class="video-caption"><p class="video-name">Meera &amp; Kabir</p><p class="video-loc">Santorini, Greece</p></div>
+    </div>
+    <div class="video-thumb reveal stagger-3">
+      <div class="video-bg" style="background:linear-gradient(135deg,#241a2e,#16101e)"><div class="play-btn"></div></div>
+      <div class="video-caption"><p class="video-name">Simran &amp; Rishi</p><p class="video-loc">Tuscany, Italy</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MASONRY TESTIMONIALS -->
+<section id="all-testimonials">
+  <p class="section-label reveal">300+ Happy Couples</p>
+  <h2 class="section-title reveal">All <em>Reviews</em></h2>
+  <div class="testi-masonry">
+    <div class="testi-item reveal stagger-1"><div class="testi-stars">★★★★★</div><p class="testi-quote-text">"Vows & Vedas turned our dream of a Rajasthan palace wedding into an absolutely breathtaking reality. Every detail was beyond what we imagined."</p><p class="testi-author">Priya &amp; Arjun</p><p class="testi-location">Udaipur Palace, India</p></div>
+    <div class="testi-item reveal stagger-2"><div class="testi-stars">★★★★★</div><p class="testi-quote-text">"The décor was unreal — marigolds and mirror work set against the desert dunes. Our guests are still talking about it two years later."</p><p class="testi-author">Rhea &amp; Dev</p><p class="testi-location">Jaisalmer, India</p></div>
+    <div class="testi-item reveal stagger-3"><div class="testi-stars">★★★★★</div><p class="testi-quote-text">"Professional, creative, and genuinely warm. They handled everything — from our 500-guest baraat to the most intimate mehendi evening."</p><p class="testi-author">Simran &amp; Rishi</p><p class="testi-location">Tuscany, Italy</p></div>
+    <div class="testi-item reveal stagger-1"><div class="testi-stars">★★★★★</div><p class="testi-quote-text">"We were planning from London and were nervous about a destination wedding in Rajasthan. They made every step feel effortless and exciting."</p><p class="testi-author">Nisha &amp; Aarav</p><p class="testi-location">Jodhpur, India</p></div>
+    <div class="testi-item reveal stagger-2"><div class="testi-stars">★★★★★</div><p class="testi-quote-text">"Our Bali ceremony was pure magic. The team understood our vision immediately and executed it with such care and creativity."</p><p class="testi-author">Kavya &amp; Vikram</p><p class="testi-location">Bali, Indonesia</p></div>
+    <div class="testi-item reveal stagger-3"><div class="testi-stars">★★★★★</div><p class="testi-quote-text">"From Santorini to Bali, they gave us the most cinematic wedding. The team was with us every step. We truly felt loved and cared for."</p><p class="testi-author">Meera &amp; Kabir</p><p class="testi-location">Santorini, Greece</p></div>
+    <div class="testi-item reveal stagger-1"><div class="testi-stars">★★★★★</div><p class="testi-quote-text">"The florals alone were worth every rupee. Our mandap looked like something out of a dream — a dream I hadn't even known to have."</p><p class="testi-author">Tara &amp; Ishaan</p><p class="testi-location">Rishikesh, India</p></div>
+    <div class="testi-item reveal stagger-2"><div class="testi-stars">★★★★★</div><p class="testi-quote-text">"They took a stressful process and made it joyful. Our wedding day was the most relaxed, present, and beautiful day of our lives."</p><p class="testi-author">Ananya &amp; Sid</p><p class="testi-location">Maldives</p></div>
+    <div class="testi-item reveal stagger-3"><div class="testi-stars">★★★★★</div><p class="testi-quote-text">"Every single vendor they recommended was exceptional. The photography, the catering, the DJ — a perfectly curated team."</p><p class="testi-author">Preethi &amp; Rohan</p><p class="testi-location">Goa, India</p></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:var(--ink);text-align:center">
+  <p class="section-label reveal" style="color:var(--gold)">Your Story is Next</p>
+  <h2 class="section-title reveal" style="color:var(--white)">Let's Create <em>Memories</em><br>Together</h2>
+  <a href="contact.html" class="btn-gold reveal" style="margin-top:16px">Begin Your Journey</a>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><p class="footer-logo">Vows &amp; Vedas</p><p class="footer-tagline">India's premier luxury destination wedding studio.</p></div>
+    <div><p class="footer-heading">Navigate</p><ul class="footer-links"><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Real Weddings</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><p class="footer-heading">Services</p><ul class="footer-links"><li><a href="#">Destination Weddings</a></li><li><a href="#">Full Planning</a></li><li><a href="#">Photography</a></li><li><a href="#">Mehendi</a></li></ul></div>
+    <div><p class="footer-heading">Stay Connected</p><div class="newsletter-form"><input type="email" class="newsletter-input" placeholder="Your email address"><button class="newsletter-btn">→</button></div></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 Vows &amp; Vedas.</p><div class="social-icons"><a href="#">Instagram</a><a href="#">Pinterest</a><a href="#">YouTube</a></div><p>Privacy &nbsp;·&nbsp; Terms</p></div>
+</footer>
+
+<div id="chatbot">
+  <div id="chat-panel">
+    <div class="chat-header"><div class="chat-avatar">V</div><div><p class="chat-title">Vows &amp; Vedas</p><p class="chat-status">● Online Now</p></div></div>
+    <div class="chat-messages" id="chat-messages"><div class="chat-msg bot">Inspired by what you've read? Let's start planning your love story.</div></div>
+    <div class="chat-input-wrap"><input type="text" class="chat-input" id="chat-input-field" placeholder="Type a message…"><button class="chat-send" id="chat-send-btn">→</button></div>
+    <a href="https://wa.me/" class="chat-whatsapp">💬 &nbsp; Continue on WhatsApp</a>
+  </div>
+  <button id="chat-btn" onclick="toggleChat()">
+    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+  </button>
+</div>
+
+<script src="global.js"></script>
+<script>
+// COUNT-UP ANIMATION
+const countIO = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = parseInt(el.dataset.count);
+    const em = el.querySelector('em');
+    const suffix = el.textContent.replace(/[0-9]/g, '').replace(em.textContent,'').trim();
+    let start = null;
+    const step = ts => {
+      if (!start) start = ts;
+      const progress = Math.min((ts - start) / 1800, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      em.textContent = Math.round(eased * target);
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+    countIO.unobserve(el);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => countIO.observe(el));
+</script>
+</body>
+</html>
