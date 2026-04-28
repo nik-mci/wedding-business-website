@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vows & Vedas — Luxury Destination Weddings</title>
+    <style>
+      /* Inline styles for loader to prevent FOUC */
+      #loader {
+        position: fixed;
+        inset: 0;
+        background: #1A1408; /* Using hex here for the initial load before CSS variables are ready */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 99999;
+      }
+      #loader-text {
+        font-family: 'Cormorant Garamond', serif;
+        color: #C9A234;
+        font-size: clamp(18px, 3vw, 28px);
+        letter-spacing: 0.4em;
+        font-weight: 300;
+      }
+    </style>
+</head>
+<body>
+    <!-- CUSTOM CURSOR -->
+    <div id="cursor" style="position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s;"></div>
+    <div id="cursor-ring" style="position: fixed; width: 32px; height: 32px; border: 1.5px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 9997; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, opacity 0.3s; opacity: 0.6;"></div>
+
+    <!-- LOADER -->
+    <div id="loader">
+      <div id="loader-text">✦ &nbsp; VOWS &amp; VEDAS &nbsp; ✦</div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav id="navbar" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; transition: background 0.4s;">
+      <a href="/" class="nav-logo" style="font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 0.1em; font-weight: 500;">VOWS &amp; VEDAS</a>
+      <ul class="nav-links" style="display: flex; gap: 32px; list-style: none;">
+        <li><a href="#services" class="label" style="color: var(--text);">Services</a></li>
+        <li><a href="#portfolio" class="label" style="color: var(--text);">Weddings</a></li>
+        <li><a href="#about" class="label" style="color: var(--text);">About</a></li>
+        <li><a href="#contact" class="label" style="color: var(--text);">Contact</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta" style="padding: 12px 24px; border: 1px solid var(--gold); color: var(--text); font-family: var(--font-body); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600;">Begin Your Journey</a>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero" style="position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: var(--text);">
+      <div id="hero-bg" class="parallax-img" style="position: absolute; inset: 0; background: url('/assets/uploads/real_images-1777026820855.jpg') center/cover no-repeat; opacity: 0.6;"></div>
+      <div id="hero-content" style="position: relative; z-index: 2; text-align: center; color: var(--white); max-width: 900px; padding: 0 24px;">
+        <p class="hero-eyebrow label" style="color: var(--gold); margin-bottom: 24px;">Luxury Destination Weddings</p>
+        <h1 class="hero-title" style="font-size: clamp(3rem, 8vw, 7rem); color: var(--white); margin-bottom: 32px;">
+          <span class="word">Where</span>&nbsp;
+          <span class="word" style="font-style: italic;">Every</span>&nbsp;
+          <span class="word">Vow</span><br>
+          <span class="word" style="font-style: italic;">Becomes</span>&nbsp;
+          <span class="word">a</span>&nbsp;
+          <span class="word">Story</span>
+        </h1>
+        <p class="hero-subtitle" style="font-size: 1.1rem; color: var(--bg); opacity: 0.8; margin-bottom: 48px;">Crafting timeless ceremonies across the world's most extraordinary destinations</p>
+        <div class="hero-ctas" style="display: flex; gap: 20px; justify-content: center;">
+          <a href="#contact" style="background: var(--gold); color: var(--white); padding: 16px 40px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.75rem;">Plan Your Wedding</a>
+          <a href="#portfolio" style="border: 1px solid var(--white); color: var(--white); padding: 16px 40px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.75rem;">View Our Work</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW WE DO IT (Timeline) -->
+    <section id="process" style="background: var(--text); color: var(--white);" class="section-padding reveal">
+      <p class="label" style="color: var(--gold);">Our Process</p>
+      <h2 style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 48px; color: var(--white);">How We Craft<br><em>Your Day</em></h2>
+      <div class="timeline" style="position: relative; margin-top: 80px;">
+        <div style="display: flex; justify-content: space-between; position: relative; z-index: 2;">
+          <div class="timeline-step" style="text-align: center; flex: 1;">
+            <div class="step-circle" style="width: 64px; height: 64px; border-radius: 50%; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-family: var(--font-heading); font-size: 1.5rem; color: var(--gold);">01</div>
+            <p class="label" style="font-size: 0.8rem; margin-bottom: 8px;">Discovery</p>
+            <p style="font-size: 0.75rem; color: var(--muted); padding: 0 10px;">We listen to your vision &amp; dreams</p>
+          </div>
+          <div class="timeline-step" style="text-align: center; flex: 1;">
+            <div class="step-circle" style="width: 64px; height: 64px; border-radius: 50%; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-family: var(--font-heading); font-size: 1.5rem; color: var(--gold);">02</div>
+            <p class="label" style="font-size: 0.8rem; margin-bottom: 8px;">Curation</p>
+            <p style="font-size: 0.75rem; color: var(--muted); padding: 0 10px;">Handpicked venues &amp; experiences</p>
+          </div>
+          <div class="timeline-step" style="text-align: center; flex: 1;">
+            <div class="step-circle" style="width: 64px; height: 64px; border-radius: 50%; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-family: var(--font-heading); font-size: 1.5rem; color: var(--gold);">03</div>
+            <p class="label" style="font-size: 0.8rem; margin-bottom: 8px;">Design</p>
+            <p style="font-size: 0.75rem; color: var(--muted); padding: 0 10px;">Styled to reflect your unique story</p>
+          </div>
+          <div class="timeline-step" style="text-align: center; flex: 1;">
+            <div class="step-circle" style="width: 64px; height: 64px; border-radius: 50%; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-family: var(--font-heading); font-size: 1.5rem; color: var(--gold);">04</div>
+            <p class="label" style="font-size: 0.8rem; margin-bottom: 8px;">Execution</p>
+            <p style="font-size: 0.75rem; color: var(--muted); padding: 0 10px;">Flawless orchestration on the day</p>
+          </div>
+        </div>
+        <!-- Decorative line -->
+        <div style="position: absolute; top: 32px; left: 10%; right: 10%; height: 1px; background: rgba(201, 162, 52, 0.3); z-index: 1;"></div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="section-padding reveal">
+      <p class="label">What We Offer</p>
+      <h2 style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 48px;">Our <em>Services</em></h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2px; background: var(--border);">
+        <div class="service-card" style="position: relative; aspect-ratio: 4/5; background: var(--bg); overflow: hidden;">
+          <img src="/assets/photos/services/059A3875.jpg" alt="Destination Weddings" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
+          <div style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; background: linear-gradient(transparent, rgba(26,20,8,0.8));">
+            <p class="label" style="color: var(--gold);">01</p>
+            <h3 style="color: var(--white); font-size: 2rem;">Destination Weddings</h3>
+          </div>
+        </div>
+        <div class="service-card" style="position: relative; aspect-ratio: 4/5; background: var(--bg); overflow: hidden;">
+          <img src="/assets/photos/services/059A4309.jpg" alt="Full Planning" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
+          <div style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; background: linear-gradient(transparent, rgba(26,20,8,0.8));">
+            <p class="label" style="color: var(--gold);">02</p>
+            <h3 style="color: var(--white); font-size: 2rem;">Full Planning</h3>
+          </div>
+        </div>
+        <div class="service-card" style="position: relative; aspect-ratio: 4/5; background: var(--bg); overflow: hidden;">
+          <img src="/assets/photos/services/059A5110.jpg" alt="Décor & Florals" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
+          <div style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; background: linear-gradient(transparent, rgba(26,20,8,0.8));">
+            <p class="label" style="color: var(--gold);">03</p>
+            <h3 style="color: var(--white); font-size: 2rem;">Décor &amp; Florals</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO PREVIEW -->
+    <section id="portfolio" style="background: var(--text); color: var(--white);" class="section-padding">
+      <p class="label" style="color: var(--gold);">Real Weddings</p>
+      <h2 style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 48px; color: var(--white);">Our <em>Memory Space</em></h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 8px;">
+        <div class="portfolio-item reveal" style="aspect-ratio: 3/4; overflow: hidden;">
+          <img src="/assets/photos/couple shots/0G4A1624.jpg" alt="Wedding" style="width: 100%; height: 100%; object-fit: cover;" class="parallax-img">
+        </div>
+        <div class="portfolio-item reveal" style="aspect-ratio: 3/4; overflow: hidden;">
+          <img src="/assets/photos/couple shots/0G4A2282.jpg" alt="Wedding" style="width: 100%; height: 100%; object-fit: cover;" class="parallax-img">
+        </div>
+        <div class="portfolio-item reveal" style="aspect-ratio: 3/4; overflow: hidden;">
+          <img src="/assets/photos/couple shots/TSR53127.jpg" alt="Wedding" style="width: 100%; height: 100%; object-fit: cover;" class="parallax-img">
+        </div>
+        <div class="portfolio-item reveal" style="aspect-ratio: 3/4; overflow: hidden;">
+          <img src="/assets/photos/couple shots/TSR53717.jpg" alt="Wedding" style="width: 100%; height: 100%; object-fit: cover;" class="parallax-img">
+        </div>
+      </div>
+    </section>
+
+    <!-- IDEAS & MOODS -->
+    <section id="ideas" class="section-padding reveal" style="background: var(--bg);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 80px; align-items: center;">
+        <div>
+          <p class="label">Inspiration</p>
+          <h2 style="font-size: clamp(2.5rem, 4vw, 3.5rem); margin-bottom: 24px;">Wedding<br><em>Ideas &amp; Moods</em></h2>
+          <p style="font-size: 1rem; color: var(--muted); margin-bottom: 32px; line-height: 1.8;">Explore our curated library of ideas, from mandap silhouettes under Rajasthan skies to candlelit cliffside ceremonies in Santorini.</p>
+          <a href="#" class="label" style="border-bottom: 1px solid var(--gold); padding-bottom: 4px;">Explore Journal &nbsp;→</a>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+          <div style="aspect-ratio: 1; background: var(--border); overflow: hidden;">
+            <img src="/assets/photos/destination/059A3032 (1).jpg" alt="Idea" style="width: 100%; height: 100%; object-fit: cover;" class="parallax-img">
+          </div>
+          <div style="aspect-ratio: 1; background: var(--border); overflow: hidden; margin-top: 40px;">
+            <img src="/assets/photos/destination/TSR50334.jpg" alt="Idea" style="width: 100%; height: 100%; object-fit: cover;" class="parallax-img">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" style="background: var(--bg); overflow: hidden; padding-bottom: 80px;">
+      <p class="label" style="padding-left: 48px;">Love Stories</p>
+      <h2 style="padding-left: 48px; font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 48px;">What Our<br><em>Couples Say</em></h2>
+      <div class="testi-track" style="display: flex; gap: 32px; padding: 0 48px;">
+        <div style="min-width: 350px; background: var(--white); padding: 40px; border: 1px solid var(--border); border-bottom: 4px solid var(--gold);">
+          <p style="font-family: var(--font-heading); font-size: 1.4rem; font-style: italic; margin-bottom: 24px;">"Vows &amp; Vedas turned our dream of a Rajasthan palace wedding into a breathtaking reality."</p>
+          <p class="label" style="color: var(--text); margin-bottom: 4px;">Priya &amp; Arjun</p>
+          <p style="font-size: 0.75rem; color: var(--gold);">Udaipur Palace, India</p>
+        </div>
+        <div style="min-width: 350px; background: var(--white); padding: 40px; border: 1px solid var(--border); border-bottom: 4px solid var(--gold);">
+          <p style="font-family: var(--font-heading); font-size: 1.4rem; font-style: italic; margin-bottom: 24px;">"From Santorini to Bali, they gave us the most cinematic wedding. Truly cared for."</p>
+          <p class="label" style="color: var(--text); margin-bottom: 4px;">Meera &amp; Kabir</p>
+          <p style="font-size: 0.75rem; color: var(--gold);">Santorini, Greece</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG / JOURNAL -->
+    <section id="blog" class="section-padding reveal" style="background: var(--bg); border-top: 1px solid var(--border);">
+      <p class="label">From Our Journal</p>
+      <h2 style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 48px;">Stories &amp; <em>Inspiration</em></h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2px; background: var(--border);">
+        <div class="blog-card" style="background: var(--white); overflow: hidden;">
+          <div style="aspect-ratio: 4/3; overflow: hidden; background: var(--border);">
+             <img src="/assets/photos/destination/TSR50499 (1).jpg" alt="Blog" style="width: 100%; height: 100%; object-fit: cover;" class="parallax-img">
+          </div>
+          <div style="padding: 24px;">
+            <p class="label" style="font-size: 0.7rem; margin-bottom: 8px;">Destinations</p>
+            <h3 style="font-size: 1.5rem; margin-bottom: 12px; font-family: var(--font-heading);">Top 10 Destination Wedding Venues in India for 2025</h3>
+            <p style="font-size: 0.75rem; color: var(--muted);">March 18, 2025</p>
+          </div>
+        </div>
+        <div class="blog-card" style="background: var(--white); overflow: hidden;">
+          <div style="aspect-ratio: 4/3; overflow: hidden; background: var(--border);">
+             <img src="/assets/photos/destination/TSR50967.jpg" alt="Blog" style="width: 100%; height: 100%; object-fit: cover;" class="parallax-img">
+          </div>
+          <div style="padding: 24px;">
+            <p class="label" style="font-size: 0.7rem; margin-bottom: 8px;">Styling</p>
+            <h3 style="font-size: 1.5rem; margin-bottom: 12px; font-family: var(--font-heading);">The Art of the Modern Mehendi: Traditions Reimagined</h3>
+            <p style="font-size: 0.75rem; color: var(--muted);">February 4, 2025</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section id="final-cta" style="position: relative; overflow: hidden; padding: 120px 48px; text-align: center; background: var(--text);">
+      <div class="parallax-img" style="position: absolute; inset: 0; background: url('/assets/uploads/real_images-1777026820855.jpg') center/cover no-repeat; opacity: 0.3;"></div>
+      <div style="position: relative; z-index: 2;">
+        <p class="label" style="color: var(--gold); margin-bottom: 24px;">Your Story Awaits</p>
+        <h2 style="font-size: clamp(3rem, 7vw, 6rem); color: var(--white); margin-bottom: 32px;">Begin Your<br><em>Journey With Us</em></h2>
+        <a href="#contact" style="background: var(--gold); color: var(--white); padding: 16px 48px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.2em; display: inline-block;">Start Planning →</a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="background: var(--text); color: var(--muted); padding: 80px 48px 40px; border-top: 1px solid var(--border);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 48px;">
+        <div>
+          <p style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--white); margin-bottom: 16px;">VOWS &amp; VEDAS</p>
+          <p style="font-size: 0.9rem; line-height: 1.8;">India's premier luxury destination wedding studio. We craft timeless ceremonies that become the story you tell forever.</p>
+        </div>
+        <div>
+          <p class="label" style="margin-bottom: 20px;">Connect</p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+            <li><a href="#" style="font-size: 0.9rem;">Instagram</a></li>
+            <li><a href="#" style="font-size: 0.9rem;">Pinterest</a></li>
+            <li><a href="#" style="font-size: 0.9rem;">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top: 60px; padding-top: 28px; border-top: 1px solid rgba(237,232,220,0.1); display: flex; justify-content: space-between; font-size: 0.75rem;">
+        <p>© 2025 Vows &amp; Vedas. All rights reserved.</p>
+        <p>Crafted for Excellence</p>
+      </div>
+    </footer>
+
+    <!-- CHATBOT -->
+    <div id="chatbot" style="position: fixed; bottom: 32px; right: 32px; z-index: 2000;">
+      <button id="chat-btn" style="width: 64px; height: 64px; background: var(--gold); border-radius: 50%; border: none; cursor: none; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 32px rgba(201, 162, 52, 0.3);">
+        <svg viewBox="0 0 24 24" style="width: 24px; height: 24px; fill: white;"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+      </button>
+      <div id="chat-panel" style="position: absolute; bottom: 80px; right: 0; width: 320px; background: var(--white); border: 1px solid var(--border); box-shadow: 0 16px 64px rgba(0,0,0,0.1); display: none; flex-direction: column;">
+        <div style="background: var(--text); padding: 20px; color: var(--white); display: flex; align-items: center; gap: 12px;">
+          <div style="width: 40px; height: 40px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: 1.2rem;">V</div>
+          <div>
+            <p style="font-family: var(--font-heading); font-size: 1.1rem;">Vows &amp; Vedas</p>
+            <p style="font-size: 0.65rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase;">● Online Now</p>
+          </div>
+        </div>
+        <div id="chat-messages" style="height: 250px; overflow-y: auto; padding: 20px; background: var(--bg); display: flex; flex-direction: column; gap: 12px;">
+          <div style="background: var(--white); padding: 12px; border-left: 2px solid var(--gold); font-size: 0.8rem;">Welcome! I'm here to help you begin planning your dream wedding. What's the occasion?</div>
+        </div>
+        <div style="display: flex; border-top: 1px solid var(--border);">
+          <input type="text" id="chat-input" placeholder="Type a message..." style="flex: 1; border: none; padding: 16px; font-size: 0.85rem; outline: none; font-family: var(--font-body);">
+          <button style="background: none; border: none; padding: 16px; color: var(--gold); cursor: none;">→</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
