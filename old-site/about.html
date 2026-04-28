@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us — Vows & Vedas</title>
+    <style>
+      #loader { position: fixed; inset: 0; background: #1A1408; display: flex; align-items: center; justify-content: center; z-index: 99999; }
+      #loader-text { font-family: 'Cormorant Garamond', serif; color: #C9A234; font-size: clamp(18px, 3vw, 28px); letter-spacing: 0.4em; font-weight: 300; }
+    </style>
+</head>
+<body>
+    <div id="cursor" style="position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s;"></div>
+    <div id="cursor-ring" style="position: fixed; width: 32px; height: 32px; border: 1.5px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 9997; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, opacity 0.3s; opacity: 0.6;"></div>
+
+    <div id="loader"><div id="loader-text">✦ &nbsp; VOWS &amp; VEDAS &nbsp; ✦</div></div>
+
+    <nav id="navbar" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; transition: background 0.4s;">
+      <a href="/" class="nav-logo" style="font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 0.1em; font-weight: 500;">VOWS &amp; VEDAS</a>
+      <ul class="nav-links" style="display: flex; gap: 32px; list-style: none;">
+        <li><a href="services.html" class="label" style="color: var(--text);">Services</a></li>
+        <li><a href="destinations.html" class="label" style="color: var(--text);">Destinations</a></li>
+        <li><a href="venues.html" class="label" style="color: var(--text);">Venues</a></li>
+        <li><a href="experiences.html" class="label" style="color: var(--text);">Experiences</a></li>
+        <li><a href="/#portfolio" class="label" style="color: var(--text);">Weddings</a></li>
+        <li><a href="about.html" class="label" style="color: var(--gold);">About</a></li>
+        <li><a href="/#contact" class="label" style="color: var(--text);">Contact</a></li>
+      </ul>
+      <a href="/#contact" class="nav-cta" style="padding: 12px 24px; border: 1px solid var(--gold); color: var(--text); font-family: var(--font-body); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600;">Begin Your Journey</a>
+    </nav>
+
+    <!-- SPLIT HERO -->
+    <section id="about-hero" style="display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh;">
+      <div style="background: var(--bg); display: flex; flex-direction: column; justify-content: center; padding: 80px 64px;">
+        <p class="label" style="margin-bottom: 24px;">Our Story</p>
+        <h1 style="font-size: clamp(3rem, 6vw, 5rem); line-height: 1.1;">Where<br><em>Vision</em><br>Meets<br><em>Devotion</em></h1>
+      </div>
+      <div style="position: relative; overflow: hidden; background: var(--text);">
+        <div class="parallax-img" style="position: absolute; inset: 0; background: url('/assets/photos/couple shots/059A4274.jpg') center/cover no-repeat; opacity: 0.8;"></div>
+      </div>
+    </section>
+
+    <!-- BRAND STORY -->
+    <section class="section-padding" style="background: var(--bg);">
+      <div style="max-width: 900px; margin: 0 auto;">
+        <p class="label" style="text-align: center; margin-bottom: 48px;">Our Journey</p>
+        <div style="display: flex; gap: 48px;">
+          <div style="width: 1px; background: var(--border); position: relative;">
+            <div style="position: absolute; top: 0; left: 0; width: 1px; background: var(--gold); height: 100%;"></div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 40px; font-size: 1.1rem; line-height: 2; color: var(--text);">
+            <p class="reveal"><strong>Founded on the principles of excellence,</strong> Vows &amp; Vedas (formerly Exotic Indian Weddings) is represented by a team of creative, enthusiastic, trained, and experienced individuals dedicated to planning and executing your perfect wedding.</p>
+            <p class="reveal">We strive to make each wedding a talk of the town. By taking care of every detail, we ensure you can relax and simply look your best. We plan weddings on a range of themes—from the serene beaches and majestic forts to the snowy slopes of the Himalayas and the gushing banks of the Ganges.</p>
+            <p class="reveal">Every itinerary is carefully planned to provide the level of activity that suits you best. We leverage our industry connections to provide illustrative arrangements and avoid costly mistakes, helping you live the most beautiful moments of your life with us.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="section-padding" style="background: var(--text); color: var(--white); text-align: center;">
+      <p class="label" style="color: var(--gold);">In Numbers</p>
+      <h2 style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 64px; color: var(--white);">A Decade of <em>Love Stories</em></h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 48px;">
+        <div class="reveal">
+          <p style="font-family: var(--font-heading); font-size: 4rem; color: var(--gold);">300+</p>
+          <p class="label">Weddings Crafted</p>
+        </div>
+        <div class="reveal">
+          <p style="font-family: var(--font-heading); font-size: 4rem; color: var(--gold);">40+</p>
+          <p class="label">Destinations</p>
+        </div>
+        <div class="reveal">
+          <p style="font-family: var(--font-heading); font-size: 4rem; color: var(--gold);">10+</p>
+          <p class="label">Years of Excellence</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="background: var(--text); color: var(--muted); padding: 80px 48px 40px; border-top: 1px solid var(--border);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 48px;">
+        <div>
+          <p style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--white); margin-bottom: 16px;">VOWS &amp; VEDAS</p>
+          <p style="font-size: 0.9rem; line-height: 1.8;">India's premier luxury destination wedding studio. We craft timeless ceremonies that become the story you tell forever.</p>
+        </div>
+        <div>
+          <p class="label" style="margin-bottom: 20px;">Connect</p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+            <li><a href="#" style="font-size: 0.9rem;">Instagram</a></li>
+            <li><a href="#" style="font-size: 0.9rem;">Pinterest</a></li>
+            <li><a href="#" style="font-size: 0.9rem;">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -1,4 +1,6 @@
 import '../global.css';
+import './scripts/pages/hashtag.js';
+import { CircularGallery } from './scripts/components/CircularGallery.js';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
@@ -135,6 +137,31 @@ const initChatbot = () => {
 // Animations
 const initAnimations = () => {
   // Hero Section
+  // --- CIRCULAR GALLERY ---
+  const galleryContainer = document.getElementById('circular-gallery-container');
+  if (galleryContainer) {
+    const galleryItems = [
+      { image: '/assets/photos/couple-shots/059A3486.jpg', text: 'Timeless Vows' },
+      { image: '/assets/photos/couple-shots/059A4274.jpg', text: 'Eternal Bond' },
+      { image: '/assets/photos/couple-shots/0G4A1624.jpg', text: 'Royal Affair' },
+      { image: '/assets/photos/couple-shots/0G4A1676.jpg', text: 'Sacred Union' },
+      { image: '/assets/photos/couple-shots/0G4A2084.jpg', text: 'Love & Laughter' },
+      { image: '/assets/photos/couple-shots/0G4A2282.jpg', text: 'Golden Hour' },
+      { image: '/assets/photos/couple-shots/0G4A4577.jpg', text: 'Divine Grace' },
+      { image: '/assets/photos/couple-shots/0G4A4625.jpg', text: 'Majestic Moments' }
+    ];
+
+    new CircularGallery(galleryContainer, {
+      items: galleryItems,
+      bend: 3.5,
+      textColor: '#C9A234',
+      borderRadius: 0.08,
+      font: "bold 24px 'DM Sans', sans-serif",
+      scrollSpeed: 2.5,
+      scrollEase: 0.03
+    });
+  }
+
   const heroTl = gsap.timeline();
   heroTl.from('.hero-eyebrow', { opacity: 0, y: 20, duration: 0.8, delay: 0.5 })
         .from('.hero-title .word', { opacity: 0, y: 40, stagger: 0.1, duration: 0.8, ease: 'power3.out' }, '-=0.4')

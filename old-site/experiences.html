@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signature Experiences — Vows & Vedas</title>
+    <style>
+      #loader { position: fixed; inset: 0; background: #1A1408; display: flex; align-items: center; justify-content: center; z-index: 99999; }
+      #loader-text { font-family: 'Cormorant Garamond', serif; color: #C9A234; font-size: clamp(18px, 3vw, 28px); letter-spacing: 0.4em; font-weight: 300; }
+      
+      .exp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 48px; padding: 80px 48px; background: var(--bg); }
+      .exp-card { background: var(--white); border: 1px solid var(--border); overflow: hidden; display: flex; flex-direction: column; }
+      .exp-header { height: 300px; position: relative; overflow: hidden; }
+      .exp-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+      .exp-card:hover .exp-img { transform: scale(1.05); }
+      
+      .exp-body { padding: 40px; flex-grow: 1; }
+      .exp-tag { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; font-weight: 600; }
+      .exp-title { font-family: var(--font-heading); font-size: 2.2rem; margin-bottom: 24px; line-height: 1.2; }
+      
+      .itinerary { border-top: 1px solid var(--border); margin-top: 32px; padding-top: 32px; }
+      .day { margin-bottom: 24px; }
+      .day-num { font-size: 11px; font-weight: 700; color: var(--text); margin-bottom: 8px; display: block; }
+      .day-desc { font-size: 0.95rem; color: var(--text); opacity: 0.8; line-height: 1.6; }
+      
+      .cta-bar { background: var(--text); color: var(--white); padding: 64px 48px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div id="cursor" style="position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s;"></div>
+    <div id="cursor-ring" style="position: fixed; width: 32px; height: 32px; border: 1.5px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 9997; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, opacity 0.3s; opacity: 0.6;"></div>
+
+    <div id="loader"><div id="loader-text">✦ &nbsp; VOWS &amp; VEDAS &nbsp; ✦</div></div>
+
+    <nav id="navbar" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; transition: background 0.4s;">
+      <a href="/" class="nav-logo" style="font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 0.1em; font-weight: 500;">VOWS &amp; VEDAS</a>
+      <ul class="nav-links" style="display: flex; gap: 32px; list-style: none;">
+        <li><a href="services.html" class="label" style="color: var(--text);">Services</a></li>
+        <li><a href="destinations.html" class="label" style="color: var(--text);">Destinations</a></li>
+        <li><a href="venues.html" class="label" style="color: var(--text);">Venues</a></li>
+        <li><a href="experiences.html" class="label" style="color: var(--gold);">Experiences</a></li>
+        <li><a href="/#portfolio" class="label" style="color: var(--text);">Weddings</a></li>
+        <li><a href="about.html" class="label" style="color: var(--text);">About</a></li>
+        <li><a href="/#contact" class="label" style="color: var(--text);">Contact</a></li>
+      </ul>
+      <a href="/#contact" class="nav-cta" style="padding: 12px 24px; border: 1px solid var(--gold); color: var(--text); font-family: var(--font-body); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600;">Begin Your Journey</a>
+    </nav>
+
+    <!-- HEADER -->
+    <header style="height: 50vh; background: var(--text); display: flex; align-items: center; justify-content: center; text-align: center; position: relative;">
+      <div class="parallax-img" style="position: absolute; inset: 0; background: url('/assets/photos/couple shots/059A4274.jpg') center/cover no-repeat; opacity: 0.4;"></div>
+      <div style="position: relative; z-index: 2;">
+        <p class="label" style="color: var(--gold); margin-bottom: 16px;">Signature Journeys</p>
+        <h1 style="font-size: clamp(3rem, 7vw, 5rem); color: var(--white);">Curated <em>Itineraries</em></h1>
+      </div>
+    </header>
+
+    <!-- EXPERIENCES GRID -->
+    <section class="exp-grid">
+      <!-- BIG FAT INDIAN WEDDING -->
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <img src="/assets/photos/destination/TSR50355.jpg" class="exp-img" alt="Big Fat Indian Wedding">
+        </div>
+        <div class="exp-body">
+          <p class="exp-tag">The Grand Celebration</p>
+          <h2 class="exp-title">Big Fat Indian<br><em>Wedding</em></h2>
+          <div class="itinerary">
+            <div class="day">
+              <span class="day-num">DAY 01: ARRIVAL &amp; WELCOME</span>
+              <p class="day-desc">Traditional welcome with garlands and fragrance of exotic flowers. Evening Gala Dinner followed by a relaxed Cocktail / Bachelor's Party.</p>
+            </div>
+            <div class="day">
+              <span class="day-num">DAY 02: SAGAN &amp; ENGAGEMENT</span>
+              <p class="day-desc">Exchanging of rings accompanied by live folk artists or traditional Sitar/Flute music under a beautifully decorated canopy.</p>
+            </div>
+            <div class="day">
+              <span class="day-num">DAY 03: MEHENDI &amp; SANGEET</span>
+              <p class="day-desc">Vibrant evening celebrations with celebrity performances and theme-based decor tailored to your vision.</p>
+            </div>
+            <div class="day">
+              <span class="day-num">DAY 04: THE WEDDING DAY</span>
+              <p class="day-desc">Haldi and Chura rituals followed by a Royal Procession with elephants and traditional dancers. The Saptpadi ceremony under a floral Mandap.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXOTIC BEACH WEDDING -->
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <img src="/assets/photos/destination/TSR50348.jpg" class="exp-img" alt="Exotic Beach Wedding">
+        </div>
+        <div class="exp-body">
+          <p class="exp-tag">Coastal Paradise</p>
+          <h2 class="exp-title">Exotic Beach<br><em>Wedding</em></h2>
+          <div class="itinerary">
+            <div class="day">
+              <span class="day-num">DAY 01: GOAN ARRIVAL</span>
+              <p class="day-desc">Check-in to a luxury resort. Spend the day at leisure in the refreshing environs of the Arabian Sea.</p>
+            </div>
+            <div class="day">
+              <span class="day-num">DAY 02: BRIDAL PAMPERING</span>
+              <p class="day-desc">The bride is anointed with scented oils and aromatic baths. Couple's spa treatment at the Aguada Spa.</p>
+            </div>
+            <div class="day">
+              <span class="day-num">DAY 03: THE BEACH CEREMONY</span>
+              <p class="day-desc">Main ceremony at the beachside with a live choir. Choose from themes like White Wedding or Black &amp; Glitter.</p>
+            </div>
+            <div class="day">
+              <span class="day-num">DAY 04: CHAMPAGNE BRUNCH</span>
+              <p class="day-desc">A private silver service brunch in your villa to celebrate your first moments of blissful marriage.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADVENTURE WEDDING -->
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <img src="/assets/photos/destination/TSR50350.jpg" class="exp-img" alt="Adventure Wedding">
+        </div>
+        <div class="exp-body">
+          <p class="exp-tag">Thrilling Vows</p>
+          <h2 class="exp-title">Himalayan Ski<br><em>Wedding</em></h2>
+          <div class="itinerary">
+            <div class="day">
+              <span class="day-num">DAY 01: ARRIVAL IN AULI</span>
+              <p class="day-desc">Arrive at 3,000m altitude. Enjoy lunch amidst snow-clad peaks and romantic serenity.</p>
+            </div>
+            <div class="day">
+              <span class="day-num">DAY 02: THE D-DAY SKI</span>
+              <p class="day-desc">Exchange rings and vows on the skiing slopes with a Himalayan backdrop. Confetti shower in the snow.</p>
+            </div>
+            <div class="day">
+              <span class="day-num">DAY 03: MOUNTAIN DEPARTURE</span>
+              <p class="day-desc">Leave your unique marriage venue with memories that will last a lifetime.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BAR -->
+    <section class="cta-bar">
+      <h2 style="font-family: var(--font-heading); font-size: 3rem; margin-bottom: 24px;">Your Story, <em>Tailored</em></h2>
+      <p style="margin-bottom: 40px; opacity: 0.8; max-width: 600px; margin-left: auto; margin-right: auto;">These itineraries are just the beginning. We customize every moment to reflect your unique journey.</p>
+      <a href="/#contact" class="nav-cta" style="background: var(--gold); border: none; color: var(--white); padding: 16px 40px;">Request a Custom Plan</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="background: var(--text); color: var(--muted); padding: 80px 48px 40px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 48px;">
+        <div>
+          <p style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--white); margin-bottom: 16px;">VOWS &amp; VEDAS</p>
+          <p style="font-size: 0.9rem; line-height: 1.8;">India's premier luxury destination wedding studio.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

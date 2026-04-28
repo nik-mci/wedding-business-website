@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services — Vows & Vedas</title>
+    <style>
+      #loader { position: fixed; inset: 0; background: #1A1408; display: flex; align-items: center; justify-content: center; z-index: 99999; }
+      #loader-text { font-family: 'Cormorant Garamond', serif; color: #C9A234; font-size: clamp(18px, 3vw, 28px); letter-spacing: 0.4em; font-weight: 300; }
+      
+      .service-row { display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; border-bottom: 1px solid var(--border); }
+      .service-row.reverse { direction: rtl; }
+      .service-row.reverse > * { direction: ltr; }
+      
+      .service-img { position: relative; overflow: hidden; background: var(--text); }
+      .service-content { padding: 80px 64px; display: flex; flex-direction: column; justify-content: center; background: var(--bg); }
+      
+      .service-num { font-size: 10px; letter-spacing: 0.5em; color: var(--gold); margin-bottom: 16px; font-weight: 600; }
+      .service-title { font-family: var(--font-heading); font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 32px; }
+      .service-desc { font-size: 1.1rem; line-height: 1.8; color: var(--text); margin-bottom: 40px; opacity: 0.8; }
+      
+      .checklist { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+      .checklist li { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: var(--text); }
+      .check-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
+    </style>
+</head>
+<body>
+    <div id="cursor" style="position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s;"></div>
+    <div id="cursor-ring" style="position: fixed; width: 32px; height: 32px; border: 1.5px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 9997; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, opacity 0.3s; opacity: 0.6;"></div>
+
+    <div id="loader"><div id="loader-text">✦ &nbsp; VOWS &amp; VEDAS &nbsp; ✦</div></div>
+
+    <nav id="navbar" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; transition: background 0.4s;">
+      <a href="/" class="nav-logo" style="font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 0.1em; font-weight: 500;">VOWS &amp; VEDAS</a>
+      <ul class="nav-links" style="display: flex; gap: 32px; list-style: none;">
+        <li><a href="services.html" class="label" style="color: var(--gold);">Services</a></li>
+        <li><a href="destinations.html" class="label" style="color: var(--text);">Destinations</a></li>
+        <li><a href="venues.html" class="label" style="color: var(--text);">Venues</a></li>
+        <li><a href="experiences.html" class="label" style="color: var(--text);">Experiences</a></li>
+        <li><a href="/#portfolio" class="label" style="color: var(--text);">Weddings</a></li>
+        <li><a href="about.html" class="label" style="color: var(--text);">About</a></li>
+        <li><a href="/#contact" class="label" style="color: var(--text);">Contact</a></li>
+      </ul>
+      <a href="/#contact" class="nav-cta" style="padding: 12px 24px; border: 1px solid var(--gold); color: var(--text); font-family: var(--font-body); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600;">Begin Your Journey</a>
+    </nav>
+
+    <!-- HERO -->
+    <header style="height: 60vh; background: var(--text); display: flex; align-items: center; justify-content: center; text-align: center; position: relative;">
+      <div class="parallax-img" style="position: absolute; inset: 0; background: url('/assets/photos/services/059A5110.jpg') center/cover no-repeat; opacity: 0.5;"></div>
+      <div style="position: relative; z-index: 2;">
+        <p class="label" style="color: var(--gold); margin-bottom: 16px;">Expert Curation</p>
+        <h1 style="font-size: clamp(3rem, 7vw, 5rem); color: var(--white);">Our <em>Services</em></h1>
+      </div>
+    </header>
+
+    <!-- SERVICES -->
+    <section>
+      <!-- 01: VENUES -->
+      <div class="service-row">
+        <div class="service-img reveal">
+          <img src="/assets/photos/destination/TSR50355.jpg" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
+        </div>
+        <div class="service-content reveal">
+          <p class="service-num">01</p>
+          <h2 class="service-title">Venue Selection &amp;<br><em>Management</em></h2>
+          <p class="service-desc">The selection of a perfect venue ranks foremost in our planning. Whether it's the scenic environs of Kerala, the royal settings of Rajasthan, or the picturesque beaches of Goa, we secure the most desired locations for your authentic theme wedding.</p>
+          <ul class="checklist">
+            <li><span class="check-dot"></span>Site Inspection</li>
+            <li><span class="check-dot"></span>Vendor Negotiation</li>
+            <li><span class="check-dot"></span>Accommodation</li>
+            <li><span class="check-dot"></span>Logistics</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 02: DECOR -->
+      <div class="service-row reverse">
+        <div class="service-img reveal">
+          <img src="/assets/photos/services/059A4309.jpg" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
+        </div>
+        <div class="service-content reveal">
+          <p class="service-num">02</p>
+          <h2 class="service-title">Floral &amp; Light<br><em>Design</em></h2>
+          <p class="service-desc">Fresh flowers like roses, orchids, and marigolds augment the traditional and ethnic look. We believe that lighting, if used artistically, can amplify and emphasize every element of décor, taking your celebration to a completely different level.</p>
+          <ul class="checklist">
+            <li><span class="check-dot"></span>Theme Design</li>
+            <li><span class="check-dot"></span>Floral Installation</li>
+            <li><span class="check-dot"></span>Artistic Lighting</li>
+            <li><span class="check-dot"></span>Custom Mandaps</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 03: TROUSSEAU -->
+      <div class="service-row">
+        <div class="service-img reveal">
+          <img src="/assets/photos/couple shots/059A4274.jpg" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
+        </div>
+        <div class="service-content reveal">
+          <p class="service-num">03</p>
+          <h2 class="service-title">Trousseau &amp;<br><em>Styling</em></h2>
+          <p class="service-desc">Whether you desire a traditional trousseau or a contemporary formal look, our team works with professional designers to provide the finest wedding attire. From bridal makeup to guest mehendi, every detail is perfected.</p>
+          <ul class="checklist">
+            <li><span class="check-dot"></span>Designer Consults</li>
+            <li><span class="check-dot"></span>Bridal Makeup</li>
+            <li><span class="check-dot"></span>Mehendi Artists</li>
+            <li><span class="check-dot"></span>Guest Styling</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="background: var(--text); color: var(--muted); padding: 80px 48px 40px; border-top: 1px solid var(--border);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 48px;">
+        <div>
+          <p style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--white); margin-bottom: 16px;">VOWS &amp; VEDAS</p>
+          <p style="font-size: 0.9rem; line-height: 1.8;">India's premier luxury destination wedding studio. We craft timeless ceremonies that become the story you tell forever.</p>
+        </div>
+        <div>
+          <p class="label" style="margin-bottom: 20px;">Connect</p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+            <li><a href="#" style="font-size: 0.9rem;">Instagram</a></li>
+            <li><a href="#" style="font-size: 0.9rem;">Pinterest</a></li>
+            <li><a href="#" style="font-size: 0.9rem;">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

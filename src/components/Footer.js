@@ -1,0 +1,75 @@
+import Link from "next/link";
+
+export default function Footer() {
+  return (
+    <footer className="bg-ink text-surface/60 py-20 px-12">
+      <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div>
+          <p className="font-heading text-2xl text-surface tracking-[0.1em] mb-4">Vows & Vedas</p>
+          <p className="text-[12px] leading-relaxed font-light">
+            India's premier luxury destination wedding studio. We craft timeless ceremonies that become the story you tell forever.
+          </p>
+        </div>
+
+        <div>
+          <p className="text-[10px] uppercase tracking-[0.4em] text-gold font-medium mb-5">Navigate</p>
+          <ul className="flex flex-col gap-3">
+            {[
+              { name: 'Services', href: '/services' },
+              { name: 'Real Weddings', href: '/portfolio' },
+              { name: 'About Us', href: '/about' },
+              { name: 'Destinations', href: '/destinations' },
+              { name: 'Journal', href: '/blog' },
+              { name: 'Contact', href: '/contact' }
+            ].map(item => (
+              <li key={item.name}>
+                <Link href={item.href} className="text-[12px] text-surface/55 hover:text-gold transition-colors font-light">
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <p className="text-[10px] uppercase tracking-[0.4em] text-gold font-medium mb-5">Offerings</p>
+          <ul className="flex flex-col gap-3">
+            {['Destination Weddings', 'Full Planning', 'Décor & Florals', 'Photography', 'E-Invites', 'Mehendi'].map(item => (
+              <li key={item}>
+                <Link href="/services" className="text-[12px] text-surface/55 hover:text-gold transition-colors font-light">
+                  {item}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <p className="text-[10px] uppercase tracking-[0.4em] text-gold font-medium mb-5">Stay Connected</p>
+          <p className="text-[12px] font-light mb-4 text-surface/50">Receive inspiration, stories & exclusive offers.</p>
+          <div className="flex">
+            <input 
+              type="email" 
+              placeholder="Your email address" 
+              className="bg-surface/5 border-none border-b border-surface/20 p-3 text-[12px] text-surface outline-none focus:border-gold transition-colors w-full"
+            />
+            <button className="bg-gold px-4 text-surface transition-opacity hover:opacity-90">
+              →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-[1440px] mx-auto border-t border-surface/10 pt-7 flex flex-col md:flex-row justify-between items-center text-[10px] tracking-widest gap-6">
+        <p>© 2025 Vows & Vedas. All rights reserved.</p>
+        <div className="flex gap-5 uppercase">
+          <a href="#" className="hover:text-gold transition-colors">Instagram</a>
+          <a href="#" className="hover:text-gold transition-colors">Pinterest</a>
+          <a href="#" className="hover:text-gold transition-colors">YouTube</a>
+          <a href="#" className="hover:text-gold transition-colors">WhatsApp</a>
+        </div>
+        <p className="uppercase">Privacy · Terms</p>
+      </div>
+    </footer>
+  );
+}

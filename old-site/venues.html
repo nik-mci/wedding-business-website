@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venue Directory — Vows & Vedas</title>
+    <style>
+      #loader { position: fixed; inset: 0; background: #1A1408; display: flex; align-items: center; justify-content: center; z-index: 99999; }
+      #loader-text { font-family: 'Cormorant Garamond', serif; color: #C9A234; font-size: clamp(18px, 3vw, 28px); letter-spacing: 0.4em; font-weight: 300; }
+      
+      .venue-container { padding: 120px 48px; background: var(--bg); }
+      .city-section { margin-bottom: 80px; border-bottom: 1px solid var(--border); padding-bottom: 60px; }
+      .city-name { font-family: var(--font-heading); font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 40px; display: flex; align-items: center; gap: 24px; }
+      .city-name::after { content: ''; flex-grow: 1; height: 1px; background: var(--border); }
+      
+      .venue-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 32px; }
+      .venue-item { padding: 24px; border: 1px solid transparent; transition: all 0.3s; }
+      .venue-item:hover { border-color: var(--gold); background: var(--white); transform: translateY(-5px); }
+      .venue-hotel { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 12px; }
+      .venue-type { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; font-weight: 600; }
+      .venue-desc { font-size: 0.9rem; color: var(--text); opacity: 0.7; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div id="cursor" style="position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s;"></div>
+    <div id="cursor-ring" style="position: fixed; width: 32px; height: 32px; border: 1.5px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 9997; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, opacity 0.3s; opacity: 0.6;"></div>
+
+    <div id="loader"><div id="loader-text">✦ &nbsp; VOWS &amp; VEDAS &nbsp; ✦</div></div>
+
+    <nav id="navbar" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; transition: background 0.4s;">
+      <a href="/" class="nav-logo" style="font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 0.1em; font-weight: 500;">VOWS &amp; VEDAS</a>
+      <ul class="nav-links" style="display: flex; gap: 32px; list-style: none;">
+        <li><a href="services.html" class="label" style="color: var(--text);">Services</a></li>
+        <li><a href="destinations.html" class="label" style="color: var(--text);">Destinations</a></li>
+        <li><a href="venues.html" class="label" style="color: var(--gold);">Venues</a></li>
+        <li><a href="experiences.html" class="label" style="color: var(--text);">Experiences</a></li>
+        <li><a href="/#portfolio" class="label" style="color: var(--text);">Weddings</a></li>
+        <li><a href="about.html" class="label" style="color: var(--text);">About</a></li>
+        <li><a href="/#contact" class="label" style="color: var(--text);">Contact</a></li>
+      </ul>
+      <a href="/#contact" class="nav-cta" style="padding: 12px 24px; border: 1px solid var(--gold); color: var(--text); font-family: var(--font-body); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600;">Begin Your Journey</a>
+    </nav>
+
+    <!-- HEADER -->
+    <header style="height: 40vh; background: var(--text); display: flex; align-items: center; justify-content: center; text-align: center; position: relative;">
+      <div class="parallax-img" style="position: absolute; inset: 0; background: url('/assets/photos/destination/TSR50334.jpg') center/cover no-repeat; opacity: 0.4;"></div>
+      <div style="position: relative; z-index: 2;">
+        <p class="label" style="color: var(--gold); margin-bottom: 16px;">The Directory</p>
+        <h1 style="font-size: clamp(3rem, 6vw, 5rem); color: var(--white);">Elite <em>Partners</em></h1>
+      </div>
+    </header>
+
+    <!-- VENUES -->
+    <section class="venue-container">
+      
+      <!-- UDAIPUR -->
+      <div class="city-section reveal">
+        <h2 class="city-name">Udaipur</h2>
+        <div class="venue-list">
+          <div class="venue-item">
+            <p class="venue-type">Palace Studio</p>
+            <h3 class="venue-hotel">Oberoi Udai Vilas</h3>
+            <p class="venue-desc">Voted best hotel in the world. A masterpiece of traditional architecture and luxury.</p>
+          </div>
+          <div class="venue-item">
+            <p class="venue-type">Island Heritage</p>
+            <h3 class="venue-hotel">Taj Lake Palace</h3>
+            <p class="venue-desc">A floating vision of white marble set in the middle of Lake Pichola.</p>
+          </div>
+          <div class="venue-item">
+            <p class="venue-type">Historic Fortress</p>
+            <h3 class="venue-hotel">Jag Mandir</h3>
+            <p class="venue-desc">The legendary island palace where history meets the future of weddings.</p>
+          </div>
+          <div class="venue-item">
+            <p class="venue-type">Hilltop Estate</p>
+            <h3 class="venue-hotel">Devigarh Fort Palace</h3>
+            <p class="venue-desc">An 18th-century palace offering breathtaking views of the Aravalli Valley.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- JAIPUR -->
+      <div class="city-section reveal">
+        <h2 class="city-name">Jaipur</h2>
+        <div class="venue-list">
+          <div class="venue-item">
+            <p class="venue-type">Royal Residence</p>
+            <h3 class="venue-hotel">Rambagh Palace</h3>
+            <p class="venue-desc">The "Jewel of Jaipur," former residence of the Maharaja, offering sprawling lawns.</p>
+          </div>
+          <div class="venue-item">
+            <p class="venue-type">Mughal Gardens</p>
+            <h3 class="venue-hotel">Jai Mahal Palace</h3>
+            <p class="venue-desc">A masterpiece of Indo-Saracenic architecture set amidst 18 acres of Mughal gardens.</p>
+          </div>
+          <div class="venue-item">
+            <p class="venue-type">Luxury Resort</p>
+            <h3 class="venue-hotel">Oberoi Raj Vilas</h3>
+            <p class="venue-desc">A 32-acre oasis of luxury built around a traditional Rajasthani fort.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- JODHPUR -->
+      <div class="city-section reveal">
+        <h2 class="city-name">Jodhpur</h2>
+        <div class="venue-list">
+          <div class="venue-item">
+            <p class="venue-type">Grandest Palace</p>
+            <h3 class="venue-hotel">Umaid Bhawan Palace</h3>
+            <p class="venue-desc">One of the world's largest private residences, offering unmatched regal splendor.</p>
+          </div>
+          <div class="venue-item">
+            <p class="venue-type">Art Deco Gem</p>
+            <h3 class="venue-hotel">Taj Hari Mahal</h3>
+            <p class="venue-desc">Spreading over 6 acres of landscaped gardens, reflecting Jodhpur's princely heritage.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- GOA -->
+      <div class="city-section reveal">
+        <h2 class="city-name">Goa</h2>
+        <div class="venue-list">
+          <div class="venue-item">
+            <p class="venue-type">Beach Luxury</p>
+            <h3 class="venue-hotel">Taj Exotica Resort</h3>
+            <p class="venue-desc">Set on 56 acres of Mediterranean-style landscape on the Benaulim beach.</p>
+          </div>
+          <div class="venue-item">
+            <p class="venue-type">Boutique Charm</p>
+            <h3 class="venue-hotel">Symphony Beach</h3>
+            <p class="venue-desc">An intimate paradise perfect for smaller, personalized beach ceremonies.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="background: var(--text); color: var(--muted); padding: 80px 48px 40px; border-top: 1px solid var(--border);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 48px;">
+        <div>
+          <p style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--white); margin-bottom: 16px;">VOWS &amp; VEDAS</p>
+          <p style="font-size: 0.9rem; line-height: 1.8;">Your journey to a lifetime of memories starts here.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

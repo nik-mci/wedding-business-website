@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinations — Vows & Vedas</title>
+    <style>
+      #loader { position: fixed; inset: 0; background: #1A1408; display: flex; align-items: center; justify-content: center; z-index: 99999; }
+      #loader-text { font-family: 'Cormorant Garamond', serif; color: #C9A234; font-size: clamp(18px, 3vw, 28px); letter-spacing: 0.4em; font-weight: 300; }
+      
+      .dest-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 8px; margin-top: 64px; padding: 0 48px; }
+      .dest-card { position: relative; overflow: hidden; aspect-ratio: 4/5; }
+      .dest-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform .6s cubic-bezier(0.23, 1, 0.32, 1); }
+      .dest-card:hover .dest-bg { transform: scale(1.06); }
+      .dest-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,20,8,0.9) 0%, rgba(26,20,8,0.1) 60%); }
+      .dest-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 40px; transform: translateY(10px); transition: transform .4s ease; }
+      .dest-card:hover .dest-info { transform: translateY(0); }
+      .dest-region { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; font-weight: 600; }
+      .dest-name { font-family: var(--font-heading); font-size: 2.5rem; color: var(--white); font-weight: 300; margin-bottom: 8px; }
+      .dest-desc { font-size: 0.85rem; color: rgba(253,250,245,0.7); line-height: 1.6; margin-bottom: 24px; max-width: 80%; }
+      .dest-cta { display: inline-block; padding: 12px 28px; border: 1px solid rgba(253,250,245,0.3); color: var(--white); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; transition: all 0.3s; }
+      .dest-card:hover .dest-cta { background: var(--gold); border-color: var(--gold); }
+    </style>
+</head>
+<body>
+    <div id="cursor" style="position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s;"></div>
+    <div id="cursor-ring" style="position: fixed; width: 32px; height: 32px; border: 1.5px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 9997; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, opacity 0.3s; opacity: 0.6;"></div>
+
+    <div id="loader"><div id="loader-text">✦ &nbsp; VOWS &amp; VEDAS &nbsp; ✦</div></div>
+
+    <nav id="navbar" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; transition: background 0.4s;">
+      <a href="/" class="nav-logo" style="font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 0.1em; font-weight: 500;">VOWS &amp; VEDAS</a>
+      <ul class="nav-links" style="display: flex; gap: 32px; list-style: none;">
+        <li><a href="services.html" class="label" style="color: var(--text);">Services</a></li>
+        <li><a href="destinations.html" class="label" style="color: var(--gold);">Destinations</a></li>
+        <li><a href="venues.html" class="label" style="color: var(--text);">Venues</a></li>
+        <li><a href="experiences.html" class="label" style="color: var(--text);">Experiences</a></li>
+        <li><a href="/#portfolio" class="label" style="color: var(--text);">Weddings</a></li>
+        <li><a href="about.html" class="label" style="color: var(--text);">About</a></li>
+        <li><a href="/#contact" class="label" style="color: var(--text);">Contact</a></li>
+      </ul>
+      <a href="/#contact" class="nav-cta" style="padding: 12px 24px; border: 1px solid var(--gold); color: var(--text); font-family: var(--font-body); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600;">Begin Your Journey</a>
+    </nav>
+
+    <!-- PAGE HERO -->
+    <header style="height: 60vh; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center; background: var(--text);">
+      <div class="parallax-img" style="position: absolute; inset: 0; background: url('/assets/photos/destination/TSR50355.jpg') center/cover no-repeat; opacity: 0.6;"></div>
+      <div style="position: relative; z-index: 2;">
+        <p class="label" style="color: var(--gold); margin-bottom: 16px;">Around the World</p>
+        <h1 style="font-size: clamp(3rem, 7vw, 5rem); color: var(--white); line-height: 1.1;">Our <em>Destinations</em></h1>
+      </div>
+    </header>
+
+    <!-- DESTINATIONS GRID -->
+    <section class="section-padding" style="background: var(--bg);">
+      <div style="text-align: center; margin-bottom: 64px;">
+        <p class="label">Curated Locations</p>
+        <h2 style="font-size: clamp(2.5rem, 5vw, 4rem);">Extraordinary <em>Visions</em></h2>
+      </div>
+
+      <div class="dest-grid">
+        <!-- RAJASTHAN -->
+        <div class="dest-card reveal">
+          <div class="dest-bg" style="background-image: url('/assets/photos/destination/TSR50334.jpg');"></div>
+          <div class="dest-overlay"></div>
+          <div class="dest-info">
+            <p class="dest-region">The Royal Heritage</p>
+            <h3 class="dest-name">Rajasthan</h3>
+            <p class="dest-desc">From the golden sands of Jaisalmer to the lake palaces of Udaipur. Experience royalty at Umaid Bhawan and Devi Garh.</p>
+            <a href="/#contact" class="dest-cta">Inquire Now</a>
+          </div>
+        </div>
+
+        <!-- GOA -->
+        <div class="dest-card reveal">
+          <div class="dest-bg" style="background-image: url('/assets/photos/destination/TSR50348.jpg');"></div>
+          <div class="dest-overlay"></div>
+          <div class="dest-info">
+            <p class="dest-region">Coastal Bliss</p>
+            <h3 class="dest-name">Goa</h3>
+            <p class="dest-desc">Azure waters and silvery sands. Sunset vows at the Taj Exotica and Benaulim Beach's pristine shores.</p>
+            <a href="/#contact" class="dest-cta">Inquire Now</a>
+          </div>
+        </div>
+
+        <!-- KERALA -->
+        <div class="dest-card reveal">
+          <div class="dest-bg" style="background-image: url('/assets/photos/destination/TSR50350.jpg');"></div>
+          <div class="dest-overlay"></div>
+          <div class="dest-info">
+            <p class="dest-region">God's Own Country</p>
+            <h3 class="dest-name">Kerala</h3>
+            <p class="dest-desc">Tranquil backwaters and ethical temples. A celestial blend of beauty and sanctity for intimate ceremonies.</p>
+            <a href="/#contact" class="dest-cta">Inquire Now</a>
+          </div>
+        </div>
+
+        <!-- RISHIKESH -->
+        <div class="dest-card reveal">
+          <div class="dest-bg" style="background-image: url('/assets/photos/destination/TSR50355.jpg');"></div>
+          <div class="dest-overlay"></div>
+          <div class="dest-info">
+            <p class="dest-region">Spiritual Heights</p>
+            <h3 class="dest-name">Rishikesh</h3>
+            <p class="dest-desc">Riverside vows on the banks of the sacred Ganges. Adventurous ceremonies at Camp 5 Elements.</p>
+            <a href="/#contact" class="dest-cta">Inquire Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="background: var(--text); color: var(--muted); padding: 80px 48px 40px; border-top: 1px solid var(--border);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 48px;">
+        <div>
+          <p style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--white); margin-bottom: 16px;">VOWS &amp; VEDAS</p>
+          <p style="font-size: 0.9rem; line-height: 1.8;">India's premier luxury destination wedding studio. We craft timeless ceremonies that become the story you tell forever.</p>
+        </div>
+        <div>
+          <p class="label" style="margin-bottom: 20px;">Connect</p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+            <li><a href="#" style="font-size: 0.9rem;">Instagram</a></li>
+            <li><a href="#" style="font-size: 0.9rem;">Pinterest</a></li>
+            <li><a href="#" style="font-size: 0.9rem;">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
