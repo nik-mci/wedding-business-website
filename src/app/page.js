@@ -230,20 +230,52 @@ export default function HomePage() {
       </section>
 
       {/* IDEAS TEASER */}
-      <section id="ideas">
-        <div className="ideas-grid">
+      <section id="ideas" className="py-24 bg-bg">
+        <div className="max-w-[1440px] mx-auto px-12 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="reveal">
             <p className="section-label">Inspiration</p>
             <h2 className="section-title">Wedding<br /><em className="italic">Ideas & Moods</em></h2>
-            <p className="ideas-body">From mandap silhouettes under Rajasthan skies to candlelit cliffside ceremonies in Santorini — explore our curated library of ideas, mood boards, and styling references.</p>
+            <p className="text-muted text-[13px] leading-[2] font-light mb-10 max-w-[480px]">
+              From mandap silhouettes under Rajasthan skies to candlelit cliffside ceremonies in Santorini — explore our curated library of ideas, mood boards, and styling references.
+            </p>
             <Link href="/ideas" className="btn-underline">Explore Ideas &nbsp;→</Link>
           </div>
-          <div className="ideas-mosaic reveal">
-            <div className="mosaic-card"><div className="mosaic-inner"><div className="mosaic-bg bg-ink/20 flex items-center justify-center h-full"><span className="mosaic-label">Mandap Design</span></div></div></div>
-            <div className="mosaic-card"><div className="mosaic-inner"><div className="mosaic-bg bg-ink/30 flex items-center justify-center h-full"><span className="mosaic-label">Night Ceremony</span></div></div></div>
-            <div className="mosaic-card"><div className="mosaic-inner"><div className="mosaic-bg bg-ink/40 flex items-center justify-center h-full"><span className="mosaic-label">Floral Arch</span></div></div></div>
-            <div className="mosaic-card"><div className="mosaic-inner"><div className="mosaic-bg bg-ink/50 flex items-center justify-center h-full"><span className="mosaic-label">Bridal Look</span></div></div></div>
-            <div className="mosaic-card col-span-2"><div className="mosaic-inner"><div className="mosaic-bg bg-ink/60 flex items-center justify-center h-full"><span className="mosaic-label">Reception Setup</span></div></div></div>
+          <div className="ideas-mosaic reveal grid grid-cols-2 grid-rows-3 gap-2 h-[500px]">
+            <div className="mosaic-card row-span-2 relative overflow-hidden group">
+              <Image src="/assets/photos/destination/TSR50355.jpg" alt="Mandap Design" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+              <div className="absolute inset-0 bg-ink/20 group-hover:bg-ink/10 transition-colors"></div>
+              <div className="absolute bottom-4 left-4 z-2">
+                <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Mandap Design</span>
+              </div>
+            </div>
+            <div className="mosaic-card relative overflow-hidden group">
+              <Image src="/assets/photos/destination/TSR50501.jpg" alt="Night Ceremony" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+              <div className="absolute inset-0 bg-ink/30 group-hover:bg-ink/10 transition-colors"></div>
+              <div className="absolute bottom-4 left-4 z-2">
+                <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Night Ceremony</span>
+              </div>
+            </div>
+            <div className="mosaic-card relative overflow-hidden group">
+              <Image src="/assets/photos/destination/0G4A1341.jpg" alt="Floral Arch" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+              <div className="absolute inset-0 bg-ink/40 group-hover:bg-ink/10 transition-colors"></div>
+              <div className="absolute bottom-4 left-4 z-2">
+                <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Floral Arch</span>
+              </div>
+            </div>
+            <div className="mosaic-card col-span-1 relative overflow-hidden group">
+              <Image src="/assets/photos/couple-shots/0G4A2282.jpg" alt="Bridal Look" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+              <div className="absolute inset-0 bg-ink/50 group-hover:bg-ink/10 transition-colors"></div>
+              <div className="absolute bottom-4 left-4 z-2">
+                <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Bridal Look</span>
+              </div>
+            </div>
+            <div className="mosaic-card col-span-2 relative overflow-hidden group">
+              <Image src="/assets/photos/couple-shots/059A3486.jpg" alt="Reception Setup" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+              <div className="absolute inset-0 bg-ink/60 group-hover:bg-ink/10 transition-colors"></div>
+              <div className="absolute bottom-4 left-4 z-2">
+                <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Reception Setup</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>

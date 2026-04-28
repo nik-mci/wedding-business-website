@@ -16,10 +16,11 @@ export default function Footer() {
           <ul className="flex flex-col gap-3">
             {[
               { name: 'Services', href: '/services' },
-              { name: 'Real Weddings', href: '/portfolio' },
-              { name: 'About Us', href: '/about' },
+              { name: 'Weddings', href: '/portfolio' },
+              { name: 'About', href: '/about' },
+              { name: 'Stories', href: '/blog' },
               { name: 'Destinations', href: '/destinations' },
-              { name: 'Journal', href: '/blog' },
+              { name: 'FAQ', href: '/faq' },
               { name: 'Contact', href: '/contact' }
             ].map(item => (
               <li key={item.name}>
