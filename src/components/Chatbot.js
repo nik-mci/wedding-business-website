@@ -24,10 +24,10 @@ export default function Chatbot() {
       {/* CHAT PANEL */}
       <div className={`absolute bottom-[72px] right-0 w-[320px] bg-white rounded-sm shadow-2xl transition-all duration-350 ease-out overflow-hidden ${isOpen ? 'translate-y-0 scale-100 opacity-100 pointer-events-all' : 'translate-y-4 scale-95 opacity-0 pointer-events-none'}`}>
         <div className="bg-[#1C1C1C] p-5 flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-[var(--gold)] flex items-center justify-center font-heading text-white text-lg">V</div>
+          <div className="w-9 h-9 rounded-full bg-gold flex items-center justify-center font-heading text-white text-lg">V</div>
           <div>
             <p className="text-white font-heading text-sm">Vows & Vedas</p>
-            <p className="text-[var(--gold)] text-[9px] tracking-widest uppercase">● Online Now</p>
+            <p className="text-gold text-[9px] tracking-widest uppercase">● Online Now</p>
           </div>
         </div>
         
@@ -35,7 +35,7 @@ export default function Chatbot() {
           {messages.map((msg, i) => (
             <div 
               key={i} 
-              className={`text-xs leading-relaxed p-3 max-w-[85%] font-light ${msg.type === 'bot' ? 'bg-white text-[#1C1C1C] self-start border-l-2 border-[var(--gold)]' : 'bg-[var(--gold)] text-white self-end'}`}
+              className={`text-xs leading-relaxed p-3 max-w-[85%] font-light ${msg.type === 'bot' ? 'bg-white text-[#1C1C1C] self-start border-l-2 border-gold' : 'bg-gold text-white self-end'}`}
             >
               {msg.text}
             </div>
@@ -51,7 +51,7 @@ export default function Chatbot() {
             placeholder="Type a message..." 
             className="flex-1 border-none p-4 text-xs font-body outline-none"
           />
-          <button onClick={handleSend} className="p-4 text-[var(--gold)] text-lg">→</button>
+          <button onClick={handleSend} className="p-4 text-gold text-lg">→</button>
         </div>
         
         <a href="https://wa.me/91XXXXXXXXXX" target="_blank" className="flex items-center justify-center gap-2 py-3 bg-[#25D366] text-white text-[11px] font-semibold tracking-widest hover:bg-[#128C7E] transition-colors">
@@ -62,9 +62,9 @@ export default function Chatbot() {
       {/* CHAT BUTTON */}
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 bg-[var(--gold)] rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110 active:scale-95"
+        className="w-14 h-14 bg-gold rounded-full flex items-center justify-center shadow-[0_8px_32px_rgba(201,162,52,0.4)] hover:shadow-[0_8px_40px_rgba(201,162,52,0.6)] transition-all duration-300 hover:scale-110 active:scale-95 group"
       >
-        <svg className="w-6 h-6 fill-white" viewBox="0 0 24 24">
+        <svg className="w-6 h-6 fill-white group-hover:rotate-12 transition-transform duration-300" viewBox="0 0 24 24">
           <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
         </svg>
       </button>

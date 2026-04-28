@@ -33,16 +33,20 @@ export default function Navigation() {
       </Link>
 
       <ul className="hidden md:flex items-center gap-9">
-        {navLinks.map((link) => (
-          <li key={link.name}>
-            <Link 
-              href={link.href} 
-              className={`text-[11px] uppercase tracking-[0.18em] font-medium transition-colors duration-300 hover:text-gold ${(!isHome || scrolled) ? 'text-muted' : 'text-surface/90'}`}
-            >
-              {link.name}
-            </Link>
-          </li>
-        ))}
+        {navLinks.map((link) => {
+          const isActive = pathname === link.href;
+          return (
+            <li key={link.name} className="relative py-1 group">
+              <Link 
+                href={link.href} 
+                className={`text-[11px] uppercase tracking-[0.18em] font-medium transition-colors duration-300 hover:text-gold ${isActive ? 'text-gold' : (!isHome || scrolled) ? 'text-muted' : 'text-surface/90'}`}
+              >
+                {link.name}
+              </Link>
+              <div className={`absolute bottom-0 left-0 h-[1.5px] bg-gold transition-all duration-300 ${isActive ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-50'}`} />
+            </li>
+          );
+        })}
       </ul>
 
       <Link 
