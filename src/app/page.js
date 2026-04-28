@@ -312,7 +312,7 @@ export default function HomePage() {
       <section id="final-cta">
         <div id="cta-bg" className="absolute inset-[-10%] bg-cover bg-center filter brightness-[0.3] saturate-[0.5]" style={{ backgroundImage: "url('/assets/photos/destination/TSR50355.jpg')" }}></div>
         <p className="section-label reveal relative z-2" style={{ color: "var(--color-gold)" }}>Your Story Awaits</p>
-        <h2 className="section-title reveal text-surface relative z-2">Begin Your<br /><em className="italic">Journey With Us</em></h2>
+        <h2 className="section-title reveal text-gold relative z-2">Begin Your<br /><em className="italic">Journey With Us</em></h2>
         <p className="subtitle reveal relative z-2 text-surface/60 text-sm tracking-widest mb-12 uppercase">Let's craft the wedding you've always envisioned.</p>
         <Link href="/contact" className="btn-gold btn-pulse reveal relative z-2">Start Planning →</Link>
       </section>
