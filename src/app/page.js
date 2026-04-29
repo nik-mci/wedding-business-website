@@ -50,29 +50,70 @@ export default function HomePage() {
       });
 
       // Timeline animation
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: processRef.current,
-          start: "top 70%",
-        }
+      let mm = gsap.matchMedia();
+      
+      mm.add("(min-width: 768px)", () => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: processRef.current,
+            start: "top 60%",
+          }
+        });
+
+        tl.to(".timeline-line-progress", {
+          width: "100%",
+          duration: 2,
+          ease: "power2.inOut"
+        }, 0);
+
+        const steps = processRef.current.querySelectorAll(".timeline-step-horizontal");
+        
+        steps.forEach((step, i) => {
+          const dot = step.querySelector(".step-dot");
+          const content = step.querySelector(".step-content");
+          
+          const delay = (i / Math.max(1, steps.length - 1)) * 1.6; 
+          
+          tl.to(dot, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.4,
+            ease: "back.out(2)"
+          }, delay);
+          
+          tl.to(content, {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            ease: "power2.out"
+          }, delay + 0.1);
+        });
       });
 
-      tl.to(".timeline-path", {
-        strokeDashoffset: 0,
-        duration: 2,
-        ease: "power2.inOut"
-      }, 0.2);
+      mm.add("(max-width: 767px)", () => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: processRef.current,
+            start: "top 70%",
+          }
+        });
 
-      const circles = processRef.current.querySelectorAll(".step-circle");
-      const labels = processRef.current.querySelectorAll(".step-label");
-      
-      circles.forEach((c, i) => {
-        tl.to(c, {
-          opacity: 1,
-          scale: 1,
-          duration: 0.5,
-          onComplete: () => labels[i].classList.add("visible"),
-        }, 0.4 + i * 0.35);
+        tl.to(".timeline-line-vertical-progress", {
+          height: "100%",
+          duration: 2,
+          ease: "power2.inOut"
+        }, 0);
+
+        const steps = processRef.current.querySelectorAll(".timeline-step-vertical");
+        steps.forEach((step, i) => {
+          const dot = step.querySelector(".step-dot-vert");
+          const content = step.querySelector(".step-content-vert");
+          
+          const delay = (i / Math.max(1, steps.length - 1)) * 1.6;
+          
+          tl.to(dot, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, delay);
+          tl.to(content, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, delay + 0.1);
+        });
       });
     }, [heroRef, processRef]);
 
@@ -110,7 +151,7 @@ export default function HomePage() {
         <div 
           id="hero-bg" 
           className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/assets/photos/destination/TSR50334.jpg')" }}
+          style={{ backgroundImage: "url('/assets/photos/couple-shots/0G4A1624.jpg')" }}
         ></div>
         <div id="hero-overlay" className="absolute inset-0 bg-gradient-to-b from-ink/45 via-ink/20 to-ink/60"></div>
         <div id="hero-content" className="relative z-2 text-center px-6">
@@ -135,71 +176,144 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* HOW WE DO IT */}
-      <section id="process" ref={processRef}>
-        <p className="section-label reveal">Our Process</p>
-        <h2 className="section-title reveal text-surface">How We Craft<br /><em className="italic">Your Day</em></h2>
-        <div className="timeline reveal">
-          <div className="timeline-track">
-            <svg className="timeline-svg" viewBox="0 0 100 4" preserveAspectRatio="none">
-              <line className="timeline-path" x1="4" y1="2" x2="96" y2="2" />
-            </svg>
-            <div className="timeline-steps">
-              {[
-                { num: "01", title: "Discovery", desc: "We listen to your vision, values & dreams for the day" },
-                { num: "02", title: "Curation", desc: "We handpick venues, vendors & experiences worldwide" },
-                { num: "03", title: "Design", desc: "Every detail is styled to reflect your story" },
-                { num: "04", title: "Execution", desc: "Flawless orchestration on the day itself" },
-                { num: "05", title: "Memories", desc: "We capture & preserve every magical moment" }
-              ].map((step, i) => (
-                <div key={i} className="timeline-step">
-                  <div className="step-circle">{step.num}</div>
-                  <div className="step-label">
-                    <p className="step-title">{step.title}</p>
-                    <p className="step-desc">{step.desc}</p>
+      {/* SERVICES */}
+      <section id="services" className="py-16 px-6 md:px-12 bg-bg">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-12 text-center">
+            <p className="section-label reveal">What We Offer</p>
+            <h2 className="section-title reveal">Our <em className="italic">Services</em></h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 group/grid">
+            {[
+              { num: "01", name: "Decor & Styling", desc: "Bespoke floral artistry and immersive aesthetic environments.", img: "services/decoration/haldi_decor1.jpg" },
+              { num: "02", name: "Entertainment", desc: "Live bands, DJs, and captivating performances.", img: "services/entertainment/entertainment_band.jpg" },
+              { num: "03", name: "Hospitality", desc: "White-glove guest management and concierge services.", img: "couple-shots/hospitality1.jpg" },
+              { num: "04", name: "Destination Selection", desc: "Scouting breathtaking venues around the globe.", img: "destination/TSR50967.jpg" },
+              { num: "05", name: "Food & Beverages", desc: "Curated menus from Michelin-quality chefs.", img: "services/decoration/059A4328.jpg" },
+              { num: "06", name: "Full Planning", desc: "End-to-end curation of your entire wedding journey.", img: "destination/pool_venue.jpg" }
+            ].map((service, i) => (
+              <div 
+                key={i} 
+                className={`group/card relative overflow-hidden bg-ink/5 reveal border transition-all duration-300 ease-in-out border-gold/15 hover:border-gold hover:shadow-[0_0_20px_rgba(201,162,52,0.15)] group-hover/grid:brightness-[0.65] hover:!brightness-100 h-[250px] sm:h-[300px] ${
+                  i === 0 ? "md:col-span-2 md:h-[320px]" : 
+                  (i === 5 ? "md:col-span-3 md:h-[320px]" : "md:col-span-1 md:h-[320px]")
+                }`}
+              >
+                <div className="absolute top-4 right-4 font-heading text-[64px] text-white/10 select-none z-10 leading-none">{service.num}</div>
+                <Image 
+                  src={`/assets/photos/${service.img}`} 
+                  alt={service.name} 
+                  fill 
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/60 to-transparent translate-y-full transition-transform duration-[350ms] ease-out group-hover/card:translate-y-0 z-20">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-col justify-end">
+                    <p className="font-heading text-gold text-[14px] tracking-[0.3em] uppercase mb-1">{service.num}</p>
+                    <h3 className="font-heading text-surface text-[28px] font-light leading-tight mb-2">{service.name}</h3>
+                    <p className="font-body text-surface/70 text-[13px] font-light truncate mb-4">{service.desc}</p>
+                    <div className="h-[1px] bg-gold w-[48px] origin-left scale-x-0 transition-transform duration-[400ms] delay-100 ease-out group-hover/card:scale-x-100"></div>
                   </div>
                 </div>
-              ))}
-            </div>
+                <Link href="/services" className="absolute inset-0 z-30">
+                  <span className="sr-only">Explore {service.name}</span>
+                </Link>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12 text-center reveal">
+             <Link href="/services" className="inline-block relative font-body text-[11px] uppercase tracking-[0.3em] text-gold pb-1 group/btn">
+               View All Services &nbsp;→
+               <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gold transition-all duration-300 ease-out group-hover/btn:w-full"></span>
+             </Link>
           </div>
         </div>
       </section>
 
-      {/* SERVICES */}
-      <section id="services">
-        <p className="section-label reveal">What We Offer</p>
-        <h2 className="section-title reveal">Our <em className="italic">Services</em></h2>
-        <div className="services-grid">
-          {[
-            { num: "01", name: "Royal Palace Weddings", img: "destination/059A3564.jpg" },
-            { num: "02", name: "Exotic Beach Weddings", img: "destination/TSR50499 (1).jpg" },
-            { num: "03", name: "Full Planning & Curation", img: "couple-shots/059A4274.jpg" },
-            { num: "04", name: "Décor & Cultural Artistry", img: "couple-shots/0G4A4577.jpg" },
-            { num: "05", name: "Cinematic Photography", img: "couple-shots/TSR53127.jpg" },
-            { num: "06", name: "Renewal of Vows", img: "destination/TSR50967.jpg" }
-          ].map((service, i) => (
-            <div key={i} className={`service-card reveal stagger-${i % 3 + 1}`}>
-              <Image 
-                src={`/assets/photos/${service.img}`} 
-                alt={service.name} 
-                fill 
-                className="service-card-img"
-              />
-              <div className="service-info">
-                <p className="service-number">{service.num}</p>
-                <h3 className="service-name">{service.name}</h3>
-              </div>
-              <div className="service-overlay">
-                <Link href="/services" className="service-cta">Explore</Link>
-              </div>
-            </div>
-          ))}
+      {/* HOW WE DO IT */}
+      <section id="process" ref={processRef} className="overflow-hidden bg-bg py-16">
+        <p className="section-label reveal">Our Process</p>
+        <h2 className="section-title reveal text-ink">How We Craft<br /><em className="italic">Your Day</em></h2>
+        
+        {/* DESKTOP HORIZONTAL TIMELINE */}
+        <div className="hidden md:flex relative w-full h-[320px] mt-16 items-center">
+          {/* Connector Line */}
+          <div className="absolute top-1/2 left-[5%] right-[5%] h-[1px] -translate-y-1/2 z-0">
+            <div className="w-full h-full border-t border-dashed border-gold/40"></div>
+            <div className="timeline-line-progress absolute top-0 left-0 h-[1px] bg-gold origin-left" style={{ width: '0%' }}></div>
+          </div>
+          
+          <div className="relative z-10 flex justify-between w-[90%] mx-auto h-full">
+            {[
+              { num: "01", title: "Discovery", desc: "We listen to your vision, values & dreams for the day" },
+              { num: "02", title: "Curation", desc: "We handpick venues, vendors & experiences worldwide" },
+              { num: "03", title: "Design", desc: "Every detail is styled to reflect your story" },
+              { num: "04", title: "Execution", desc: "Flawless orchestration on the day itself" },
+              { num: "05", title: "Memories", desc: "We capture & preserve every magical moment" }
+            ].map((step, i) => {
+              const isOdd = i % 2 === 0; // 0, 2, 4 are 'odd' numbered steps (01, 03, 05)
+              const isLast = i === 4;
+              return (
+                <div key={i} className="timeline-step-horizontal flex flex-col items-center justify-center relative w-[18%]">
+                  {isOdd ? (
+                    <>
+                      <div className="step-content absolute bottom-[calc(50%+24px)] flex flex-col items-center text-center w-full translate-y-4 opacity-0">
+                        <div className={`font-heading text-2xl mb-3 ${isLast ? 'text-gold drop-shadow-[0_0_8px_rgba(201,162,52,0.4)]' : 'text-gold'}`}>{step.num}</div>
+                        <p className="font-body uppercase text-ink text-[13px] tracking-widest mb-2 font-medium">{step.title}</p>
+                        <p className="font-body font-light text-muted text-[11px] leading-relaxed px-2">{step.desc}</p>
+                      </div>
+                      <div className={`step-dot w-3 h-3 rounded-full bg-gold relative z-10 opacity-0 scale-0 ${isLast ? 'shadow-[0_0_12px_rgba(201,162,52,0.6)]' : ''}`}></div>
+                    </>
+                  ) : (
+                    <>
+                      <div className={`step-dot w-3 h-3 rounded-full bg-gold relative z-10 opacity-0 scale-0 ${isLast ? 'shadow-[0_0_12px_rgba(201,162,52,0.6)]' : ''}`}></div>
+                      <div className="step-content absolute top-[calc(50%+24px)] flex flex-col items-center text-center w-full -translate-y-4 opacity-0">
+                        <div className={`font-heading text-2xl mb-3 ${isLast ? 'text-gold drop-shadow-[0_0_8px_rgba(201,162,52,0.4)]' : 'text-gold'}`}>{step.num}</div>
+                        <p className="font-body uppercase text-ink text-[13px] tracking-widest mb-2 font-medium">{step.title}</p>
+                        <p className="font-body font-light text-muted text-[11px] leading-relaxed px-2">{step.desc}</p>
+                      </div>
+                    </>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* MOBILE VERTICAL TIMELINE */}
+        <div className="md:hidden relative w-full mt-12 pl-4 pb-8">
+          <div className="absolute top-6 bottom-6 left-[21px] w-[1px] z-0">
+            <div className="w-full h-full border-l border-dashed border-gold/40"></div>
+            <div className="timeline-line-vertical-progress absolute top-0 left-0 w-[1px] bg-gold origin-top" style={{ height: '0%' }}></div>
+          </div>
+          
+          <div className="flex flex-col gap-10 relative z-10">
+            {[
+              { num: "01", title: "Discovery", desc: "We listen to your vision, values & dreams for the day" },
+              { num: "02", title: "Curation", desc: "We handpick venues, vendors & experiences worldwide" },
+              { num: "03", title: "Design", desc: "Every detail is styled to reflect your story" },
+              { num: "04", title: "Execution", desc: "Flawless orchestration on the day itself" },
+              { num: "05", title: "Memories", desc: "We capture & preserve every magical moment" }
+            ].map((step, i) => {
+              const isLast = i === 4;
+              return (
+                <div key={i} className="timeline-step-vertical flex items-start relative">
+                  <div className={`step-dot-vert w-3 h-3 rounded-full bg-gold relative z-10 mt-[6px] shrink-0 opacity-0 scale-0 ${isLast ? 'shadow-[0_0_12px_rgba(201,162,52,0.6)]' : ''}`}></div>
+                  <div className="step-content-vert ml-8 flex flex-col opacity-0 -translate-x-4">
+                    <div className={`font-heading text-xl mb-1 ${isLast ? 'text-gold drop-shadow-[0_0_8px_rgba(201,162,52,0.4)]' : 'text-gold'}`}>{step.num}</div>
+                    <p className="font-body uppercase text-ink text-[13px] tracking-widest mb-1 font-medium">{step.title}</p>
+                    <p className="font-body font-light text-muted text-[11px] leading-relaxed">{step.desc}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
       {/* CIRCULAR MEMORY SPACE */}
-      <section id="memory-space" className="bg-ink py-24">
-        <div className="px-12 mb-12">
+      <section id="memory-space" className="bg-ink py-16">
+        <div className="px-12 mb-10">
           <p className="section-label" style={{ color: "var(--color-gold)" }}>Portfolio</p>
           <h2 className="section-title text-surface">Our <em className="italic">Memory Space</em></h2>
         </div>
@@ -213,14 +327,14 @@ export default function HomePage() {
             { image: '/assets/photos/destination/TSR50355.jpg', text: 'Tuscany' }
           ]} />
         </div>
-        <div className="text-center mt-12">
+        <div className="text-center mt-10">
           <Link href="/portfolio" className="btn-underline">View All Weddings &nbsp;→</Link>
         </div>
       </section>
 
       {/* HASHTAG GENERATOR */}
-      <section id="hashtag" className="bg-bg py-24">
-        <div className="px-12 mb-12">
+      <section id="hashtag" className="bg-bg py-16">
+        <div className="px-12 mb-10">
           <p className="section-label">AI Tool</p>
           <h2 className="section-title">Wedding <em className="italic">Hashtag Generator</em></h2>
         </div>
@@ -230,40 +344,40 @@ export default function HomePage() {
       </section>
 
       {/* IDEAS TEASER */}
-      <section id="ideas" className="py-24 bg-bg">
-        <div className="max-w-[1440px] mx-auto px-12 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+      <section id="ideas" className="py-16 bg-bg">
+        <div className="max-w-[1440px] mx-auto px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="reveal">
             <p className="section-label">Inspiration</p>
             <h2 className="section-title">Wedding<br /><em className="italic">Ideas & Moods</em></h2>
-            <p className="text-muted text-[13px] leading-[2] font-light mb-10 max-w-[480px]">
+            <p className="text-muted text-[13px] leading-[2] font-light mb-8 max-w-[480px]">
               From mandap silhouettes under Rajasthan skies to candlelit cliffside ceremonies in Santorini — explore our curated library of ideas, mood boards, and styling references.
             </p>
             <Link href="/ideas" className="btn-underline">Explore Ideas &nbsp;→</Link>
           </div>
           <div className="ideas-mosaic reveal grid grid-cols-2 grid-rows-3 gap-2 h-[500px]">
             <div className="mosaic-card row-span-2 relative overflow-hidden group">
-              <Image src="/assets/photos/destination/TSR50355.jpg" alt="Mandap Design" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+              <Image src="/assets/photos/services/decoration/mandap_decor.jpg" alt="Mandap Design" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-ink/20 group-hover:bg-ink/10 transition-colors"></div>
               <div className="absolute bottom-4 left-4 z-2">
                 <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Mandap Design</span>
               </div>
             </div>
             <div className="mosaic-card relative overflow-hidden group">
-              <Image src="/assets/photos/destination/TSR50501.jpg" alt="Night Ceremony" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+              <Image src="/assets/photos/services/decoration/sangeet_decoration.jpg" alt="Night Ceremony" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-ink/30 group-hover:bg-ink/10 transition-colors"></div>
               <div className="absolute bottom-4 left-4 z-2">
                 <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Night Ceremony</span>
               </div>
             </div>
             <div className="mosaic-card relative overflow-hidden group">
-              <Image src="/assets/photos/destination/0G4A1341.jpg" alt="Floral Arch" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+              <Image src="/assets/photos/services/decoration/haldi_flowers_decor.jpg" alt="Floral Arch" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-ink/40 group-hover:bg-ink/10 transition-colors"></div>
               <div className="absolute bottom-4 left-4 z-2">
                 <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Floral Arch</span>
               </div>
             </div>
             <div className="mosaic-card col-span-1 relative overflow-hidden group">
-              <Image src="/assets/photos/couple-shots/0G4A2282.jpg" alt="Bridal Look" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+              <Image src="/assets/photos/couple-shots/TSR53127.jpg" alt="Bridal Look" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-ink/50 group-hover:bg-ink/10 transition-colors"></div>
               <div className="absolute bottom-4 left-4 z-2">
                 <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Bridal Look</span>

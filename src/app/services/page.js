@@ -10,32 +10,40 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function ServicesPage() {
   useEffect(() => {
-    // Reveal animations
-    const reveals = document.querySelectorAll(".reveal");
-    reveals.forEach((el) => {
-      gsap.to(el, {
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          onEnter: () => el.classList.add("visible"),
-        }
+    let ctx = gsap.context(() => {
+      // Reveal animations
+      const reveals = document.querySelectorAll(".reveal");
+      reveals.forEach((el) => {
+        gsap.to(el, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            onEnter: () => el.classList.add("visible"),
+          }
+        });
       });
-    });
 
-    // Checklist animations
-    const checklists = document.querySelectorAll("[data-checklist]");
-    checklists.forEach((list) => {
-      gsap.to(list.querySelectorAll("li"), {
-        opacity: 1,
-        x: 0,
-        duration: 0.5,
-        stagger: 0.15,
-        scrollTrigger: {
-          trigger: list,
-          start: "top 80%",
-        }
+      // Checklist animations
+      const checklists = document.querySelectorAll("[data-checklist]");
+      checklists.forEach((list) => {
+        const items = list.querySelectorAll("li");
+        gsap.set(items, { opacity: 0, x: -15 });
+        
+        gsap.to(items, {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: list,
+            start: "top 85%",
+          }
+        });
       });
     });
+    
+    return () => ctx.revert();
   }, []);
 
   const services = [
@@ -49,7 +57,7 @@ export default function ServicesPage() {
         "Local vendor network in 40+ destinations",
         "Legal ceremony documentation"
       ],
-      img: "destination/TSR50355.jpg",
+      img: "destination/TSR50501.jpg",
       reverse: false
     },
     {
@@ -62,7 +70,7 @@ export default function ServicesPage() {
         "Day-of coordination & on-site team",
         "Dedicated wedding manager"
       ],
-      img: "couple-shots/0G4A4625.jpg",
+      img: "couple-shots/TSR53067.jpg",
       reverse: true
     },
     {
@@ -75,12 +83,12 @@ export default function ServicesPage() {
         "Table centrepiece & linen styling",
         "Lighting design & draping"
       ],
-      img: "destination/0G4A1341.jpg",
+      img: "services/decoration/haldi_flowers_decor.jpg",
       reverse: false
     },
     {
       num: "04",
-      title: "Photography & Film",
+      title: "Film & Photography",
       desc: "Cinematic storytelling by India's finest photographers and filmmakers — capturing raw emotion with editorial precision.",
       checklist: [
         "Pre-wedding & engagement shoots",
@@ -88,34 +96,47 @@ export default function ServicesPage() {
         "Feature film & same-day edit",
         "Aerial & drone cinematography"
       ],
-      img: "couple-shots/0G4A4811.jpg",
+      img: "couple-shots/TSR53178.jpg",
       reverse: true
     },
     {
       num: "05",
-      title: "Mehendi & Styling",
-      desc: "From intricate bridal mehendi to head-to-toe wedding looks — our styling team creates beauty that's both traditional and timeless.",
-      checklist: [
-        "Bridal & guest mehendi",
-        "Hair & makeup artistry",
-        "Trousseau & outfit styling",
-        "Pre-wedding beauty prep"
-      ],
-      img: "destination/TSR50973.jpg",
-      reverse: false
-    },
-    {
-      num: "06",
       title: "Entertainment & DJ",
       desc: "From sangeet choreography to curated playlists and live acts — we fill your celebrations with energy, soul, and unforgettable moments.",
       checklist: [
         "Live musicians & dhol players",
         "DJ & sound system setup",
         "Sangeet choreography coordination",
-        "Fireworks & special effects"
+        "Celebrity performance management"
       ],
-      img: "destination/TSR50334.jpg",
+      img: "services/entertainment/performances.jpg",
+      reverse: false
+    },
+    {
+      num: "06",
+      title: "Fireworks & FX",
+      desc: "Dazzling sky shows, cold pyrotechnics, and stunning visual effects to add an explosive touch of magic to your milestones.",
+      checklist: [
+        "Customized aerial firework displays",
+        "Cold pyro for entry and first dance",
+        "Confetti cannons & special effects",
+        "Venue safety & permit clearance"
+      ],
+      img: "destination/hospitality2.jpg",
       reverse: true
+    },
+    {
+      num: "07",
+      title: "Hospitality & Guest Management",
+      desc: "White-glove concierge service ensuring every guest is treated like royalty from their arrival to their departure.",
+      checklist: [
+        "Airport transfers & fleet management",
+        "Welcome hampers & room allocations",
+        "24/7 hospitality desk & RSVP tracking",
+        "Personalized guest itineraries"
+      ],
+      img: "couple-shots/0G4A2084.jpg",
+      reverse: false
     }
   ];
 
@@ -141,15 +162,14 @@ export default function ServicesPage() {
           className={`service-section ${svc.reverse ? 'reverse' : ''}`} 
           style={{ background: svc.reverse ? 'var(--color-bg)' : 'transparent' }}
         >
-          <div className="svc-image reveal">
-            <div className="svc-img-inner relative w-full h-full">
+          <div className="svc-image reveal group overflow-hidden">
+            <div className="relative w-full h-full">
               <Image 
                 src={`/assets/photos/${svc.img}`} 
                 alt={svc.title} 
                 fill 
-                className="svc-img-real"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
-              <div className="svc-warm-overlay"></div>
             </div>
           </div>
           <div className="svc-content reveal stagger-2">
@@ -158,13 +178,13 @@ export default function ServicesPage() {
             <p className="svc-desc">{svc.desc}</p>
             <ul className="svc-checklist" data-checklist>
               {svc.checklist.map((item, j) => (
-                <li key={j} className="flex items-center gap-3 opacity-0 -translate-x-3 transition-all duration-500">
+                <li key={j} className="flex items-center gap-3">
                   <span className="check-icon flex-shrink-0 w-[18px] h-[18px] border border-gold rounded-full flex items-center justify-center after:content-[''] after:w-[6px] after:h-[3px] after:border-l after:border-b after:border-gold after:-rotate-45 after:-translate-y-[1px]"></span>
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
-            <Link href="/contact" className="svc-cta"><span>Enquire Now</span></Link>
+            <Link href="/contact" className="btn-gold self-start mt-6">Enquire Now</Link>
           </div>
         </div>
       ))}
@@ -175,16 +195,19 @@ export default function ServicesPage() {
         <h2 className="section-title reveal text-surface">Add-<em className="italic">Ons</em></h2>
         <div className="addons-grid">
           {[
-            { icon: "E", name: "E-Invites", desc: "Custom digital wedding invitations with RSVP tracking and animated reveals." },
-            { icon: "C", name: "Catering", desc: "Curated menus from Michelin-quality chefs — from traditional thalis to fusion feasts." },
-            { icon: "W", name: "Wedding Website", desc: "A bespoke website for your wedding — your story, schedule, and RSVP in one place." },
-            { icon: "G", name: "Guest Gifting", desc: "Handcrafted welcome boxes and luxury farewell gifts for every guest." }
+            { img: "services/decoration/printables2.jpg", name: "E-Invites", desc: "Custom digital wedding invitations with RSVP tracking and animated reveals." },
+            { img: "services/decoration/059A4328.jpg", name: "Vendor Management", desc: "End-to-end coordination with our curated network of top-tier partners and artisans." },
+            { img: "services/mehendi.jpg", name: "Mehendi & Styling", desc: "Intricate bridal henna and comprehensive head-to-toe styling for you and your guests." },
+            { img: "couple-shots/0G4A4811.jpg", name: "Logistics & Transport", desc: "Seamless guest transportation, luxury fleet management, and venue logistics." }
           ].map((addon, i) => (
             <div key={i} className={`addon-card reveal stagger-${i + 1}`}>
               <div className="addon-inner">
-                <div className="addon-front">
-                  <div className="addon-icon">{addon.icon}</div>
-                  <p className="addon-name">{addon.name}</p>
+                <div className="addon-front overflow-hidden border border-gold/15">
+                  <Image src={`/assets/photos/${addon.img}`} alt={addon.name} fill className="object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent"></div>
+                  <div className="relative z-10 w-full flex flex-col justify-end h-full p-6">
+                    <p className="addon-name">{addon.name}</p>
+                  </div>
                 </div>
                 <div className="addon-back">
                   <p className="addon-desc">{addon.desc}</p>
@@ -247,29 +270,19 @@ export default function ServicesPage() {
         .service-section.reverse { direction: rtl; }
         .service-section.reverse > * { direction: ltr; }
         .svc-image { position: relative; overflow: hidden; min-height: 500px; }
-        .svc-img-real { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85); transition: filter .5s; }
-        .svc-image:hover .svc-img-real { filter: brightness(1); }
-        .svc-warm-overlay { position: absolute; inset: 0; background: rgba(191,130,60,0.25); opacity: 1; transition: opacity .5s; pointer-events: none; }
-        .svc-image:hover .svc-warm-overlay { opacity: 0; }
         .svc-content { padding: 72px 64px; display: flex; flex-direction: column; justify-content: center; }
         .svc-number { font-size: 10px; letter-spacing: 0.5em; color: var(--color-gold); margin-bottom: 12px; font-weight: 500; }
         .svc-title { font-family: var(--font-heading); font-size: clamp(36px,4vw,56px); font-weight: 300; line-height: 1.1; margin-bottom: 24px; color: var(--color-ink); }
         .svc-desc { font-size: 13px; line-height: 2; color: var(--color-muted); font-weight: 300; margin-bottom: 32px; }
         .svc-checklist { list-style: none; margin-bottom: 40px; display: flex; flex-direction: column; gap: 12px; }
-        .svc-cta { position: relative; padding: 14px 36px; border: 1px solid var(--color-ink); color: var(--color-ink); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; display: inline-block; overflow: hidden; align-self: flex-start; }
-        .svc-cta::before { content:''; position:absolute; inset:0; background:var(--color-gold); transform:scaleX(0); transform-origin:left; transition:transform .3s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-        .svc-cta:hover::before { transform: scaleX(1); }
-        .svc-cta span { position: relative; z-index: 1; }
-        .svc-cta:hover span { color: var(--color-surface); }
 
         .addons-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 64px; }
         .addon-card { height: 220px; perspective: 800px; }
         .addon-inner { position: relative; width: 100%; height: 100%; transition: transform .6s cubic-bezier(0.25, 0.46, 0.45, 0.94); transform-style: preserve-3d; }
         .addon-card:hover .addon-inner { transform: rotateY(180deg); }
-        .addon-front, .addon-back { position: absolute; inset: 0; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; }
-        .addon-front { background: #252220; border: 1px solid rgba(191,164,106,0.15); }
-        .addon-back { background: var(--color-gold); transform: rotateY(180deg); justify-content: center; align-items: flex-start; gap: 12px; }
-        .addon-icon { font-size: 28px; margin-bottom: 12px; font-family: var(--font-heading); color: var(--color-gold); }
+        .addon-front, .addon-back { position: absolute; inset: 0; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
+        .addon-front { background: #252220; }
+        .addon-back { background: var(--color-gold); transform: rotateY(180deg); justify-content: center; align-items: flex-start; gap: 12px; padding: 24px; }
         .addon-name { font-family: var(--font-heading); font-size: 22px; color: var(--color-surface); }
         .addon-desc { font-size: 11px; line-height: 1.7; color: rgba(255,255,255,0.9); font-weight: 300; }
         .addon-back-cta { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-surface); font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.4); padding-bottom: 2px; }
