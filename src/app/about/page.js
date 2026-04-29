@@ -98,14 +98,14 @@ export default function AboutPage() {
           <div 
             id="hero-right-bg" 
             className="absolute inset-[-10%] bg-cover bg-center"
-            style={{ backgroundImage: "url('/assets/photos/couple-shots/0G4A4274.jpg')" }}
+            style={{ backgroundImage: "url('/assets/photos/couple-shots/TSR53127.jpg')" }}
           ></div>
           <div className="absolute inset-0 bg-ink/20"></div>
         </div>
       </section>
 
       {/* BRAND STORY */}
-      <section className="py-32 px-12">
+      <section className="py-16 px-12">
         <p className="section-label reveal text-center mb-12">Our Journey</p>
         <div id="brand-story" className="grid grid-cols-[60px_1fr] gap-12 max-w-[900px] mx-auto">
           <div className="story-line-wrap relative flex justify-center">
@@ -114,17 +114,17 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="story-paragraphs flex flex-col gap-10">
-            <p className="story-para opacity-0 translate-y-4 transition-all duration-800 text-[15px] leading-[2] text-muted font-light">
-              <strong className="text-ink font-medium font-heading text-[18px] italic">Founded on love itself,</strong> Vows & Vedas was born from a simple belief: that your wedding day should feel as extraordinary as the love that led you here.
+            <p className="story-para opacity-0 translate-y-4 transition-all duration-800 text-[17px] leading-[2] text-muted font-light">
+              <strong className="text-ink font-medium font-heading text-[20px] italic">Founded on love itself,</strong> Vows & Vedas was born from a simple belief: that your wedding day should feel as extraordinary as the love that led you here.
             </p>
-            <p className="story-para opacity-0 translate-y-4 transition-all duration-800 text-[15px] leading-[2] text-muted font-light">
+            <p className="story-para opacity-0 translate-y-4 transition-all duration-800 text-[17px] leading-[2] text-muted font-light">
               We began in 2015, with a small team and a single palace wedding in Udaipur. What started as a dream became a calling — and today we've crafted over 300 weddings across 40+ destinations worldwide.
             </p>
-            <p className="story-para opacity-0 translate-y-4 transition-all duration-800 text-[15px] leading-[2] text-muted font-light">
+            <p className="story-para opacity-0 translate-y-4 transition-all duration-800 text-[17px] leading-[2] text-muted font-light">
               Our approach is deeply personal. We don't believe in templates. Every couple is a new story, every venue a new canvas. We listen before we plan, and we dream before we design.
             </p>
-            <p className="story-para opacity-0 translate-y-4 transition-all duration-800 text-[15px] leading-[2] text-muted font-light">
-              <strong className="text-ink font-medium font-heading text-[18px] italic">From the Himalayas to the Mediterranean,</strong> from intimate gardens to 1,000-guest palaces — we bring the same attention, creativity and care to every celebration we touch.
+            <p className="story-para opacity-0 translate-y-4 transition-all duration-800 text-[17px] leading-[2] text-muted font-light">
+              <strong className="text-ink font-medium font-heading text-[20px] italic">From the Himalayas to the Mediterranean,</strong> from intimate gardens to 1,000-guest palaces — we bring the same attention, creativity and care to every celebration we touch.
             </p>
           </div>
         </div>

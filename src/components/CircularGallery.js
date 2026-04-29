@@ -25,7 +25,7 @@ function autoBind(instance) {
 }
 
 class Title {
-  constructor({ gl, plane, text, textColor = '#C9A234', font = 'bold 24px sans-serif' }) {
+  constructor({ gl, plane, text, textColor = '#C9A234', font = '500 16px "DM Sans", sans-serif' }) {
     autoBind(this);
     this.gl = gl;
     this.plane = plane;
@@ -48,7 +48,13 @@ class Title {
     context.fillStyle = this.textColor;
     context.textBaseline = 'middle';
     context.textAlign = 'center';
-    context.fillText(this.text, canvas.width / 2, canvas.height / 2);
+    
+    // Add letter spacing for that premium subtitle look
+    if ('letterSpacing' in context) {
+      context.letterSpacing = '0.3em';
+    }
+    
+    context.fillText(this.text.toUpperCase(), canvas.width / 2, canvas.height / 2);
 
     const texture = new Texture(this.gl, { generateMipmaps: false });
     texture.image = canvas;
