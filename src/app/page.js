@@ -356,35 +356,35 @@ export default function HomePage() {
           </div>
           <div className="ideas-mosaic reveal grid grid-cols-2 grid-rows-3 gap-2 h-[500px]">
             <div className="mosaic-card row-span-2 relative overflow-hidden group">
-              <Image src="/assets/photos/services/decoration/mandap_decor.jpg" alt="Mandap Design" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+              <Image src="/assets/photos/services/decoration/mandap_decor.jpg" alt="Mandap Design" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-ink/20 group-hover:bg-ink/10 transition-colors"></div>
               <div className="absolute bottom-4 left-4 z-2">
                 <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Mandap Design</span>
               </div>
             </div>
             <div className="mosaic-card relative overflow-hidden group">
-              <Image src="/assets/photos/services/decoration/sangeet_decoration.jpg" alt="Night Ceremony" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+              <Image src="/assets/photos/services/decoration/sangeet_decoration.jpg" alt="Night Ceremony" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-ink/30 group-hover:bg-ink/10 transition-colors"></div>
               <div className="absolute bottom-4 left-4 z-2">
                 <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Night Ceremony</span>
               </div>
             </div>
             <div className="mosaic-card relative overflow-hidden group">
-              <Image src="/assets/photos/services/decoration/haldi_flowers_decor.jpg" alt="Floral Arch" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+              <Image src="/assets/photos/services/decoration/haldi_flowers_decor.jpg" alt="Floral Arch" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-ink/40 group-hover:bg-ink/10 transition-colors"></div>
               <div className="absolute bottom-4 left-4 z-2">
                 <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Floral Arch</span>
               </div>
             </div>
             <div className="mosaic-card col-span-1 relative overflow-hidden group">
-              <Image src="/assets/photos/couple-shots/TSR53127.jpg" alt="Bridal Look" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+              <Image src="/assets/photos/couple-shots/TSR53127.jpg" alt="Bridal Look" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-ink/50 group-hover:bg-ink/10 transition-colors"></div>
               <div className="absolute bottom-4 left-4 z-2">
                 <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Bridal Look</span>
               </div>
             </div>
             <div className="mosaic-card col-span-2 relative overflow-hidden group">
-              <Image src="/assets/photos/couple-shots/059A3486.jpg" alt="Reception Setup" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+              <Image src="/assets/photos/couple-shots/059A3486.jpg" alt="Reception Setup" fill sizes="100vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-ink/60 group-hover:bg-ink/10 transition-colors"></div>
               <div className="absolute bottom-4 left-4 z-2">
                 <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Reception Setup</span>

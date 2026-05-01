@@ -39,21 +39,22 @@ class Title {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
     context.font = this.font;
-    const metrics = context.measureText(this.text);
-    const textWidth = Math.ceil(metrics.width);
+    if ('letterSpacing' in context) {
+      context.letterSpacing = '0.3em';
+    }
+    const metrics = context.measureText(this.text.toUpperCase());
     const fontSize = 24;
-    canvas.width = textWidth + 20;
+    const letterSpacingPx = 0.3 * 16;
+    const textWidth = Math.ceil(metrics.width) + this.text.length * letterSpacingPx;
+    canvas.width = textWidth + 40;
     canvas.height = fontSize + 20;
     context.font = this.font;
     context.fillStyle = this.textColor;
     context.textBaseline = 'middle';
     context.textAlign = 'center';
-    
-    // Add letter spacing for that premium subtitle look
     if ('letterSpacing' in context) {
       context.letterSpacing = '0.3em';
     }
-    
     context.fillText(this.text.toUpperCase(), canvas.width / 2, canvas.height / 2);
 
     const texture = new Texture(this.gl, { generateMipmaps: false });

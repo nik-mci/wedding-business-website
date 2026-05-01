@@ -123,7 +123,7 @@ export default function PortfolioPage() {
               <div className="modal-gallery flex gap-2 overflow-x-auto mt-8 pb-2">
                 {[1, 2, 3, 4, 5].map((n) => (
                   <div key={n} className="flex-shrink-0 w-[120px] h-[90px] bg-ink/10 relative">
-                    <Image src={`/assets/photos/${selectedWedding.img}`} alt="gallery" fill className="object-cover opacity-50" />
+                    <Image src={`/assets/photos/${selectedWedding.img}`} alt="gallery" fill sizes="120px" className="object-cover opacity-50" />
                   </div>
                 ))}
               </div>
