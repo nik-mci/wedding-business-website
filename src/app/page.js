@@ -412,10 +412,32 @@ export default function HomePage() {
               { quote: "Professional, creative, warm. They handled everything — from our 500-guest baraat to the intimate mehendi evening.", author: "Ashira & Junak", loc: "Tuscany, Italy" }
             ].map((testi, i) => (
               <div key={i} className="testi-card">
+                <svg width="180" height="22.5" viewBox="0 0 240 30" fill="none" xmlns="http://www.w3.org/2000/svg" className="mb-6 opacity-80" style={{ color: "var(--color-gold)" }}>
+                  <circle cx="120" cy="15" r="5" stroke="currentColor" strokeWidth="2.5" />
+                  <path d="M 111 15 C 85 22, 50 8, 10 15" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+                  <path d="M 129 15 C 155 22, 190 8, 230 15" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+                  <circle cx="10" cy="15" r="2" fill="currentColor" />
+                  <circle cx="230" cy="15" r="2" fill="currentColor" />
+                  <path d="M 110 21 Q 120 28 130 21" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+                  <circle cx="120" cy="24.5" r="1.5" fill="currentColor" />
+                  <path d="M 105 18 Q 110 18 112 16" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+                  <path d="M 135 18 Q 130 18 128 16" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+                </svg>
                 <div className="testi-stars">★★★★★</div>
                 <p className="testi-quote">"{testi.quote}"</p>
                 <p className="testi-author">{testi.author}</p>
                 <p className="testi-location">{testi.loc}</p>
+                <svg width="180" height="22.5" viewBox="0 0 240 30" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-6 opacity-80" style={{ color: "var(--color-gold)", transform: "scaleY(-1)" }}>
+                  <circle cx="120" cy="15" r="5" stroke="currentColor" strokeWidth="2.5" />
+                  <path d="M 111 15 C 85 22, 50 8, 10 15" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+                  <path d="M 129 15 C 155 22, 190 8, 230 15" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+                  <circle cx="10" cy="15" r="2" fill="currentColor" />
+                  <circle cx="230" cy="15" r="2" fill="currentColor" />
+                  <path d="M 110 21 Q 120 28 130 21" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+                  <circle cx="120" cy="24.5" r="1.5" fill="currentColor" />
+                  <path d="M 105 18 Q 110 18 112 16" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+                  <path d="M 135 18 Q 130 18 128 16" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+                </svg>
               </div>
             ))}
           </div>
