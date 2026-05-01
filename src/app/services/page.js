@@ -114,7 +114,7 @@ export default function ServicesPage() {
     },
     {
       num: "06",
-      title: "Fireworks & FX",
+      title: "Fireworks & SFX",
       desc: "Dazzling sky shows, cold pyrotechnics, and stunning visual effects to add an explosive touch of magic to your milestones.",
       checklist: [
         "Customized aerial firework displays",
@@ -149,10 +149,7 @@ export default function ServicesPage() {
           style={{ backgroundImage: "url('/assets/photos/destination/TSR50995.jpg')", backgroundPosition: "center 30%" }}
         ></div>
         <div className="page-hero-overlay"></div>
-        <div className="page-hero-content">
-          <p className="page-hero-eyebrow">What We Offer</p>
-          <h1 className="page-hero-title">Our <em className="italic">Services</em></h1>
-        </div>
+
       </div>
 
       {/* SERVICE SECTIONS */}
@@ -175,7 +172,10 @@ export default function ServicesPage() {
           </div>
           <div className="svc-content reveal stagger-2">
             <p className="svc-number">{svc.num}</p>
-            <h2 className="svc-title" dangerouslySetInnerHTML={{ __html: svc.title.replace(' ', '<br>') + (svc.title.includes('&') ? '' : `<br><em className="italic">${svc.title.split(' ').pop()}</em>`) }}></h2>
+            <h2 className="svc-title">
+              {svc.title.split(' ')[0]}<br />
+              {svc.title.substring(svc.title.indexOf(' ') + 1)}
+            </h2>
             <p className="svc-desc">{svc.desc}</p>
             <ul className="svc-checklist" data-checklist>
               {svc.checklist.map((item, j) => (
