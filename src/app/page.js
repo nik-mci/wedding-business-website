@@ -177,11 +177,31 @@ export default function HomePage() {
       </section>
 
       {/* SERVICES */}
-      <section id="services" className="py-16 px-6 md:px-12 bg-bg">
+      <section id="services" className="pt-16 pb-12 px-6 md:px-12 bg-bg">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-12 text-center">
-            <p className="section-label reveal">What We Offer</p>
+          <div className="mb-12 text-center flex flex-col items-center">
+            <svg width="500" height="52" viewBox="0 0 500 52" fill="none" xmlns="http://www.w3.org/2000/svg" className="mb-4 opacity-90 reveal" style={{ color: "#C8A84B" }}>
+              <path d="M0 42 L180 42" stroke="currentColor" strokeWidth="1.2" />
+              <path d="M320 42 L500 42" stroke="currentColor" strokeWidth="1.2" />
+              <path d="M190 42 C 210 42, 210 26, 230 26 C 240 26, 245 42, 250 42 C 255 42, 260 26, 270 26 C 290 26, 290 42, 310 42" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+              <circle cx="185" cy="42" r="2.5" fill="currentColor" />
+              <circle cx="315" cy="42" r="2.5" fill="currentColor" />
+              <circle cx="250" cy="22" r="5" fill="currentColor" />
+              <circle cx="250" cy="22" r="2.5" fill="#F9F5EF" />
+            </svg>
+            
+            <p className="section-label reveal uppercase">What We Offer</p>
             <h2 className="section-title reveal">Our <em className="italic">Services</em></h2>
+            
+            <svg width="500" height="52" viewBox="0 0 500 52" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-2 opacity-90 reveal" style={{ color: "#C8A84B", transform: "scaleY(-1)" }}>
+              <path d="M0 42 L180 42" stroke="currentColor" strokeWidth="1.2" />
+              <path d="M320 42 L500 42" stroke="currentColor" strokeWidth="1.2" />
+              <path d="M190 42 C 210 42, 210 26, 230 26 C 240 26, 245 42, 250 42 C 255 42, 260 26, 270 26 C 290 26, 290 42, 310 42" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+              <circle cx="185" cy="42" r="2.5" fill="currentColor" />
+              <circle cx="315" cy="42" r="2.5" fill="currentColor" />
+              <circle cx="250" cy="22" r="5" fill="currentColor" />
+              <circle cx="250" cy="22" r="2.5" fill="#F9F5EF" />
+            </svg>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 group/grid">
@@ -230,20 +250,31 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ORNAMENTAL DIVIDER */}
+      <div className="w-full flex items-center justify-center opacity-80" style={{ color: "#C8A84B" }}>
+        <div className="flex-grow h-[1px] bg-current"></div>
+        <svg width="300" height="52" viewBox="0 0 300 52" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
+          <path d="M 10 26 C 40 26, 40 18, 80 18 C 110 18, 130 38, 150 38 C 170 38, 190 18, 220 18 C 260 18, 260 26, 290 26" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          <circle cx="5" cy="26" r="2.5" fill="currentColor" />
+          <circle cx="295" cy="26" r="2.5" fill="currentColor" />
+          <circle cx="150" cy="10" r="3" fill="none" stroke="currentColor" strokeWidth="1.5" />
+        </svg>
+        <div className="flex-grow h-[1px] bg-current"></div>
+      </div>
+
       {/* HOW WE DO IT */}
-      <section id="process" ref={processRef} className="overflow-hidden bg-bg py-16">
+      <section id="process" ref={processRef} className="overflow-hidden bg-bg pt-10 pb-12">
         <p className="section-label reveal">Our Process</p>
         <h2 className="section-title reveal text-ink">How We Craft<br /><em className="italic">Your Day</em></h2>
         
         {/* DESKTOP HORIZONTAL TIMELINE */}
         <div className="hidden md:flex relative w-full h-[320px] mt-16 items-center">
-          {/* Connector Line */}
-          <div className="absolute top-1/2 left-[5%] right-[5%] h-[1px] -translate-y-1/2 z-0">
-            <div className="w-full h-full border-t border-dashed border-gold/40"></div>
-            <div className="timeline-line-progress absolute top-0 left-0 h-[1px] bg-gold origin-left" style={{ width: '0%' }}></div>
+          {/* Connector Line Progress */}
+          <div className="absolute top-1/2 left-[8%] right-[8%] h-[1px] -translate-y-1/2 z-0 pointer-events-none">
+            <div className="timeline-line-progress absolute top-0 left-0 h-[1px] bg-gold origin-left opacity-60" style={{ width: '0%' }}></div>
           </div>
           
-          <div className="relative z-10 flex justify-between w-[90%] mx-auto h-full">
+          <div className="relative z-10 flex items-center justify-between w-[92%] mx-auto h-full">
             {[
               { num: "01", title: "Discovery", desc: "We listen to your vision, values & dreams for the day" },
               { num: "02", title: "Curation", desc: "We handpick venues, vendors & experiences worldwide" },
@@ -251,28 +282,52 @@ export default function HomePage() {
               { num: "04", title: "Execution", desc: "Flawless orchestration on the day itself" },
               { num: "05", title: "Memories", desc: "We capture & preserve every magical moment" }
             ].map((step, i) => {
-              const isOdd = i % 2 === 0; // 0, 2, 4 are 'odd' numbered steps (01, 03, 05)
+              const isOdd = i % 2 === 0;
               const isLast = i === 4;
               return (
-                <div key={i} className="timeline-step-horizontal flex flex-col items-center justify-center relative w-[18%]">
-                  {isOdd ? (
-                    <>
-                      <div className="step-content absolute bottom-[calc(50%+24px)] flex flex-col items-center text-center w-full translate-y-4 opacity-0">
-                        <div className={`font-heading text-2xl mb-3 ${isLast ? 'text-gold drop-shadow-[0_0_8px_rgba(201,162,52,0.4)]' : 'text-gold'}`}>{step.num}</div>
-                        <p className="font-body uppercase text-ink text-[13px] tracking-widest mb-2 font-medium">{step.title}</p>
-                        <p className="font-body font-light text-muted text-[11px] leading-relaxed px-2">{step.desc}</p>
-                      </div>
-                      <div className={`step-dot w-3 h-3 rounded-full bg-gold relative z-10 opacity-0 scale-0 ${isLast ? 'shadow-[0_0_12px_rgba(201,162,52,0.6)]' : ''}`}></div>
-                    </>
-                  ) : (
-                    <>
-                      <div className={`step-dot w-3 h-3 rounded-full bg-gold relative z-10 opacity-0 scale-0 ${isLast ? 'shadow-[0_0_12px_rgba(201,162,52,0.6)]' : ''}`}></div>
-                      <div className="step-content absolute top-[calc(50%+24px)] flex flex-col items-center text-center w-full -translate-y-4 opacity-0">
-                        <div className={`font-heading text-2xl mb-3 ${isLast ? 'text-gold drop-shadow-[0_0_8px_rgba(201,162,52,0.4)]' : 'text-gold'}`}>{step.num}</div>
-                        <p className="font-body uppercase text-ink text-[13px] tracking-widest mb-2 font-medium">{step.title}</p>
-                        <p className="font-body font-light text-muted text-[11px] leading-relaxed px-2">{step.desc}</p>
-                      </div>
-                    </>
+                <div key={i} className="contents">
+                  <div className="timeline-step-horizontal flex flex-col items-center justify-center relative w-[18%]">
+                    {isOdd ? (
+                      <>
+                        <div className="step-content absolute bottom-[calc(50%+36px)] flex flex-col items-center text-center w-full translate-y-4 opacity-0">
+                          <p className="font-body uppercase text-ink text-[13px] tracking-widest mb-2 font-medium">{step.title}</p>
+                          <p className="font-body font-light text-muted text-[11px] leading-[1.6] px-2 max-w-[200px] mx-auto whitespace-normal break-keep">{step.desc}</p>
+                        </div>
+                        <div className={`step-dot relative z-10 opacity-0 scale-0 flex items-center justify-center w-[56px] h-[56px] text-gold bg-bg ${isLast ? 'drop-shadow-[0_0_12px_rgba(201,162,52,0.4)]' : ''}`}>
+                          <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0">
+                            <path d="M 28 3 L 53 28 L 28 53 L 3 28 Z" stroke="currentColor" strokeWidth="1.5" />
+                            <path d="M 28 9 L 47 28 L 28 47 L 9 28 Z" stroke="currentColor" strokeWidth="0.8" opacity="0.6" />
+                            <circle cx="3" cy="28" r="2" fill="currentColor" />
+                            <circle cx="53" cy="28" r="2" fill="currentColor" />
+                          </svg>
+                          <span style={{ fontFamily: "Georgia, serif", fontStyle: "italic", fontSize: "16px", color: "#C8A84B" }} className="relative z-10 bg-bg px-1">{step.num}</span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className={`step-dot relative z-10 opacity-0 scale-0 flex items-center justify-center w-[56px] h-[56px] text-gold bg-bg ${isLast ? 'drop-shadow-[0_0_12px_rgba(201,162,52,0.4)]' : ''}`}>
+                          <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0">
+                            <path d="M 28 3 L 53 28 L 28 53 L 3 28 Z" stroke="currentColor" strokeWidth="1.5" />
+                            <path d="M 28 9 L 47 28 L 28 47 L 9 28 Z" stroke="currentColor" strokeWidth="0.8" opacity="0.6" />
+                            <circle cx="3" cy="28" r="2" fill="currentColor" />
+                            <circle cx="53" cy="28" r="2" fill="currentColor" />
+                          </svg>
+                          <span style={{ fontFamily: "Georgia, serif", fontStyle: "italic", fontSize: "16px", color: "#C8A84B" }} className="relative z-10 bg-bg px-1">{step.num}</span>
+                        </div>
+                        <div className="step-content absolute top-[calc(50%+36px)] flex flex-col items-center text-center w-full -translate-y-4 opacity-0">
+                          <p className="font-body uppercase text-ink text-[13px] tracking-widest mb-2 font-medium">{step.title}</p>
+                          <p className="font-body font-light text-muted text-[11px] leading-[1.6] px-2 max-w-[200px] mx-auto whitespace-normal break-keep">{step.desc}</p>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                  {i < 4 && (
+                    <div className="flex-1 flex justify-center items-center z-0">
+                      <svg width="120" height="30" viewBox="0 0 120 30" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-70" style={{ color: "#C8A84B" }}>
+                        <path d="M 0 15 L 45 15 C 55 15, 55 5, 60 5 C 65 5, 65 15, 75 15 L 120 15" stroke="currentColor" strokeWidth="1.2" fill="none" />
+                        <circle cx="60" cy="5" r="1.5" fill="currentColor" />
+                      </svg>
+                    </div>
                   )}
                 </div>
               );
@@ -282,12 +337,11 @@ export default function HomePage() {
 
         {/* MOBILE VERTICAL TIMELINE */}
         <div className="md:hidden relative w-full mt-12 pl-4 pb-8">
-          <div className="absolute top-6 bottom-6 left-[21px] w-[1px] z-0">
-            <div className="w-full h-full border-l border-dashed border-gold/40"></div>
-            <div className="timeline-line-vertical-progress absolute top-0 left-0 w-[1px] bg-gold origin-top" style={{ height: '0%' }}></div>
+          <div className="absolute top-6 bottom-6 left-[40px] w-[1px] z-0 pointer-events-none">
+            <div className="timeline-line-vertical-progress absolute top-0 left-0 w-[1px] bg-gold origin-top opacity-60" style={{ height: '0%' }}></div>
           </div>
           
-          <div className="flex flex-col gap-10 relative z-10">
+          <div className="flex flex-col relative z-10">
             {[
               { num: "01", title: "Discovery", desc: "We listen to your vision, values & dreams for the day" },
               { num: "02", title: "Curation", desc: "We handpick venues, vendors & experiences worldwide" },
@@ -297,13 +351,30 @@ export default function HomePage() {
             ].map((step, i) => {
               const isLast = i === 4;
               return (
-                <div key={i} className="timeline-step-vertical flex items-start relative">
-                  <div className={`step-dot-vert w-3 h-3 rounded-full bg-gold relative z-10 mt-[6px] shrink-0 opacity-0 scale-0 ${isLast ? 'shadow-[0_0_12px_rgba(201,162,52,0.6)]' : ''}`}></div>
-                  <div className="step-content-vert ml-8 flex flex-col opacity-0 -translate-x-4">
-                    <div className={`font-heading text-xl mb-1 ${isLast ? 'text-gold drop-shadow-[0_0_8px_rgba(201,162,52,0.4)]' : 'text-gold'}`}>{step.num}</div>
-                    <p className="font-body uppercase text-ink text-[13px] tracking-widest mb-1 font-medium">{step.title}</p>
-                    <p className="font-body font-light text-muted text-[11px] leading-relaxed">{step.desc}</p>
+                <div key={i} className="contents">
+                  <div className="timeline-step-vertical flex items-start relative min-h-[100px]">
+                    <div className={`step-dot-vert relative z-10 flex items-center justify-center w-[48px] h-[48px] shrink-0 text-gold bg-bg mt-[-4px] opacity-0 scale-0 ${isLast ? 'drop-shadow-[0_0_12px_rgba(201,162,52,0.4)]' : ''}`}>
+                      <svg width="48" height="48" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0">
+                        <path d="M 28 3 L 53 28 L 28 53 L 3 28 Z" stroke="currentColor" strokeWidth="1.5" />
+                        <path d="M 28 9 L 47 28 L 28 47 L 9 28 Z" stroke="currentColor" strokeWidth="0.8" opacity="0.6" />
+                        <circle cx="3" cy="28" r="2" fill="currentColor" />
+                        <circle cx="53" cy="28" r="2" fill="currentColor" />
+                      </svg>
+                      <span style={{ fontFamily: "Georgia, serif", fontStyle: "italic", fontSize: "14px", color: "#C8A84B" }} className="relative z-10 bg-bg px-1">{step.num}</span>
+                    </div>
+                    <div className="step-content-vert ml-6 flex flex-col opacity-0 -translate-x-4 pt-2">
+                      <p className="font-body uppercase text-ink text-[13px] tracking-widest mb-1 font-medium">{step.title}</p>
+                      <p className="font-body font-light text-muted text-[11px] leading-[1.6] max-w-[220px] whitespace-normal break-keep">{step.desc}</p>
+                    </div>
                   </div>
+                  {i < 4 && (
+                    <div className="w-[48px] flex justify-center -my-2 z-0">
+                      <svg width="30" height="60" viewBox="0 0 30 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-70" style={{ color: "#C8A84B" }}>
+                        <path d="M 15 0 L 15 15 C 15 25, 5 25, 5 30 C 5 35, 15 35, 15 45 L 15 60" stroke="currentColor" strokeWidth="1.2" fill="none" />
+                        <circle cx="5" cy="30" r="1.5" fill="currentColor" />
+                      </svg>
+                    </div>
+                  )}
                 </div>
               );
             })}
