@@ -281,9 +281,9 @@ export default function ServicesPage() {
         .addon-card { height: 220px; perspective: 800px; }
         .addon-inner { position: relative; width: 100%; height: 100%; transition: transform .6s cubic-bezier(0.25, 0.46, 0.45, 0.94); transform-style: preserve-3d; }
         .addon-card:hover .addon-inner { transform: rotateY(180deg); }
-        .addon-front, .addon-back { position: absolute; inset: 0; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
-        .addon-front { background: #252220; }
-        .addon-back { background: var(--color-gold); transform: rotateY(180deg); justify-content: center; align-items: flex-start; gap: 12px; padding: 24px; }
+        .addon-front, .addon-back { position: absolute; inset: 0; -webkit-backface-visibility: hidden; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
+        .addon-front { background: #252220; transform: translateZ(1px); }
+        .addon-back { background: var(--color-gold); transform: rotateY(180deg) translateZ(1px); justify-content: center; align-items: flex-start; gap: 12px; padding: 24px; }
         .addon-name { font-family: var(--font-heading); font-size: 22px; color: var(--color-surface); }
         .addon-desc { font-size: 11px; line-height: 1.7; color: rgba(255,255,255,0.9); font-weight: 300; }
         .addon-back-cta { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-surface); font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.4); padding-bottom: 2px; }
