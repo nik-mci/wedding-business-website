@@ -164,10 +164,11 @@ export default function ServicesPage() {
         >
           <div className="svc-image reveal group overflow-hidden">
             <div className="relative w-full h-full">
-              <Image 
-                src={`/assets/photos/${svc.img}`} 
-                alt={svc.title} 
-                fill 
+              <Image
+                src={`/assets/photos/${svc.img}`}
+                alt={svc.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
             </div>
@@ -203,7 +204,7 @@ export default function ServicesPage() {
             <div key={i} className={`addon-card reveal stagger-${i + 1}`}>
               <div className="addon-inner">
                 <div className="addon-front overflow-hidden border border-gold/15">
-                  <Image src={`/assets/photos/${addon.img}`} alt={addon.name} fill className="object-cover" />
+                  <Image src={`/assets/photos/${addon.img}`} alt={addon.name} fill sizes="(max-width: 768px) 50vw, 33vw" className="object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent"></div>
                   <div className="relative z-10 w-full flex flex-col justify-end h-full p-6">
                     <p className="addon-name">{addon.name}</p>
