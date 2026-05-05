@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CircularGallery from "@/components/CircularGallery";
 import HashtagGenerator from "@/components/HashtagGenerator";
 import GoldDivider from "@/components/GoldDivider";
+import FloatingSidebar from "@/components/FloatingSidebar";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -147,6 +148,8 @@ export default function HomePage() {
 
   return (
     <div className="overflow-hidden">
+      <FloatingSidebar />
+
       {/* HERO SECTION */}
       <section id="hero" ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden">
         <div 
@@ -178,7 +181,7 @@ export default function HomePage() {
       </section>
 
       {/* SERVICES */}
-      <section id="services" className="pt-16 pb-12 px-6 md:px-12 bg-bg">
+      <section id="our-services" className="pt-16 pb-12 px-6 md:px-12 bg-bg">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12 flex flex-col items-center text-center">
             <GoldDivider className="mb-4 reveal" />
@@ -237,7 +240,7 @@ export default function HomePage() {
       <GoldDivider variant="section" />
 
       {/* HOW WE DO IT */}
-      <section id="process" ref={processRef} className="overflow-hidden bg-bg pt-10 pb-12">
+      <section id="our-process" ref={processRef} className="overflow-hidden bg-bg pt-10 pb-12">
         <div className="flex flex-col items-center text-center px-12">
           <GoldDivider className="mb-4 reveal" />
           <p className="section-label reveal">Our Process</p>
@@ -389,7 +392,7 @@ export default function HomePage() {
       <GoldDivider variant="section" />
 
       {/* HASHTAG GENERATOR */}
-      <section id="hashtag" className="bg-bg py-16">
+      <section id="hashtag-generator" className="bg-bg py-16">
         <div className="px-12 mb-10 flex flex-col items-center text-center">
           <GoldDivider className="mb-4 reveal" />
           <h2 className="section-title">Wedding <em className="italic">Hashtag Generator</em></h2>
@@ -404,7 +407,7 @@ export default function HomePage() {
       <GoldDivider variant="section" />
 
       {/* IDEAS TEASER */}
-      <section id="ideas" className="py-16 bg-bg">
+      <section id="ideas-moods" className="py-16 bg-bg">
         <div className="max-w-[1440px] mx-auto px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="reveal">
             <GoldDivider className="mb-4" />
@@ -460,7 +463,7 @@ export default function HomePage() {
       <GoldDivider variant="section" />
 
       {/* TESTIMONIALS */}
-      <section id="testimonials">
+      <section id="couples-say">
         <div className="flex flex-col items-center text-center">
           <GoldDivider className="mb-4 reveal" />
           <p className="section-label reveal">Love Stories</p>

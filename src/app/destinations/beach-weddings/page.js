@@ -158,7 +158,7 @@ export default function BeachWeddingsPage() {
       <section className="relative h-[90vh] w-full flex items-center justify-center overflow-hidden m-0 p-0">
         <div className="absolute inset-0 z-0">
           <Image 
-            src="/assets/photos/destination/TSR50334.jpg" 
+            src="/assets/photos/destination/beach-wedding-img.jpg" 
             alt="Beach Wedding Hero"
             fill
             priority

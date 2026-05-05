@@ -41,11 +41,11 @@ export default function DestinationsPage() {
   }, []);
 
   const destinations = [
-    { region: "India", name: "Beach Weddings", count: "Goa, Kovalam, Varkala, Alleppey, Andaman Islands", img: "destination/059A3564.jpg", slug: "beach-weddings" },
-    { region: "India", name: "Hills Weddings", count: "Mussoorie, Shimla, Manali, Nainital, Coorg, Darjeeling", img: "destination/TSR50501.jpg", slug: "hills-weddings" },
-    { region: "India", name: "Royal and Heritage", count: "Udaipur, Jaipur, Jodhpur, Jaisalmer, Neemrana, Ranthambore", img: "destination/TSR50355.jpg", slug: "royal-and-heritage" },
-    { region: "India", name: "Cities and Metropolitans", count: "Mumbai, Delhi, Bangalore, Hyderabad, Kolkata", img: "couple-shots/0G4A4625.jpg", slug: "cities-and-metropolitans" },
-    { region: "India", name: "Backwaters & Lakes", count: "Kumarakom, Kochi, Alleppey", img: "couple-shots/TSR53127.jpg", slug: "backwaters-and-lakes" }
+    { region: "India", name: "Hills Weddings", count: "Mussoorie, Shimla, Manali, Nainital, Coorg, Darjeeling", img: "destination/hills-image.jpg", slug: "hills-weddings" },
+    { region: "India", name: "Beach Weddings", count: "Goa, Kovalam, Varkala, Alleppey, Andaman Islands", img: "destination/beach-wedding-img.jpg", slug: "beach-weddings" },
+    { region: "India", name: "Royal and Heritage", count: "Udaipur, Jaipur, Jodhpur, Jaisalmer, Neemrana, Ranthambore", img: "destination/TSR50334.jpg", slug: "royal-and-heritage" },
+    { region: "India", name: "Cities and Metropolitans", count: "Mumbai, Delhi, Bangalore, Hyderabad, Kolkata", img: "destination/cities-wedding.jpg", slug: "cities-and-metropolitans" },
+    { region: "India", name: "Backwaters & Lakes", count: "Kumarakom, Kochi, Alleppey", img: "destination/backwaterandlakes.jpg", slug: "backwaters-and-lakes" }
   ];
 
   return (
