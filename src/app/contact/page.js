@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import GoldDivider from "@/components/GoldDivider";
+import CornerOrnament from "@/components/CornerOrnament";
 import gsap from "gsap";
 
 export default function ContactPage() {
@@ -30,9 +32,12 @@ export default function ContactPage() {
   return (
     <div id="contact-layout" className="grid grid-cols-1 md:grid-cols-2 min-h-screen pt-20 md:pt-0">
       {/* FORM SIDE */}
-      <div className="contact-form-side bg-surface p-12 md:p-24 flex flex-col justify-center border-r border-ink/5">
+      <div className="contact-form-side bg-surface p-12 md:p-24 flex flex-col justify-center border-r border-ink/5 relative">
+        <CornerOrnament size={48} inset={16} opacity={0.35} />
+        <GoldDivider className="mb-6 opacity-0 translate-y-5 animate-fadeUp" />
         <p className="form-eyebrow text-[10px] tracking-[0.5em] uppercase text-gold mb-4 font-medium opacity-0 translate-y-5 animate-fadeUp">Let's Begin</p>
         <h1 className="form-title font-heading text-ink text-5xl md:text-7xl font-light leading-[1.1] mb-12 opacity-0 translate-y-5 animate-fadeUp-delayed">Tell Us About<br />Your <em className="italic">Dream Day</em></h1>
+        <GoldDivider flip className="mb-10 opacity-0 translate-y-5 animate-fadeUp-delayed" />
 
         <form id="contact-form" onSubmit={handleSubmit} className="space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -132,8 +137,10 @@ export default function ContactPage() {
         ></div>
         <div className="absolute inset-0 bg-ink/35"></div>
         <div className="contact-quote absolute bottom-16 left-12 right-12 z-2">
+          <GoldDivider darkBg className="mb-6 opacity-80" />
           <blockquote className="font-heading text-surface text-5xl md:text-6xl font-light italic leading-tight">"The best weddings begin with a single conversation."</blockquote>
           <cite className="block text-[11px] tracking-[0.3em] text-gold mt-4 font-normal not-italic uppercase">— Ananya Sharma, Founder</cite>
+          <GoldDivider darkBg flip className="mt-6 opacity-80" />
         </div>
       </div>
 

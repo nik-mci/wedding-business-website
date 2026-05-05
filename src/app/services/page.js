@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import GoldDivider from "@/components/GoldDivider";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -148,12 +149,17 @@ export default function ServicesPage() {
     <div className="pt-20">
       {/* PAGE HERO */}
       <div className="page-hero">
-        <div 
-          className="page-hero-bg" 
+        <div
+          className="page-hero-bg"
           style={{ backgroundImage: "url('/assets/photos/destination/TSR50995.jpg')", backgroundPosition: "center 30%" }}
         ></div>
         <div className="page-hero-overlay"></div>
-
+        <div className="page-hero-content">
+          <GoldDivider darkBg className="mb-4" />
+          <p className="page-hero-eyebrow">What We Offer</p>
+          <h1 className="page-hero-title">Our <em className="italic">Services</em></h1>
+          <GoldDivider darkBg flip className="mt-4" />
+        </div>
       </div>
 
       {/* SERVICE SECTIONS */}
@@ -195,9 +201,14 @@ export default function ServicesPage() {
       ))}
 
       {/* ADD-ONS */}
+      <GoldDivider variant="section" />
       <section id="addons" className="bg-ink py-24 px-12">
-        <p className="section-label reveal">Elevate Further</p>
-        <h2 className="section-title reveal text-surface">Add-<em className="italic">Ons</em></h2>
+        <div className="flex flex-col items-center text-center">
+          <GoldDivider darkBg className="mb-4 reveal" />
+          <p className="section-label reveal">Elevate Further</p>
+          <h2 className="section-title reveal text-surface">Add-<em className="italic">Ons</em></h2>
+          <GoldDivider darkBg flip className="mt-2 reveal" />
+        </div>
         <div className="addons-grid">
           {[
             { img: "services/decoration/printables2.jpg", name: "E-Invites", desc: "Custom digital wedding invitations with RSVP tracking and animated reveals." },

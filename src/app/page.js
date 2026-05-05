@@ -7,6 +7,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CircularGallery from "@/components/CircularGallery";
 import HashtagGenerator from "@/components/HashtagGenerator";
+import GoldDivider from "@/components/GoldDivider";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -179,29 +180,11 @@ export default function HomePage() {
       {/* SERVICES */}
       <section id="services" className="pt-16 pb-12 px-6 md:px-12 bg-bg">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-12 text-center flex flex-col items-center">
-            <svg width="500" height="52" viewBox="0 0 500 52" fill="none" xmlns="http://www.w3.org/2000/svg" className="mb-4 opacity-90 reveal" style={{ color: "#C8A84B" }}>
-              <path d="M0 42 L180 42" stroke="currentColor" strokeWidth="1.2" />
-              <path d="M320 42 L500 42" stroke="currentColor" strokeWidth="1.2" />
-              <path d="M190 42 C 210 42, 210 26, 230 26 C 240 26, 245 42, 250 42 C 255 42, 260 26, 270 26 C 290 26, 290 42, 310 42" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
-              <circle cx="185" cy="42" r="2.5" fill="currentColor" />
-              <circle cx="315" cy="42" r="2.5" fill="currentColor" />
-              <circle cx="250" cy="22" r="5" fill="currentColor" />
-              <circle cx="250" cy="22" r="2.5" fill="#F9F5EF" />
-            </svg>
-            
+          <div className="mb-12 flex flex-col items-center text-center">
+            <GoldDivider className="mb-4 reveal" />
             <p className="section-label reveal uppercase">What We Offer</p>
             <h2 className="section-title reveal">Our <em className="italic">Services</em></h2>
-            
-            <svg width="500" height="52" viewBox="0 0 500 52" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-2 opacity-90 reveal" style={{ color: "#C8A84B", transform: "scaleY(-1)" }}>
-              <path d="M0 42 L180 42" stroke="currentColor" strokeWidth="1.2" />
-              <path d="M320 42 L500 42" stroke="currentColor" strokeWidth="1.2" />
-              <path d="M190 42 C 210 42, 210 26, 230 26 C 240 26, 245 42, 250 42 C 255 42, 260 26, 270 26 C 290 26, 290 42, 310 42" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
-              <circle cx="185" cy="42" r="2.5" fill="currentColor" />
-              <circle cx="315" cy="42" r="2.5" fill="currentColor" />
-              <circle cx="250" cy="22" r="5" fill="currentColor" />
-              <circle cx="250" cy="22" r="2.5" fill="#F9F5EF" />
-            </svg>
+            <GoldDivider flip className="mt-2 reveal" />
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 group/grid">
@@ -251,21 +234,15 @@ export default function HomePage() {
       </section>
 
       {/* ORNAMENTAL DIVIDER */}
-      <div className="w-full flex items-center justify-center opacity-80" style={{ color: "#C8A84B" }}>
-        <div className="flex-grow h-[1px] bg-current"></div>
-        <svg width="300" height="52" viewBox="0 0 300 52" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
-          <path d="M 10 26 C 40 26, 40 18, 80 18 C 110 18, 130 38, 150 38 C 170 38, 190 18, 220 18 C 260 18, 260 26, 290 26" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          <circle cx="5" cy="26" r="2.5" fill="currentColor" />
-          <circle cx="295" cy="26" r="2.5" fill="currentColor" />
-          <circle cx="150" cy="10" r="3" fill="none" stroke="currentColor" strokeWidth="1.5" />
-        </svg>
-        <div className="flex-grow h-[1px] bg-current"></div>
-      </div>
+      <GoldDivider variant="section" />
 
       {/* HOW WE DO IT */}
       <section id="process" ref={processRef} className="overflow-hidden bg-bg pt-10 pb-12">
-        <p className="section-label reveal">Our Process</p>
-        <h2 className="section-title reveal text-ink">How We Craft<br /><em className="italic">Your Day</em></h2>
+        <div className="flex flex-col items-center text-center px-12">
+          <GoldDivider className="mb-4 reveal" />
+          <p className="section-label reveal">Our Process</p>
+          <h2 className="section-title reveal text-ink">How We Craft<br /><em className="italic">Your Day</em></h2>
+        </div>
         
         {/* DESKTOP HORIZONTAL TIMELINE */}
         <div className="hidden md:flex relative w-full h-[320px] mt-16 items-center">
@@ -382,11 +359,16 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ORNAMENTAL DIVIDER */}
+      <GoldDivider variant="section" />
+
       {/* CIRCULAR MEMORY SPACE */}
       <section id="memory-space" className="bg-ink py-16">
-        <div className="px-12 mb-10">
+        <div className="px-12 mb-10 flex flex-col items-center text-center">
+          <GoldDivider darkBg className="mb-4 reveal" />
           <p className="section-label" style={{ color: "var(--color-gold)" }}>Portfolio</p>
           <h2 className="section-title text-surface">Our <em className="italic">Memory Space</em></h2>
+          <GoldDivider darkBg flip className="mt-2 reveal" />
         </div>
         <div className="h-[600px] w-full">
           <CircularGallery items={[
@@ -403,23 +385,32 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ORNAMENTAL DIVIDER */}
+      <GoldDivider variant="section" />
+
       {/* HASHTAG GENERATOR */}
       <section id="hashtag" className="bg-bg py-16">
-        <div className="px-12 mb-10">
-          <p className="section-label">AI Tool</p>
+        <div className="px-12 mb-10 flex flex-col items-center text-center">
+          <GoldDivider className="mb-4 reveal" />
           <h2 className="section-title">Wedding <em className="italic">Hashtag Generator</em></h2>
+          <GoldDivider flip className="mt-2 reveal" />
         </div>
         <div className="px-12">
           <HashtagGenerator />
         </div>
       </section>
 
+      {/* ORNAMENTAL DIVIDER */}
+      <GoldDivider variant="section" />
+
       {/* IDEAS TEASER */}
       <section id="ideas" className="py-16 bg-bg">
         <div className="max-w-[1440px] mx-auto px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="reveal">
+            <GoldDivider className="mb-4" />
             <p className="section-label">Inspiration</p>
             <h2 className="section-title">Wedding<br /><em className="italic">Ideas & Moods</em></h2>
+            <GoldDivider flip className="mb-6" />
             <p className="text-muted text-[13px] leading-[2] font-light mb-8 max-w-[480px]">
               From mandap silhouettes under Rajasthan skies to candlelit cliffside ceremonies in Santorini — explore our curated library of ideas, mood boards, and styling references.
             </p>
@@ -465,10 +456,17 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ORNAMENTAL DIVIDER */}
+      <GoldDivider variant="section" />
+
       {/* TESTIMONIALS */}
       <section id="testimonials">
-        <p className="section-label reveal">Love Stories</p>
-        <h2 className="section-title reveal">What Our<br /><em className="italic">Couples Say</em></h2>
+        <div className="flex flex-col items-center text-center">
+          <GoldDivider className="mb-4 reveal" />
+          <p className="section-label reveal">Love Stories</p>
+          <h2 className="section-title reveal">What Our<br /><em className="italic">Couples Say</em></h2>
+          <GoldDivider flip className="mt-2 mb-8 reveal" />
+        </div>
         <div className="overflow-hidden mt-0">
           <div className="testimonials-track">
             {[
@@ -518,12 +516,16 @@ export default function HomePage() {
       </section>
 
       {/* FINAL CTA */}
-      <section id="final-cta">
+      <section id="final-cta" className="relative overflow-hidden">
         <div id="cta-bg" className="absolute inset-[-10%] bg-cover bg-center filter brightness-[0.3] saturate-[0.5]" style={{ backgroundImage: "url('/assets/photos/destination/TSR50355.jpg')" }}></div>
-        <p className="section-label reveal relative z-2" style={{ color: "var(--color-gold)" }}>Your Story Awaits</p>
-        <h2 className="section-title reveal text-gold relative z-2">Begin Your<br /><em className="italic">Journey With Us</em></h2>
-        <p className="subtitle reveal relative z-2 text-surface/60 text-sm tracking-widest mb-12 uppercase">Let's craft the wedding you've always envisioned.</p>
-        <Link href="/contact" className="btn-gold btn-pulse reveal relative z-2">Start Planning →</Link>
+        <div className="relative z-[2] flex flex-col items-center text-center">
+          <GoldDivider darkBg className="mb-4 reveal" />
+          <p className="section-label reveal" style={{ color: "var(--color-gold)" }}>Your Story Awaits</p>
+          <h2 className="section-title reveal text-gold">Begin Your<br /><em className="italic">Journey With Us</em></h2>
+          <GoldDivider darkBg flip className="mt-2 mb-8 reveal" />
+          <p className="subtitle reveal text-surface/60 text-sm tracking-widest mb-12 uppercase">Let's craft the wedding you've always envisioned.</p>
+          <Link href="/contact" className="btn-gold btn-pulse reveal">Start Planning →</Link>
+        </div>
       </section>
     </div>
   );

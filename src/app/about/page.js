@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import GoldDivider from "@/components/GoldDivider";
+import CornerOrnament from "@/components/CornerOrnament";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -90,9 +92,24 @@ export default function AboutPage() {
     <div className="pt-0">
       {/* SPLIT HERO */}
       <section id="about-hero" className="grid grid-cols-1 md:grid-cols-2 min-h-screen p-0">
-        <div className="hero-left bg-bg flex flex-col justify-end p-16 pt-[140px]">
-          <p className="hero-left-eyebrow opacity-0 translate-y-6">Our Story</p>
-          <h1 className="hero-left-title opacity-0 translate-y-6 font-heading text-ink text-7xl font-light leading-[1.05]">Where<br /><em className="italic">Vision</em><br />Meets<br /><em className="italic">Devotion</em></h1>
+        <div className="hero-left bg-bg flex flex-col justify-end items-center text-center p-16 pt-[140px] relative">
+          <CornerOrnament size={44} inset={16} opacity={0.4} />
+
+          {/* Decorative vertical motif in upper empty area */}
+          <div className="absolute top-[18%] left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none" style={{ opacity: 0.2, color: '#C9A234' }}>
+            <div className="w-px h-20 bg-current"></div>
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <path d="M11 1 L21 11 L11 21 L1 11 Z" stroke="currentColor" strokeWidth="1.2" fill="none"/>
+              <path d="M11 5 L17 11 L11 17 L5 11 Z" stroke="currentColor" strokeWidth="0.7" fill="none" opacity="0.6"/>
+              <circle cx="11" cy="11" r="1.5" fill="currentColor"/>
+            </svg>
+            <div className="w-px h-10 bg-current"></div>
+          </div>
+
+          <GoldDivider className="mb-5" />
+          <p className="hero-left-eyebrow opacity-0 translate-y-6 text-[10px] tracking-[0.5em] uppercase font-medium mb-4" style={{ color: 'var(--color-gold)' }}>Our Story</p>
+          <h1 className="hero-left-title opacity-0 translate-y-6 font-heading text-ink text-7xl font-light leading-[1.05]">Where <em className="italic">Vision</em><br />Meets <em className="italic">Devotion</em></h1>
+          <GoldDivider flip className="mt-5" />
         </div>
         <div className="hero-right relative overflow-hidden hidden md:block">
           <div 
@@ -105,8 +122,12 @@ export default function AboutPage() {
       </section>
 
       {/* BRAND STORY */}
+      <GoldDivider variant="section" />
       <section className="py-16 px-12">
-        <p className="section-label reveal text-center mb-12">Our Journey</p>
+        <div className="flex flex-col items-center text-center mb-12">
+          <GoldDivider className="mb-4 reveal" />
+          <p className="section-label reveal">Our Journey</p>
+        </div>
         <div id="brand-story" className="grid grid-cols-[60px_1fr] gap-12 max-w-[900px] mx-auto">
           <div className="story-line-wrap relative flex justify-center">
             <div className="story-line w-[1px] bg-ink/10 relative">
@@ -131,9 +152,14 @@ export default function AboutPage() {
       </section>
 
       {/* VALUES */}
+      <GoldDivider variant="section" />
       <section id="values" className="bg-ink py-24 px-12">
-        <p className="section-label reveal">What Drives Us</p>
-        <h2 className="section-title reveal text-surface">Our <em className="italic">Values</em></h2>
+        <div className="flex flex-col items-center text-center">
+          <GoldDivider darkBg className="mb-4 reveal" />
+          <p className="section-label reveal">What Drives Us</p>
+          <h2 className="section-title reveal text-surface">Our <em className="italic">Values</em></h2>
+          <GoldDivider darkBg flip className="mt-2 reveal" />
+        </div>
         <div className="values-grid mt-16 grid grid-cols-1 md:grid-cols-3 gap-0.5">
           {[
             { num: "01", name: "Intention", desc: "Every decision we make is purposeful. From the colour of the marigolds to the sequencing of the evening — nothing is accidental." },
@@ -150,21 +176,31 @@ export default function AboutPage() {
       </section>
 
       {/* STATS */}
+      <GoldDivider variant="section" />
       <section id="stats" className="bg-bg py-24 px-12">
-        <p className="section-label reveal text-center">In Numbers</p>
-        <h2 className="section-title reveal text-center">A Decade of <em className="italic">Love Stories</em></h2>
-        <div className="stats-row mt-16 grid grid-cols-2 md:grid-cols-4 gap-0.5">
-          <div className="stat-item reveal stagger-1 bg-surface p-12 text-center"><p className="stat-num font-heading text-7xl font-light text-ink" data-count="300">0<span>+</span></p><p className="stat-label text-[10px] tracking-[0.3em] uppercase text-muted mt-3 font-medium">Weddings Crafted</p></div>
-          <div className="stat-item reveal stagger-2 bg-surface p-12 text-center"><p className="stat-num font-heading text-7xl font-light text-ink" data-count="40">0<span>+</span></p><p className="stat-label text-[10px] tracking-[0.3em] uppercase text-muted mt-3 font-medium">Destinations</p></div>
-          <div className="stat-item reveal stagger-3 bg-surface p-12 text-center"><p className="stat-num font-heading text-7xl font-light text-ink" data-count="10">0<span>+</span></p><p className="stat-label text-[10px] tracking-[0.3em] uppercase text-muted mt-3 font-medium">Years of Excellence</p></div>
-          <div className="stat-item reveal stagger-4 bg-surface p-12 text-center"><p className="stat-num font-heading text-7xl font-light text-ink" data-count="98">0<span>%</span></p><p className="stat-label text-[10px] tracking-[0.3em] uppercase text-muted mt-3 font-medium">Couple Satisfaction</p></div>
+        <div className="flex flex-col items-center text-center mb-12">
+          <GoldDivider className="mb-4 reveal" />
+          <p className="section-label reveal">In Numbers</p>
+          <h2 className="section-title reveal">A Decade of <em className="italic">Love Stories</em></h2>
+          <GoldDivider flip className="mt-2 reveal" />
+        </div>
+        <div className="stats-row mt-4 grid grid-cols-2 md:grid-cols-4 gap-0.5">
+          <div className="stat-item reveal stagger-1 bg-surface p-12 text-center relative"><CornerOrnament size={36} inset={10} opacity={0.4} /><p className="stat-num font-heading text-7xl font-light text-ink" data-count="300">0<span>+</span></p><p className="stat-label text-[10px] tracking-[0.3em] uppercase text-muted mt-3 font-medium">Weddings Crafted</p></div>
+          <div className="stat-item reveal stagger-2 bg-surface p-12 text-center relative"><CornerOrnament size={36} inset={10} opacity={0.4} /><p className="stat-num font-heading text-7xl font-light text-ink" data-count="40">0<span>+</span></p><p className="stat-label text-[10px] tracking-[0.3em] uppercase text-muted mt-3 font-medium">Destinations</p></div>
+          <div className="stat-item reveal stagger-3 bg-surface p-12 text-center relative"><CornerOrnament size={36} inset={10} opacity={0.4} /><p className="stat-num font-heading text-7xl font-light text-ink" data-count="10">0<span>+</span></p><p className="stat-label text-[10px] tracking-[0.3em] uppercase text-muted mt-3 font-medium">Years of Excellence</p></div>
+          <div className="stat-item reveal stagger-4 bg-surface p-12 text-center relative"><CornerOrnament size={36} inset={10} opacity={0.4} /><p className="stat-num font-heading text-7xl font-light text-ink" data-count="98">0<span>%</span></p><p className="stat-label text-[10px] tracking-[0.3em] uppercase text-muted mt-3 font-medium">Couple Satisfaction</p></div>
         </div>
       </section>
 
       {/* TEAM */}
-      <section id="team" className="bg-bg py-24 px-12 border-t border-ink/5">
-        <p className="section-label reveal">The People Behind The Magic</p>
-        <h2 className="section-title reveal">Meet Our <em className="italic">Team</em></h2>
+      <GoldDivider variant="section" />
+      <section id="team" className="bg-bg py-24 px-12">
+        <div className="flex flex-col items-center text-center">
+          <GoldDivider className="mb-4 reveal" />
+          <p className="section-label reveal">The People Behind The Magic</p>
+          <h2 className="section-title reveal">Meet Our <em className="italic">Team</em></h2>
+          <GoldDivider flip className="mt-2 reveal" />
+        </div>
         <div className="team-grid mt-16 grid grid-cols-1 md:grid-cols-3 gap-0.5">
           {[
             { name: "Ananya Sharma", role: "Founder & Creative Director", vibe: "Every wedding is a love letter to the future.", color: "linear-gradient(135deg, #2a2518 0%, #1a1608 100%)" },
