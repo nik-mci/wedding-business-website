@@ -50,12 +50,14 @@ export default function ServicesPage() {
     {
       num: "01",
       title: "Destination Weddings",
-      desc: "From Rajasthan palace gardens to Greek clifftops — we craft extraordinary ceremonies in the world's most breathtaking locations.",
+      desc: "From the palace gardens of Rajasthan to the cliffsides of Santorini and the pristine beaches of Goa, we craft extraordinary ceremonies in the world's most breathtaking locations.",
       checklist: [
         "Venue scouting & negotiation worldwide",
         "Guest travel & logistics management",
         "Local vendor network in 40+ destinations",
-        "Legal ceremony documentation"
+        "Legal ceremony documentation",
+        "Royal procession with elephants, horses & drum players",
+        "Devigarh Palace & Taj Exotica as signature venues"
       ],
       img: "destination/TSR50501.jpg",
       reverse: false
@@ -63,12 +65,12 @@ export default function ServicesPage() {
     {
       num: "02",
       title: "Full Planning",
-      desc: "End-to-end curation of your entire wedding journey — from the first vision call to the final farewell. You celebrate; we handle everything.",
+      desc: "From your initial vision to breathtaking reality, our dedicated team of professionals pays meticulous attention to every detail, orchestrating a flawless journey so you can simply celebrate.",
       checklist: [
-        "12-month planning timeline & milestones",
-        "Budget management & vendor coordination",
-        "Day-of coordination & on-site team",
-        "Dedicated wedding manager"
+        "Venue selection across Rajasthan, Goa & Kerala",
+        "Themed weddings — royal, fairytale, or colour-specific",
+        "Wedding calendar & itinerary management",
+        "Bridal trousseau coordination with professional designers"
       ],
       img: "couple-shots/TSR53067.jpg",
       reverse: true
@@ -76,12 +78,12 @@ export default function ServicesPage() {
     {
       num: "03",
       title: "Décor & Florals",
-      desc: "Immersive environments built from flowers, fabric, light and texture — every table, mandap, and aisle tells your story.",
+      desc: "We use exquisite fresh florals and artistic lighting to elevate every element of décor, transforming your venue into an immersive, bespoke environment that tells your unique story.",
       checklist: [
-        "Custom mandap & stage design",
-        "Floral art & installation",
-        "Table centrepiece & linen styling",
-        "Lighting design & draping"
+        "Fresh roses, orchids, marigolds & gerberas",
+        "Mandap floral decoration around Havankund",
+        "Artistic lighting design for each theme",
+        "Customised décor for indoor and outdoor venues"
       ],
       img: "services/decoration/haldi_flowers_decor.jpg",
       reverse: false
@@ -89,7 +91,7 @@ export default function ServicesPage() {
     {
       num: "04",
       title: "Film & Photography",
-      desc: "Cinematic storytelling by India's finest photographers and filmmakers — capturing raw emotion with editorial precision.",
+      desc: "Our professional photographers and videographers are appointed to beautifully capture every propitious moment, preserving your milestones with raw emotion and cinematic precision.",
       checklist: [
         "Pre-wedding & engagement shoots",
         "Multi-camera ceremony & reception coverage",
@@ -102,12 +104,12 @@ export default function ServicesPage() {
     {
       num: "05",
       title: "Entertainment & DJ",
-      desc: "From sangeet choreography to curated playlists and live acts — we fill your celebrations with energy, soul, and unforgettable moments.",
+      desc: "Song and dance are seamlessly woven into every celebration. From traditional performances to modern acts, we fill your milestones with energy, soul, and unforgettable moments.",
       checklist: [
-        "Live musicians & dhol players",
-        "DJ & sound system setup",
-        "Sangeet choreography coordination",
-        "Celebrity performance management"
+        "Native & folk dancers",
+        "Live shenai & traditional music",
+        "Cultural programme curation",
+        "DJ & contemporary entertainment"
       ],
       img: "services/entertainment/performances.jpg",
       reverse: false
@@ -115,12 +117,14 @@ export default function ServicesPage() {
     {
       num: "06",
       title: "Fireworks & SFX",
-      desc: "Dazzling sky shows, cold pyrotechnics, and stunning visual effects to add an explosive touch of magic to your milestones.",
+      desc: "A spectacular firework display that illuminates the night sky, adding an explosive touch of magic and ensuring your occasion remains truly unforgettable.",
       checklist: [
         "Customized aerial firework displays",
         "Cold pyro for entry and first dance",
         "Confetti cannons & special effects",
-        "Venue safety & permit clearance"
+        "Timed to ceremony moments",
+        "Indoor-safe sparkler options",
+        "Coordinated with photography team"
       ],
       img: "destination/hospitality2.jpg",
       reverse: true
@@ -128,12 +132,12 @@ export default function ServicesPage() {
     {
       num: "07",
       title: "Hospitality & Guest Management",
-      desc: "White-glove concierge service ensuring every guest is treated like royalty from their arrival to their departure.",
+      desc: "We provide seamless, white-glove hospitality from airport arrival to departure, ensuring that every guest experiences unparalleled comfort and is treated like royalty.",
       checklist: [
-        "Airport transfers & fleet management",
-        "Welcome hampers & room allocations",
-        "24/7 hospitality desk & RSVP tracking",
-        "Personalized guest itineraries"
+        "Airport transfers & city representatives",
+        "Accommodation from 5-star palaces to boutique stays",
+        "Limousine with floral decoration for grand entrances",
+        "On-ground coordinators at every destination"
       ],
       img: "couple-shots/0G4A2084.jpg",
       reverse: false

@@ -474,13 +474,15 @@ export default function HomePage() {
             {[
               { quote: "Vows & Vedas turned our dream of a Rajasthan palace wedding into a breathtaking reality. Everything you have done for us is more like what we expect a family member to do.", author: "Zara & Samar", loc: "Udaipur Palace, India" },
               { quote: "Our wedding at the Devi Garh was an unforgettable experience. The hotel was absolutely stunning and the level of service was outstanding.", author: "Sonia & Manlio", loc: "Devi Garh, Rajasthan" },
-              { quote: "Thank you and your team from the bottom of my heart for making my renewal of vows so magical and special. It was a dream come true!", author: "Cheryl", loc: "Goa, India" },
-              { quote: "Professional, creative, warm. They handled everything — from our 500-guest baraat to the intimate mehendi evening.", author: "Ashira & Junak", loc: "Tuscany, Italy" },
+              { quote: "The entire wedding and organization was truly amazing! Our dream is to go back to Symphony Beach once again. We will recommend you everywhere we can.", author: "Tivadar & Orsi", loc: "Symphony Beach, Goa" },
+              { quote: "The wedding was spectacular and everything I dreamed and more. Thank you and your team from the bottom of my heart for making my renewal of vows so magical and special.", author: "Cheryl", loc: "Rajasthan" },
+              { quote: "We were really impressed that we managed to organize the entire three-day ceremony from so far away, in such detail. From the painstaking planning to the wonderful memories, the wedding was exceptional.", author: "The UK couple", loc: "Vijay & Team, India" },
               // Duplicate for infinite scroll
               { quote: "Vows & Vedas turned our dream of a Rajasthan palace wedding into a breathtaking reality. Everything you have done for us is more like what we expect a family member to do.", author: "Zara & Samar", loc: "Udaipur Palace, India" },
               { quote: "Our wedding at the Devi Garh was an unforgettable experience. The hotel was absolutely stunning and the level of service was outstanding.", author: "Sonia & Manlio", loc: "Devi Garh, Rajasthan" },
-              { quote: "Thank you and your team from the bottom of my heart for making my renewal of vows so magical and special. It was a dream come true!", author: "Cheryl", loc: "Goa, India" },
-              { quote: "Professional, creative, warm. They handled everything — from our 500-guest baraat to the intimate mehendi evening.", author: "Ashira & Junak", loc: "Tuscany, Italy" }
+              { quote: "The entire wedding and organization was truly amazing! Our dream is to go back to Symphony Beach once again. We will recommend you everywhere we can.", author: "Tivadar & Orsi", loc: "Symphony Beach, Goa" },
+              { quote: "The wedding was spectacular and everything I dreamed and more. Thank you and your team from the bottom of my heart for making my renewal of vows so magical and special.", author: "Cheryl", loc: "Rajasthan" },
+              { quote: "We were really impressed that we managed to organize the entire three-day ceremony from so far away, in such detail. From the painstaking planning to the wonderful memories, the wedding was exceptional.", author: "The UK couple", loc: "Vijay & Team, India" }
             ].map((testi, i) => (
               <div key={i} className="testi-card">
                 <svg width="180" height="22.5" viewBox="0 0 240 30" fill="none" xmlns="http://www.w3.org/2000/svg" className="mb-6 opacity-80" style={{ color: "var(--color-gold)" }}>
