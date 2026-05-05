@@ -88,10 +88,22 @@
     padding: 20px 48px; transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s; 
   }
 
-  nav.scrolled { 
-    background: rgba(253, 250, 245, 0.92); 
-    backdrop-filter: blur(16px); 
-    box-shadow: 0 1px 0 rgba(0,0,0,0.08); 
+  nav.scrolled {
+    background: rgba(253, 250, 245, 0.92);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+  }
+
+  nav.scrolled::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 55%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,162,52,0.45), transparent);
+    pointer-events: none;
   }
 
   nav.solid { 
@@ -254,6 +266,56 @@
   .testi-author { @apply text-surface font-body font-medium uppercase; font-size: 10px; letter-spacing: 0.3em; }
   .testi-location { @apply text-gold font-body; font-size: 10px; letter-spacing: 0.2em; margin-top: 4px; }
   @keyframes scrollTrack { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* Page Hero (shared across Services, Portfolio, FAQ, Destinations, etc.) */
+  .page-hero {
+    position: relative;
+    height: 70vh;
+    min-height: 520px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .page-hero-bg {
+    position: absolute;
+    inset: -10%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.1s linear;
+  }
+
+  .page-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(26,20,8,0.25) 0%, rgba(26,20,8,0.55) 60%, rgba(26,20,8,0.80) 100%);
+  }
+
+  .page-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 48px 56px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .page-hero-eyebrow {
+    @apply font-body font-medium uppercase;
+    color: var(--color-gold);
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    margin-bottom: 16px;
+  }
+
+  .page-hero-title {
+    @apply font-heading font-light text-surface;
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 1.05;
+  }
 
   /* Footer */
   .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 48px; margin-bottom: 60px; }

@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import GoldDivider from "@/components/GoldDivider";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -57,8 +58,10 @@ export default function DestinationsPage() {
         ></div>
         <div className="page-hero-overlay"></div>
         <div className="page-hero-content">
+          <GoldDivider darkBg className="mb-4" />
           <p className="page-hero-eyebrow">Around the World</p>
           <h1 className="page-hero-title">Our <em className="italic">Destinations</em></h1>
+          <GoldDivider darkBg flip className="mt-4" />
         </div>
       </div>
 

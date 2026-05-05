@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import GoldDivider from "@/components/GoldDivider";
 import gsap from "gsap";
 
 export default function PortfolioPage() {
@@ -47,8 +48,10 @@ export default function PortfolioPage() {
         ></div>
         <div className="page-hero-overlay"></div>
         <div className="page-hero-content">
+          <GoldDivider darkBg className="mb-4" />
           <p className="page-hero-eyebrow">Memory Space</p>
-          <h1 className="page-hero-title">Real <em className="italic">Weddings</em></h1>
+          <h1 className="page-hero-title">Captured <em className="italic">Celebrations</em></h1>
+          <GoldDivider darkBg flip className="mt-4" />
         </div>
       </div>
 

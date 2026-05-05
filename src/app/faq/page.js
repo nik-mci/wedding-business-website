@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import GoldDivider from "@/components/GoldDivider";
 import gsap from "gsap";
 
 export default function FAQPage() {
@@ -78,8 +79,10 @@ export default function FAQPage() {
         ></div>
         <div className="page-hero-overlay"></div>
         <div className="page-hero-content">
+          <GoldDivider darkBg className="mb-4" />
           <p className="page-hero-eyebrow">Everything You Need to Know</p>
           <h1 className="page-hero-title">Frequently Asked<br /><em className="italic">Questions</em></h1>
+          <GoldDivider darkBg flip className="mt-4" />
         </div>
       </div>
 
