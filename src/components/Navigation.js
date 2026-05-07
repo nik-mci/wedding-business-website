@@ -36,7 +36,7 @@ export default function Navigation() {
   const isHome = pathname === "/";
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-[1000] flex items-center justify-between px-12 py-6 transition-all duration-400 ${scrolled ? 'bg-surface/92 backdrop-blur-lg shadow-sm border-b border-black/5' : 'bg-transparent'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-[1000] flex items-center justify-between pl-[112px] pr-12 py-6 transition-all duration-400 ${scrolled ? 'bg-surface/92 backdrop-blur-lg shadow-sm border-b border-black/5' : 'bg-transparent'}`}>
       <Link href="/" className={`font-heading text-2xl tracking-[0.12em] transition-colors duration-400 ${(!isHome || scrolled) ? 'text-ink' : 'text-surface'}`}>
         VOWS & VEDAS
       </Link>

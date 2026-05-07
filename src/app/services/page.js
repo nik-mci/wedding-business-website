@@ -235,51 +235,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* PACKAGES */}
-      <section id="packages" className="bg-bg py-24 px-12 text-center">
-        <p className="section-label reveal">Choose Your Path</p>
-        <h2 className="section-title reveal">Our <em className="italic">Packages</em></h2>
-        <div className="packages-grid mt-16">
-          <div className="pkg-card reveal stagger-1">
-            <p className="pkg-label">Essentials</p>
-            <h3 className="pkg-name">Pearl</h3>
-            <p className="pkg-price">Starting from ₹8,00,000</p>
-            <ul className="pkg-features">
-              <li>1 day ceremony</li>
-              <li>Basic décor & florals</li>
-              <li>Photography coverage</li>
-              <li>Coordination support</li>
-            </ul>
-            <Link href="/contact" className="btn-ghost">Get Started</Link>
-          </div>
-          <div className="pkg-card featured reveal stagger-2">
-            <p className="pkg-label">Most Popular</p>
-            <h3 className="pkg-name">Gold</h3>
-            <p className="pkg-price">Starting from ₹18,00,000</p>
-            <ul className="pkg-features">
-              <li>3-day multi-event wedding</li>
-              <li>Full décor, florals & lighting</li>
-              <li>Photography + cinematic film</li>
-              <li>Dedicated wedding manager</li>
-              <li>Mehendi & styling</li>
-            </ul>
-            <Link href="/contact" className="btn-gold">Begin Planning</Link>
-          </div>
-          <div className="pkg-card reveal stagger-3">
-            <p className="pkg-label">Bespoke</p>
-            <h3 className="pkg-name">Prestige</h3>
-            <p className="pkg-price">Fully tailored</p>
-            <ul className="pkg-features">
-              <li>5+ day destination wedding</li>
-              <li>All services included</li>
-              <li>International venues</li>
-              <li>Concierge guest management</li>
-              <li>White-glove experience</li>
-            </ul>
-            <Link href="/contact" className="btn-ghost">Enquire</Link>
-          </div>
-        </div>
-      </section>
 
       <style jsx>{`
         .service-section { display: grid; grid-template-columns: 1fr 1fr; min-height: 600px; overflow: hidden; }
@@ -303,18 +258,7 @@ export default function ServicesPage() {
         .addon-desc { font-size: 11px; line-height: 1.7; color: rgba(255,255,255,0.9); font-weight: 300; }
         .addon-back-cta { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-surface); font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.4); padding-bottom: 2px; }
 
-        .packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 64px; }
-        .pkg-card { background: var(--color-surface); padding: 56px 40px; border-bottom: 3px solid transparent; transition: border-color .3s, transform .3s; }
-        .pkg-card:hover { border-color: var(--color-gold); transform: translateY(-4px); }
-        .pkg-card.featured { background: var(--color-ink); color: var(--color-surface); border-color: var(--color-gold); }
-        .pkg-label { font-size: 9px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--color-gold); margin-bottom: 16px; font-weight: 500; }
-        .pkg-name { font-family: var(--font-heading); font-size: 40px; font-weight: 300; margin-bottom: 8px; }
-        .pkg-price { font-size: 13px; letter-spacing: 0.1em; color: var(--color-muted); margin-bottom: 32px; font-weight: 300; }
-        .pkg-card.featured .pkg-price { color: rgba(255,255,255,0.6); }
-        .pkg-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; text-align: left; }
-        .pkg-features li { font-size: 12px; color: var(--color-muted); padding-left: 16px; position: relative; font-weight: 300; line-height: 1.6; }
-        .pkg-card.featured .pkg-features li { color: rgba(255,255,255,0.7); }
-        .pkg-features li::before { content: '—'; position: absolute; left: 0; color: var(--color-gold); }
+
       `}</style>
     </div>
   );
