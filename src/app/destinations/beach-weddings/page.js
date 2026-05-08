@@ -13,43 +13,94 @@ gsap.registerPlugin(ScrollTrigger);
 const beachDestinations = [
   {
     id: "01",
-    name: "Goa",
-    tag: "The Emerald Coast",
-    desc: "From the bohemian charm of Mandrem to the white-sand luxury of South Goa, we curate celebrations that blend Susegad spirit with high-end elegance. Imagine exchange vows against a crimson sunset, followed by a barefoot banquet under the stars.",
+    name: "ITC Grand Goa",
+    location: "Canasaulim",
+    desc: "45 acres of lagoon-meets-sea luxury. Portugese grandeur, lush gardens, and space for the grandest of celebrations.",
     img: "destination/059A3564.jpg",
-    pills: ["South & North Goa", "Sunset Mandaps", "Luxury Resorts"]
   },
   {
     id: "02",
-    name: "Kovalam",
-    tag: "Kerala's Crescent",
-    desc: "Famous for its iconic lighthouse and crescent-shaped beaches, Kovalam offers a dramatic backdrop of silver sands and azure waters. Our celebrations here are framed by swaying palms and the soulful rhythm of the Arabian Sea.",
+    name: "St. Regis Goa",
+    location: "Cavelossim",
+    desc: "South Goa's most refined address. Colonial elegance, ocean-front lawns, and white-glove service for the discerning couple.",
     img: "destination/TSR50334.jpg",
-    pills: ["Lighthouse Views", "Cliffside Luxury", "Pristine Sands"]
   },
   {
     id: "03",
-    name: "Varkala",
-    tag: "The Cliffside Haven",
-    desc: "Where unique red cliffs meet the ocean. Varkala is for those seeking a ceremony that feels both raw and spiritual. We specialize in intimate, high-vibe celebrations perched atop the heights or nestled in hidden coves.",
+    name: "W Goa",
+    location: "Vagator",
+    desc: "Clifftop, contemporary, and unapologetically bold. The most stylish wedding backdrop on the Arabian Sea.",
     img: "couple-shots/0G4A4625.jpg",
-    pills: ["Red Cliffs", "Hidden Coves", "Spiritual Vibe"]
   },
   {
     id: "04",
-    name: "Alleppey",
-    tag: "Backwater Coastal",
-    desc: "A destination like no other. We bring the tranquility of the backwaters to the energy of the coast. Arrive at your wedding by traditional houseboat to a coconut-fringed beach altar for a truly ethereal experience.",
+    name: "Alila Diwa",
+    location: "Majorda",
+    desc: "Paddy fields, coconut groves, and quiet boutique elegance. For couples who want intimacy over grandeur.",
     img: "destination/TSR50995.jpg",
-    pills: ["Houseboat Arrival", "Backwater Fusion", "Village Charm"]
   },
   {
     id: "05",
-    name: "Andaman Islands",
-    tag: "Exotic Havelock",
-    desc: "India's own Maldives. With turquoise waters and white silica sands, the Andamans offer a private island experience. We curate exclusive celebrations in Havelock and Neil, where nature is the greatest guest.",
+    name: "JW Marriott Goa",
+    location: "Vagator",
+    desc: "Direct beach access, expansive event lawns, and seamless multi-day celebrations for large guest lists.",
     img: "couple-shots/TSR53127.jpg",
-    pills: ["Turquoise Water", "White Sand", "Private Island"]
+  },
+  {
+    id: "06",
+    name: "Taj Exotica",
+    location: "Calangute",
+    desc: "56 acres of heritage hospitality stretching to the shore. Goa's most iconic wedding address, and for good reason.",
+    img: "destination/059A3564.jpg",
+  },
+  {
+    id: "07",
+    name: "Park Hyatt Goa",
+    location: "Arossim",
+    desc: "Portuguese village architecture, reflecting pools, and 45 beachfront acres in the quieter, more soulful south of Goa.",
+    img: "destination/TSR50334.jpg",
+  },
+  {
+    id: "08",
+    name: "Caravela Beach Resort",
+    location: "Colva",
+    desc: "Old-world Goan charm with direct beach access. Warm, effortless, and built for big family celebrations.",
+    img: "couple-shots/0G4A4625.jpg",
+  },
+  {
+    id: "09",
+    name: "Taj Green Cove",
+    location: "Kovalam",
+    desc: "Clifftop terraces, a lighthouse in the frame, and the Arabian Sea below. Kerala's most dramatic ceremony setting.",
+    img: "destination/TSR50995.jpg",
+  },
+  {
+    id: "10",
+    name: "The Leela",
+    location: "Kovalam",
+    desc: "Traditional Kerala architecture meets private beach access. The finest luxury wedding address on the Malabar coast.",
+    img: "couple-shots/TSR53127.jpg",
+  },
+  {
+    id: "11",
+    name: "Niramaya",
+    location: "Kovalam",
+    desc: "Intimate cliff-top villas and open ocean views. Perfect for small, private ceremonies where every detail is personal.",
+    img: "destination/059A3564.jpg",
+  },
+  {
+    id: "12",
+    name: "Marari Beach Resort",
+    location: "Marari",
+    desc: "A secluded fishing village shore, coconut groves, and barefoot luxury. Entirely off the beaten path.",
+    img: "destination/TSR50334.jpg",
+  },
+  {
+    id: "13",
+    name: "The Lalit Resort",
+    location: "Bekal",
+    desc: "Ancient Bekal Fort as your backdrop, backwater views at your feet. Where history and luxury meet on Kerala's northern coast.",
+    img: "couple-shots/0G4A4625.jpg",
   }
 ];
 
@@ -105,11 +156,6 @@ export default function BeachWeddingsPage() {
               className="object-cover parallax-img"
             />
           </div>
-          <div className="absolute top-6 left-6 z-10">
-            <div className="bg-[rgba(200,168,75,0.08)] border border-[#C8A84B] text-[#A8892F] px-4 py-2 text-[10px] tracking-[0.2em] uppercase font-medium rounded-[30px] shadow-lg transition-all duration-300 hover:bg-[#C8A84B] hover:text-white cursor-default">
-              {dest.tag}
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -117,37 +163,21 @@ export default function BeachWeddingsPage() {
 
   const ContentPanel = ({ dest }) => (
     <div className="flex-grow bg-[#F9F5EF] p-[1.5rem] md:p-[2.5rem] flex flex-col justify-center relative border-l-2 border-[rgba(200,168,75,0.4)] h-full">
-      <p className="text-gold font-heading text-4xl mb-2 opacity-30">{dest.id}</p>
-      <h2 className="font-heading text-ink text-4xl md:text-5xl font-light mb-4">
+      <h2 className="font-heading text-ink text-4xl md:text-5xl font-light mb-1">
         {dest.name}
       </h2>
-      <p className="text-muted text-[14px] leading-[1.6] font-light mb-4 max-w-[500px]">
+      <p className="text-[#C8A84B] text-[11px] tracking-[3px] uppercase font-medium mb-4">
+        {dest.location}
+      </p>
+      <p className="text-muted text-[14px] leading-[1.6] font-light mb-6 max-w-[500px]">
         {dest.desc}
       </p>
-
-      {/* SVG ORNAMENT */}
-      <div className="w-[120px] h-[20px] flex items-center justify-center mb-4">
-        <div className="h-[0.5px] bg-[#C8A84B] flex-grow"></div>
-        <div className="w-2 h-2 bg-[#C8A84B] rotate-45 mx-2"></div>
-        <div className="h-[0.5px] bg-[#C8A84B] flex-grow"></div>
-      </div>
-
-      <div className="flex flex-wrap gap-2 mb-6">
-        {dest.pills.map((pill, idx) => (
-          <span 
-            key={idx} 
-            className="border border-gold/40 px-4 py-1.5 text-[8px] tracking-[0.15em] uppercase text-ink/70 rounded-full"
-          >
-            {pill}
-          </span>
-        ))}
-      </div>
 
       <Link 
         href="/contact" 
         className="inline-block bg-[#C8A84B] text-[#1a1200] px-[2rem] py-[0.8rem] text-[11px] tracking-[3px] uppercase font-bold transition-all duration-500 self-start border-none hover:bg-[#A8892F] hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(168,137,47,0.25)]"
       >
-        Top 5 Venues
+        Enquire for This Venue
       </Link>
     </div>
   );
