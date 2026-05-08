@@ -1,13 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import Groq from "groq-sdk";
 import html2canvas from 'html2canvas';
-
-const client = new Groq({
-  apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY,
-  dangerouslyAllowBrowser: true
-});
 
 const HashtagGenerator = () => {
   const [formData, setFormData] = useState({ bride: '', groom: '', vibe: '', loveWord: '' });
@@ -26,32 +20,19 @@ const HashtagGenerator = () => {
     setLoading(true);
     setError('');
 
-    const prompt = `Generate 9 unique creative wedding hashtags for a couple.
-Bride: ${formData.bride}
-Groom: ${formData.groom}
-Vibe: ${formData.vibe}
-Word describing their love: ${formData.loveWord}
-
-Rules:
-- Mix of combined names, wordplay, emotion
-- Some English, 1-2 Hinglish
-- CamelCase format #LikeThis
-- Clever not generic
-- Return ONLY a valid JSON array of 9 strings, no explanation, no markdown.`;
-
     try {
-      const completion = await client.chat.completions.create({
-        model: "llama-3.3-70b-versatile",
-        temperature: 0.9,
-        messages: [
-          { role: "system", content: "You return ONLY valid JSON arrays." },
-          { role: "user", content: prompt }
-        ]
+      const res = await fetch('/api/hashtags', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
       });
 
-      const text = completion.choices[0].message.content;
-      const clean = text.replace(/```json/g, "").replace(/```/g, "").trim();
-      setHashtags(JSON.parse(clean));
+      if (!res.ok) {
+        throw new Error(`Request failed: ${res.status}`);
+      }
+
+      const { hashtags } = await res.json();
+      setHashtags(hashtags);
     } catch (err) {
       console.error(err);
       setError('Something went wrong, please try again.');

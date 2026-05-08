@@ -136,16 +136,16 @@ export default function AboutPage() {
           </div>
           <div className="story-paragraphs flex flex-col gap-10">
             <p className="story-para opacity-0 translate-y-4 transition-all duration-800 text-[17px] leading-[2] text-muted font-light">
-              <strong className="text-ink font-medium font-heading text-[20px] italic">Founded on love itself,</strong> Vows & Vedas was born from a simple belief: that your wedding day should feel as extraordinary as the love that led you here.
+              <strong className="text-ink font-medium font-heading text-[20px] italic">Expertly curated,</strong> Vows & Vedas is represented by a team of creative, experienced professionals dedicated to making your celebration the talk of the town. We take care of every meticulous detail, ensuring you can simply relax and look your absolute best.
             </p>
             <p className="story-para opacity-0 translate-y-4 transition-all duration-800 text-[17px] leading-[2] text-muted font-light">
-              We began in 2015, with a small team and a single palace wedding in Udaipur. What started as a dream became a calling — and today we've crafted over 300 weddings across 40+ destinations worldwide.
+              We design weddings across a breathtaking range of themes. Whether exchanging vows on pristine beaches, within majestic palace forts, or beside the gushing Ganges, be prepared to experience the illustrious, bespoke arrangements we offer every time.
             </p>
             <p className="story-para opacity-0 translate-y-4 transition-all duration-800 text-[17px] leading-[2] text-muted font-light">
-              Our approach is deeply personal. We don't believe in templates. Every couple is a new story, every venue a new canvas. We listen before we plan, and we dream before we design.
+              Beyond the ceremony itself, all pre-marriage preparations, exquisite catering, bridal trousseaus, and curated honeymoon packages are expertly handled by our team. Carefully planned itineraries provide the perfect level of activity that suits your unique rhythm.
             </p>
             <p className="story-para opacity-0 translate-y-4 transition-all duration-800 text-[17px] leading-[2] text-muted font-light">
-              <strong className="text-ink font-medium font-heading text-[20px] italic">From the Himalayas to the Mediterranean,</strong> from intimate gardens to 1,000-guest palaces — we bring the same attention, creativity and care to every celebration we touch.
+              <strong className="text-ink font-medium font-heading text-[20px] italic">From start to finish,</strong> we pay attention to the smallest details, taking advantage of exclusive partnerships to avoid costly mistakes. Allow us to orchestrate your vision, so you can live the most beautiful moments of your life with us.
             </p>
           </div>
         </div>

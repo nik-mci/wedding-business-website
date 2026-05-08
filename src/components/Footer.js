@@ -18,7 +18,6 @@ export default function Footer() {
               { name: 'Services', href: '/services' },
               { name: 'Weddings', href: '/portfolio' },
               { name: 'About', href: '/about' },
-              { name: 'Stories', href: '/blog' },
               { name: 'Destinations', href: '/destinations' },
               { name: 'FAQ', href: '/faq' },
               { name: 'Contact', href: '/contact' }

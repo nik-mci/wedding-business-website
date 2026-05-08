@@ -19,15 +19,24 @@ export default function Navigation() {
     { name: "Services", href: "/services" },
     { name: "Weddings", href: "/portfolio" },
     { name: "About", href: "/about" },
-    { name: "Stories", href: "/blog" },
-    { name: "Destinations", href: "/destinations" },
+    { 
+      name: "Destinations", 
+      href: "/destinations",
+      submenu: [
+        { name: "Beach Weddings", href: "/destinations/beach-weddings" },
+        { name: "Hills Weddings", href: "/destinations/hills-weddings" },
+        { name: "Royal and Heritage", href: "/destinations/royal-and-heritage" },
+        { name: "Cities and Metropolitans", href: "/destinations/cities-and-metropolitans" },
+        { name: "Backwaters & Lakes", href: "/destinations/backwaters-and-lakes" }
+      ]
+    },
     { name: "FAQ", href: "/faq" },
   ];
 
   const isHome = pathname === "/";
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-[1000] flex items-center justify-between px-12 py-6 transition-all duration-400 ${scrolled ? 'bg-surface/92 backdrop-blur-lg shadow-sm border-b border-black/5' : 'bg-transparent'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-[1000] flex items-center justify-between pl-[112px] pr-12 py-6 transition-all duration-400 ${scrolled ? 'bg-surface/92 backdrop-blur-lg shadow-sm border-b border-black/5' : 'bg-transparent'}`}>
       <Link href="/" className={`font-heading text-2xl tracking-[0.12em] transition-colors duration-400 ${(!isHome || scrolled) ? 'text-ink' : 'text-surface'}`}>
         VOWS & VEDAS
       </Link>
@@ -44,6 +53,25 @@ export default function Navigation() {
                 {link.name}
               </Link>
               <div className={`absolute bottom-0 left-0 h-[1.5px] bg-gold transition-all duration-300 ${isActive ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-50'}`} />
+              
+              {link.submenu && (
+                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-50">
+                  <div className="w-[200px] bg-surface border border-ink/5 shadow-xl">
+                    <ul className="p-2 flex flex-col gap-1">
+                      {link.submenu.map((sublink) => (
+                        <li key={sublink.name}>
+                          <Link 
+                            href={sublink.href}
+                            className="block px-4 py-2.5 text-[9px] tracking-[0.2em] uppercase text-muted transition-all duration-300 border border-transparent rounded-[6px] hover:border-[#C8A84B] hover:bg-[rgba(200,168,75,0.08)] hover:shadow-[0_0_12px_rgba(200,168,75,0.35)] hover:text-[#C8A84B] hover:translate-x-1"
+                          >
+                            {sublink.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
             </li>
           );
         })}

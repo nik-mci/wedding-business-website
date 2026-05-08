@@ -41,11 +41,11 @@ export default function DestinationsPage() {
   }, []);
 
   const destinations = [
-    { region: "India", name: "Rajasthan", count: "42 weddings celebrated", img: "destination/059A3564.jpg" },
-    { region: "Greece", name: "Santorini", count: "18 weddings celebrated", img: "destination/TSR50501.jpg" },
-    { region: "Italy", name: "Tuscany", count: "14 weddings celebrated", img: "destination/TSR50355.jpg" },
-    { region: "Indonesia", name: "Bali", count: "22 weddings celebrated", img: "couple-shots/0G4A4625.jpg" },
-    { region: "Maldives", name: "Maldives", count: "11 weddings celebrated", img: "couple-shots/TSR53127.jpg" }
+    { region: "India", name: "Hills Weddings", count: "Mussoorie, Shimla, Manali, Nainital, Coorg, Darjeeling", img: "destination/hills-image.jpg", slug: "hills-weddings" },
+    { region: "India", name: "Beach Weddings", count: "Goa, Kovalam, Varkala, Alleppey, Andaman Islands", img: "destination/beach-wedding-img.jpg", slug: "beach-weddings" },
+    { region: "India", name: "Royal and Heritage", count: "Udaipur, Jaipur, Jodhpur, Jaisalmer, Neemrana, Ranthambore", img: "destination/TSR50334.jpg", slug: "royal-and-heritage" },
+    { region: "India", name: "Cities and Metropolitans", count: "Mumbai, Delhi, Bangalore, Hyderabad, Kolkata", img: "destination/cities-wedding.jpg", slug: "cities-and-metropolitans" },
+    { region: "India", name: "Backwaters & Lakes", count: "Kumarakom, Kochi, Alleppey", img: "destination/backwaterandlakes.jpg", slug: "backwaters-and-lakes" }
   ];
 
   return (
@@ -78,7 +78,7 @@ export default function DestinationsPage() {
                 <p className="dest-region text-[9px] tracking-[0.5em] uppercase text-gold mb-2 font-medium">{dest.region}</p>
                 <h3 className="dest-name font-heading text-surface text-4xl font-light mb-2">{dest.name}</h3>
                 <p className="dest-count text-[10px] text-surface/50 tracking-[0.1em]">{dest.count}</p>
-                <Link href="/contact" className="dest-cta inline-block mt-4 px-6 py-2.5 border border-surface/50 text-surface text-[10px] tracking-[0.2em] uppercase opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-100 hover:bg-gold hover:border-gold">Explore →</Link>
+                <Link href={`/destinations/${dest.slug}`} className="dest-cta inline-block mt-4 px-6 py-2.5 border border-surface/50 text-surface text-[10px] tracking-[0.2em] uppercase opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-100 hover:bg-gold hover:border-gold">Explore →</Link>
               </div>
             </div>
           ))}

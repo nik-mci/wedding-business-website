@@ -51,12 +51,14 @@ export default function ServicesPage() {
     {
       num: "01",
       title: "Destination Weddings",
-      desc: "From Rajasthan palace gardens to Greek clifftops — we craft extraordinary ceremonies in the world's most breathtaking locations.",
+      desc: "From the palace gardens of Rajasthan to the cliffsides of Santorini and the pristine beaches of Goa, we craft extraordinary ceremonies in the world's most breathtaking locations.",
       checklist: [
         "Venue scouting & negotiation worldwide",
         "Guest travel & logistics management",
         "Local vendor network in 40+ destinations",
-        "Legal ceremony documentation"
+        "Legal ceremony documentation",
+        "Royal procession with elephants, horses & drum players",
+        "Devigarh Palace & Taj Exotica as signature venues"
       ],
       img: "destination/TSR50501.jpg",
       reverse: false
@@ -64,12 +66,12 @@ export default function ServicesPage() {
     {
       num: "02",
       title: "Full Planning",
-      desc: "End-to-end curation of your entire wedding journey — from the first vision call to the final farewell. You celebrate; we handle everything.",
+      desc: "From your initial vision to breathtaking reality, our dedicated team of professionals pays meticulous attention to every detail, orchestrating a flawless journey so you can simply celebrate.",
       checklist: [
-        "12-month planning timeline & milestones",
-        "Budget management & vendor coordination",
-        "Day-of coordination & on-site team",
-        "Dedicated wedding manager"
+        "Venue selection across Rajasthan, Goa & Kerala",
+        "Themed weddings — royal, fairytale, or colour-specific",
+        "Wedding calendar & itinerary management",
+        "Bridal trousseau coordination with professional designers"
       ],
       img: "couple-shots/TSR53067.jpg",
       reverse: true
@@ -77,12 +79,12 @@ export default function ServicesPage() {
     {
       num: "03",
       title: "Décor & Florals",
-      desc: "Immersive environments built from flowers, fabric, light and texture — every table, mandap, and aisle tells your story.",
+      desc: "We use exquisite fresh florals and artistic lighting to elevate every element of décor, transforming your venue into an immersive, bespoke environment that tells your unique story.",
       checklist: [
-        "Custom mandap & stage design",
-        "Floral art & installation",
-        "Table centrepiece & linen styling",
-        "Lighting design & draping"
+        "Fresh roses, orchids, marigolds & gerberas",
+        "Mandap floral decoration around Havankund",
+        "Artistic lighting design for each theme",
+        "Customised décor for indoor and outdoor venues"
       ],
       img: "services/decoration/haldi_flowers_decor.jpg",
       reverse: false
@@ -90,7 +92,7 @@ export default function ServicesPage() {
     {
       num: "04",
       title: "Film & Photography",
-      desc: "Cinematic storytelling by India's finest photographers and filmmakers — capturing raw emotion with editorial precision.",
+      desc: "Our professional photographers and videographers are appointed to beautifully capture every propitious moment, preserving your milestones with raw emotion and cinematic precision.",
       checklist: [
         "Pre-wedding & engagement shoots",
         "Multi-camera ceremony & reception coverage",
@@ -103,12 +105,12 @@ export default function ServicesPage() {
     {
       num: "05",
       title: "Entertainment & DJ",
-      desc: "From sangeet choreography to curated playlists and live acts — we fill your celebrations with energy, soul, and unforgettable moments.",
+      desc: "Song and dance are seamlessly woven into every celebration. From traditional performances to modern acts, we fill your milestones with energy, soul, and unforgettable moments.",
       checklist: [
-        "Live musicians & dhol players",
-        "DJ & sound system setup",
-        "Sangeet choreography coordination",
-        "Celebrity performance management"
+        "Native & folk dancers",
+        "Live shenai & traditional music",
+        "Cultural programme curation",
+        "DJ & contemporary entertainment"
       ],
       img: "services/entertainment/performances.jpg",
       reverse: false
@@ -116,12 +118,14 @@ export default function ServicesPage() {
     {
       num: "06",
       title: "Fireworks & SFX",
-      desc: "Dazzling sky shows, cold pyrotechnics, and stunning visual effects to add an explosive touch of magic to your milestones.",
+      desc: "A spectacular firework display that illuminates the night sky, adding an explosive touch of magic and ensuring your occasion remains truly unforgettable.",
       checklist: [
         "Customized aerial firework displays",
         "Cold pyro for entry and first dance",
         "Confetti cannons & special effects",
-        "Venue safety & permit clearance"
+        "Timed to ceremony moments",
+        "Indoor-safe sparkler options",
+        "Coordinated with photography team"
       ],
       img: "destination/hospitality2.jpg",
       reverse: true
@@ -129,12 +133,12 @@ export default function ServicesPage() {
     {
       num: "07",
       title: "Hospitality & Guest Management",
-      desc: "White-glove concierge service ensuring every guest is treated like royalty from their arrival to their departure.",
+      desc: "We provide seamless, white-glove hospitality from airport arrival to departure, ensuring that every guest experiences unparalleled comfort and is treated like royalty.",
       checklist: [
-        "Airport transfers & fleet management",
-        "Welcome hampers & room allocations",
-        "24/7 hospitality desk & RSVP tracking",
-        "Personalized guest itineraries"
+        "Airport transfers & city representatives",
+        "Accommodation from 5-star palaces to boutique stays",
+        "Limousine with floral decoration for grand entrances",
+        "On-ground coordinators at every destination"
       ],
       img: "couple-shots/0G4A2084.jpg",
       reverse: false
@@ -231,51 +235,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* PACKAGES */}
-      <section id="packages" className="bg-bg py-24 px-12 text-center">
-        <p className="section-label reveal">Choose Your Path</p>
-        <h2 className="section-title reveal">Our <em className="italic">Packages</em></h2>
-        <div className="packages-grid mt-16">
-          <div className="pkg-card reveal stagger-1">
-            <p className="pkg-label">Essentials</p>
-            <h3 className="pkg-name">Pearl</h3>
-            <p className="pkg-price">Starting from ₹8,00,000</p>
-            <ul className="pkg-features">
-              <li>1 day ceremony</li>
-              <li>Basic décor & florals</li>
-              <li>Photography coverage</li>
-              <li>Coordination support</li>
-            </ul>
-            <Link href="/contact" className="btn-ghost">Get Started</Link>
-          </div>
-          <div className="pkg-card featured reveal stagger-2">
-            <p className="pkg-label">Most Popular</p>
-            <h3 className="pkg-name">Gold</h3>
-            <p className="pkg-price">Starting from ₹18,00,000</p>
-            <ul className="pkg-features">
-              <li>3-day multi-event wedding</li>
-              <li>Full décor, florals & lighting</li>
-              <li>Photography + cinematic film</li>
-              <li>Dedicated wedding manager</li>
-              <li>Mehendi & styling</li>
-            </ul>
-            <Link href="/contact" className="btn-gold">Begin Planning</Link>
-          </div>
-          <div className="pkg-card reveal stagger-3">
-            <p className="pkg-label">Bespoke</p>
-            <h3 className="pkg-name">Prestige</h3>
-            <p className="pkg-price">Fully tailored</p>
-            <ul className="pkg-features">
-              <li>5+ day destination wedding</li>
-              <li>All services included</li>
-              <li>International venues</li>
-              <li>Concierge guest management</li>
-              <li>White-glove experience</li>
-            </ul>
-            <Link href="/contact" className="btn-ghost">Enquire</Link>
-          </div>
-        </div>
-      </section>
 
       <style jsx>{`
         .service-section { display: grid; grid-template-columns: 1fr 1fr; min-height: 600px; overflow: hidden; }
@@ -299,18 +258,7 @@ export default function ServicesPage() {
         .addon-desc { font-size: 11px; line-height: 1.7; color: rgba(255,255,255,0.9); font-weight: 300; }
         .addon-back-cta { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-surface); font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.4); padding-bottom: 2px; }
 
-        .packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 64px; }
-        .pkg-card { background: var(--color-surface); padding: 56px 40px; border-bottom: 3px solid transparent; transition: border-color .3s, transform .3s; }
-        .pkg-card:hover { border-color: var(--color-gold); transform: translateY(-4px); }
-        .pkg-card.featured { background: var(--color-ink); color: var(--color-surface); border-color: var(--color-gold); }
-        .pkg-label { font-size: 9px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--color-gold); margin-bottom: 16px; font-weight: 500; }
-        .pkg-name { font-family: var(--font-heading); font-size: 40px; font-weight: 300; margin-bottom: 8px; }
-        .pkg-price { font-size: 13px; letter-spacing: 0.1em; color: var(--color-muted); margin-bottom: 32px; font-weight: 300; }
-        .pkg-card.featured .pkg-price { color: rgba(255,255,255,0.6); }
-        .pkg-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; text-align: left; }
-        .pkg-features li { font-size: 12px; color: var(--color-muted); padding-left: 16px; position: relative; font-weight: 300; line-height: 1.6; }
-        .pkg-card.featured .pkg-features li { color: rgba(255,255,255,0.7); }
-        .pkg-features li::before { content: '—'; position: absolute; left: 0; color: var(--color-gold); }
+
       `}</style>
     </div>
   );
