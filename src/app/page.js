@@ -362,8 +362,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ORNAMENTAL DIVIDER */}
-      <GoldDivider variant="section" />
 
       {/* CIRCULAR MEMORY SPACE */}
       <section id="memory-space" className="bg-ink py-16">
@@ -388,8 +386,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ORNAMENTAL DIVIDER */}
-      <GoldDivider variant="section" />
 
       {/* HASHTAG GENERATOR */}
       <section id="hashtag-generator" className="bg-bg py-16">
@@ -417,44 +413,49 @@ export default function HomePage() {
             <p className="text-muted text-[13px] leading-[2] font-light mb-8 max-w-[480px]">
               From mandap silhouettes under Rajasthan skies to candlelit cliffside ceremonies in Santorini — explore our curated library of ideas, mood boards, and styling references.
             </p>
-            <Link href="/ideas" className="btn-underline">Explore Ideas &nbsp;→</Link>
+            <Link href="/moodboards" className="btn-underline">Explore Mood Boards &nbsp;→</Link>
           </div>
-          <div className="ideas-mosaic reveal grid grid-cols-2 grid-rows-3 gap-2 h-[500px]">
-            <div className="mosaic-card row-span-2 relative overflow-hidden group">
-              <Image src="/assets/photos/services/decoration/mandap_decor.jpg" alt="Mandap Design" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-ink/20 group-hover:bg-ink/10 transition-colors"></div>
-              <div className="absolute bottom-4 left-4 z-2">
-                <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Mandap Design</span>
+          <div className="flex flex-col items-center">
+            <div className="ideas-mosaic reveal grid grid-cols-2 grid-rows-3 gap-2 h-[500px] w-full">
+              <div className="mosaic-card row-span-2 relative overflow-hidden group">
+                <Image src="/assets/photos/services/decoration/mandap_decor.jpg" alt="Mandap Design" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-ink/20 group-hover:bg-ink/10 transition-colors"></div>
+                <div className="absolute bottom-4 left-4 z-2">
+                  <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Mandap Design</span>
+                </div>
+              </div>
+              <div className="mosaic-card relative overflow-hidden group">
+                <Image src="/assets/photos/services/decoration/sangeet_decoration.jpg" alt="Night Ceremony" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-ink/30 group-hover:bg-ink/10 transition-colors"></div>
+                <div className="absolute bottom-4 left-4 z-2">
+                  <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Night Ceremony</span>
+                </div>
+              </div>
+              <div className="mosaic-card relative overflow-hidden group">
+                <Image src="/assets/photos/services/decoration/haldi_flowers_decor.jpg" alt="Floral Arch" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-ink/40 group-hover:bg-ink/10 transition-colors"></div>
+                <div className="absolute bottom-4 left-4 z-2">
+                  <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Floral Arch</span>
+                </div>
+              </div>
+              <div className="mosaic-card col-span-1 relative overflow-hidden group">
+                <Image src="/assets/photos/couple-shots/TSR53127.jpg" alt="Bridal Look" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-ink/50 group-hover:bg-ink/10 transition-colors"></div>
+                <div className="absolute bottom-4 left-4 z-2">
+                  <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Bridal Look</span>
+                </div>
+              </div>
+              <div className="mosaic-card col-span-2 relative overflow-hidden group">
+                <Image src="/assets/photos/couple-shots/059A3486.jpg" alt="Reception Setup" fill sizes="100vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-ink/60 group-hover:bg-ink/10 transition-colors"></div>
+                <div className="absolute bottom-4 left-4 z-2">
+                  <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Reception Setup</span>
+                </div>
               </div>
             </div>
-            <div className="mosaic-card relative overflow-hidden group">
-              <Image src="/assets/photos/services/decoration/sangeet_decoration.jpg" alt="Night Ceremony" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-ink/30 group-hover:bg-ink/10 transition-colors"></div>
-              <div className="absolute bottom-4 left-4 z-2">
-                <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Night Ceremony</span>
-              </div>
-            </div>
-            <div className="mosaic-card relative overflow-hidden group">
-              <Image src="/assets/photos/services/decoration/haldi_flowers_decor.jpg" alt="Floral Arch" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-ink/40 group-hover:bg-ink/10 transition-colors"></div>
-              <div className="absolute bottom-4 left-4 z-2">
-                <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Floral Arch</span>
-              </div>
-            </div>
-            <div className="mosaic-card col-span-1 relative overflow-hidden group">
-              <Image src="/assets/photos/couple-shots/TSR53127.jpg" alt="Bridal Look" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-ink/50 group-hover:bg-ink/10 transition-colors"></div>
-              <div className="absolute bottom-4 left-4 z-2">
-                <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Bridal Look</span>
-              </div>
-            </div>
-            <div className="mosaic-card col-span-2 relative overflow-hidden group">
-              <Image src="/assets/photos/couple-shots/059A3486.jpg" alt="Reception Setup" fill sizes="100vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-ink/60 group-hover:bg-ink/10 transition-colors"></div>
-              <div className="absolute bottom-4 left-4 z-2">
-                <span className="text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">Reception Setup</span>
-              </div>
-            </div>
+            <Link href="/moodboards" className="mt-6 font-body text-[11px] uppercase tracking-[0.3em] text-gold hover:opacity-80 transition-opacity">
+              View all 8 mood boards &nbsp;→
+            </Link>
           </div>
         </div>
       </section>
