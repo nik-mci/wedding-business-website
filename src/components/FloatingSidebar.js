@@ -18,25 +18,26 @@ const navGroups = [
     title: "Inspiration",
     links: [
       { label: "Our Memory Space", id: "memory-space", num: "03" },
-      { label: "Wedding Ideas & Moods", id: "ideas-moods", num: "04" }
+      { label: "Wedding Ideas & Moods", id: "ideas-moods", num: "04" },
+      { label: "Mood Boards", href: "/moodboards", num: "05" }
     ]
   },
   {
     title: "Tools",
     links: [
-      { label: "Hashtag Generator", id: "hashtag-generator", num: "05" }
+      { label: "Hashtag Generator", id: "hashtag-generator", num: "06" }
     ]
   },
   {
     title: "Social Proof",
     links: [
-      { label: "What Our Couples Say", id: "couples-say", num: "06" }
+      { label: "What Our Couples Say", id: "couples-say", num: "07" }
     ]
   },
   {
     title: "Connect",
     links: [
-      { label: "Begin Your Journey", id: "final-cta", num: "07" }
+      { label: "Begin Your Journey", id: "final-cta", num: "08" }
     ]
   }
 ];
@@ -95,12 +96,7 @@ export default function FloatingSidebar() {
         gsap.set(wrapperRef.current, { visibility: "hidden" });
         gsap.set(layers, { xPercent: -100 });
         gsap.set(panel, { xPercent: -100 });
-        gsap.set(".nav-item", {
-          y: 80,
-          rotationZ: 6,
-          opacity: 0,
-          transformOrigin: "left center",
-        });
+        gsap.set(".nav-item", { opacity: 0 });
         gsap.set(".sidebar-header", { opacity: 0, y: -20 });
 
         // ── Build timeline ────────────────────────────────────────────────
@@ -122,16 +118,16 @@ export default function FloatingSidebar() {
           // Layers slide in with stagger — all in SAME container so they stack correctly
           .to(layers, {
             xPercent: 0,
-            duration: 0.7,
-            stagger: 0.18,
+            duration: 0.6,
+            stagger: 0.12,
             ease: "power3.out",
           })
 
-          // Main panel enters slightly after last layer
+          // Panel starts as last layer is finishing — no gap
           .to(
             panel,
-            { xPercent: 0, duration: 0.75, ease: "power4.inOut" },
-            "-=0.15"
+            { xPercent: 0, duration: 0.6, ease: "power3.out" },
+            "-=0.24"
           )
 
           // Header fades in
@@ -141,18 +137,16 @@ export default function FloatingSidebar() {
             "-=0.45"
           )
 
-          // Nav items stagger up
+          // Nav items simple fade — no pop, no movement
           .to(
             ".nav-item",
             {
-              y: 0,
-              rotationZ: 0,
               opacity: 1,
-              duration: 0.9,
-              stagger: 0.07,
-              ease: "expo.out",
+              duration: 0.5,
+              stagger: 0.05,
+              ease: "power2.out",
             },
-            "-=0.3"
+            "-=0.4"
           );
 
         timelineRef.current = tl;
@@ -305,13 +299,22 @@ export default function FloatingSidebar() {
                 )}
 
                 <div className="flex flex-col gap-4">
-                  {group.links.map(({ label, id, num }) => {
+                  {group.links.map(({ label, id, href, num }) => {
                     const isActive = activeId === id;
                     const isOverview = num === "00";
+
+                    const handleClick = () => {
+                      if (href) {
+                        window.location.href = href;
+                      } else if (id) {
+                        handleScroll(id);
+                      }
+                    };
+
                     return (
                       <button
-                        key={id}
-                        onClick={() => handleScroll(id)}
+                        key={num}
+                        onClick={handleClick}
                         className={`nav-item group relative flex items-center gap-5 text-left w-full bg-transparent border-none cursor-pointer m-0 py-0.5 transition-all duration-300 ${
                           isOverview ? "opacity-70" : ""
                         }`}
