@@ -45,8 +45,13 @@ const heritageDestinations = [
     id: "H05",
     name: "Leela Palace",
     location: "Jaipur",
-    desc: "A modern palace-inspired property with soaring domes and intricate jali work. The Leela's signature opulence translated into one of Jaipur's finest wedding addresses.",
+    desc: "A majestic tribute to Rajasthan’s royal heritage set against the serene backdrop of the Aravalli hills. This magnificent venue seamlessly blends traditional Rajputana architecture with Mughal-inspired design, featuring gleaming white facades, intricate Thikri mirror work, and sprawling manicured gardens. Featuring a grand pillarless ballroom and enchanting outdoor lawns, it is a premier choice for both intimate ceremonies and lavish celebrations. The palace offers exquisite suites and villas, many featuring private plunge pools and courtyard views to ensure a truly royal stay. Choosing this destination promises an unforgettable wedding experience defined by world-class dining, exceptional hospitality, and a fairytale-like atmosphere.",
     img: "destination/059A3486.jpg",
+    stats: {
+      rooms: "200",
+      guests: "1,500",
+      space: "50,000+ Sq. Ft."
+    }
   },
   {
     id: "H06",
@@ -378,8 +383,8 @@ export default function RoyalHeritagePage() {
   }, []);
 
   const ImagePanel = ({ dest }) => (
-    <div className="w-full md:w-[420px] relative flex-shrink-0 p-4 md:p-6 flex items-center justify-center bg-bg h-full group/img">
-      <div className="relative w-full h-full max-w-[360px] md:max-w-none flex flex-col">
+    <div className="w-full md:w-[360px] relative flex-shrink-0 p-4 md:p-6 flex items-center justify-center bg-bg h-full group/img">
+      <div className="relative w-full h-full max-w-[320px] md:max-w-none flex flex-col">
         {/* L-SHAPE ACCENTS */}
         <div className="absolute top-[-12px] left-[-12px] w-12 h-12 border-t border-l border-[#C8A84B] z-10 pointer-events-none opacity-60 transition-transform duration-700 group-hover/img:scale-110"></div>
         <div className="absolute bottom-[-12px] right-[-12px] w-12 h-12 border-b border-r border-[#C8A84B] z-10 pointer-events-none opacity-60 transition-transform duration-700 group-hover/img:scale-110"></div>
@@ -406,9 +411,39 @@ export default function RoyalHeritagePage() {
       <p className="text-[#C8A84B] text-[11px] tracking-[3px] uppercase font-medium mb-4">
         {dest.location}
       </p>
-      <p className="text-muted text-[14px] leading-[1.6] font-light mb-6 max-w-[500px]">
+      <p className="text-muted text-[15px] leading-[1.7] font-light mb-8 w-full">
         {dest.desc}
       </p>
+
+      {/* STATS PILLS */}
+      {dest.stats && (
+        <div className="flex flex-wrap gap-3 mb-8">
+          {dest.stats.rooms && (
+            <div className="px-4 py-1.5 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm transition-transform hover:scale-105">
+              <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">Rooms:</span>
+              <span className="text-ink text-[11px] font-medium">{dest.stats.rooms}</span>
+            </div>
+          )}
+          {dest.stats.guests && (
+            <div className="px-4 py-1.5 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm transition-transform hover:scale-105">
+              <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">Guests:</span>
+              <span className="text-ink text-[11px] font-medium">{dest.stats.guests}</span>
+            </div>
+          )}
+          {dest.stats.space && (
+            <div className="px-4 py-1.5 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm transition-transform hover:scale-105">
+              <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">Space:</span>
+              <span className="text-ink text-[11px] font-medium">{dest.stats.space}</span>
+            </div>
+          )}
+          {dest.stats.acres && (
+            <div className="px-4 py-1.5 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm transition-transform hover:scale-105">
+              <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">Acres:</span>
+              <span className="text-ink text-[11px] font-medium">{dest.stats.acres}</span>
+            </div>
+          )}
+        </div>
+      )}
 
       <Link 
         href="/contact" 
@@ -468,7 +503,7 @@ export default function RoyalHeritagePage() {
               <div 
                 key={dest.id} 
                 className="flex flex-col md:grid items-stretch reveal p-0 m-0"
-                style={{ gridTemplateColumns: isEven ? '420px 1fr' : '1fr 420px' }}
+                style={{ gridTemplateColumns: isEven ? '360px 1fr' : '1fr 360px' }}
               >
                 {isEven ? (
                   <>
