@@ -94,7 +94,7 @@ export const TiltedCard = ({
       onMouseLeave={handleMouseLeave}
     >
       {showMobileWarning && (
-        <div className="absolute top-4 text-center text-[10px] block sm:hidden text-[#C9A234] tracking-widest uppercase z-20">
+        <div className="absolute top-4 text-center text-[10px] block sm:hidden text-[#C9A234] tracking-widest uppercase">
           Optimized for desktop
         </div>
       )}
