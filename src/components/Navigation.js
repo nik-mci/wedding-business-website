@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import ProfileDropdown from "@/components/global/ProfileDropdown";
 
@@ -37,9 +38,15 @@ export default function Navigation() {
   const isHome = pathname === "/";
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-[1000] flex items-center justify-between pl-[112px] pr-12 py-6 transition-all duration-400 ${scrolled ? 'bg-surface/92 backdrop-blur-lg shadow-sm border-b border-black/5' : 'bg-transparent'}`}>
-      <Link href="/" className={`font-heading text-2xl tracking-[0.12em] transition-colors duration-400 ${(!isHome || scrolled) ? 'text-ink' : 'text-surface'}`}>
-        VOWS & VEDAS
+    <nav className={`fixed top-0 left-0 right-0 z-[1000] flex items-center justify-between pl-[112px] pr-12 py-4 transition-all duration-400 ${scrolled ? 'bg-surface/92 backdrop-blur-lg shadow-sm border-b border-black/5' : 'bg-transparent'}`}>
+      <Link href="/" className="relative h-14 w-44 group">
+        <Image
+          src="/assets/photos/logo-opt 6.png"
+          alt="Vows & Vedas"
+          fill
+          className={`object-contain transition-all duration-400 group-hover:scale-105 ${(!isHome || scrolled) ? '' : 'brightness-0 invert opacity-90'}`}
+          priority
+        />
       </Link>
 
       <ul className="hidden md:flex items-center gap-9">
