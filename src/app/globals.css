@@ -176,22 +176,39 @@
     position: relative; padding: 16px 40px; text-decoration: none; font-size: 11px; letter-spacing: 0.22em; overflow: hidden; display: inline-block; 
   }
 
-  .btn-gold::after { 
-    content: ''; position: absolute; inset: 0; 
-    background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%); 
-    transform: translateX(-100%); animation: shimmer 3s ease-in-out 1s infinite; 
+  .btn-gold::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%);
+    transform: translateX(-100%); animation: shimmer 3s ease-in-out 1s infinite;
   }
+
+  .btn-gold { transition: background-color 0.3s var(--ease-custom); }
+  .btn-gold:hover { background-color: #B8860B; }
 
   @keyframes shimmer { 0%{transform:translateX(-100%)} 100%{transform:translateX(200%)} }
 
-  .btn-ghost { 
+  .btn-ghost {
     @apply border border-muted text-ink font-medium uppercase;
-    padding: 15px 40px; text-decoration: none; font-size: 11px; letter-spacing: 0.22em; transition: all 0.3s; display: inline-block; 
+    padding: 15px 40px; text-decoration: none; font-size: 11px; letter-spacing: 0.22em; transition: all 0.3s; display: inline-block;
   }
 
   .btn-ghost:hover { @apply border-gold text-gold; }
   .btn-ghost.light { border-color: rgba(255,255,255,0.7); @apply text-surface; }
   .btn-ghost.light:hover { background: rgba(255,255,255,0.1); }
+
+  .btn-ghost-gold {
+    @apply font-medium uppercase;
+    border: 1px solid var(--color-gold);
+    color: var(--color-gold);
+    background: transparent;
+    padding: 13px 32px;
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    display: inline-block;
+    transition: background-color 0.3s var(--ease-custom), color 0.3s var(--ease-custom);
+  }
+  .btn-ghost-gold:hover { background: var(--color-gold); color: var(--color-surface); }
 
   .hero-scroll { 
     position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); 
