@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ProfileDropdown from "@/components/global/ProfileDropdown";
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
@@ -16,9 +17,9 @@ export default function Navigation() {
   }, []);
 
   const navLinks = [
-    { name: "Services", href: "/services" },
-    { name: "Weddings", href: "/portfolio" },
     { name: "About", href: "/about" },
+    { name: "Services", href: "/services" },
+    { name: "Gallery", href: "/portfolio" },
     { 
       name: "Destinations", 
       href: "/destinations",
@@ -77,13 +78,20 @@ export default function Navigation() {
         })}
       </ul>
 
-      <Link 
-        href="/contact" 
-        className={`relative group text-[11px] uppercase tracking-[0.18em] font-medium px-6 py-[10px] border transition-all duration-300 overflow-hidden ${(!isHome || scrolled) ? 'border-gold text-ink' : 'border-surface/60 text-surface'}`}
-      >
-        <span className="relative z-10 group-hover:text-surface transition-colors duration-300">Begin Your Journey</span>
-        <div className="absolute inset-0 bg-gold translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-300 ease-out origin-left"></div>
-      </Link>
+      {/* Profile & CTA Group */}
+      <div className="flex items-center gap-6">
+        <div className="hidden md:block">
+          <ProfileDropdown />
+        </div>
+
+        <Link 
+          href="/contact" 
+          className={`relative group text-[11px] uppercase tracking-[0.18em] font-medium px-6 py-[10px] border transition-all duration-300 overflow-hidden ${(!isHome || scrolled) ? 'border-gold text-ink' : 'border-surface/60 text-surface'}`}
+        >
+          <span className="relative z-10 group-hover:text-surface transition-colors duration-300">Begin Your Journey</span>
+          <div className="absolute inset-0 bg-gold translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-300 ease-out origin-left"></div>
+        </Link>
+      </div>
     </nav>
   );
 }
