@@ -10,38 +10,118 @@ import CornerOrnament from "@/components/CornerOrnament";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const hillDestinations = [
+const cityDestinations = [
+  // DELHI & NCR
   {
-    id: "08",
-    name: "Westin Resort & Spa",
-    location: "Himalayas",
-    desc: "A high-altitude sanctuary where Westin's wellness philosophy meets dramatic Himalayan scenery. Expansive event terraces and mountain air for an unforgettable celebration.",
-    img: "destination/hills-image.jpg",
+    id: "C01",
+    name: "Zora",
+    location: "DELHI",
+    desc: "A boutique sanctuary in the heart of the capital, offering a perfect blend of modern sophistication and intimate luxury for the discerning urban couple.",
+    img: "destination/cities-wedding.jpg",
   },
   {
-    id: "24",
-    name: "Hyatt Regency",
-    location: "Dehradun",
-    desc: "A sophisticated urban resort nestled in the foothills of the Himalayas, offering a perfect blend of modern luxury and natural beauty. With its expansive ballroom and picturesque outdoor spaces, it provides an elegant stage for both grand and intimate celebrations.",
+    id: "C02",
+    name: "A Dot",
+    location: "GURUGRAM",
+    desc: "A monumental event space in Gurugram, known for its grand scale, contemporary architecture, and world-class facilities designed for massive celebrations.",
+    img: "destination/059A3486.jpg",
+  },
+  {
+    id: "C03",
+    name: "Morbagh",
+    location: "CHATTARPUR",
+    desc: "A lush, sprawling estate in Chattarpur that offers a serene garden setting for elegant farmhouse-style weddings with a touch of rustic charm and absolute privacy.",
+    img: "destination/pool_venue.jpg",
+  },
+  {
+    id: "C04",
+    name: "Leela Palace",
+    location: "DELHI",
+    desc: "A flagship of luxury in the diplomatic enclave. Opulent interiors, legendary service, and grand ballrooms that define the absolute pinnacle of city weddings.",
     img: "destination/TSR50334.jpg",
   },
   {
-    id: "13",
-    name: "Taj Corbett Resort & Spa",
-    location: "Jim Corbett",
-    desc: "Where jungle meets luxury. Ceremony spaces nestled in the Corbett wilderness — for couples who want their wedding to feel like a true wild adventure.",
-    img: "destination/059A3564.jpg",
+    id: "C05",
+    name: "ITC Maurya",
+    location: "DELHI",
+    desc: "An iconic landmark hosting world leaders and grand celebrations. Its storied architecture and culinary excellence make it a legendary venue for high-profile weddings.",
+    img: "destination/0G4A1341.jpg",
+  },
+  // MUMBAI
+  {
+    id: "C06",
+    name: "Fairmont",
+    location: "MUMBAI",
+    desc: "A grand presence in the city of dreams. Offering sophisticated ballrooms and polished international hospitality for elegant urban celebrations of every scale.",
+    img: "destination/TSR50995.jpg",
   },
   {
-    id: "20",
-    name: "Khyber Himalayan Resort & Spa",
-    location: "Gulmarg",
-    desc: "At 8,825 feet in the meadows of Gulmarg, Khyber is India's highest luxury resort. Snow-dusted peaks, pine forests, and an otherworldly silence make it one of the most extraordinary wedding destinations in the world.",
+    id: "C07",
+    name: "Taj Lands End",
+    location: "MUMBAI",
+    desc: "Perched on the Bandra seafront with stunning views of the Arabian Sea. A premier choice for luxury city weddings that crave the sound of waves and a cool ocean breeze.",
+    img: "destination/beach-wedding-img.jpg",
+  },
+  {
+    id: "C08",
+    name: "Hyatt BKC",
+    location: "MUMBAI",
+    desc: "Located in the heart of Mumbai's business district. Modern, chic, and perfectly equipped for large-scale contemporary wedding celebrations that pulse with the city's energy.",
+    img: "destination/TSR50355.jpg",
+  },
+  {
+    id: "C09",
+    name: "JWCC",
+    location: "MUMBAI",
+    desc: "The JW Marriott Hotel & Convention Centre. A powerhouse for grand weddings with massive pillarless ballrooms and world-class international service standards.",
     img: "destination/059A3564.jpg",
+  },
+  // BANGALORE
+  {
+    id: "C10",
+    name: "Sheraton Grand Whitefield",
+    location: "BANGALORE",
+    desc: "A premier destination in the tech hub. Boasting expansive indoor and outdoor venues designed for seamless multi-day wedding programmes and effortless guest flow.",
+    img: "destination/059A3486.jpg",
+  },
+  {
+    id: "C11",
+    name: "Leela Palace",
+    location: "BANGALORE",
+    desc: "Inspired by the Royal Palace of Mysore. A breathtaking garden estate in the city with ornate carvings, lush greenery, and unparalleled palatial luxury.",
+    img: "destination/TSR50967.jpg",
+  },
+  {
+    id: "C12",
+    name: "Taj Westend",
+    location: "BANGALORE",
+    desc: "A century-old sanctuary amidst 20 acres of flora and fauna. Iconic colonial architecture and sprawling lawns for a soulful heritage wedding in the heart of the city.",
+    img: "destination/hills-image.jpg",
+  },
+  {
+    id: "C13",
+    name: "Tamarind Tree",
+    location: "BANGALORE",
+    desc: "A magical venue where heritage meets nature. Featuring antique doorways, open-air courtyards, and a truly unique, earthy aesthetic for intimate celebrations.",
+    img: "destination/pool_venue.jpg",
+  },
+  {
+    id: "C14",
+    name: "Aura by Area 83",
+    location: "BANGALORE",
+    desc: "A hidden gem on the outskirts of the city. Modern, eco-conscious, and offering a serene lakeside setting for a refreshing urban escape wedding experience.",
+    img: "destination/backwaterandlakes.jpg",
+  },
+  {
+    id: "C15",
+    name: "Palace Ground",
+    location: "BANGALORE",
+    desc: "The legendary grounds of the Bangalore Palace. Massive, historic, and capable of hosting the city's most grand and elaborate royal-scale wedding spectacles.",
+    img: "destination/TSR50334.jpg",
   }
 ];
 
-export default function HillsWeddingsPage() {
+export default function CitiesMetropolitansPage() {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -125,8 +205,8 @@ export default function HillsWeddingsPage() {
       <section className="relative h-[90vh] w-full flex items-center justify-center overflow-hidden m-0 p-0">
         <div className="absolute inset-0 z-0">
           <Image 
-            src="/assets/photos/destination/hills-image.jpg" 
-            alt="Hill Wedding Hero"
+            src="/assets/photos/destination/cities-wedding.jpg" 
+            alt="City Wedding Hero"
             fill
             priority
             className="object-cover"
@@ -137,10 +217,10 @@ export default function HillsWeddingsPage() {
         <div className="relative z-10 text-center px-6 reveal">
           <CornerOrnament inset={40} size={60} opacity={0.8} />
           <GoldDivider darkBg className="mb-6 mx-auto" />
-          <p className="text-gold text-[12px] tracking-[0.6em] uppercase mb-4 font-medium">Bespoke Alpine</p>
+          <p className="text-gold text-[12px] tracking-[0.6em] uppercase mb-4 font-medium">Bespoke Urban</p>
           <h1 className="font-heading text-surface text-7xl md:text-9xl font-light leading-tight mb-4">
-            Hills<br />
-            <em className="italic">Weddings</em>
+            Cities &<br />
+            <em className="italic">Metropolitans</em>
           </h1>
           <GoldDivider darkBg flip className="mt-6 mx-auto" />
         </div>
@@ -149,7 +229,7 @@ export default function HillsWeddingsPage() {
       {/* DESTINATION CARDS */}
       <section className="p-0 m-0 border-none">
         <div className="flex flex-col gap-0 p-0 m-0">
-          {hillDestinations.map((dest, i) => {
+          {cityDestinations.map((dest, i) => {
             const isEven = i % 2 === 0;
 
             return (
@@ -182,9 +262,9 @@ export default function HillsWeddingsPage() {
         </div>
         
         <div className="relative z-10 reveal">
-          <p className="text-gold text-[12px] tracking-[0.6em] uppercase mb-6 font-medium">Your Summit Sanctuary</p>
+          <p className="text-gold text-[12px] tracking-[0.6em] uppercase mb-6 font-medium">Your Urban Sanctuary</p>
           <h2 className="font-heading text-surface text-5xl md:text-6xl font-light mb-12 italic">
-            Begin Your Highland <br /> Love Story
+            Begin Your Cosmopolitan <br /> Love Story
           </h2>
           <Link 
             href="/contact" 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
@@ -17,7 +17,7 @@ const beachDestinations = [
     name: "ITC Grand Goa",
     location: "Canasaulim",
     desc: "45 acres of lagoon-meets-sea luxury. Portugese grandeur, lush gardens, and space for the grandest of celebrations.",
-    img: "destination/059A3564.jpg",
+    img: "destination/ITC-grand/goilc-exterior-5185-hor-clsc.webp",
     stats: {
       rooms: "252",
       guests: "1,000+",
@@ -33,39 +33,11 @@ const beachDestinations = [
     img: "destination/TSR50334.jpg",
   },
   {
-    id: "03",
-    name: "W Goa",
-    location: "Vagator",
-    desc: "Clifftop, contemporary, and unapologetically bold. The most stylish wedding backdrop on the Arabian Sea.",
-    img: "couple-shots/0G4A4625.jpg",
-  },
-  {
-    id: "04",
-    name: "Alila Diwa",
-    location: "Majorda",
-    desc: "Paddy fields, coconut groves, and quiet boutique elegance. For couples who want intimacy over grandeur.",
-    img: "destination/TSR50995.jpg",
-  },
-  {
-    id: "05",
-    name: "JW Marriott Goa",
-    location: "Vagator",
-    desc: "Direct beach access, expansive event lawns, and seamless multi-day celebrations for large guest lists.",
-    img: "couple-shots/TSR53127.jpg",
-  },
-  {
     id: "06",
     name: "Taj Exotica",
     location: "Calangute",
     desc: "56 acres of heritage hospitality stretching to the shore. Goa's most iconic wedding address, and for good reason.",
     img: "destination/059A3564.jpg",
-  },
-  {
-    id: "07",
-    name: "Park Hyatt Goa",
-    location: "Arossim",
-    desc: "Portuguese village architecture, reflecting pools, and 45 beachfront acres in the quieter, more soulful south of Goa.",
-    img: "destination/TSR50334.jpg",
   },
   {
     id: "08",
@@ -87,32 +59,23 @@ const beachDestinations = [
     location: "Kovalam",
     desc: "Traditional Kerala architecture meets private beach access. The finest luxury wedding address on the Malabar coast.",
     img: "couple-shots/TSR53127.jpg",
-  },
-  {
-    id: "11",
-    name: "Niramaya",
-    location: "Kovalam",
-    desc: "Intimate cliff-top villas and open ocean views. Perfect for small, private ceremonies where every detail is personal.",
-    img: "destination/059A3564.jpg",
-  },
-  {
-    id: "12",
-    name: "Marari Beach Resort",
-    location: "Marari",
-    desc: "A secluded fishing village shore, coconut groves, and barefoot luxury. Entirely off the beaten path.",
-    img: "destination/TSR50334.jpg",
-  },
-  {
-    id: "13",
-    name: "The Lalit Resort",
-    location: "Bekal",
-    desc: "Ancient Bekal Fort as your backdrop, backwater views at your feet. Where history and luxury meet on Kerala's northern coast.",
-    img: "couple-shots/0G4A4625.jpg",
   }
+];
+
+const itcSlides = [
+  { label: "Exterior View", desc: "Classic Portuguese-inspired architecture across 45 acres of lush landscape.", img: "/assets/photos/destination/ITC-grand/goilc-exterior-5185-hor-clsc.webp" },
+  { label: "Magical Forest", desc: "A tropical sanctuary for intimate woodland ceremonies and celebrations.", img: "/assets/photos/destination/ITC-grand/goilc-magicalforest-8768-hor-clsc.webp" },
+  { label: "Seaside Sunset", desc: "Breathtaking Arabian Sea vistas from the property during the golden hour.", img: "/assets/photos/destination/ITC-grand/goilc-evening-sunset-8771-hor-clsc.jpg" },
+  { label: "Grand Lobby", desc: "Opulent arrival experience featuring heritage Goan charm and grandeur.", img: "/assets/photos/destination/ITC-grand/lc-goilc-lobby-11425_Classic-Hor.jpeg" },
+  { label: "Kayakalp Spa", desc: "Award-winning wellness sanctuary perfect for pre-wedding relaxation.", img: "/assets/photos/destination/ITC-grand/goilc-kayakalp-spa-8761_Classic-Hor.jpeg" },
+  { label: "Lap Pool Suite", desc: "Ultra-luxury accommodations featuring private pool access and premium comfort.", img: "/assets/photos/destination/ITC-grand/lc-goilc-lap-pool-suite-41870_Classic-Hor.jpeg" },
 ];
 
 export default function BeachWeddingsPage() {
   const containerRef = useRef(null);
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -146,6 +109,56 @@ export default function BeachWeddingsPage() {
 
     return () => ctx.revert();
   }, []);
+
+  // Overlay unmount delay and body scroll lock
+  useEffect(() => {
+    let timer;
+    if (isOverlayOpen) {
+      setShowOverlay(true);
+      const scrollY = window.scrollY;
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+      document.documentElement.classList.add("lenis-stopped");
+    } else {
+      const top = document.body.style.top;
+      if (top) {
+        document.body.style.overflow = "";
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
+        window.scrollTo(0, parseInt(top || '0') * -1);
+      }
+      document.documentElement.classList.remove("lenis-stopped");
+      timer = setTimeout(() => setShowOverlay(false), 250);
+    }
+
+    return () => {
+      if (timer) clearTimeout(timer);
+      const top = document.body.style.top;
+      if (top) {
+        document.body.style.overflow = "";
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
+        window.scrollTo(0, parseInt(top || '0') * -1);
+      }
+      document.documentElement.classList.remove("lenis-stopped");
+    };
+  }, [isOverlayOpen]);
+
+  // Keyboard navigation for overlay
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!isOverlayOpen) return;
+      if (e.key === "Escape") setIsOverlayOpen(false);
+      if (e.key === "ArrowLeft") setCurrentSlide((prev) => (prev > 0 ? prev - 1 : itcSlides.length - 1));
+      if (e.key === "ArrowRight") setCurrentSlide((prev) => (prev < itcSlides.length - 1 ? prev + 1 : 0));
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOverlayOpen]);
 
   const ImagePanel = ({ dest, isFeatured }) => (
     <div className={`w-full ${isFeatured ? 'md:w-[360px]' : 'md:w-[420px]'} relative flex-shrink-0 p-4 md:p-6 flex items-center justify-center bg-bg h-full group/img`}>
@@ -187,7 +200,7 @@ export default function BeachWeddingsPage() {
   );
 
   const ContentPanel = ({ dest, isFeatured }) => (
-    <div className="flex-grow bg-[#F9F5EF] p-[1.5rem] md:p-[2.5rem] flex flex-col justify-center relative border-l-2 border-[rgba(200,168,75,0.4)] h-full">
+    <div className="flex-grow bg-[#F9F5EF] p-[1.5rem] md:p-[2.5rem] flex flex-col justify-center relative border-l-2 border-[rgba(200,168,75,0.4)] h-full w-full">
       <h2 className="font-heading text-ink text-4xl md:text-5xl font-light mb-1">
         {dest.name}
       </h2>
@@ -197,6 +210,12 @@ export default function BeachWeddingsPage() {
       <p className={`text-muted text-[14px] leading-[1.6] font-light mb-6 ${isFeatured ? 'w-full' : 'max-w-[500px]'}`}>
         {dest.desc}
       </p>
+
+      {isFeatured && (
+        <p className="text-muted text-[14px] leading-[1.6] font-light mb-6 w-full">
+          Arrosim Beach unfolds at its doorstep — choose between candlelit seaside lawns, a magical forest setting, or a grand marquee ballroom for 1,000+ guests. A venue that commands every sense.
+        </p>
+      )}
 
       {/* STATS PILLS */}
       {dest.stats && (
@@ -228,12 +247,21 @@ export default function BeachWeddingsPage() {
         </div>
       )}
 
-      <Link 
-        href="/contact" 
-        className="inline-block bg-[#C8A84B] text-[#1a1200] px-[2rem] py-[0.8rem] text-[11px] tracking-[3px] uppercase font-bold transition-all duration-500 self-start border-none hover:bg-[#A8892F] hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(168,137,47,0.25)]"
-      >
-        Enquire for This Venue
-      </Link>
+      {isFeatured ? (
+        <button 
+          onClick={() => setIsOverlayOpen(true)}
+          className="inline-block bg-[#C8A84B] text-[#1a1200] px-[2rem] py-[0.8rem] text-[11px] tracking-[3px] uppercase font-bold transition-all duration-500 self-start border-none hover:bg-[#A8892F] hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(168,137,47,0.25)]"
+        >
+          Explore More About This Venue
+        </button>
+      ) : (
+        <Link 
+          href="/contact" 
+          className="inline-block bg-[#C8A84B] text-[#1a1200] px-[2rem] py-[0.8rem] text-[11px] tracking-[3px] uppercase font-bold transition-all duration-500 self-start border-none hover:bg-[#A8892F] hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(168,137,47,0.25)]"
+        >
+          Enquire for This Venue
+        </Link>
+      )}
     </div>
   );
 
@@ -315,9 +343,228 @@ export default function BeachWeddingsPage() {
         </div>
       </section>
 
+      {/* LIGHTBOX OVERLAY */}
+      {showOverlay && (
+        <div className="fixed inset-0 z-[9999] flex items-end md:items-center justify-center p-0 md:p-4">
+          {/* Backdrop */}
+          <div 
+            className={`absolute inset-0 z-[9998] bg-[rgba(13,13,8,0.80)] backdrop-blur-[4px] transition-opacity duration-${isOverlayOpen ? '200' : '250'} ease-in ${isOverlayOpen ? "opacity-100" : "opacity-0"}`}
+            onClick={() => setIsOverlayOpen(false)}
+          ></div>
+          
+          {/* Panel */}
+          <div 
+            className={`relative z-[9999] w-full h-[95vh] md:w-[90vw] md:max-w-[1200px] md:h-[88vh] bg-[#FFFFFF] rounded-t-[16px] md:rounded-b-[16px] overflow-hidden flex flex-col transition-all origin-center shadow-2xl ${isOverlayOpen ? "scale-100 opacity-100" : "md:scale-[0.95] translate-y-8 md:translate-y-0 opacity-0"}`}
+            style={{ 
+              transitionDuration: isOverlayOpen ? "420ms" : "250ms", 
+              transitionTimingFunction: isOverlayOpen ? "cubic-bezier(0.16,1,0.3,1)" : "ease-in" 
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* TOP BAR */}
+            <div className="h-[52px] border-b border-[#EDE8DC] px-[28px] flex justify-between items-center bg-[#FDFAF5] shrink-0">
+              <div className="flex items-center gap-[8px]">
+                <span className="text-[#C9A234]">✦</span>
+                <span className="font-sans text-[11px] text-[#9A8F7E] tracking-wider">Beach Weddings → ITC Grand Goa</span>
+              </div>
+              <div className="flex items-center gap-4">
+                <button className="text-[#9A8F7E] hover:text-[#1A1408] transition-colors">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                </button>
+                <button 
+                  onClick={() => setIsOverlayOpen(false)}
+                  className="w-[32px] h-[32px] flex items-center justify-center text-[#9A8F7E] hover:text-[#1A1408] transition-colors"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+              </div>
+            </div>
+
+            {/* TWO COLUMNS */}
+            <div className="flex flex-col md:flex-row flex-grow overflow-hidden">
+              {/* IMAGE CAROUSEL (Top on Mobile, Right on Desktop) */}
+              <div className="w-full h-[45%] md:w-[58%] md:h-full flex flex-col order-1 md:order-2 shrink-0">
+                <div className="relative w-full h-[75%] overflow-hidden bg-[#1A1408]">
+                  {itcSlides.map((slide, i) => (
+                    <div 
+                      key={i}
+                      className={`absolute inset-0 transition-opacity duration-[400ms] ease-in-out ${i === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`}
+                    >
+                      <div className="w-full h-full transform scale-[1.0] animate-kenBurns origin-center">
+                        <Image 
+                          src={slide.img} 
+                          alt={slide.label}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="h-[25%] bg-[#1A1408] px-[28px] py-[20px] flex flex-col justify-center shrink-0 z-20 relative">
+                  <div className="flex flex-col gap-[12px]">
+                    {/* Dots Row */}
+                    <div className="flex justify-center items-center gap-[6px]">
+                      {itcSlides.map((_, i) => (
+                        <button 
+                          key={i}
+                          onClick={() => setCurrentSlide(i)}
+                          className={`h-[6px] rounded-[100px] transition-all duration-300 ${i === currentSlide ? "w-[18px] bg-[#C9A234]" : "w-[6px] bg-[rgba(255,255,255,0.3)]"}`}
+                        />
+                      ))}
+                    </div>
+
+                    {/* Controls Row */}
+                    <div className="flex justify-between items-center">
+                      <button 
+                        onClick={() => setCurrentSlide(prev => prev > 0 ? prev - 1 : itcSlides.length - 1)}
+                        className="w-[36px] h-[36px] rounded-full border border-white/20 bg-[rgba(255,255,255,0.08)] flex items-center justify-center hover:bg-[rgba(201,162,52,0.2)] transition-colors group z-10"
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-translate-x-0.5 transition-transform"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                      </button>
+
+                      <div className="font-heading text-[16px] text-[#C9A234] z-10">
+                        {(currentSlide + 1).toString().padStart(2, '0')} / {itcSlides.length.toString().padStart(2, '0')}
+                      </div>
+
+                      <button 
+                        onClick={() => setCurrentSlide(prev => prev < itcSlides.length - 1 ? prev + 1 : 0)}
+                        className="w-[36px] h-[36px] rounded-full border border-white/20 bg-[rgba(255,255,255,0.08)] flex items-center justify-center hover:bg-[rgba(201,162,52,0.2)] transition-colors group z-10"
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-0.5 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* CONTENT AREA (Bottom on Mobile, Left on Desktop) */}
+              <div 
+                className="w-full h-[55%] md:w-[42%] md:h-full bg-[#FDFAF5] border-t md:border-t-0 md:border-r border-[#EDE8DC] p-[24px] md:p-[40px] overflow-y-auto order-2 md:order-1 relative"
+                data-lenis-prevent
+              >
+                <div className="flex flex-col min-h-full">
+                  <div className="flex items-center justify-center opacity-40">
+                    <div className="h-[1px] w-12 bg-[#C9A234]"></div>
+                    <span className="mx-3 text-[#C9A234] text-[10px]">✦</span>
+                    <div className="h-[1px] w-12 bg-[#C9A234]"></div>
+                  </div>
+
+                  <div className="font-sans text-[10px] uppercase text-[#E87B3A] tracking-[5px] mt-[16px] text-center md:text-left">
+                    Goa · Canasaulim
+                  </div>
+
+                  <h3 className="font-heading text-[44px] text-[#1A1408] leading-[1.05] mt-[8px] text-center md:text-left">
+                    ITC Grand Goa
+                  </h3>
+
+                  <div className="w-[56px] h-[1px] bg-[#C9A234] mt-[14px] mx-auto md:mx-0"></div>
+
+                  <p className="font-sans text-[14px] text-[#9A8F7E] leading-[1.75] mt-[18px] text-center md:text-left">
+                    45 acres of lagoon-meets-sea luxury. Portuguese grandeur, lush gardens, and Arrosim Beach at its doorstep — a venue that commands every sense.
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mt-[20px] justify-center md:justify-start">
+                    <div className="px-3 py-1 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm">
+                      <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">Rooms:</span>
+                      <span className="text-[#1A1408] text-[11px] font-medium">252</span>
+                    </div>
+                    <div className="px-3 py-1 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm">
+                      <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">Guests:</span>
+                      <span className="text-[#1A1408] text-[11px] font-medium">1,000+</span>
+                    </div>
+                    <div className="px-3 py-1 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm">
+                      <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">Space:</span>
+                      <span className="text-[#1A1408] text-[11px] font-medium">45,000+ Sq. Ft.</span>
+                    </div>
+                    <div className="px-3 py-1 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm">
+                      <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">Acres:</span>
+                      <span className="text-[#1A1408] text-[11px] font-medium">45</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-[28px]">
+                    <div className="font-sans text-[10px] uppercase text-[#9A8F7E] tracking-[3px] mb-3">Indoor Venues</div>
+                    <ul className="space-y-3">
+                      {[
+                        { name: "Salcete Ballroom (divisible into 3)", size: "4,000 Sq Ft" },
+                        { name: "Palm Court Prefunction", size: "1,776 Sq Ft" },
+                        { name: "Colva-Loutolim (divisible into 2)", size: "1,200 Sq Ft" },
+                        { name: "Benaulim Storage/Control", size: "585 Sq Ft" },
+                        { name: "Cansaulim Lounge", size: "780 Sq Ft" }
+                      ].map((item, i) => (
+                        <li key={i} className="flex justify-between items-center">
+                          <div className="flex items-center gap-2">
+                            <span className="text-[#C9A234] text-lg leading-none mt-[-2px]">·</span>
+                            <span className="font-sans text-[13px] text-[#1A1408]">{item.name}</span>
+                          </div>
+                          <span className="font-sans text-[11px] text-[#9A8F7E] text-right ml-2 shrink-0">{item.size}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="h-[1px] bg-[#EDE8DC] w-full mt-[20px]"></div>
+
+                  <div className="mt-[20px]">
+                    <div className="font-sans text-[10px] uppercase text-[#9A8F7E] tracking-[3px] mb-3">Outdoor Venues</div>
+                    <ul className="space-y-3">
+                      {[
+                        { name: "Magical Forest", size: "14,300 Sq Ft" },
+                        { name: "Seaside Lawns", size: "21,600 Sq Ft" },
+                        { name: "Dunes Lawns", size: "15,750 Sq Ft" },
+                        { name: "Grand Marquee Salcete", size: "9,000 Sq Ft" }
+                      ].map((item, i) => (
+                        <li key={i} className="flex justify-between items-center">
+                          <div className="flex items-center gap-2">
+                            <span className="text-[#C9A234] text-lg leading-none mt-[-2px]">·</span>
+                            <span className="font-sans text-[13px] text-[#1A1408]">{item.name}</span>
+                          </div>
+                          <span className="font-sans text-[11px] text-[#9A8F7E] text-right ml-2 shrink-0">{item.size}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="font-sans text-[11px] text-[#9A8F7E] italic mt-4 leading-relaxed">
+                      Music permitted on outdoor venues till 22:00 hrs. Arrosim Beach access available from Seaside and Dunes Lawns.
+                    </p>
+                  </div>
+
+                  <div className="h-[1px] bg-[#EDE8DC] w-full mt-[20px]"></div>
+
+                  <div className="mt-[20px]">
+                    <div className="font-sans text-[10px] uppercase text-[#9A8F7E] tracking-[3px] mb-2">Licenses Available</div>
+                    <p className="font-sans text-[12px] text-[#9A8F7E] leading-[1.6]">
+                      Novex, PPL, IPRS, RMPL, Sound NOC, CRZ Lawn & Beach, Panchayat NOC, Tourism, FSSAI, Excise, Fire — all subject to event requirements.
+                    </p>
+                  </div>
+
+                  <div className="mt-auto pt-[32px] text-center w-full">
+                    <div className="text-[#C9A234] opacity-30 tracking-[4px] mb-[20px] text-xs">✦ ✦ ✦</div>
+                    <Link 
+                      href="/contact"
+                      className="flex items-center justify-center w-full h-[50px] bg-[#C9A234] rounded-[6px] font-sans text-[11px] uppercase tracking-[3px] text-white hover:bg-[#A8892F] hover:-translate-y-0.5 transition-all shadow-[0_10px_20px_rgba(201,162,52,0.2)]"
+                    >
+                      Enquire For This Venue
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <style jsx>{`
         .reveal { opacity: 0; transform: translateY(30px); transition: all 1s var(--ease-custom); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
+        @keyframes kenBurns {
+          0% { transform: scale(1.0); }
+          100% { transform: scale(1.04); }
+        }
+        .animate-kenBurns {
+          animation: kenBurns 5s ease-out forwards;
+        }
       `}</style>
     </div>
   );

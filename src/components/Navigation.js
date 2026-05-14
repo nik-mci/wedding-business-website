@@ -25,11 +25,10 @@ export default function Navigation() {
       name: "Destinations", 
       href: "/destinations",
       submenu: [
-        { name: "Beach Weddings", href: "/destinations/beach-weddings" },
+        { name: "Beach and Backwaters", href: "/destinations/beach-weddings" },
         { name: "Hills Weddings", href: "/destinations/hills-weddings" },
         { name: "Royal and Heritage", href: "/destinations/royal-and-heritage" },
-        { name: "Cities and Metropolitans", href: "/destinations/cities-and-metropolitans" },
-        { name: "Backwaters & Lakes", href: "/destinations/backwaters-and-lakes" }
+        { name: "Cities and Metropolitans", href: "/destinations/cities-and-metropolitans" }
       ]
     },
     { name: "FAQ", href: "/faq" },
@@ -38,7 +37,7 @@ export default function Navigation() {
   const isHome = pathname === "/";
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-[1000] flex items-center justify-between pl-[112px] pr-12 py-4 transition-all duration-400 ${scrolled ? 'bg-surface/92 backdrop-blur-lg shadow-sm border-b border-black/5' : 'bg-transparent'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-[100] isolate flex items-center justify-between pl-[112px] pr-12 py-4 transition-all duration-400 ${scrolled ? 'bg-surface/92 backdrop-blur-lg shadow-sm border-b border-black/5' : 'bg-transparent'}`}>
       <Link href="/" className="relative h-14 w-44 group">
         <Image
           src="/assets/photos/logo-opt 6.png"

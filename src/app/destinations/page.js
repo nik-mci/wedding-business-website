@@ -41,11 +41,10 @@ export default function DestinationsPage() {
   }, []);
 
   const destinations = [
-    { region: "India", name: "Hills Weddings", count: "Mussoorie, Shimla, Manali, Nainital, Coorg, Darjeeling", img: "destination/hills-image.jpg", slug: "hills-weddings" },
-    { region: "India", name: "Beach Weddings", count: "Goa, Kovalam, Varkala, Alleppey, Andaman Islands", img: "destination/beach-wedding-img.jpg", slug: "beach-weddings" },
+    { region: "India", name: "Beach and Backwater Weddings", count: "Goa, Kovalam, Varkala, Alleppey, Andaman Islands", img: "destination/beach-wedding-img.jpg", slug: "beach-weddings" },
     { region: "India", name: "Royal and Heritage", count: "Udaipur, Jaipur, Jodhpur, Jaisalmer, Neemrana, Ranthambore", img: "destination/TSR50334.jpg", slug: "royal-and-heritage" },
-    { region: "India", name: "Cities and Metropolitans", count: "Mumbai, Delhi, Bangalore, Hyderabad, Kolkata", img: "destination/cities-wedding.jpg", slug: "cities-and-metropolitans" },
-    { region: "India", name: "Backwaters & Lakes", count: "Kumarakom, Kochi, Alleppey", img: "destination/backwaterandlakes.jpg", slug: "backwaters-and-lakes" }
+    { region: "India", name: "Hills Weddings", count: "Mussoorie, Shimla, Manali, Nainital, Coorg, Darjeeling", img: "destination/hills-image.jpg", slug: "hills-weddings" },
+    { region: "India", name: "Cities and Metropolitans", count: "Mumbai, Delhi, Bangalore, Hyderabad, Kolkata", img: "destination/cities-wedding.jpg", slug: "cities-and-metropolitans" }
   ];
 
   return (
@@ -69,9 +68,9 @@ export default function DestinationsPage() {
       <section className="py-24 px-12">
         <p className="section-label reveal">Where We Work</p>
         <h2 className="section-title reveal">Extraordinary <em className="italic">Locations</em></h2>
-        <div className="dest-grid mt-16 grid grid-cols-1 md:grid-cols-3 gap-2">
+        <div className="dest-grid mt-16 grid grid-cols-1 md:grid-cols-2 gap-[12px] max-w-[1400px] mx-auto">
           {destinations.map((dest, i) => (
-            <div key={i} className={`dest-card reveal stagger-${(i % 3) + 1} relative overflow-hidden aspect-[4/5] group cursor-none ${i === 0 ? 'md:row-span-2 md:aspect-auto' : ''}`}>
+            <div key={i} className={`dest-card reveal stagger-${(i % 2) + 1} relative overflow-hidden h-[400px] md:h-[520px] rounded-[12px] group cursor-none`}>
               <div className="dest-bg absolute inset-0 bg-cover bg-center transition-transform duration-600 group-hover:scale-105" style={{ backgroundImage: `url('/assets/photos/${dest.img}')` }}></div>
               <div className="dest-overlay absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent transition-all duration-400 group-hover:bg-black/20"></div>
               <div className="dest-info absolute bottom-0 left-0 right-0 p-8 pb-10 translate-y-2 group-hover:translate-y-0 transition-transform duration-400">
