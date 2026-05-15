@@ -160,7 +160,7 @@ export default function HomePage() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/assets/photos/Manya Blog Vid.mp4" type="video/mp4" />
+          <source src="/assets/photos/hero-video.mp4" type="video/mp4" />
         </video>
         <div id="hero-overlay" className="absolute inset-0 bg-gradient-to-b from-ink/45 via-ink/20 to-ink/60"></div>
         <div id="hero-content" className="relative z-2 text-center px-6">
