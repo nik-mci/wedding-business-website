@@ -40,7 +40,7 @@ export default function Navigation() {
     <nav className={`fixed top-0 left-0 right-0 z-[100] isolate flex items-center justify-between pl-[112px] pr-12 py-4 transition-all duration-400 ${scrolled ? 'bg-surface/92 backdrop-blur-lg shadow-sm border-b border-black/5' : 'bg-transparent'}`}>
       <Link href="/" className="relative h-14 w-44 group">
         <Image
-          src="/assets/photos/logo-opt 6.png"
+          src="/assets/photos/V&V_A_PNG.png"
           alt="Vows & Vedas"
           fill
           className={`object-contain transition-all duration-400 group-hover:scale-105 ${(!isHome || scrolled) ? '' : 'brightness-0 invert opacity-90'}`}

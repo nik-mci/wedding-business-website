@@ -80,7 +80,7 @@ const heritageDestinations = [
     location: "ARAVALLI HILLS · NARLAI",
     desc1: "Rawla Narlai is a meticulously restored 17th-century royal hunting lodge located in the Aravalli Hills, halfway between Jodhpur and Udaipur. This boutique heritage destination features individually decorated rooms — including the ornate Grand Heritage rooms — offering an intimate yet grand setting for destination weddings.",
     desc2: "The venue's crown jewel is the Stepwell Dinner at an 11th-century reservoir, where hundreds of lanterns and soulful folk music create a mystical atmosphere for pre-wedding functions. Additional spaces include lush frangipani-scented gardens, traditional courtyards, and the Jharokha Café. Known for its authentic Rajasthani hospitality and living-in-the-past charm, it is a premier choice for couples seeking a secluded, fairytale-like heritage celebration.",
-    img: "destination/059A3032 (1).jpg",
+    img: "royal-and-heritage/rawla_narai_royal.png",
     stats: { rooms: "32", setting: "Boutique Heritage", venues: "Stepwell + Gardens + Courtyards" }
   },
   {

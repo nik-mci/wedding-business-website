@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GoldDivider from "@/components/GoldDivider";
 import CornerOrnament from "@/components/CornerOrnament";
 import TiltedCard from "@/components/TiltedCard";
+import FloatingSidebar from "@/components/FloatingSidebar";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,8 +16,9 @@ const beachDestinations = [
   {
     id: "01",
     name: "ITC Grand Goa",
-    location: "Canasaulim",
-    desc: "45 acres of lagoon-meets-sea luxury. Portugese grandeur, lush gardens, and space for the grandest of celebrations.",
+    location: "GOA · CANSAULIM",
+    desc1: "45 acres of lagoon-meets-sea luxury. Portuguese grandeur, lush gardens, and space for the grandest of celebrations.",
+    desc2: "Arrosim Beach unfolds at its doorstep — choose between candlelit seaside lawns, a magical forest setting, or a grand marquee ballroom for 1,000+ guests. A venue that commands every sense.",
     img: "destination/ITC-grand/goilc-exterior-5185-hor-clsc.webp",
     stats: {
       rooms: "252",
@@ -27,38 +29,66 @@ const beachDestinations = [
   },
   {
     id: "02",
-    name: "St. Regis Goa",
-    location: "Cavelossim",
-    desc: "South Goa's most refined address. Colonial elegance, ocean-front lawns, and white-glove service for the discerning couple.",
-    img: "destination/TSR50334.jpg",
+    name: "St. Regis Goa Resort",
+    location: "GOA · SAL RIVER",
+    desc1: "A breathtaking 49-acre sanctuary poised between the Sal River and the Arabian Sea, blending Goan heritage with modern luxury across elegantly appointed rooms, suites, and private villas.",
+    desc2: "The iconic St. Regis Butler Service, private beach access, and a signature golf course make it one of the coast's most distinguished wedding destinations.",
+    img: "beach-wedding/st regis goa.jpeg",
+    stats: { rooms: "206", guests: "500+", space: "32,000+ Sq Ft" }
+  },
+  {
+    id: "03",
+    name: "Grand Hyatt, Goa",
+    location: "GOA · BAMBOLIM BAY",
+    desc1: "A magnificent 17th-century Indo-Portuguese inspired estate sprawling across 28 acres of lush tropical gardens along Bambolim Bay — one of Goa's grandest residential wedding properties.",
+    desc2: "The pillar-less Grand Ballroom, picturesque Palace Lawns, and seaside verandas with Arabian Sea views make it an elite choice for large-scale coastal celebrations.",
+    img: "beach-wedding/grand-hyatt-goa.jpg",
+    stats: { rooms: "312", guests: "1,200+", space: "40,000+ Sq Ft" }
+  },
+  {
+    id: "04",
+    name: "Taj Exotica, Goa",
+    location: "GOA · BENAULIM BEACH",
+    desc1: "A Mediterranean-inspired oasis across 56 acres of manicured gardens along pristine Benaulim Beach — intimate yet grand, with sun-drenched architecture and private beachfront access.",
+    desc2: "The majestic Sala Gran Ballroom and Sea-View Lawns, backed by Taj's award-winning culinary excellence, offer a timeless setting for a quintessential Goan celebration.",
+    img: "beach-wedding/taj-exortica-goa.jpg",
+    stats: { rooms: "140", guests: "450+", space: "11,000+ Sq Ft" }
+  },
+  {
+    id: "05",
+    name: "Taj Cidade de Goa",
+    location: "GOA · VAINGUINIM BEACH",
+    desc1: "A stunning hillside tribute to Portuguese-inspired architecture — arched corridors, red-tiled roofs, and hand-painted murals frame every celebration with old-world charm and coastal romance.",
+    desc2: "The iconic Sunset Lawns with panoramic Arabian Sea views and private beach access make it a picturesque and culturally rich destination.",
+    img: "beach-wedding/taj-cidade-goa.jpg",
+    stats: { rooms: "207", guests: "450+", venues: "Sala de Banquete + Sunset Lawns" }
   },
   {
     id: "06",
-    name: "Taj Exotica",
-    location: "Calangute",
-    desc: "56 acres of heritage hospitality stretching to the shore. Goa's most iconic wedding address, and for good reason.",
-    img: "destination/059A3564.jpg",
+    name: "Caravela Beach Resort, Goa",
+    location: "GOA · VARCA BEACH",
+    desc1: "A sprawling 24-acre beachfront estate on the pristine white sands of Varca Beach, blending Indo-Portuguese heritage with refined tropical luxury.",
+    desc2: "The Poolside Lawns, expansive beachfront sunset backdrop, and a unique 9-hole golf course make it a sophisticated and serene choice for a fairytale coastal celebration.",
+    img: "beach-wedding/caravela-beachresort.jpg",
+    stats: { rooms: "199", guests: "600+", setting: "Varca Beachfront" }
+  },
+  {
+    id: "07",
+    name: "Taj Green Cove, Kovalam",
+    location: "KERALA · KOVALAM",
+    desc1: "A breathtaking 10-acre Balinese-inspired retreat on a lush hillside where the backwaters meet the Arabian Sea — secluded, intimate, and entirely distinctive.",
+    desc2: "Unique boat-entry experiences, the world-renowned J Wellness Circle, and Seaside Lawns for sunset ceremonies make it a fairytale destination for those seeking tranquil coastal opulence.",
+    img: "beach-wedding/taj-green-cove-kerala.jpg",
+    stats: { rooms: "59", guests: "500+", setting: "Hillside Backwater" }
   },
   {
     id: "08",
-    name: "Caravela Beach Resort",
-    location: "Colva",
-    desc: "Old-world Goan charm with direct beach access. Warm, effortless, and built for big family celebrations.",
-    img: "couple-shots/0G4A4625.jpg",
-  },
-  {
-    id: "09",
-    name: "Taj Green Cove",
-    location: "Kovalam",
-    desc: "Clifftop terraces, a lighthouse in the frame, and the Arabian Sea below. Kerala's most dramatic ceremony setting.",
-    img: "destination/TSR50995.jpg",
-  },
-  {
-    id: "10",
-    name: "The Leela",
-    location: "Kovalam",
-    desc: "Traditional Kerala architecture meets private beach access. The finest luxury wedding address on the Malabar coast.",
-    img: "couple-shots/TSR53127.jpg",
+    name: "The Leela, Kovalam",
+    location: "KERALA · KOVALAM",
+    desc1: "India's only clifftop beach resort — a breathtaking architectural marvel merging panoramic Arabian Sea views with traditional Kerala heritage across exclusive clifftop accommodations.",
+    desc2: "From the grand Pandal Convention Center to the intimate private beach for sunset vows, it offers a regal and ethereal setting unlike any other coastal property.",
+    img: "beach-wedding/The-Leela-Palace-Trail-kovalam.jpg",
+    stats: { rooms: "188", guests: "900+", setting: "Clifftop Beach Resort" }
   }
 ];
 
@@ -115,35 +145,21 @@ export default function BeachWeddingsPage() {
     let timer;
     if (isOverlayOpen) {
       setShowOverlay(true);
-      const scrollY = window.scrollY;
+      const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = "100%";
+      document.body.style.paddingRight = `${scrollBarWidth}px`;
       document.documentElement.classList.add("lenis-stopped");
     } else {
-      const top = document.body.style.top;
-      if (top) {
-        document.body.style.overflow = "";
-        document.body.style.position = "";
-        document.body.style.top = "";
-        document.body.style.width = "";
-        window.scrollTo(0, parseInt(top || '0') * -1);
-      }
+      document.body.style.overflow = "auto";
+      document.body.style.paddingRight = "0px";
       document.documentElement.classList.remove("lenis-stopped");
       timer = setTimeout(() => setShowOverlay(false), 250);
     }
 
     return () => {
       if (timer) clearTimeout(timer);
-      const top = document.body.style.top;
-      if (top) {
-        document.body.style.overflow = "";
-        document.body.style.position = "";
-        document.body.style.top = "";
-        document.body.style.width = "";
-        window.scrollTo(0, parseInt(top || '0') * -1);
-      }
+      document.body.style.overflow = "auto";
+      document.body.style.paddingRight = "0px";
       document.documentElement.classList.remove("lenis-stopped");
     };
   }, [isOverlayOpen]);
@@ -161,8 +177,8 @@ export default function BeachWeddingsPage() {
   }, [isOverlayOpen]);
 
   const ImagePanel = ({ dest, isFeatured }) => (
-    <div className={`w-full ${isFeatured ? 'md:w-[360px]' : 'md:w-[420px]'} relative flex-shrink-0 p-4 md:p-6 flex items-center justify-center bg-bg h-full group/img`}>
-      <div className={`relative w-full h-full ${isFeatured ? 'max-w-[320px]' : 'max-w-[360px]'} md:max-w-none flex flex-col`}>
+    <div className={`w-full md:w-[360px] relative flex-shrink-0 p-4 md:p-6 flex items-center justify-center bg-bg h-full group/img`}>
+      <div className={`relative w-full h-full max-w-[320px] md:max-w-none flex flex-col`}>
         {/* L-SHAPE ACCENTS */}
         <div className="absolute top-[-12px] left-[-12px] w-12 h-12 border-t border-l border-[#C8A84B] z-10 pointer-events-none opacity-60 transition-transform duration-700 group-hover/img:scale-110"></div>
         <div className="absolute bottom-[-12px] right-[-12px] w-12 h-12 border-b border-r border-[#C8A84B] z-10 pointer-events-none opacity-60 transition-transform duration-700 group-hover/img:scale-110"></div>
@@ -207,43 +223,23 @@ export default function BeachWeddingsPage() {
       <p className="text-[#C8A84B] text-[11px] tracking-[3px] uppercase font-medium mb-4">
         {dest.location}
       </p>
-      <p className={`text-muted text-[14px] leading-[1.6] font-light mb-6 ${isFeatured ? 'w-full' : 'max-w-[500px]'}`}>
-        {dest.desc}
+      
+      <p className="text-muted text-[15px] leading-[1.7] font-light mb-4 w-full">
+        {dest.desc1}
       </p>
-
-      {isFeatured && (
-        <p className="text-muted text-[14px] leading-[1.6] font-light mb-6 w-full">
-          Arrosim Beach unfolds at its doorstep — choose between candlelit seaside lawns, a magical forest setting, or a grand marquee ballroom for 1,000+ guests. A venue that commands every sense.
-        </p>
-      )}
+      <p className="text-muted text-[15px] leading-[1.7] font-light mb-8 w-full">
+        {dest.desc2}
+      </p>
 
       {/* STATS PILLS */}
       {dest.stats && (
         <div className="flex flex-wrap gap-3 mb-8">
-          {dest.stats.rooms && (
-            <div className="px-4 py-1.5 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm transition-transform hover:scale-105">
-              <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">Rooms:</span>
-              <span className="text-ink text-[11px] font-medium">{dest.stats.rooms}</span>
+          {Object.entries(dest.stats).map(([key, value]) => (
+            <div key={key} className="px-4 py-1.5 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm transition-transform hover:scale-105">
+              <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">{key}:</span>
+              <span className="text-ink text-[11px] font-medium">{value}</span>
             </div>
-          )}
-          {dest.stats.guests && (
-            <div className="px-4 py-1.5 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm transition-transform hover:scale-105">
-              <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">Guests:</span>
-              <span className="text-ink text-[11px] font-medium">{dest.stats.guests}</span>
-            </div>
-          )}
-          {dest.stats.space && (
-            <div className="px-4 py-1.5 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm transition-transform hover:scale-105">
-              <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">Space:</span>
-              <span className="text-ink text-[11px] font-medium">{dest.stats.space}</span>
-            </div>
-          )}
-          {dest.stats.acres && (
-            <div className="px-4 py-1.5 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm transition-transform hover:scale-105">
-              <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">Acres:</span>
-              <span className="text-ink text-[11px] font-medium">{dest.stats.acres}</span>
-            </div>
-          )}
+          ))}
         </div>
       )}
 
@@ -259,7 +255,7 @@ export default function BeachWeddingsPage() {
           href="/contact" 
           className="inline-block bg-[#C8A84B] text-[#1a1200] px-[2rem] py-[0.8rem] text-[11px] tracking-[3px] uppercase font-bold transition-all duration-500 self-start border-none hover:bg-[#A8892F] hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(168,137,47,0.25)]"
         >
-          Enquire for This Venue
+          Explore More About This Venue
         </Link>
       )}
     </div>
@@ -267,6 +263,7 @@ export default function BeachWeddingsPage() {
 
   return (
     <div ref={containerRef} className="bg-bg overflow-x-hidden flex flex-col gap-0 p-0 m-0">
+      <FloatingSidebar />
       {/* HERO BANNER */}
       <section className="relative h-[90vh] w-full flex items-center justify-center overflow-hidden m-0 p-0">
         <div className="absolute inset-0 z-0">
@@ -298,13 +295,12 @@ export default function BeachWeddingsPage() {
           {beachDestinations.map((dest, i) => {
             const isEven = i % 2 === 0;
             const isFeatured = dest.id === "01";
-            const imgWidth = isFeatured ? '360px' : '420px';
             
             return (
               <div 
                 key={dest.id} 
                 className="flex flex-col md:grid items-stretch reveal p-0 m-0"
-                style={{ gridTemplateColumns: isEven ? `${imgWidth} 1fr` : `1fr ${imgWidth}` }}
+                style={{ gridTemplateColumns: isEven ? '360px 1fr' : '1fr 360px' }}
               >
                 {isEven ? (
                   <>

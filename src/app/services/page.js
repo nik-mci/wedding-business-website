@@ -87,7 +87,7 @@ const services = [
     tagline: "Seamless fleet management and guest transit", 
     description: "We handle the complex movement of hundreds of guests across venues and cities with precision, from luxury airport transfers to venue shuttles.", 
     includes: ["Guest travel & ticket coordination", "Luxury car fleet & coach management", "On-site transport concierge desk", "Real-time transit tracking & communication", "Venue-to-hotel shuttle coordination"],
-    img: "destination/TSR50967.jpg",
+    img: "services/transport-logistics.jpg",
     photographer: "Logistics Excellence"
   },
   { 
@@ -109,7 +109,7 @@ function AddOnCard({ addon }) {
     <div
       onMouseEnter={() => setFlipped(true)}
       onMouseLeave={() => setFlipped(false)}
-      className="relative cursor-pointer w-full"
+      className="relative cursor-pointer w-[280px] md:w-[320px] shrink-0"
       style={{ perspective: "1000px", height: "260px" }}
     >
       <div
@@ -261,7 +261,7 @@ export default function ServicesPage() {
       <div className="page-hero">
         <div
           className="page-hero-bg"
-          style={{ backgroundImage: "url('/assets/photos/destination/TSR50995.jpg')", backgroundPosition: "center 30%" }}
+          style={{ backgroundImage: "url('/assets/photos/destination/pool_venue.jpg')", backgroundPosition: "center top" }}
         ></div>
         <div className="page-hero-overlay"></div>
         <div className="page-hero-content">
@@ -383,13 +383,19 @@ export default function ServicesPage() {
           <h2 className="text-[48px] font-heading text-white leading-tight mb-2">Add-<em className="italic">Ons</em></h2>
           <GoldDivider darkBg flip className="mt-2" />
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-16 max-w-[1200px] mx-auto">
+        <div className="flex overflow-x-auto gap-4 mt-16 max-w-[1280px] mx-auto pb-8 custom-scrollbar scroll-smooth">
           {[
             { 
-              img: "couple-shots/TSR53067.jpg",
+              img: "services/3-d modelling.png",
               name: "3-D Models", 
               tagline: "Virtual Venue Pre-visualization", 
               description: "Visualize your mandap and ballroom in photorealistic 3D before a single flower is placed." 
+            },
+            { 
+              img: "services/sfx-and-fireworks.jpg",
+              name: "SFX & Fireworks", 
+              tagline: "Atmospheric Spectacles", 
+              description: "Breathtaking pyrotechnics and cinematic atmospheric effects to elevate your grand entry and celebration moments." 
             },
             { 
               img: "services/decoration/e-invites and stationary.JPG",
@@ -398,16 +404,16 @@ export default function ServicesPage() {
               description: "Custom digital wedding invitations with RSVP tracking and animated reveals." 
             },
             { 
-              img: "services/website-addson.png",
-              name: "Website Creation", 
-              tagline: "Bespoke Guest Hubs", 
-              description: "A bespoke digital hub for your guests with RSVPs, gallery, and travel itineraries." 
-            },
-            { 
               img: "services/decoration/haldi_flowers_decor.jpg",
               name: "Home Decor", 
               tagline: "Pre & Post Wedding Styling", 
               description: "Bringing the celebration home with elegant floral and lighting designs for your residence." 
+            },
+            { 
+              img: "services/website-addson.png",
+              name: "Website Creation", 
+              tagline: "Bespoke Guest Hubs", 
+              description: "A bespoke digital hub for your guests with RSVPs, gallery, and travel itineraries." 
             }
           ].map((addon, i) => (
             <AddOnCard key={i} addon={addon} />
@@ -528,6 +534,11 @@ export default function ServicesPage() {
         .preserve-3d { transform-style: preserve-3d; }
         .backface-hidden { backface-visibility: hidden; }
         .rotate-y-180 { transform: rotateY(180deg); }
+        
+        .custom-scrollbar::-webkit-scrollbar { height: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(201, 162, 52, 0.05); }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(201, 162, 52, 0.2); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(201, 162, 52, 0.4); }
         
         @keyframes kenBurns {
           0% { transform: scale(1); }

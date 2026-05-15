@@ -7,117 +7,131 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GoldDivider from "@/components/GoldDivider";
 import CornerOrnament from "@/components/CornerOrnament";
+import FloatingSidebar from "@/components/FloatingSidebar";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const cityDestinations = [
-  // DELHI & NCR
+  // DELHI VENUES
   {
     id: "C01",
     name: "Zora",
-    location: "DELHI",
-    desc: "A boutique sanctuary in the heart of the capital, offering a perfect blend of modern sophistication and intimate luxury for the discerning urban couple.",
-    img: "destination/cities-wedding.jpg",
+    location: "NEW DELHI · LODHI ROAD",
+    desc1: "Designed by award-winning architect Walid Baz, The Zora is a nature-inspired masterpiece featuring soaring 45-foot ceilings and state-of-the-art 3D mapping — a masterclass in logistical efficiency and elite sophistication.",
+    desc2: "From the Grand Ballroom to the fully customisable Open Canvas outdoor space, it offers unmatched versatility for celebrations of every scale.",
+    img: "citiy luxe/zora-delhi.jpg",
+    stats: { "Ballroom": "45,000 Sq Ft", "Guests": "3,000+", "Outdoor Space": "1.25 Lakh Sq Ft" }
   },
   {
     id: "C02",
-    name: "A Dot",
-    location: "GURUGRAM",
-    desc: "A monumental event space in Gurugram, known for its grand scale, contemporary architecture, and world-class facilities designed for massive celebrations.",
-    img: "destination/059A3486.jpg",
+    name: "Morebagh",
+    location: "NEW DELHI · CHATTARPUR",
+    desc1: "An exquisite farmhouse estate renowned for its lush Mediterranean-inspired landscapes and stunning white villa — a serene escape from the city that feels entirely world apart.",
+    desc2: "Morebagh is particularly prized for its versatility, moving seamlessly between sun-drenched outdoor brunches and opulent starlit receptions.",
+    img: "citiy luxe/morbagh-delhi.jpg",
+    stats: { "Guests": "1,000+", "Setting": "Luxury Farmhouse", "Location": "Chattarpur" }
   },
   {
     id: "C03",
-    name: "Morbagh",
-    location: "CHATTARPUR",
-    desc: "A lush, sprawling estate in Chattarpur that offers a serene garden setting for elegant farmhouse-style weddings with a touch of rustic charm and absolute privacy.",
-    img: "destination/pool_venue.jpg",
+    name: "ITC Grand Bharat",
+    location: "GURGAON · ARAVALLI RANGE",
+    desc1: "A LEED Platinum-certified 300-acre all-suite estate paying homage to India's diverse architectural heritage — each of its suites and Presidential Villas inspired by legendary Indian dynasties.",
+    desc2: "From poolside haldi ceremonies to the mystical Ghats of Yamuna evening rituals, it offers regal backdrops unlike any urban property.",
+    img: "citiy luxe/ITC-grand-bharat-delhi.png",
+    stats: { "Rooms": "104", "Guests": "1,300+", "Space": "50,000+ Sq Ft" }
   },
   {
     id: "C04",
     name: "Leela Palace",
-    location: "DELHI",
-    desc: "A flagship of luxury in the diplomatic enclave. Opulent interiors, legendary service, and grand ballrooms that define the absolute pinnacle of city weddings.",
-    img: "destination/TSR50334.jpg",
+    location: "NEW DELHI · DIPLOMATIC ENCLAVE",
+    desc1: "A modern architectural masterpiece inspired by the grandeur of the Lutyens era, located in the prestigious Diplomatic Enclave.",
+    desc2: "The magnificent Grand Ballroom, intimate terraces, and lush inner courtyards offer a sophisticated blend of royal Indian charm and contemporary luxury.",
+    img: "citiy luxe/The-Leela-Palace-New-Delhi.jpg",
+    stats: { "Rooms": "254", "Guests": "400+", "Setting": "Diplomatic Enclave" }
   },
   {
     id: "C05",
     name: "ITC Maurya",
-    location: "DELHI",
-    desc: "An iconic landmark hosting world leaders and grand celebrations. Its storied architecture and culinary excellence make it a legendary venue for high-profile weddings.",
-    img: "destination/0G4A1341.jpg",
+    location: "NEW DELHI · DIPLOMATIC ENCLAVE",
+    desc1: "A landmark of Mauryan-inspired architecture and elite hospitality at the heart of New Delhi's Diplomatic Enclave.",
+    desc2: "Its crown jewel, the pillar-less Kamal Mahal ballroom, is complemented by legendary culinary heritage — including the iconic Bukhara and Dum Pukht — for an unparalleled gastronomic wedding experience.",
+    img: "citiy luxe/itc-maurya-delhi.png",
+    stats: { "Rooms": "437", "Guests": "600+", "Venue": "Kamal Mahal Ballroom" }
   },
-  // MUMBAI
+  // MUMBAI VENUES
   {
     id: "C06",
-    name: "Fairmont",
-    location: "MUMBAI",
-    desc: "A grand presence in the city of dreams. Offering sophisticated ballrooms and polished international hospitality for elegant urban celebrations of every scale.",
-    img: "destination/TSR50995.jpg",
+    name: "Taj Lands End",
+    location: "MUMBAI · BANDRA WEST",
+    desc1: "Perched atop Bandra West with breathtaking panoramic views of the Arabian Sea and the iconic Bandra-Worli Sea Link, Taj Lands End is a pinnacle of seaside luxury.",
+    desc2: "From the majestic Ballroom to the stunning Poolside Lawns, it blends contemporary urban grandeur with renowned Taj hospitality.",
+    img: "citiy luxe/taj-mumbai.jpg",
+    stats: { "Rooms": "496", "Guests": "1,000+", "Space": "55,000+ Sq Ft" }
   },
   {
     id: "C07",
-    name: "Taj Lands End",
-    location: "MUMBAI",
-    desc: "Perched on the Bandra seafront with stunning views of the Arabian Sea. A premier choice for luxury city weddings that crave the sound of waves and a cool ocean breeze.",
-    img: "destination/beach-wedding-img.jpg",
+    name: "Grand Hyatt BKC",
+    location: "MUMBAI · BANDRA KURLA COMPLEX",
+    desc1: "A sprawling 12-acre luxury landmark in Bandra Kurla Complex, Grand Hyatt Mumbai redefines urban grandeur with its world-class culinary repertoire and stunning contemporary art collection.",
+    desc2: "The pillar-less Grand Ballroom is one of Mumbai's largest, complemented by a serene art-filled outdoor courtyard for alfresco celebrations.",
+    img: "citiy luxe/hyatt-mumbai.jpg",
+    stats: { "Rooms": "548", "Guests": "1,500+", "Space": "30,000+ Sq Ft" }
   },
   {
     id: "C08",
-    name: "Hyatt BKC",
-    location: "MUMBAI",
-    desc: "Located in the heart of Mumbai's business district. Modern, chic, and perfectly equipped for large-scale contemporary wedding celebrations that pulse with the city's energy.",
-    img: "destination/TSR50355.jpg",
+    name: "Fairmont Sahar",
+    location: "MUMBAI · SAHAR",
+    desc1: "A sophisticated urban palace near the international airport, Fairmont Sahar reflects a modern palace aesthetic with its hallmark Grandest of Spirits service.",
+    desc2: "The pillar-less Grand Ballroom and beautifully landscaped Terrace Gardens make it an elite choice for seamless, high-profile celebrations.",
+    img: "citiy luxe/fairmont-mumbai.jpg",
+    stats: { "Rooms": "325", "Guests": "1,000+", "Ballroom": "11,000+ Sq Ft" }
   },
-  {
-    id: "C09",
-    name: "JWCC",
-    location: "MUMBAI",
-    desc: "The JW Marriott Hotel & Convention Centre. A powerhouse for grand weddings with massive pillarless ballrooms and world-class international service standards.",
-    img: "destination/059A3564.jpg",
-  },
-  // BANGALORE
+  // BANGALORE VENUES
+
   {
     id: "C10",
-    name: "Sheraton Grand Whitefield",
-    location: "BANGALORE",
-    desc: "A premier destination in the tech hub. Boasting expansive indoor and outdoor venues designed for seamless multi-day wedding programmes and effortless guest flow.",
-    img: "destination/059A3486.jpg",
+    name: "ITC Gardenia",
+    location: "BENGALURU · CITY CENTRE",
+    desc1: "An architectural tribute to Bengaluru's Garden City identity — LEED Platinum-certified with vertical gardens and open-air spaces that weave sustainability into luxury.",
+    desc2: "The pillar-less Mysore Hall and lush Botanic Garden lawns offer a majestic, environmentally conscious stage for sophisticated celebrations.",
+    img: "citiy luxe/itc-banglore.jpg",
+    stats: { "Guests": "600+", "Venue": "Mysore Hall + Botanic Garden", "Setting": "Vertical Garden Hotel" }
   },
   {
     id: "C11",
-    name: "Leela Palace",
-    location: "BANGALORE",
-    desc: "Inspired by the Royal Palace of Mysore. A breathtaking garden estate in the city with ornate carvings, lush greenery, and unparalleled palatial luxury.",
-    img: "destination/TSR50967.jpg",
+    name: "Taj West End",
+    location: "BENGALURU · CITY CENTRE",
+    desc1: "A legendary 20-acre sanctuary blending Victorian-era charm with over 130 years of heritage — its colonial-style rooms and suites nestled amid lush century-old tropical gardens.",
+    desc2: "The iconic Prince of Wales Lawns and the famous 150-year-old Rain Tree provide an unparalleled fairytale backdrop for outdoor ceremonies.",
+    img: "citiy luxe/taj-westend-banglore.jpg",
+    stats: { "Space": "20,000+ Sq Ft", "Venues": "Grand Ballroom + Prince of Wales Lawns", "Setting": "Heritage Estate" }
   },
   {
     id: "C12",
-    name: "Taj Westend",
-    location: "BANGALORE",
-    desc: "A century-old sanctuary amidst 20 acres of flora and fauna. Iconic colonial architecture and sprawling lawns for a soulful heritage wedding in the heart of the city.",
-    img: "destination/hills-image.jpg",
+    name: "Prestige Golfshire",
+    location: "BENGALURU · NANDI HILLS",
+    desc1: "Set against the scenic Nandi Hills backdrop, Prestige Golfshire is an ultra-luxury retreat housing the JW Marriott Bengaluru Resort & Spa.",
+    desc2: "A world-class 18-hole golf course, serene lake views, and sprawling manicured lawns make it a stunningly modern destination for large-scale celebrations away from the city.",
+    img: "citiy luxe/prestigegolfshire-banglore.jpg",
+    stats: { "Rooms": "301", "Guests": "1,000+", "Space": "66,000+ Sq Ft" }
   },
   {
     id: "C13",
-    name: "Tamarind Tree",
-    location: "BANGALORE",
-    desc: "A magical venue where heritage meets nature. Featuring antique doorways, open-air courtyards, and a truly unique, earthy aesthetic for intimate celebrations.",
-    img: "destination/pool_venue.jpg",
+    name: "Kings Meadow",
+    location: "BENGALURU · NORTH BANGALORE",
+    desc1: "A purpose-built luxury wedding destination offering a seamless blend of contemporary architecture and manicured natural beauty.",
+    desc2: "Its logistical excellence — ample parking, dedicated bridal suites, and flexible vendor policies — makes it a premier open-canvas environment for grand personalised celebrations.",
+    img: "citiy luxe/kings-meadows-banglore.jpg",
+    stats: { "Guests": "1,500+", "Parking": "500+ Vehicles", "Setting": "Purpose-Built Venue" }
   },
   {
     id: "C14",
-    name: "Aura by Area 83",
-    location: "BANGALORE",
-    desc: "A hidden gem on the outskirts of the city. Modern, eco-conscious, and offering a serene lakeside setting for a refreshing urban escape wedding experience.",
-    img: "destination/backwaterandlakes.jpg",
-  },
-  {
-    id: "C15",
-    name: "Palace Ground",
-    location: "BANGALORE",
-    desc: "The legendary grounds of the Bangalore Palace. Massive, historic, and capable of hosting the city's most grand and elaborate royal-scale wedding spectacles.",
-    img: "destination/TSR50334.jpg",
+    name: "Angsana Oasis",
+    location: "BENGALURU · NORTH BANGALORE",
+    desc1: "A tranquil Mediterranean-inspired sanctuary offering an intimate yet grand boutique wedding experience surrounded by lush greenery.",
+    desc2: "World-class Ayurvedic spa facilities, Thai-inspired architecture, and sprawling open-air courtyards capture the city's pleasant climate for a harmonious, wellness-forward celebration.",
+    img: "citiy luxe/angsana-banglore.jpg",
+    stats: { "Rooms": "79", "Guests": "1,000+", "Venues": "Main Lawn + Hibiscus + Marigold Halls" }
   }
 ];
 
@@ -158,8 +172,8 @@ export default function CitiesMetropolitansPage() {
   }, []);
 
   const ImagePanel = ({ dest }) => (
-    <div className="w-full md:w-[420px] relative flex-shrink-0 p-4 md:p-6 flex items-center justify-center bg-bg h-full group/img">
-      <div className="relative w-full h-full max-w-[360px] md:max-w-none flex flex-col">
+    <div className="w-full md:w-[360px] relative flex-shrink-0 p-4 md:p-6 flex items-center justify-center bg-bg h-full group/img">
+      <div className="relative w-full h-full max-w-[320px] md:max-w-none flex flex-col">
         {/* L-SHAPE ACCENTS */}
         <div className="absolute top-[-12px] left-[-12px] w-12 h-12 border-t border-l border-[#C8A84B] z-10 pointer-events-none opacity-60 transition-transform duration-700 group-hover/img:scale-110"></div>
         <div className="absolute bottom-[-12px] right-[-12px] w-12 h-12 border-b border-r border-[#C8A84B] z-10 pointer-events-none opacity-60 transition-transform duration-700 group-hover/img:scale-110"></div>
@@ -186,21 +200,38 @@ export default function CitiesMetropolitansPage() {
       <p className="text-[#C8A84B] text-[11px] tracking-[3px] uppercase font-medium mb-4">
         {dest.location}
       </p>
-      <p className="text-muted text-[14px] leading-[1.6] font-light mb-6 max-w-[500px]">
-        {dest.desc}
+      
+      <p className="text-muted text-[15px] leading-[1.7] font-light mb-4 w-full">
+        {dest.desc1}
       </p>
+      <p className="text-muted text-[15px] leading-[1.7] font-light mb-8 w-full">
+        {dest.desc2}
+      </p>
+
+      {/* STATS PILLS */}
+      {dest.stats && (
+        <div className="flex flex-wrap gap-3 mb-8">
+          {Object.entries(dest.stats).map(([key, value]) => (
+            <div key={key} className="px-4 py-1.5 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm transition-transform hover:scale-105">
+              <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">{key}:</span>
+              <span className="text-ink text-[11px] font-medium">{value}</span>
+            </div>
+          ))}
+        </div>
+      )}
 
       <Link 
         href="/contact" 
         className="inline-block bg-[#C8A84B] text-[#1a1200] px-[2rem] py-[0.8rem] text-[11px] tracking-[3px] uppercase font-bold transition-all duration-500 self-start border-none hover:bg-[#A8892F] hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(168,137,47,0.25)]"
       >
-        Enquire for This Venue
+        Explore More About This Venue
       </Link>
     </div>
   );
 
   return (
     <div ref={containerRef} className="bg-bg overflow-x-hidden flex flex-col gap-0 p-0 m-0">
+      <FloatingSidebar />
       {/* HERO BANNER */}
       <section className="relative h-[90vh] w-full flex items-center justify-center overflow-hidden m-0 p-0">
         <div className="absolute inset-0 z-0">
@@ -236,7 +267,7 @@ export default function CitiesMetropolitansPage() {
               <div 
                 key={dest.id} 
                 className="flex flex-col md:grid items-stretch reveal p-0 m-0"
-                style={{ gridTemplateColumns: isEven ? '420px 1fr' : '1fr 420px' }}
+                style={{ gridTemplateColumns: isEven ? '360px 1fr' : '1fr 360px' }}
               >
                 {isEven ? (
                   <>
