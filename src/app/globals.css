@@ -38,8 +38,30 @@
 }
 
 @layer components {
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 8px;
+    z-index: 10000;
+    padding: 12px 20px;
+    background: var(--color-gold);
+    color: var(--color-surface);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: top 0.2s var(--ease-custom);
+  }
+  .skip-link:focus {
+    top: 8px;
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
   /* Restore EXACT styles from original CSS */
-  #progress-bar { 
+  #progress-bar {
     position: fixed; top: 0; left: 0; height: 2px; 
     @apply bg-gold; 
     width: 0%; z-index: 9999; transition: width 0.1s linear; 
