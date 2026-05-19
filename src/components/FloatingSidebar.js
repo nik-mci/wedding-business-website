@@ -213,15 +213,20 @@ export default function FloatingSidebar() {
 
   return (
     <>
-      {/* Trigger Button */}
+      {/* Trigger Button — Pill Shape on Left Centre */}
       <button
         onClick={openSidebar}
-        className="fixed top-[20px] left-[48px] z-[9999] hidden md:flex flex-col items-center justify-center gap-[4px] w-[32px] h-[32px] bg-[#1A1408] border border-[rgba(201,162,52,0.5)] cursor-pointer group hover:shadow-[0_0_15px_rgba(201,162,52,0.3)] transition-shadow duration-300"
+        className="fixed top-1/2 -translate-y-1/2 left-0 z-[9999] hidden md:flex flex-col items-center justify-center gap-[5px] w-[26px] h-[84px] bg-[#1A1408] border border-l-0 border-[#C9A234]/40 rounded-r-full cursor-pointer group hover:bg-[#1D180C] hover:border-[#C9A234]/70 hover:shadow-[5px_0_20px_rgba(201,162,52,0.15)] transition-all duration-400"
         aria-label="Open navigation"
       >
-        <span className="w-[14px] h-[1px] bg-[#C9A234]" />
-        <span className="w-[14px] h-[1px] bg-[#C9A234]" />
-        <span className="w-[14px] h-[1px] bg-[#C9A234]" />
+        <span className="w-[11px] h-[1.5px] bg-[#C9A234] opacity-80 group-hover:opacity-100 group-hover:w-[13px] transition-all duration-300" />
+        <span className="w-[11px] h-[1.5px] bg-[#C9A234] opacity-80 group-hover:opacity-100 group-hover:w-[13px] transition-all duration-300" />
+        <span className="w-[11px] h-[1.5px] bg-[#C9A234] opacity-80 group-hover:opacity-100 group-hover:w-[13px] transition-all duration-300" />
+        
+        {/* Subtle vertical text label (Optional but adds to the 'pill' look) */}
+        <span className="absolute -rotate-90 text-[8px] uppercase tracking-[0.2em] text-[#C9A234]/40 font-medium whitespace-nowrap mt-20 group-hover:text-[#C9A234]/70 transition-colors">
+          Menu
+        </span>
       </button>
 
       {/* Backdrop */}

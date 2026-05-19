@@ -7,176 +7,49 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GoldDivider from "@/components/GoldDivider";
 import CornerOrnament from "@/components/CornerOrnament";
+import FloatingSidebar from "@/components/FloatingSidebar";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const hillDestinations = [
-  // HIMACHAL PRADESH
-  { type: 'section', name: 'Himachal Pradesh' },
+  // UTTARAKHAND VENUES
   {
-    id: "01",
-    name: "Wildflower Hall",
-    location: "Shimla",
-    desc: "A former residence of Lord Kitchener at 8,250 feet among cedar forests. Snow-capped peaks, colonial grandeur, and an atmosphere that feels entirely otherworldly.",
-    img: "destination/hills-image.jpg",
+    id: "H01",
+    name: "The Westin Himalayas, Rishikesh",
+    location: "UTTARAKHAND · RISHIKESH",
+    desc1: "A magnificent mountain sanctuary perched on a hillside near Rishikesh, offering breathtaking panoramic views of forested valleys and the holy Ganges River.",
+    desc2: "The grand pillar-less Grand Ballroom and spectacular Outdoor Terrace Lawns, paired with signature wellness philosophies and world-class culinary innovation, create an ethereal Himalayan backdrop for a fairytale celebration.",
+    img: "hill-weddings/The Westin Himalayas Spa and resort, Uttarakhand.jpeg",
+    stats: { "Rooms": "141", "Guests": "400+", "Space": "10,000+ Sq Ft" }
   },
   {
-    id: "02",
-    name: "The Oberoi Cecil",
-    location: "Shimla",
-    desc: "Shimla's most storied heritage hotel since 1884. Victorian elegance, manicured gardens, and a timeless mountain setting straight out of a fairytale.",
-    img: "destination/059A3486.jpg",
+    id: "H02",
+    name: "Taj Corbett, Uttarakhand",
+    location: "UTTARAKHAND · JIM CORBETT",
+    desc1: "A magnificent 61-acre wilderness sanctuary on the banks of the Kosi River, surrounded by the majestic forests of Jim Corbett National Park — rustic yet thoroughly opulent.",
+    desc2: "Riverside outdoor lawns under a canopy of old-growth trees, bespoke outdoor dining, and unique jungle-safari charm make it a sophisticated nature-inspired wedding destination unlike any other.",
+    img: "hill-weddings/Taj Corbett Spa and Resort, Uttarakhand .jpg",
+    stats: { "Rooms": "61", "Guests": "400+", "Setting": "Kosi Riverside" }
   },
+  // DEHRADUN VENUES
   {
-    id: "03",
-    name: "Clarkes Hotel",
-    location: "Shimla",
-    desc: "The oldest operating hotel in Shimla. Intimate, colonial, and full of character — for couples who love history woven into every detail.",
-    img: "destination/TSR50995.jpg",
+    id: "H03",
+    name: "Hyatt Regency, Dehradun",
+    location: "DEHRADUN · HIMALAYAN FOOTHILLS",
+    desc1: "A magnificent sanctuary at the foothills of the Himalayas, flanked by the serene Malsi Reserved Forest — a perfect blend of urban luxury and scenic mountain tranquility.",
+    desc2: "The majestic Regency Ballroom with its 20-foot ceiling and the sprawling Regency Lawns against a breathtaking mountain backdrop make it an elite, picturesque haven for an unforgettable destination wedding.",
+    img: "hill-weddings/hyatt-dehradun.jpeg",
+    stats: { "Rooms": "263", "Guests": "1,000+", "Space": "33,500+ Sq Ft" }
   },
+  // SRINAGAR VENUES
   {
-    id: "04",
-    name: "Ashapuri Village",
-    location: "Manali",
-    desc: "A tucked-away retreat among apple orchards and pine forests. Raw Himalayan beauty with a warm, earthy intimacy that grand resorts simply can't replicate.",
-    img: "destination/TSR50501.jpg",
-  },
-  {
-    id: "05",
-    name: "Baragarh Resort & Spa",
-    location: "Manali",
-    desc: "Perched above the Beas River with panoramic valley views. Boutique luxury in the Kullu Valley — serene, stylish, and completely unhurried.",
-    img: "destination/TSR50334.jpg",
-  },
-  {
-    id: "06",
-    name: "Welcomhotel by ITC — Hamsa",
-    location: "Manali",
-    desc: "ITC's signature hospitality in the mountains. Generous event spaces and world-class service for celebrations of every scale.",
-    img: "destination/059A3564.jpg",
-  },
-  {
-    id: "07",
-    name: "Storii by ITC — Urvashi's Retreat",
-    location: "Manali",
-    desc: "A charming heritage-inspired boutique property on Manali's quieter side. Intimate lawns and old-world character for small, personal ceremonies.",
-    img: "destination/pool_venue.jpg",
-  },
-  // UTTARAKHAND
-  { type: 'section', name: 'Uttarakhand' },
-  {
-    id: "08",
-    name: "Westin Resort & Spa",
-    location: "Himalayas",
-    desc: "A high-altitude sanctuary where Westin's wellness philosophy meets dramatic Himalayan scenery. Expansive event terraces and mountain air for an unforgettable celebration.",
-    img: "destination/hills-image.jpg",
-  },
-  {
-    id: "09",
-    name: "Fairfield by Marriott",
-    location: "Dehradun",
-    desc: "A modern, well-appointed property in the gateway city of the Himalayas. Clean, comfortable, and ideal for larger guest lists needing city convenience with mountain proximity.",
-    img: "destination/059A3486.jpg",
-  },
-  {
-    id: "10",
-    name: "Le Méridien",
-    location: "Dehradun",
-    desc: "Contemporary luxury at the foothills of the Himalayas. Stylish interiors, generous banquet spaces, and Le Méridien's signature artistic sensibility.",
-    img: "destination/TSR50995.jpg",
-  },
-  {
-    id: "11",
-    name: "JW Marriott Walnut Grove",
-    location: "Mussoorie",
-    desc: "Nestled in the walnut groves of Mussoorie with sweeping Doon Valley views. JW's impeccable service paired with one of the most scenic hillstation settings in India.",
-    img: "destination/TSR50501.jpg",
-  },
-  {
-    id: "12",
-    name: "Jaypee Residency Manor",
-    location: "Mussoorie",
-    desc: "A classic Mussoorie estate with expansive lawns and misty mountain backdrops. Timeless, generous, and well-suited for large multi-day wedding celebrations.",
-    img: "destination/TSR50334.jpg",
-  },
-  {
-    id: "13",
-    name: "Taj Corbett Resort & Spa",
-    location: "Jim Corbett",
-    desc: "Where jungle meets luxury. Ceremony spaces nestled in the Corbett wilderness — for couples who want their wedding to feel like a true wild adventure.",
-    img: "destination/059A3564.jpg",
-  },
-  {
-    id: "14",
-    name: "Aahana Forest Resort",
-    location: "Jim Corbett",
-    desc: "An eco-luxury retreat deep in the Corbett buffer zone. Intimate jungle settings, open-air spaces, and a rawness that makes every moment feel cinematic.",
-    img: "destination/pool_venue.jpg",
-  },
-  {
-    id: "15",
-    name: "Bellmont Caves",
-    location: "Jim Corbett",
-    desc: "A distinctive boutique property with cave-inspired architecture in the Corbett forest. Unique, dramatic, and unlike any other wedding venue in the hills.",
-    img: "destination/hills-image.jpg",
-  },
-  {
-    id: "16",
-    name: "Anantum Getaway Resorts",
-    location: "Jim Corbett",
-    desc: "A peaceful forest retreat with riverside settings and lush green surroundings. Relaxed, nature-immersed, and perfect for intimate gatherings.",
-    img: "destination/059A3486.jpg",
-  },
-  {
-    id: "17",
-    name: "Taj Rishikesh",
-    location: "Rishikesh",
-    desc: "Suspended above the Ganges on a forested hillside, Taj Rishikesh is India's most spiritual luxury wedding address. Where vows exchanged feel truly sacred.",
-    img: "destination/TSR50995.jpg",
-  },
-  {
-    id: "18",
-    name: "Summit by the Ganges",
-    location: "Rishikesh",
-    desc: "Riverside ceremony spaces with direct Ganges frontage and gentle mountain views. Intimate, soulful, and deeply connected to the energy of Rishikesh.",
-    img: "destination/TSR50501.jpg",
-  },
-  // KASHMIR
-  { type: 'section', name: 'Kashmir' },
-  {
-    id: "19",
-    name: "The Lalit",
-    location: "Srinagar",
-    desc: "A grand property on the banks of Dal Lake blending Kashmiri heritage architecture with contemporary luxury. Shikaras, chinar trees, and mountain reflections on water — Kashmir's most complete wedding experience.",
-    img: "destination/TSR50334.jpg",
-  },
-  {
-    id: "20",
-    name: "Khyber Himalayan Resort & Spa",
-    location: "Gulmarg",
-    desc: "At 8,825 feet in the meadows of Gulmarg, Khyber is India's highest luxury resort. Snow-dusted peaks, pine forests, and an otherworldly silence make it one of the most extraordinary wedding destinations in the world.",
-    img: "destination/059A3564.jpg",
-  },
-  {
-    id: "21",
-    name: "Taj Dal View",
-    location: "Srinagar",
-    desc: "Perched above the famous Dal Lake with uninterrupted views of the Zabarwan mountains. Taj's legendary hospitality paired with Kashmir's most iconic landscape.",
-    img: "destination/pool_venue.jpg",
-  },
-  {
-    id: "22",
-    name: "Fortune Resort Heevan",
-    location: "Srinagar",
-    desc: "Set in a Mughal-style garden by the Dal Lake with traditional Kashmiri architecture and warm hospitality. A beautiful, classic Kashmir wedding setting.",
-    img: "destination/hills-image.jpg",
-  },
-  {
-    id: "23",
-    name: "Welcomhotel Pine & Peak",
-    location: "Pahalgam",
-    desc: "Nestled in the valley of Pahalgam by the Lidder River, surrounded by pine forests and meadows. Remote, romantic, and as close to a fairy-tale mountain elopement as it gets.",
-    img: "destination/059A3486.jpg",
+    id: "H04",
+    name: "The Lalit Grand Palace, Srinagar",
+    location: "SRINAGAR · DAL LAKE",
+    desc1: "Originally built in 1910 as a royal residence for Maharaja Pratap Singh, The Lalit Grand Palace overlooks the serene Dal Lake and stands as a majestic masterpiece of Himalayan heritage.",
+    desc2: "Sprawling historic lawns under century-old Chinar trees, the elegant Darbar Hall, and breathtaking valley views combine to offer an extraordinarily grand and romantic stage for a heritage wedding celebration.",
+    img: "hill-weddings/srinagar-the-lalit.png",
+    stats: { "Rooms": "123", "Guests": "800+", "Venues": "Darbar Hall + Historic Lawns" }
   }
 ];
 
@@ -217,8 +90,8 @@ export default function HillsWeddingsPage() {
   }, []);
 
   const ImagePanel = ({ dest }) => (
-    <div className="w-full md:w-[420px] relative flex-shrink-0 p-4 md:p-6 flex items-center justify-center bg-bg h-full group/img">
-      <div className="relative w-full h-full max-w-[360px] md:max-w-none flex flex-col">
+    <div className="w-full md:w-[360px] relative flex-shrink-0 p-4 md:p-6 flex items-center justify-center bg-bg h-full group/img">
+      <div className="relative w-full h-full max-w-[320px] md:max-w-none flex flex-col">
         {/* L-SHAPE ACCENTS */}
         <div className="absolute top-[-12px] left-[-12px] w-12 h-12 border-t border-l border-[#C8A84B] z-10 pointer-events-none opacity-60 transition-transform duration-700 group-hover/img:scale-110"></div>
         <div className="absolute bottom-[-12px] right-[-12px] w-12 h-12 border-b border-r border-[#C8A84B] z-10 pointer-events-none opacity-60 transition-transform duration-700 group-hover/img:scale-110"></div>
@@ -238,28 +111,45 @@ export default function HillsWeddingsPage() {
   );
 
   const ContentPanel = ({ dest }) => (
-    <div className="flex-grow bg-[#F9F5EF] p-[1.5rem] md:p-[2.5rem] flex flex-col justify-center relative border-l-2 border-[rgba(200,168,75,0.4)] h-full">
+    <div className="flex-grow bg-[#F9F5EF] p-[1.5rem] md:p-[2.5rem] flex flex-col justify-center relative border-l-2 border-[rgba(200,168,75,0.4)] h-full w-full">
       <h2 className="font-heading text-ink text-4xl md:text-5xl font-light mb-1">
         {dest.name}
       </h2>
       <p className="text-[#C8A84B] text-[11px] tracking-[3px] uppercase font-medium mb-4">
         {dest.location}
       </p>
-      <p className="text-muted text-[14px] leading-[1.6] font-light mb-6 max-w-[500px]">
-        {dest.desc}
+      
+      <p className="text-muted text-[15px] leading-[1.7] font-light mb-4 w-full">
+        {dest.desc1}
       </p>
+      <p className="text-muted text-[15px] leading-[1.7] font-light mb-8 w-full">
+        {dest.desc2}
+      </p>
+
+      {/* STATS PILLS */}
+      {dest.stats && (
+        <div className="flex flex-wrap gap-3 mb-8">
+          {Object.entries(dest.stats).map(([key, value]) => (
+            <div key={key} className="px-4 py-1.5 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm transition-transform hover:scale-105">
+              <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">{key}:</span>
+              <span className="text-ink text-[11px] font-medium">{value}</span>
+            </div>
+          ))}
+        </div>
+      )}
 
       <Link 
         href="/contact" 
         className="inline-block bg-[#C8A84B] text-[#1a1200] px-[2rem] py-[0.8rem] text-[11px] tracking-[3px] uppercase font-bold transition-all duration-500 self-start border-none hover:bg-[#A8892F] hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(168,137,47,0.25)]"
       >
-        Enquire for This Venue
+        Explore More About This Venue
       </Link>
     </div>
   );
 
   return (
     <div ref={containerRef} className="bg-bg overflow-x-hidden flex flex-col gap-0 p-0 m-0">
+      <FloatingSidebar />
       {/* HERO BANNER */}
       <section className="relative h-[90vh] w-full flex items-center justify-center overflow-hidden m-0 p-0">
         <div className="absolute inset-0 z-0">
@@ -289,25 +179,13 @@ export default function HillsWeddingsPage() {
       <section className="p-0 m-0 border-none">
         <div className="flex flex-col gap-0 p-0 m-0">
           {hillDestinations.map((dest, i) => {
-            if (dest.type === 'section') {
-              return (
-                <div key={dest.name} className="w-full bg-[#1a1200] py-16 px-12 border-y border-gold/10 reveal flex flex-col items-center justify-center">
-                  <p className="text-gold text-[10px] tracking-[0.5em] uppercase mb-4 opacity-70">Regions</p>
-                  <h2 className="text-gold font-heading text-4xl md:text-5xl tracking-[0.15em] uppercase text-center font-light">
-                    {dest.name}
-                  </h2>
-                </div>
-              );
-            }
-
-            const cardIndex = hillDestinations.filter(d => d.type !== 'section').indexOf(dest);
-            const isEven = cardIndex % 2 === 0;
+            const isEven = i % 2 === 0;
 
             return (
               <div 
                 key={dest.id} 
                 className="flex flex-col md:grid items-stretch reveal p-0 m-0"
-                style={{ gridTemplateColumns: isEven ? '420px 1fr' : '1fr 420px' }}
+                style={{ gridTemplateColumns: isEven ? '360px 1fr' : '1fr 360px' }}
               >
                 {isEven ? (
                   <>

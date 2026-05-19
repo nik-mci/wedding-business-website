@@ -11,338 +11,95 @@ import CornerOrnament from "@/components/CornerOrnament";
 gsap.registerPlugin(ScrollTrigger);
 
 const heritageDestinations = [
-  // JAIPUR
-  { type: 'section', name: 'Jaipur' },
-  {
-    id: "H01",
-    name: "Rambagh Palace",
-    location: "Jaipur",
-    desc: "Once the residence of the Maharaja of Jaipur, now the crown jewel of Indian palace weddings. Mughal gardens, grand durbar halls, and royal pageantry at every turn.",
-    img: "destination/TSR50334.jpg",
-  },
-  {
-    id: "H02",
-    name: "Rajasthali Resort",
-    location: "Jaipur",
-    desc: "A village-themed luxury resort celebrating Rajasthani folk art and craftsmanship. Vibrant, cultural, and wonderfully immersive for couples who want authenticity with comfort.",
-    img: "destination/TSR50967.jpg",
-  },
-  {
-    id: "H03",
-    name: "Jai Mahal Palace",
-    location: "Jaipur",
-    desc: "A 18th-century palace set in 18 acres of Mughal gardens. Stately, elegant, and perfectly proportioned for intimate royal ceremonies.",
-    img: "destination/TSR50973.jpg",
-  },
-  {
-    id: "H04",
-    name: "Fairmont Jaipur",
-    location: "Jaipur",
-    desc: "Contemporary luxury meets Rajput grandeur. Expansive event lawns, palatial interiors, and Fairmont's world-class service for large, lavish celebrations.",
-    img: "destination/TSR50995.jpg",
-  },
   {
     id: "H05",
     name: "Leela Palace",
-    location: "Jaipur",
-    desc: "A majestic tribute to Rajasthan’s royal heritage set against the serene backdrop of the Aravalli hills. This magnificent venue seamlessly blends traditional Rajputana architecture with Mughal-inspired design, featuring gleaming white facades, intricate Thikri mirror work, and sprawling manicured gardens. Featuring a grand pillarless ballroom and enchanting outdoor lawns, it is a premier choice for both intimate ceremonies and lavish celebrations. The palace offers exquisite suites and villas, many featuring private plunge pools and courtyard views to ensure a truly royal stay. Choosing this destination promises an unforgettable wedding experience defined by world-class dining, exceptional hospitality, and a fairytale-like atmosphere.",
-    img: "destination/059A3486.jpg",
-    stats: {
-      rooms: "200",
-      guests: "1,500",
-      space: "50,000+ Sq. Ft."
-    }
+    location: "JAIPUR",
+    desc1: "The Leela Palace Jaipur is a majestic tribute to Rajasthan's royal heritage, set against the serene backdrop of the Aravalli hills. This magnificent venue seamlessly blends traditional Rajputana architecture with Mughal-inspired design, featuring gleaming white facades, intricate Thikri mirror work, and sprawling manicured gardens.",
+    desc2: "It is a premier choice for both intimate ceremonies and lavish celebrations, offering luxuriously appointed rooms, suites, and villas, many featuring private plunge pools and courtyard views to ensure a truly royal stay for your guests. Choosing this destination promises an unforgettable wedding experience defined by world-class dining, exceptional hospitality, and a fairytale-like atmosphere.",
+    img: "royal-and-heritage/leela palace-jaipur.jpg",
+    stats: { rooms: "200", guests: "1,500+", space: "50,000+ Sq Ft" }
   },
   {
     id: "H06",
     name: "Hyatt Regency",
-    location: "Jaipur",
-    desc: "A reliable luxury anchor in the Pink City. Generous ballrooms, outdoor lawns, and seamless event management for multi-day wedding programmes.",
-    img: "destination/0G4A1341.jpg",
-  },
-  {
-    id: "H07",
-    name: "Ananta Spa & Resort",
-    location: "Jaipur",
-    desc: "A wellness-forward resort with traditional Rajasthani architecture and serene surroundings. Intimate, unhurried, and beautifully detailed throughout.",
-    img: "destination/pool_venue.jpg",
-  },
-  {
-    id: "H08",
-    name: "Le Méridien",
-    location: "Jaipur",
-    desc: "Modern design with Rajasthani accents in the heart of the city. Well-appointed event spaces and Le Méridien's artistic hospitality sensibility.",
-    img: "destination/059A3032 (1).jpg",
+    location: "JAIPUR",
+    desc1: "Hyatt Regency Jaipur Mansarovar is a palatial architectural marvel that masterfully blends classic Rajasthani flamboyance with contemporary luxury. Designed to evoke the grandeur of a heritage mansion, the property stands out as a premier wedding destination.",
+    desc2: "Celebrations can transition from the pillarless Regency Ballroom to the expansive Chauras Bagh lawn against a stunning palatial backdrop. With its specialised regional catering and proximity to the airport, it offers a seamless and regal experience for every couple.",
+    img: "royal-and-heritage/hyatt_jaipur.jpg",
+    stats: { rooms: "245", guests: "3,000+", space: "50,000+ Sq Ft" }
   },
   {
     id: "H09",
-    name: "Alila Fort Bishangarh",
-    location: "Bishangarh",
-    desc: "A 230-year-old hilltop fort transformed into a breathtaking luxury hotel. Rampart ceremony spaces, 360-degree countryside views, and a drama that no flat-ground venue can match.",
-    img: "destination/TSR50334.jpg",
+    name: "Alila Fort",
+    location: "BISHANGARH",
+    desc1: "Perched on a granite hill, Alila Fort Bishangarh is a 236-year-old warrior fortress that offers a truly regal wedding experience with luxury rooms and suites. The property features a collection of distinctive venues, including the Baori, a mystical multi-level step-well space.",
+    desc2: "For elevated celebrations, the 6th-floor Nazaara terrace provides sweeping 360-degree Aravalli views. Its secluded location and heritage charm combine to create a private, fairytale-like atmosphere for any celebration.",
+    img: "royal-and-heritage/alila_fort.jpg",
+    stats: { rooms: "87", guests: "650+", space: "19,100+ Sq Ft" }
   },
   {
     id: "H10",
     name: "Samode Palace",
-    location: "Samode",
-    desc: "A gem of Indo-Saracenic architecture nestled in the Aravalli foothills. Hand-painted frescoes, courtyards, and candlelit evenings that feel like stepping into another century.",
-    img: "destination/TSR50967.jpg",
-  },
-  {
-    id: "H11",
-    name: "Chomu Palace",
-    location: "Chomu",
-    desc: "A magnificently restored 300-year-old royal palace just outside Jaipur. Authentic, grand, and untouched by the modern hotel formula — for couples who want the real thing.",
-    img: "destination/TSR50973.jpg",
-  },
-  {
-    id: "H12",
-    name: "Taj Devi Ratn",
-    location: "Jaipur",
-    desc: "Taj's contemporary luxury resort in Jaipur with expansive event grounds and the brand's legendary attention to detail. A refined, modern counterpoint to the city's heritage properties.",
-    img: "destination/TSR50995.jpg",
-  },
-  {
-    id: "H13",
-    name: "The Palace by Park — Jewels",
-    location: "Jaipur",
-    desc: "A boutique palace property with intimate courtyards and warm Rajasthani hospitality. Perfect for smaller, personal celebrations that still feel regal.",
-    img: "destination/059A3486.jpg",
-  },
-  {
-    id: "H14",
-    name: "Anantara Jewel Bagh",
-    location: "Jaipur",
-    desc: "A restored royal garden estate with Anantara's signature Southeast Asian-meets-Indian luxury sensibility. Lush, fragrant, and deeply curated.",
-    img: "destination/0G4A1341.jpg",
-  },
-  {
-    id: "H15",
-    name: "ITC Rajputana",
-    location: "Jaipur",
-    desc: "ITC's tribute to Rajput military architecture — bold, structured, and impressive. Strong event infrastructure and ITC's trademark culinary excellence.",
-    img: "destination/pool_venue.jpg",
-  },
-  {
-    id: "H16",
-    name: "Indana Palace",
-    location: "Jaipur",
-    desc: "A palatial property with generous outdoor spaces and traditional Rajasthani décor. Accessible luxury for larger guest lists without compromising on royal atmosphere.",
-    img: "destination/059A3032 (1).jpg",
-  },
-
-  // UDAIPUR
-  { type: 'section', name: 'Udaipur' },
-  {
-    id: "H17",
-    name: "Aurika by Lemon Tree",
-    location: "Udaipur",
-    desc: "A sleek, contemporary lakeside property with panoramic Aravalli views. Modern luxury with a stunning natural setting for the design-forward couple.",
-    img: "destination/TSR50334.jpg",
-  },
-  {
-    id: "H18",
-    name: "Taj Aravali Resort",
-    location: "Udaipur",
-    desc: "Spread across the Aravalli hillside with sweeping lake and city views. Taj's impeccable service in one of Udaipur's most scenic elevated locations.",
-    img: "destination/TSR50967.jpg",
-  },
-  {
-    id: "H19",
-    name: "ITC Mementos",
-    location: "Udaipur",
-    desc: "ITC's newest and most luxurious Udaipur offering. Palatial scale, curated Rajasthani art, and lakeside positioning that rivals the city's most iconic addresses.",
-    img: "destination/TSR50973.jpg",
+    location: "JAIPUR · ARAVALLI HILLS",
+    desc1: "Samode Palace is a 475-year-old Indo-Saracenic marvel nestled in the Aravalli hills, offering an intimate and secluded alternative to city-based venues. Its grandeur is defined by the legendary Sheesh Mahal, a hall of mirrors, and the Durbar Hall, featuring 250-year-old frescoes and hand-painted floral motifs.",
+    desc2: "The palace is an ideal residential wedding destination with luxury rooms and suites, including Royal Suites with private Jacuzzis. For larger celebrations, the nearby Samode Bagh adds expansive Mughal gardens.",
+    img: "royal-and-heritage/samode_jaipur.jpg",
+    stats: { rooms: "43", guests: "1,000+", venues: "Durbar Hall + Rooftop + Bagh" }
   },
   {
     id: "H20",
-    name: "Raffles Udaipur",
-    location: "Udaipur",
-    desc: "Set on a private island in Udai Sagar Lake, accessible only by boat. Raffles' legendary colonial elegance in the most exclusive setting Udaipur has to offer.",
-    img: "destination/TSR50995.jpg",
-  },
-  {
-    id: "H21",
-    name: "The Leela Palace",
-    location: "Udaipur",
-    desc: "Floating above Lake Pichola like a dream, The Leela is one of India's most photographed wedding venues. Marble courtyards, lake-facing ceremony spaces, and service that anticipates every need.",
-    img: "destination/059A3486.jpg",
-  },
-  {
-    id: "H22",
-    name: "The Oberoi Udaivilas",
-    location: "Udaipur",
-    desc: "Consistently ranked among the world's finest hotels. Sprawling lake-facing suites, private pools, and ceremony spaces where every frame looks like a painting.",
-    img: "destination/0G4A1341.jpg",
-  },
-  {
-    id: "H23",
-    name: "Trident Udaipur",
-    location: "Udaipur",
-    desc: "A beautifully positioned lakeside property with Aravalli views and a quieter, more intimate atmosphere. Elegant without being overwhelming — ideal for mid-sized celebrations.",
-    img: "destination/pool_venue.jpg",
-  },
-  {
-    id: "H24",
-    name: "Radisson Blu Palace Resort",
-    location: "Udaipur",
-    desc: "Palace-inspired architecture with generous event lawns and Aravalli backdrop. A strong, reliable luxury option for larger Udaipur weddings.",
-    img: "destination/059A3032 (1).jpg",
+    name: "Raffles",
+    location: "UDAIPUR · UDAI SAGAR LAKE",
+    desc1: "Raffles Udaipur is a majestic private island estate situated in the middle of Udai Sagar Lake. On a private island embraced by the Aravallis, rooms and suites overlook Baroque-inspired gardens and tranquil waters, while Raffles Lakeshore Udaipur offers a bespoke, serene retreat.",
+    desc2: "The venue is defined by its vast outdoor spaces including manicured lawns and the stunning Great Hall ballroom. From intimate ceremonies at the Raffles Patisserie to grand celebrations on the Compass Lawn, the island provides a fairytale setting accessible only by a scenic boat ride. With its signature butler service and world-class dining, it offers an exceptionally regal atmosphere for a destination wedding.",
+    img: "royal-and-heritage/raffles.jpg",
+    stats: { rooms: "137", guests: "500+", space: "40,000+ Sq Ft" }
   },
   {
     id: "H25",
-    name: "Fairmont Udaipur",
-    location: "Udaipur",
-    desc: "A striking new addition to Udaipur's luxury landscape. Contemporary palatial design, expansive event terraces, and Fairmont's polished international hospitality.",
-    img: "destination/TSR50334.jpg",
-  },
-  {
-    id: "H26",
-    name: "Taj Lalit Bagh",
-    location: "Udaipur",
-    desc: "Set in lush heritage gardens with traditional Rajasthani architecture. A serene, garden-first wedding property that feels removed from the world.",
-    img: "destination/TSR50967.jpg",
-  },
-  {
-    id: "H27",
-    name: "Marriott Udaipur",
-    location: "Udaipur",
-    desc: "A well-positioned luxury property with strong event facilities and city views. Dependable, polished, and well-suited for large wedding parties.",
-    img: "destination/TSR50973.jpg",
-  },
-
-  // JODHPUR
-  { type: 'section', name: 'Jodhpur' },
-  {
-    id: "H28",
-    name: "Umaid Bhawan Palace",
-    location: "Jodhpur",
-    desc: "One of the world's largest private residences and India's most iconic palace hotel. Getting married here is not just a wedding — it is a historic occasion.",
-    img: "destination/TSR50995.jpg",
-  },
-  {
-    id: "H29",
-    name: "Radisson Jodhpur",
-    location: "Jodhpur",
-    desc: "A contemporary luxury hotel with strong event infrastructure in the Blue City. Reliable, spacious, and well-connected for guests arriving from across the country.",
-    img: "destination/059A3486.jpg",
-  },
-  {
-    id: "H30",
-    name: "Taj Hari Mahal",
-    location: "Jodhpur",
-    desc: "A palatial Taj property inspired by Jodhpur's majestic architecture. Grand arched corridors, Rajput detailing, and Taj's legendary wedding expertise.",
-    img: "destination/0G4A1341.jpg",
+    name: "Fairmont",
+    location: "UDAIPUR · ARAVALLI HILLS",
+    desc1: "Fairmont Udaipur is a grand palatial resort that captures the royal essence of Rajasthan, nestled amidst the verdant Aravalli Hills. Inspired by traditional Rajputana architecture, the property features ornate marble columns, hand-painted domes, and exquisitely designed rooms and suites.",
+    desc2: "It is an exceptional wedding destination offering versatile event spaces including the majestic Jewel Ballroom. For grand outdoor celebrations, the Jashn Palace Garden accommodates guests in open splendour, while the unique Chand Baori provides a mystical stepwell-inspired setting. This hilltop palace blends historic charm with modern luxury, ensuring a fairytale experience for every couple.",
+    img: "royal-and-heritage/fairmont.jpg",
+    stats: { rooms: "327", guests: "2,000+", space: "100,000+ Sq Ft" }
   },
   {
     id: "H31",
     name: "Ajit Bhawan",
-    location: "Jodhpur",
-    desc: "India's first heritage hotel — a royal residence converted with extraordinary character and warmth. Tented courts, vintage vehicles, and a family-run hospitality that is deeply personal.",
-    img: "destination/pool_venue.jpg",
+    location: "JODHPUR",
+    desc1: "Ajit Bhawan, Jodhpur, stands as India's first heritage hotel, offering an authentic glimpse into Rajputana royalty within its sprawling crimson-sandstone estate. Built in 1927 for Major General Maharajadhiraja Sir Ajit Singhji, the palace exudes an intimate yet grand charm, featuring uniquely designed rooms, suites, and luxury tents.",
+    desc2: "It serves as a premier wedding destination, boasting versatile venues like the lush Zenana Garden and the elegant Courtyard for smaller, traditional ceremonies. Couples are drawn to its vintage aesthetics, world-class Rajasthani cuisine, and the unique opportunity to include a fleet of classic vintage cars in their celebration. This historic residence provides a sophisticated, soul-stirring backdrop for a truly timeless desert wedding.",
+    img: "royal-and-heritage/ajitbhawan_jodhpur.jpg",
+    stats: { rooms: "64", guests: "400+", venues: "Zenana Garden + Courtyard" }
   },
   {
     id: "H32",
-    name: "Welcomhotel by ITC",
-    location: "Jodhpur",
-    desc: "ITC's strong hospitality offering in Jodhpur with well-appointed event spaces and a commanding presence in the heart of the city.",
-    img: "destination/059A3032 (1).jpg",
+    name: "Rawla Narlai",
+    location: "ARAVALLI HILLS · NARLAI",
+    desc1: "Rawla Narlai is a meticulously restored 17th-century royal hunting lodge located in the Aravalli Hills, halfway between Jodhpur and Udaipur. This boutique heritage destination features individually decorated rooms — including the ornate Grand Heritage rooms — offering an intimate yet grand setting for destination weddings.",
+    desc2: "The venue's crown jewel is the Stepwell Dinner at an 11th-century reservoir, where hundreds of lanterns and soulful folk music create a mystical atmosphere for pre-wedding functions. Additional spaces include lush frangipani-scented gardens, traditional courtyards, and the Jharokha Café. Known for its authentic Rajasthani hospitality and living-in-the-past charm, it is a premier choice for couples seeking a secluded, fairytale-like heritage celebration.",
+    img: "royal-and-heritage/rawla_narai_royal.png",
+    stats: { rooms: "32", setting: "Boutique Heritage", venues: "Stepwell + Gardens + Courtyards" }
   },
-
-  // BIKANER
-  { type: 'section', name: 'Bikaner' },
-  {
-    id: "H33",
-    name: "Laxmi Niwas Palace",
-    location: "Bikaner",
-    desc: "A magnificent Indo-Saracenic palace built by Maharaja Ganga Singh. Sandstone courtyards, frescoed interiors, and a grandeur that Bikaner's desert setting only amplifies.",
-    img: "destination/TSR50334.jpg",
-  },
-  {
-    id: "H34",
-    name: "Narendra Bhawan",
-    location: "Bikaner",
-    desc: "The reimagined home of the last ruling Maharaja of Bikaner. Eclectic, layered, and full of personal royal history — a boutique palace experience unlike any other in Rajasthan.",
-    img: "destination/TSR50967.jpg",
-  },
-
-  // PUSHKAR
-  { type: 'section', name: 'Pushkar' },
-  {
-    id: "H35",
-    name: "The Westin Pushkar",
-    location: "Pushkar",
-    desc: "A serene luxury resort overlooking the sacred Pushkar Lake and the Aravalli hills. Spiritual energy, desert light, and Westin's wellness-forward hospitality.",
-    img: "destination/TSR50973.jpg",
-  },
-  {
-    id: "H36",
-    name: "Ananta Spa & Resort",
-    location: "Pushkar",
-    desc: "Nestled in the Aravalli foothills with quiet, expansive grounds. A peaceful, beautifully detailed retreat perfect for intimate ceremonies in one of India's most sacred towns.",
-    img: "destination/TSR50995.jpg",
-  },
-
-  // RANTHAMBORE
-  { type: 'section', name: 'Ranthambore' },
   {
     id: "H37",
     name: "Six Senses Fort Barwara",
-    location: "Ranthambore",
-    desc: "A 10th-century fort meticulously restored by Six Senses into one of India's most extraordinary hotels. Ancient temples within the property, rampart ceremony spaces, and the brand's signature soulful luxury.",
-    img: "destination/059A3486.jpg",
+    location: "RANTHAMBORE",
+    desc1: "Six Senses Fort Barwara is a breathtaking 14th-century citadel sensitively restored into a sanctuary of royal grandeur near Ranthambore. This historic fort features magnificent suites, each designed with contemporary Rajasthani aesthetics and sweeping views of the lake and countryside.",
+    desc2: "As a premier wedding destination, it offers a dramatic sense of place with curated event spaces. Celebrations unfold within the Zenana Bagh, a lush outdoor venue, or the majestic Barwara Ballroom. Couples are drawn to its unique blend of heritage conservation, world-class wellness, and locally-inspired culinary experiences. This secluded fortress provides a sophisticated, fairytale-like setting for couples seeking an environmentally conscious yet opulently traditional celebration.",
+    img: "royal-and-heritage/six senses_ranthambore.jpg",
+    stats: { rooms: "48", guests: "400+", space: "30,000+ Sq Ft" }
   },
-  {
-    id: "H38",
-    name: "Nahargarh",
-    location: "Ranthambore",
-    desc: "A jungle luxury camp on the edge of Ranthambore National Park. Raw, wild, and deeply atmospheric — where wedding evenings end with the sounds of the forest.",
-    img: "destination/0G4A1341.jpg",
-  },
-  {
-    id: "H39",
-    name: "The Oberoi Vanyavilas",
-    location: "Ranthambore",
-    desc: "India's finest wildlife resort. Luxury tents, jungle settings, and Oberoi's flawless service — a wedding where tigers roam the surrounding wilderness.",
-    img: "destination/pool_venue.jpg",
-  },
-  {
-    id: "H40",
-    name: "JW Marriott Resort & Spa",
-    location: "Ranthambore",
-    desc: "A grand resort property bringing JW's full luxury offering to the Ranthambore landscape. Spacious event grounds and strong hospitality for larger wildlife-destination weddings.",
-    img: "destination/059A3032 (1).jpg",
-  },
-
-  // JAISALMER
-  { type: 'section', name: 'Jaisalmer' },
   {
     id: "H41",
     name: "Suryagarh",
-    location: "Jaisalmer",
-    desc: "A fortified golden sandstone palace rising from the Thar Desert. Rooftop ceremonies under infinite stars, sand dune receptions, and a romance that only the desert can conjure.",
-    img: "destination/TSR50334.jpg",
-  },
-  {
-    id: "H42",
-    name: "Jaisalmer Marriott Resort & Spa",
-    location: "Jaisalmer",
-    desc: "Marriott's full luxury offering in the golden city. Desert-themed event spaces, strong infrastructure, and a warm hospitality for large Jaisalmer celebrations.",
-    img: "destination/TSR50967.jpg",
-  },
-  {
-    id: "H43",
-    name: "Jaisalkot",
-    location: "Jaisalmer",
-    desc: "A boutique tented camp resort blending desert living with curated luxury. Intimate, artful, and perfectly suited for couples who want their wedding to feel like a private desert retreat.",
-    img: "destination/TSR50973.jpg",
-  },
-  {
-    id: "H44",
-    name: "Storii by ITC Hotels",
-    location: "Jaisalmer",
-    desc: "A heritage-inspired boutique property with ITC's characteristic attention to craft and detail. Intimate courtyards and golden sandstone surroundings in the heart of Jaisalmer.",
-    img: "destination/TSR50995.jpg",
+    location: "JAISALMER · THAR DESERT",
+    desc1: "Suryagarh Jaisalmer is a golden-sandstone fortress that serves as a gateway to the Thar Desert, masterfully blending ancient architectural traditions with modern luxury. This palatial retreat offers exquisitely crafted rooms and suites, including signature Thar Villas with private courtyards.",
+    desc2: "The estate is a premier wedding destination featuring expansive venues like the Celebration Gardens and the mystical Bawdi, a traditional step-well designed for intimate ceremonies. From desert sundowners to grand courtyard feasts accompanied by Manganiyar folk music, Suryagarh provides an unparalleled sense of place. Its commitment to curated experiences like midnight temple trails and nomadic hunts ensures a wedding celebration that is both deeply soulful and magnificently regal.",
+    img: "royal-and-heritage/suryagarh_jailasmer.jpg",
+    stats: { rooms: "72", guests: "1,200+", venues: "Celebration Gardens + Bawdi Stepwell" }
   }
 ];
 
@@ -411,37 +168,23 @@ export default function RoyalHeritagePage() {
       <p className="text-[#C8A84B] text-[11px] tracking-[3px] uppercase font-medium mb-4">
         {dest.location}
       </p>
+      
+      <p className="text-muted text-[15px] leading-[1.7] font-light mb-4 w-full">
+        {dest.desc1}
+      </p>
       <p className="text-muted text-[15px] leading-[1.7] font-light mb-8 w-full">
-        {dest.desc}
+        {dest.desc2}
       </p>
 
       {/* STATS PILLS */}
       {dest.stats && (
         <div className="flex flex-wrap gap-3 mb-8">
-          {dest.stats.rooms && (
-            <div className="px-4 py-1.5 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm transition-transform hover:scale-105">
-              <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">Rooms:</span>
-              <span className="text-ink text-[11px] font-medium">{dest.stats.rooms}</span>
+          {Object.entries(dest.stats).map(([key, value]) => (
+            <div key={key} className="px-4 py-1.5 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm transition-transform hover:scale-105">
+              <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">{key}:</span>
+              <span className="text-ink text-[11px] font-medium">{value}</span>
             </div>
-          )}
-          {dest.stats.guests && (
-            <div className="px-4 py-1.5 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm transition-transform hover:scale-105">
-              <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">Guests:</span>
-              <span className="text-ink text-[11px] font-medium">{dest.stats.guests}</span>
-            </div>
-          )}
-          {dest.stats.space && (
-            <div className="px-4 py-1.5 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm transition-transform hover:scale-105">
-              <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">Space:</span>
-              <span className="text-ink text-[11px] font-medium">{dest.stats.space}</span>
-            </div>
-          )}
-          {dest.stats.acres && (
-            <div className="px-4 py-1.5 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm transition-transform hover:scale-105">
-              <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">Acres:</span>
-              <span className="text-ink text-[11px] font-medium">{dest.stats.acres}</span>
-            </div>
-          )}
+          ))}
         </div>
       )}
 
@@ -449,7 +192,7 @@ export default function RoyalHeritagePage() {
         href="/contact" 
         className="inline-block bg-[#C8A84B] text-[#1a1200] px-[2rem] py-[0.8rem] text-[11px] tracking-[3px] uppercase font-bold transition-all duration-500 self-start border-none hover:bg-[#A8892F] hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(168,137,47,0.25)]"
       >
-        Enquire for This Venue
+        Explore More About This Venue
       </Link>
     </div>
   );
@@ -485,19 +228,7 @@ export default function RoyalHeritagePage() {
       <section className="p-0 m-0 border-none">
         <div className="flex flex-col gap-0 p-0 m-0">
           {heritageDestinations.map((dest, i) => {
-            if (dest.type === 'section') {
-              return (
-                <div key={dest.name} className="w-full bg-[#1a1200] py-16 px-12 border-y border-gold/10 reveal flex flex-col items-center justify-center">
-                  <p className="text-gold text-[10px] tracking-[0.5em] uppercase mb-4 opacity-70">Regions</p>
-                  <h2 className="text-gold font-heading text-4xl md:text-5xl tracking-[0.15em] uppercase text-center font-light">
-                    {dest.name}
-                  </h2>
-                </div>
-              );
-            }
-
-            const cardIndex = heritageDestinations.filter(d => d.type !== 'section').indexOf(dest);
-            const isEven = cardIndex % 2 === 0;
+            const isEven = i % 2 === 0;
 
             return (
               <div 
@@ -521,7 +252,6 @@ export default function RoyalHeritagePage() {
           })}
         </div>
       </section>
-
       {/* ENQUIRY STRIP */}
       <section className="bg-[#1a1200] py-20 px-12 text-center relative overflow-hidden m-0">
         <div className="absolute inset-0 opacity-[0.15]">

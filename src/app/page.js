@@ -152,11 +152,16 @@ export default function HomePage() {
 
       {/* HERO SECTION */}
       <section id="hero" ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div 
-          id="hero-bg" 
-          className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/assets/photos/couple-shots/0G4A1624.jpg')" }}
-        ></div>
+        <video 
+          id="hero-bg"
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/assets/photos/hero-video.mp4" type="video/mp4" />
+        </video>
         <div id="hero-overlay" className="absolute inset-0 bg-gradient-to-b from-ink/45 via-ink/20 to-ink/60"></div>
         <div id="hero-content" className="relative z-2 text-center px-6">
           <p className="hero-eyebrow opacity-0 translate-y-6">Luxury Destination Weddings</p>

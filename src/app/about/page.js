@@ -38,7 +38,7 @@ export default function AboutPage() {
       }
     });
 
-    // Count-up animation for stats in MCI Legacy
+    // Count-up animation for stats in GetsHolidays Legacy
     const stats = document.querySelectorAll("[data-count]");
     stats.forEach((stat) => {
       const target = parseInt(stat.getAttribute("data-count"));
@@ -65,7 +65,7 @@ export default function AboutPage() {
     <div ref={containerRef} className="pt-0">
       {/* SPLIT HERO */}
       <section id="about-hero" className="grid grid-cols-1 md:grid-cols-2 min-h-screen p-0">
-        <div className="hero-left bg-bg flex flex-col justify-end items-center text-center p-16 pt-[140px] relative w-full">
+        <div className="hero-left bg-bg flex flex-col justify-center items-center text-center p-16 pt-[140px] relative w-full">
           <CornerOrnament size={44} inset={16} opacity={0.4} />
 
           {/* Decorative vertical motif */}
@@ -132,18 +132,18 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* SECTION 3 — MCI LEGACY */}
+      {/* SECTION 3 — GetsHolidays LEGACY */}
       <section className="bg-[#1a1200] py-12 md:py-14 px-12 relative overflow-hidden">
         <CornerOrnament size={60} inset={20} opacity={0.3} strokeWidth={1.5} />
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 items-center">
           <div className="reveal">
-            <p className="text-gold text-[10px] tracking-[0.4em] uppercase mb-4 font-medium">The MCI Legacy</p>
+            <p className="text-gold text-[10px] tracking-[0.4em] uppercase mb-4 font-medium">The GetsHolidays Legacy</p>
             <h2 className="font-heading text-surface text-5xl md:text-6xl leading-[1.1]">37 Years of<br /><em className="italic">Industry Excellence</em></h2>
           </div>
           <div className="reveal stagger-1 flex flex-col justify-center">
             <div className="flex flex-col gap-4 mb-8">
               <p className="text-surface/70 text-[14px] md:text-[15px] leading-[1.7] font-light">
-                We are proud to be part of the MCI family — a 37-year-old powerhouse in the events and experiences industry, with a team of over 150 dedicated professionals across specialised divisions.
+                We are proud to be part of the GetsHolidays family — a 37-year-old powerhouse in the events and experiences industry, with a team of over 150 dedicated professionals across specialised divisions.
               </p>
               <p className="text-surface/70 text-[14px] md:text-[15px] leading-[1.7] font-light">
                 This heritage gives Vows & Vedas an unmatched foundation — the agility of a boutique wedding house backed by the muscle and expertise of an industry leader. From logistics to creative direction, every team that works behind the scenes is best in class.

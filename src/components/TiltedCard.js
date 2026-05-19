@@ -82,7 +82,7 @@ export const TiltedCard = ({
     <figure
       ref={ref}
       className={cn(
-        "relative w-full h-full [perspective:800px] flex flex-col items-center justify-center",
+        "relative w-full h-full [perspective:800px] flex flex-col items-center justify-center overflow-hidden",
         className
       )}
       style={{
@@ -100,7 +100,7 @@ export const TiltedCard = ({
       )}
       
       <motion.div
-        className="relative [transform-style:preserve-3d]"
+        className="relative w-full h-full [transform-style:preserve-3d] flex items-center justify-center"
         style={{
           width: imageWidth,
           height: imageHeight,
@@ -112,11 +112,7 @@ export const TiltedCard = ({
         <motion.img
           src={imageSrc}
           alt={altText}
-          className="absolute top-0 left-0 object-cover rounded-[12px] border border-[#C9A234]/20 shadow-2xl will-change-transform [transform:translateZ(0)]"
-          style={{
-            width: imageWidth,
-            height: imageHeight
-          }}
+          className="absolute inset-0 w-full h-full object-cover rounded-[12px] border border-[#C9A234]/20 shadow-2xl will-change-transform [transform:translateZ(0)]"
         />
         
         {displayOverlayContent && overlayContent && (
