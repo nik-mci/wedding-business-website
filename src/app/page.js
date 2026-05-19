@@ -6,7 +6,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CircularGallery from "@/components/CircularGallery";
-import HashtagGenerator from "@/components/HashtagGenerator";
+import HashtagGeneratorPopup from "@/components/HashtagGeneratorPopup";
 import GoldDivider from "@/components/GoldDivider";
 import FloatingSidebar from "@/components/FloatingSidebar";
 
@@ -263,7 +263,6 @@ export default function HomePage() {
               { num: "05", title: "Memories", desc: "We capture & preserve every magical moment" }
             ].map((step, i) => {
               const isOdd = i % 2 === 0;
-              const isLast = i === 4;
               return (
                 <div key={i} className="contents">
                   <div className="timeline-step-horizontal flex flex-col items-center justify-center relative w-[18%]">
@@ -273,7 +272,7 @@ export default function HomePage() {
                           <p className="font-body uppercase text-ink text-[13px] tracking-widest mb-2 font-medium">{step.title}</p>
                           <p className="font-body font-light text-muted text-[11px] leading-[1.6] px-2 max-w-[200px] mx-auto whitespace-normal break-keep">{step.desc}</p>
                         </div>
-                        <div className={`step-dot relative z-10 opacity-0 scale-0 flex items-center justify-center w-[56px] h-[56px] text-gold bg-bg ${isLast ? 'drop-shadow-[0_0_12px_rgba(201,162,52,0.4)]' : ''}`}>
+                        <div className="step-dot relative z-10 opacity-0 scale-0 flex items-center justify-center w-[56px] h-[56px] text-gold bg-bg">
                           <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0">
                             <path d="M 28 3 L 53 28 L 28 53 L 3 28 Z" stroke="currentColor" strokeWidth="1.5" />
                             <path d="M 28 9 L 47 28 L 28 47 L 9 28 Z" stroke="currentColor" strokeWidth="0.8" opacity="0.6" />
@@ -285,7 +284,7 @@ export default function HomePage() {
                       </>
                     ) : (
                       <>
-                        <div className={`step-dot relative z-10 opacity-0 scale-0 flex items-center justify-center w-[56px] h-[56px] text-gold bg-bg ${isLast ? 'drop-shadow-[0_0_12px_rgba(201,162,52,0.4)]' : ''}`}>
+                        <div className="step-dot relative z-10 opacity-0 scale-0 flex items-center justify-center w-[56px] h-[56px] text-gold bg-bg">
                           <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0">
                             <path d="M 28 3 L 53 28 L 28 53 L 3 28 Z" stroke="currentColor" strokeWidth="1.5" />
                             <path d="M 28 9 L 47 28 L 28 47 L 9 28 Z" stroke="currentColor" strokeWidth="0.8" opacity="0.6" />
@@ -329,11 +328,10 @@ export default function HomePage() {
               { num: "04", title: "Execution", desc: "Flawless orchestration on the day itself" },
               { num: "05", title: "Memories", desc: "We capture & preserve every magical moment" }
             ].map((step, i) => {
-              const isLast = i === 4;
               return (
                 <div key={i} className="contents">
                   <div className="timeline-step-vertical flex items-start relative min-h-[100px]">
-                    <div className={`step-dot-vert relative z-10 flex items-center justify-center w-[48px] h-[48px] shrink-0 text-gold bg-bg mt-[-4px] opacity-0 scale-0 ${isLast ? 'drop-shadow-[0_0_12px_rgba(201,162,52,0.4)]' : ''}`}>
+                    <div className="step-dot-vert relative z-10 flex items-center justify-center w-[48px] h-[48px] shrink-0 text-gold bg-bg mt-[-4px] opacity-0 scale-0">
                       <svg width="48" height="48" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0">
                         <path d="M 28 3 L 53 28 L 28 53 L 3 28 Z" stroke="currentColor" strokeWidth="1.5" />
                         <path d="M 28 9 L 47 28 L 28 47 L 9 28 Z" stroke="currentColor" strokeWidth="0.8" opacity="0.6" />
@@ -386,18 +384,6 @@ export default function HomePage() {
         </div>
       </section>
 
-
-      {/* HASHTAG GENERATOR */}
-      <section id="hashtag-generator" className="bg-bg py-16">
-        <div className="px-12 mb-10 flex flex-col items-center text-center">
-          <GoldDivider className="mb-4 reveal" />
-          <h2 className="section-title">Wedding <em className="italic">Hashtag Generator</em></h2>
-          <GoldDivider flip className="mt-2 reveal" />
-        </div>
-        <div className="px-12">
-          <HashtagGenerator />
-        </div>
-      </section>
 
       {/* ORNAMENTAL DIVIDER */}
       <GoldDivider variant="section" />
@@ -531,6 +517,8 @@ export default function HomePage() {
           <Link href="/contact" className="btn-gold btn-pulse reveal">Start Planning →</Link>
         </div>
       </section>
+
+      <HashtagGeneratorPopup />
     </div>
   );
 }
