@@ -69,7 +69,7 @@ export default function CategoryPage() {
   const locationList = data.locations.split(', ').map(loc => loc.trim());
 
   return (
-    <div className="pt-20">
+    <div>
       {/* PAGE HERO */}
       <div className="page-hero">
         <div 

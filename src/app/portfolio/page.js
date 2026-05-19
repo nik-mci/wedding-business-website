@@ -39,7 +39,7 @@ export default function PortfolioPage() {
   const filteredWeddings = filter === "all" ? weddings : weddings.filter(w => w.cat.includes(filter));
 
   return (
-    <div className="pt-20 bg-bg min-h-screen">
+    <div className="bg-bg min-h-screen">
       {/* PAGE HERO */}
       <div className="page-hero">
         <div 

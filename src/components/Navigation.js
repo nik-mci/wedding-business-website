@@ -35,6 +35,9 @@ export default function Navigation() {
   ];
 
   const isHome = pathname === "/";
+  const darkHeroRoutes = ["/services", "/destinations", "/portfolio", "/faq"];
+  const hasDarkHero =
+    isHome || darkHeroRoutes.some((r) => pathname === r || pathname.startsWith(r + "/"));
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-[100] isolate flex items-center justify-between pl-[112px] pr-12 py-4 transition-all duration-400 ${scrolled ? 'bg-surface/92 backdrop-blur-lg shadow-sm border-b border-black/5' : 'bg-transparent'}`}>
@@ -43,7 +46,7 @@ export default function Navigation() {
           src="/assets/photos/V&V_A_PNG.png"
           alt="Vows & Vedas"
           fill
-          className={`object-contain transition-all duration-400 group-hover:scale-105 ${(!isHome || scrolled) ? '' : 'brightness-0 invert opacity-90'}`}
+          className={`object-contain transition-all duration-400 group-hover:scale-105 ${(!hasDarkHero || scrolled) ? '' : 'brightness-0 invert opacity-90'}`}
           priority
         />
       </Link>
@@ -55,7 +58,7 @@ export default function Navigation() {
             <li key={link.name} className="relative py-1 group">
               <Link 
                 href={link.href} 
-                className={`text-[11px] uppercase tracking-[0.18em] font-medium transition-colors duration-300 hover:text-gold ${isActive ? 'text-gold' : (!isHome || scrolled) ? 'text-muted' : 'text-surface/90'}`}
+                className={`text-[11px] uppercase tracking-[0.18em] font-medium transition-colors duration-300 hover:text-gold ${isActive ? 'text-gold' : (!hasDarkHero || scrolled) ? 'text-muted' : 'text-surface/90'}`}
               >
                 {link.name}
               </Link>
@@ -92,7 +95,7 @@ export default function Navigation() {
 
         <Link 
           href="/contact" 
-          className={`relative group text-[11px] uppercase tracking-[0.18em] font-medium px-6 py-[10px] border transition-all duration-300 overflow-hidden ${(!isHome || scrolled) ? 'border-gold text-ink' : 'border-surface/60 text-surface'}`}
+          className={`relative group text-[11px] uppercase tracking-[0.18em] font-medium px-6 py-[10px] border transition-all duration-300 overflow-hidden ${(!hasDarkHero || scrolled) ? 'border-gold text-ink' : 'border-surface/60 text-surface'}`}
         >
           <span className="relative z-10 group-hover:text-surface transition-colors duration-300">Begin Your Journey</span>
           <div className="absolute inset-0 bg-gold translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-300 ease-out origin-left"></div>

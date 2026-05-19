@@ -48,7 +48,7 @@ export default function DestinationsPage() {
   ];
 
   return (
-    <div className="pt-20">
+    <div>
       {/* PAGE HERO */}
       <div className="page-hero">
         <div 

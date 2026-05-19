@@ -220,7 +220,7 @@ export default function ServicesPage() {
   };
 
   return (
-    <div className="pt-20">
+    <div>
       {/* PAGE HERO */}
       <div className="page-hero">
         <div
