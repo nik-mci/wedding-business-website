@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import GoldDivider from "@/components/GoldDivider";
@@ -11,221 +11,257 @@ gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
-    num: "01",
-    title: "Destination Weddings",
-    shortLabel: "Destinations",
-    category: "Signature Offering",
-    desc: "From the palace gardens of Rajasthan to the cliffsides of Santorini and the pristine beaches of Goa, we craft extraordinary ceremonies in the world's most breathtaking locations.",
-    checklist: [
-      "Venue scouting & negotiation worldwide",
-      "Guest travel & logistics management",
-      "Local vendor network in 40+ destinations",
-      "Legal ceremony documentation",
-      "Royal procession with elephants, horses & drum players",
-      "Devigarh Palace & Taj Exotica as signature venues"
-    ],
+    id: "venues-destinations",
+    number: "01",
+    name: "Venues & Destinations",
+    tagline: "Global footprint, local expertise — every setting handpicked",
+    description: "From an intimate hilltop ceremony to coordinating guests across three days at a palace — we scout, negotiate and plan every spatial detail so you never have to.",
+    includes: ["Global Footprint & Local Expertise", "Location Scouting", "Contracting & Negotiation", "Feasibility & Spatial Planning"],
     img: "destination/TSR50501.jpg",
-    reverse: false,
-    anchor: "destination-weddings"
+    photographer: "The Wedding Filmer"
   },
   {
-    num: "02",
-    title: "Full Planning",
-    shortLabel: "Full Planning",
-    category: "Planning · Logistics",
-    desc: "From your initial vision to breathtaking reality, our dedicated team of professionals pays meticulous attention to every detail, orchestrating a flawless journey so you can simply celebrate.",
-    checklist: [
-      "Venue selection across Rajasthan, Goa & Kerala",
-      "Themed weddings — royal, fairytale, or colour-specific",
-      "Wedding calendar & itinerary management",
-      "Bridal trousseau coordination with professional designers"
-    ],
+    id: "planning",
+    number: "02",
+    name: "Planning",
+    tagline: "Every detail considered. Every moment orchestrated.",
+    description: "Our dedicated team pays meticulous attention to every detail, orchestrating a flawless journey from the first consultation to the final dance.",
+    includes: ["End to End Timeline Mapping", "Budget Architecture & Allocation", "Curated Vendor Matchmaking", "Multi Day Itinerary Design", "On Site Command & Execution", "Post Wedding Wrap & Vendor Settlement"],
     img: "couple-shots/TSR53067.jpg",
-    reverse: true,
-    anchor: "full-planning"
+    photographer: "Stories by Joseph Radhik"
   },
   {
-    num: "03",
-    title: "Décor & Florals",
-    shortLabel: "Décor",
-    category: "Design · Florals",
-    desc: "We use exquisite fresh florals and artistic lighting to elevate every element of décor, transforming your venue into an immersive, bespoke environment that tells your unique story.",
-    checklist: [
-      "Fresh roses, orchids, marigolds & gerberas",
-      "Mandap floral decoration around Havankund",
-      "Artistic lighting design for each theme",
-      "Customised décor for indoor and outdoor venues"
-    ],
+    id: "design-decor",
+    number: "03",
+    name: "Design & Decor",
+    tagline: "Environments crafted to reflect your story",
+    description: "Every mandap, every centerpiece, every lighting rig is designed to reflect you. We build immersive environments, not just decorations.",
+    includes: ["Bespoke Conceptualizing & Mood Boards", "Immersive Floral Artistry", "Custom Scenography & Production", "Strategic Lighting & Soundscaping", "Finer Details & Table Scaping"],
     img: "services/decoration/haldi_flowers_decor.jpg",
-    reverse: false,
-    anchor: "decor-florals"
+    photographer: "Vows & Vedas Design Lab"
   },
   {
-    num: "04",
-    title: "Film & Photography",
-    shortLabel: "Film & Photo",
-    category: "Storytelling",
-    desc: "Our professional photographers and videographers are appointed to beautifully capture every propitious moment, preserving your milestones with raw emotion and cinematic precision.",
-    checklist: [
-      "Pre-wedding & engagement shoots",
-      "Multi-camera ceremony & reception coverage",
-      "Feature film & same-day edit",
-      "Aerial & drone cinematography"
-    ],
+    id: "film-photography",
+    number: "04",
+    name: "Film & Photography",
+    tagline: "Cinematic storytelling — raw emotion, editorial craft",
+    description: "We work with India's finest wedding photographers and cinematographers to capture your story the way it deserves to be told.",
+    includes: ["Editorial & Cinematic Matchmaking", "Creative Briefing & Art Direction", "Comprehensive Logistics & Shot Listing Planning", "Seamless Prod. Integration", "BTS & Real Time Content", "Post Prod. & Archive Management"],
     img: "couple-shots/TSR53178.jpg",
-    reverse: true,
-    anchor: "film-photography"
+    photographer: "Badal Raja Company"
   },
   {
-    num: "05",
-    title: "Entertainment & DJ",
-    shortLabel: "Entertainment",
-    category: "Performance · Music",
-    desc: "Song and dance are seamlessly woven into every celebration. From traditional performances to modern acts, we fill your milestones with energy, soul, and unforgettable moments.",
-    checklist: [
-      "Native & folk dancers",
-      "Live shenai & traditional music",
-      "Cultural programme curation",
-      "DJ & contemporary entertainment"
-    ],
+    id: "entertainment",
+    number: "05",
+    name: "Entertainment",
+    tagline: "Concert-grade production, curated talent, unforgettable moments",
+    description: "From classical Rajasthani folk performers to Bollywood DJs — we curate entertainment that fills every moment with energy and meaning.",
+    includes: ["Curated Artist & Talent Sourcing", "Immersive Guest Experiences", "End to End Artist Logistics", "Sangeet Choreography & Show Direction", "Concert Grade Tech & Sound Design"],
     img: "services/entertainment/performances.jpg",
-    reverse: false,
-    anchor: "entertainment-dj"
+    photographer: "Eventila Cast"
   },
   {
-    num: "06",
-    title: "Fireworks & SFX",
-    shortLabel: "Fireworks",
-    category: "Spectacle",
-    desc: "A spectacular firework display that illuminates the night sky, adding an explosive touch of magic and ensuring your occasion remains truly unforgettable.",
-    checklist: [
-      "Customized aerial firework displays",
-      "Cold pyro for entry and first dance",
-      "Confetti cannons & special effects",
-      "Timed to ceremony moments",
-      "Indoor-safe sparkler options",
-      "Coordinated with photography team"
-    ],
-    img: "destination/hospitality2.jpg",
-    reverse: true,
-    anchor: "fireworks-sfx"
+    id: "hospitality",
+    number: "06",
+    name: "Hospitality",
+    tagline: "White-glove guest management from arrival to departure",
+    description: "Every guest at your wedding is our responsibility. From airport transfers to room upgrades — we ensure everyone feels taken care of.",
+    includes: ["Guest travel & transfer coordination", "Hotel room blocking & upgrade management", "Welcome hamper curation & delivery", "On-site guest concierge team", "Special requirements & dietary management"],
+    img: "services/hospitality_service.png",
+    photographer: "Palace Hospitality"
   },
-  {
-    num: "07",
-    title: "Hospitality & Guest Management",
-    shortLabel: "Hospitality",
-    category: "Guest Experience",
-    desc: "We provide seamless, white-glove hospitality from airport arrival to departure, ensuring that every guest experiences unparalleled comfort and is treated like royalty.",
-    checklist: [
-      "Airport transfers & city representatives",
-      "Accommodation from 5-star palaces to boutique stays",
-      "Limousine with floral decoration for grand entrances",
-      "On-ground coordinators at every destination"
-    ],
-    img: "couple-shots/0G4A2084.jpg",
-    reverse: false,
-    anchor: "hospitality"
+  { 
+    id: "vendor-management", 
+    number: "07", 
+    name: "Vendor Management", 
+    tagline: "Curated network of India's elite artisans", 
+    description: "We bring you access to the most exclusive wedding partners — from bespoke couturiers and award-winning caterers to artisanal invitation designers.", 
+    includes: ["Bespoke vendor matching & selection", "Contract negotiation & management", "Quality control & briefing", "Timeline synchronization across partners", "Payment schedule & final settlement handling"],
+    img: "couple-shots/hospitality1.jpg",
+    photographer: "Vows & Vedas Artisan Network"
+  },
+  { 
+    id: "transport-logistics", 
+    number: "08", 
+    name: "Transport & Logistics", 
+    tagline: "Seamless fleet management and guest transit", 
+    description: "We handle the complex movement of hundreds of guests across venues and cities with precision, from luxury airport transfers to venue shuttles.", 
+    includes: ["Guest travel & ticket coordination", "Luxury car fleet & coach management", "On-site transport concierge desk", "Real-time transit tracking & communication", "Venue-to-hotel shuttle coordination"],
+    img: "services/transport-logistics.jpg",
+    photographer: "Logistics Excellence"
+  },
+  { 
+    id: "food-beverages", 
+    number: "09", 
+    name: "Food & Beverages", 
+    tagline: "Bespoke menus and world-class bar curation", 
+    description: "We curate culinary journeys that span continents, from traditional regional feasts to avant-garde international fine dining and specialty bar experiences.", 
+    includes: ["Menu curation & tasting sessions", "Specialty bar & mixology management", "Catering vendor oversight & briefing", "Thematic dining setup & styling", "Dietary requirement & guest preference management"],
+    img: "services/decoration/059A4328.jpg",
+    photographer: "Culinary Arts by V&V"
   }
 ];
 
-const addons = [
-  { img: "services/decoration/printables2.jpg", name: "E-Invites", desc: "Custom digital wedding invitations with RSVP tracking and animated reveals." },
-  { img: "services/decoration/059A4328.jpg", name: "Vendor Management", desc: "End-to-end coordination with our curated network of top-tier partners and artisans." },
-  { img: "services/mehendi.jpg", name: "Mehendi & Styling", desc: "Intricate bridal henna and comprehensive head-to-toe styling for you and your guests." },
-  { img: "couple-shots/0G4A4811.jpg", name: "Logistics & Transport", desc: "Seamless guest transportation, luxury fleet management, and venue logistics." }
-];
+function AddOnCard({ addon }) {
+  const [flipped, setFlipped] = useState(false);
+  
+  return (
+    <div
+      onMouseEnter={() => setFlipped(true)}
+      onMouseLeave={() => setFlipped(false)}
+      className="relative cursor-pointer w-[280px] md:w-[320px] shrink-0"
+      style={{ perspective: "1000px", height: "260px" }}
+    >
+      <div
+        className="relative w-full h-full transition-transform duration-[800ms]"
+        style={{
+          transformStyle: "preserve-3d",
+          transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
+          transitionTimingFunction: "cubic-bezier(0.23, 1, 0.32, 1)"
+        }}
+      >
+        {/* FRONT FACE (With Image) */}
+        <div
+          className="absolute inset-0 rounded-xl flex flex-col justify-end bg-[#252220] border border-[#C9A234]/15 overflow-hidden"
+          style={{ 
+            backfaceVisibility: "hidden", 
+            WebkitBackfaceVisibility: "hidden",
+            transform: "translateZ(1px)" 
+          }}
+        >
+          <Image 
+            src={`/assets/photos/${addon.img}`} 
+            alt={addon.name} 
+            fill 
+            sizes="(max-width: 768px) 50vw, 20vw" 
+            className="object-cover" 
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1408]/90 via-[#1A1408]/20 to-transparent"></div>
+          <div className="relative z-10 w-full p-6">
+            <p className="font-heading text-[22px] text-white leading-tight">{addon.name}</p>
+          </div>
+        </div>
+
+        {/* BACK FACE (Corrected) */}
+        <div
+          className="absolute inset-0 rounded-xl p-7 bg-[#C9A234] flex flex-col justify-between"
+          style={{
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+            transform: "rotateY(180deg) translateZ(1px)"
+          }}
+        >
+          <div>
+            <h3 className="font-heading text-[#1A1408] text-2xl mb-3 leading-tight">
+              {addon.name}
+            </h3>
+            <div className="w-8 h-px bg-[#1A1408] opacity-30 mb-4" />
+            <p className="text-[#1A1408] text-[13px] leading-relaxed font-body font-medium">
+              {addon.description}
+            </p>
+          </div>
+          <Link 
+            href="/contact" 
+            className="text-[#1A1408] text-[10px] uppercase tracking-[0.2em] font-body font-bold border-b border-[#1A1408] border-opacity-40 pb-1 self-start hover:border-opacity-100 transition-all"
+          >
+            Enquire Now →
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function ServicesPage() {
-  const [activeAnchor, setActiveAnchor] = useState(services[0].anchor);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [showBackToTop, setShowBackToTop] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
+  const [hoveredCard, setHoveredCard] = useState(null);
+  const lightboxRef = useRef(null);
+  const panelRef = useRef(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const reveals = document.querySelectorAll(".reveal");
-      reveals.forEach((el) => {
-        gsap.to(el, {
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-            onEnter: () => el.classList.add("visible")
+    // Initial check for hash
+    const hash = window.location.hash.replace("#", "");
+    if (hash) {
+      const service = services.find(s => s.id === hash);
+      if (service) setSelectedService(service);
+    }
+
+    let ctx = gsap.context(() => {
+      // Entrance animation for grid cards
+      const cards = gsap.utils.toArray(".service-card-entrance");
+      if (cards.length > 0) {
+        gsap.fromTo(cards, 
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.08,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: ".services-grid-container",
+              start: "top 85%",
+              once: true
+            }
           }
-        });
-      });
-
-      const checklists = document.querySelectorAll("[data-checklist]");
-      checklists.forEach((list) => {
-        const items = list.querySelectorAll("li");
-        gsap.set(items, { opacity: 0, x: -15 });
-        gsap.to(items, {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          stagger: 0.15,
-          ease: "power2.out",
-          scrollTrigger: { trigger: list, start: "top 85%" }
-        });
-      });
+        );
+      }
     });
-
+    
     return () => ctx.revert();
   }, []);
 
   useEffect(() => {
-    let raf = 0;
-    const onScroll = () => {
-      if (raf) return;
-      raf = requestAnimationFrame(() => {
-        const max = document.documentElement.scrollHeight - window.innerHeight;
-        setScrollProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0);
-        setShowBackToTop(window.scrollY > 600);
-        raf = 0;
-      });
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      if (raf) cancelAnimationFrame(raf);
-    };
-  }, []);
+    const nav = document.querySelector('nav');
+    if (selectedService) {
+      window.history.pushState(null, null, `#${selectedService.id}`);
+      
+      if (nav) nav.classList.add("overlay-open");
+
+      // Lightbox open animation
+      const tl = gsap.timeline();
+      tl.to(lightboxRef.current, { opacity: 1, duration: 0.25, display: "flex" })
+        .fromTo(panelRef.current, 
+          { scale: 0.96, opacity: 0, y: 15 }, 
+          { scale: 1, opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }
+        );
+      
+      // Staggered includes animation
+      gsap.fromTo(".include-item", 
+        { opacity: 0, x: -10 }, 
+        { opacity: 1, x: 0, duration: 0.4, stagger: 0.06, ease: "power2.out", delay: 0.3 }
+      );
+
+      document.body.style.overflow = "hidden";
+      document.documentElement.classList.add("lenis-stopped");
+    } else {
+      window.history.pushState(null, null, window.location.pathname);
+      if (nav) nav.classList.remove("overlay-open");
+      document.body.style.overflow = "auto";
+      document.documentElement.classList.remove("lenis-stopped");
+    }
+  }, [selectedService]);
+
+  const closeLightbox = () => {
+    gsap.to(panelRef.current, { scale: 0.96, opacity: 0, y: 15, duration: 0.25, ease: "power2.in" });
+    gsap.to(lightboxRef.current, { opacity: 0, duration: 0.25, onComplete: () => setSelectedService(null) });
+  };
 
   useEffect(() => {
-    const sections = document.querySelectorAll("[data-svc-anchor]");
-    if (!sections.length) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveAnchor(entry.target.dataset.svcAnchor);
-          }
-        });
-      },
-      { threshold: 0, rootMargin: "-35% 0px -55% 0px" }
-    );
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
+    const handleEsc = (e) => {
+      if (e.key === "Escape") closeLightbox();
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
   }, []);
 
-  const scrollToAnchor = (e, anchor) => {
-    e.preventDefault();
-    const el = document.getElementById(anchor);
-    if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY - 96;
-    window.scrollTo({ top, behavior: "smooth" });
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
-    <div>
-      {/* PAGE HERO */}
+    <div className="pt-20 bg-[#FDFAF5]">
+      {/* PAGE HERO (EXISTING) */}
       <div className="page-hero">
         <div
           className="page-hero-bg"
-          style={{ backgroundImage: "url('/assets/photos/destination/TSR50995.jpg')", backgroundPosition: "center 30%" }}
+          style={{ backgroundImage: "url('/assets/photos/destination/pool_venue.jpg')", backgroundPosition: "center top" }}
         ></div>
         <div className="page-hero-overlay"></div>
         <div className="page-hero-content">
@@ -236,431 +272,296 @@ export default function ServicesPage() {
         </div>
       </div>
 
-      {/* STICKY JUMP NAV */}
-      <nav aria-label="Services jump navigation" className="svc-jumpnav">
-        <ul className="svc-jumpnav-list">
-          {services.map((svc) => (
-            <li key={svc.anchor}>
-              <a
-                href={`#${svc.anchor}`}
-                onClick={(e) => scrollToAnchor(e, svc.anchor)}
-                className="svc-pill"
-                data-active={activeAnchor === svc.anchor || undefined}
-              >
-                {svc.shortLabel}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      {/* NEW SERVICES GRID SECTION */}
+      <section className="services-grid-container pt-12 pb-24 px-6 md:px-12 overflow-hidden">
+        <div className="max-w-[1280px] mx-auto">
+          {/* Descriptive Tagline */}
+          <div className="flex flex-col items-center text-center">
+            <p className="text-[15px] font-body text-[#9A8F7E] max-w-[480px] leading-relaxed italic">
+              "Every detail considered. Every moment orchestrated."
+            </p>
+            
+            {/* New SVG Swirl Ornament */}
+            <div className="flex items-center justify-center gap-4 mt-6 mb-10">
+              
+              {/* Left corner ornament - same SVG style as hero */}
+              <svg width="120" height="24" viewBox="0 0 120 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="0" y1="12" x2="85" y2="12" stroke="#C9A234" strokeWidth="0.75" strokeOpacity="0.6"/>
+                <circle cx="88" cy="12" r="1.5" fill="#C9A234" fillOpacity="0.8"/>
+                <path d="M95 12 Q100 6 105 12 Q100 18 95 12Z" fill="none" stroke="#C9A234" strokeWidth="0.75"/>
+                <circle cx="112" cy="12" r="1.5" fill="#C9A234" fillOpacity="0.8"/>
+                <line x1="115" y1="12" x2="120" y2="12" stroke="#C9A234" strokeWidth="0.75" strokeOpacity="0.6"/>
+              </svg>
 
-      {/* SERVICE SECTIONS */}
-      {services.map((svc) => (
-        <section
-          key={svc.anchor}
-          id={svc.anchor}
-          data-svc-anchor={svc.anchor}
-          className={`service-section ${svc.reverse ? "reverse" : ""}`}
-          style={{ background: svc.reverse ? "var(--color-bg)" : "transparent" }}
-        >
-          <div className="svc-image reveal group">
-            <div className="svc-image-inner">
-              <Image
-                src={`/assets/photos/${svc.img}`}
-                alt={svc.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              />
+              {/* Center star */}
+              <span
+                className="font-heading text-[#C9A234]"
+                style={{ fontSize: "22px", lineHeight: 1 }}
+              >
+                ✦
+              </span>
+
+              {/* Right corner ornament - mirrored */}
+              <svg width="120" height="24" viewBox="0 0 120 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ transform: "scaleX(-1)" }}>
+                <line x1="0" y1="12" x2="85" y2="12" stroke="#C9A234" strokeWidth="0.75" strokeOpacity="0.6"/>
+                <circle cx="88" cy="12" r="1.5" fill="#C9A234" fillOpacity="0.8"/>
+                <path d="M95 12 Q100 6 105 12 Q100 18 95 12Z" fill="none" stroke="#C9A234" strokeWidth="0.75"/>
+                <circle cx="112" cy="12" r="1.5" fill="#C9A234" fillOpacity="0.8"/>
+                <line x1="115" y1="12" x2="120" y2="12" stroke="#C9A234" strokeWidth="0.75" strokeOpacity="0.6"/>
+              </svg>
+
             </div>
           </div>
-          <div className="svc-content reveal stagger-2">
-            <span className="svc-number-watermark" aria-hidden>{svc.num}</span>
-            <p className="svc-category">{svc.category}</p>
-            <p className="svc-number">{svc.num}</p>
-            <h2 className="svc-title">{svc.title}</h2>
-            <p className="svc-desc">{svc.desc}</p>
-            <Link href="/contact" className="btn-ghost-gold svc-inline-cta">Explore This Service →</Link>
-            <ul className="svc-checklist" data-checklist>
-              {svc.checklist.map((item, j) => (
-                <li key={j} className="flex items-start gap-3">
-                  <span className="check-icon flex-shrink-0 w-[18px] h-[18px] border border-gold rounded-full flex items-center justify-center after:content-[''] after:w-[6px] after:h-[3px] after:border-l after:border-b after:border-gold after:-rotate-45 after:-translate-y-[1px] mt-[5px]"></span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <Link href="/contact" className="btn-gold self-start mt-2">Enquire Now</Link>
-          </div>
-        </section>
-      ))}
+ 
+          {/* 3-Column Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {services.map((svc) => (
+              <div 
+                key={svc.id}
+                className="service-card-entrance relative h-[420px] rounded-xl overflow-hidden cursor-pointer group bg-[#1A1408] transition-all duration-500"
+                onMouseEnter={() => setHoveredCard(svc.id)}
+                onMouseLeave={() => setHoveredCard(null)}
+                onClick={() => setSelectedService(svc)}
+                style={{
+                  transform: hoveredCard === svc.id ? 'translateY(-10px)' : 'translateY(0)',
+                  boxShadow: hoveredCard === svc.id ? '0 30px 60px rgba(0,0,0,0.25)' : 'none',
+                }}
+              >
+                {/* Layer 1: Image */}
+                <div className="absolute inset-0 overflow-hidden">
+                  <Image
+                    src={`/assets/photos/${svc.img}`}
+                    alt={svc.name}
+                    fill
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.1]"
+                    priority
+                  />
+                </div>
+                
+                {/* Layer 2: Default Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
 
-      {/* ADD-ONS */}
-      <GoldDivider variant="section" />
-      <section id="addons" className="bg-ink py-24 px-12">
-        <div className="flex flex-col items-center text-center">
-          <GoldDivider darkBg className="mb-4 reveal" />
-          <p className="section-label reveal">Elevate Further</p>
-          <h2 className="section-title reveal text-surface">Add-<em className="italic">Ons</em></h2>
-          <GoldDivider darkBg flip className="mt-2 reveal" />
-        </div>
-        <div className="addons-grid">
-          {addons.map((addon, i) => (
-            <div key={i} className={`addon-card reveal stagger-${i + 1}`}>
-              <div className="addon-inner">
-                <div className="addon-front overflow-hidden border border-gold/15">
-                  <Image src={`/assets/photos/${addon.img}`} alt={addon.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" className="object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent"></div>
-                  <div className="relative z-10 w-full flex flex-col justify-end h-full p-6">
-                    <p className="addon-name">{addon.name}</p>
+                {/* Layer 3: Dimming Overlay (for non-hovered cards) */}
+                <div className={`absolute inset-0 bg-black/40 transition-opacity duration-500 z-20 pointer-events-none ${hoveredCard && hoveredCard !== svc.id ? 'opacity-100' : 'opacity-0'}`}></div>
+
+                {/* Layer 4: Content */}
+                <div className="absolute bottom-0 left-0 right-0 p-8 flex flex-col items-start z-30 transition-transform duration-500 group-hover:-translate-y-2">
+                  <span className="text-[#C9A234] text-[12px] mb-2.5">✦</span>
+                  <p className="text-[10px] font-body uppercase text-[#C9A234] tracking-[0.5em]">{svc.number}</p>
+                  <h3 className="text-[34px] font-heading text-white leading-[1.1] mt-1.5">{svc.name}</h3>
+                  <p className="text-[13px] font-body text-white/60 mt-2 line-clamp-1">{svc.tagline}</p>
+                  
+                  <div className="mt-5 px-5 py-2 rounded-full bg-[#C9A234]/15 border border-[#C9A234]/40 backdrop-blur-sm transition-all duration-300 group-hover:bg-[#C9A234] group-hover:text-[#1A1408]">
+                    <span className="text-[11px] font-body uppercase tracking-[0.3em] text-[#C9A234] group-hover:text-[#1A1408]">Explore Service →</span>
                   </div>
                 </div>
-                <div className="addon-back">
-                  <p className="addon-desc">{addon.desc}</p>
-                  <Link href="/contact" className="addon-back-cta">Learn more →</Link>
-                </div>
+
+                {/* Hover Gold Border */}
+                <div className="absolute inset-0 border-2 border-[#C9A234] rounded-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none z-40"></div>
               </div>
-            </div>
-          ))}
-        </div>
-        <div className="addons-footer reveal">
-          <Link href="/contact" className="btn-gold">Build Your Package</Link>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* SCROLL PROGRESS BAR */}
-      <div
-        className="svc-progress"
-        aria-hidden
-        style={{ transform: `scaleY(${scrollProgress})` }}
-      ></div>
+      {/* DECORATIVE DIVIDER */}
+      <div className="w-full flex items-center justify-center py-12 px-6">
+        <div className="flex-grow h-[1px] bg-[#EDE8DC]"></div>
+        <div className="px-6 flex items-center gap-3">
+          <span className="h-[1px] w-8 bg-[#EDE8DC] hidden md:block"></span>
+          <span className="font-heading text-2xl text-[#C9A234]">✦</span>
+          <span className="h-[1px] w-8 bg-[#EDE8DC] hidden md:block"></span>
+        </div>
+        <div className="flex-grow h-[1px] bg-[#EDE8DC]"></div>
+      </div>
 
-      {/* BACK TO TOP */}
-      <button
-        type="button"
-        aria-label="Back to top"
-        className="svc-back-top"
-        data-visible={showBackToTop || undefined}
-        onClick={scrollToTop}
-      >
-        <span aria-hidden>↑</span>
-      </button>
+      {/* ADD-ONS SECTION */}
+      <section id="addons" className="bg-[#1A1408] py-24 px-6 md:px-12">
+        <div className="flex flex-col items-center text-center">
+          <GoldDivider darkBg className="mb-4" />
+          <p className="text-[10px] font-body uppercase text-[#C9A234] tracking-[0.5em] mb-4">Elevate Further</p>
+          <h2 className="text-[48px] font-heading text-white leading-tight mb-2">Add-<em className="italic">Ons</em></h2>
+          <GoldDivider darkBg flip className="mt-2" />
+        </div>
+        <div className="flex overflow-x-auto gap-4 mt-16 max-w-[1280px] mx-auto pb-8 custom-scrollbar scroll-smooth">
+          {[
+            { 
+              img: "services/3-d modelling.png",
+              name: "3-D Models", 
+              tagline: "Virtual Venue Pre-visualization", 
+              description: "Visualize your mandap and ballroom in photorealistic 3D before a single flower is placed." 
+            },
+            { 
+              img: "services/sfx-and-fireworks.jpg",
+              name: "SFX & Fireworks", 
+              tagline: "Atmospheric Spectacles", 
+              description: "Breathtaking pyrotechnics and cinematic atmospheric effects to elevate your grand entry and celebration moments." 
+            },
+            { 
+              img: "services/decoration/e-invites and stationary.JPG",
+              name: "E-Invites", 
+              tagline: "Animated Digital Invitations", 
+              description: "Custom digital wedding invitations with RSVP tracking and animated reveals." 
+            },
+            { 
+              img: "services/decoration/haldi_flowers_decor.jpg",
+              name: "Home Decor", 
+              tagline: "Pre & Post Wedding Styling", 
+              description: "Bringing the celebration home with elegant floral and lighting designs for your residence." 
+            },
+            { 
+              img: "services/website-addson.png",
+              name: "Website Creation", 
+              tagline: "Bespoke Guest Hubs", 
+              description: "A bespoke digital hub for your guests with RSVPs, gallery, and travel itineraries." 
+            }
+          ].map((addon, i) => (
+            <AddOnCard key={i} addon={addon} />
+          ))}
+        </div>
+      </section>
+
+      {/* LIGHTBOX OVERLAY */}
+      {selectedService && (
+        <div 
+          ref={lightboxRef}
+          className="fixed inset-0 z-[9998] flex items-center justify-center bg-[rgba(13,13,8,0.85)] backdrop-blur-[6px] opacity-0"
+          onClick={(e) => {
+            if (e.target === lightboxRef.current) closeLightbox();
+          }}
+        >
+          <div 
+            ref={panelRef}
+            className="relative w-[90vw] h-[88vh] max-w-[1200px] bg-white rounded-[16px] overflow-hidden shadow-2xl flex flex-col opacity-0 mobile-bottom-sheet z-[9999]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Top Bar */}
+            <div className="w-full h-[52px] flex-shrink-0 flex items-center justify-between px-7 border-b border-[#EDE8DC] bg-[#FDFAF5] z-30">
+              <div className="flex items-center gap-2">
+                <span className="text-[#C9A234] text-[12px]">✦</span>
+                <span className="text-[11px] font-body text-[#9A8F7E] uppercase tracking-wider">Services → {selectedService.name}</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <button className="w-8 h-8 flex items-center justify-center text-[#9A8F7E] hover:text-[#1A1408] transition-colors">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                </button>
+                <button 
+                  onClick={closeLightbox}
+                  className="w-8 h-8 flex items-center justify-center text-[#9A8F7E] hover:text-[#1A1408] transition-colors"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+              </div>
+            </div>
+
+            {/* Columns Row */}
+            <div className="flex-1 flex flex-col md:flex-row min-h-0 overflow-hidden">
+              {/* Mobile Hero Image (Top on Mobile) */}
+              <div className="md:hidden w-full h-[240px] relative flex-shrink-0">
+                <Image
+                  src={`/assets/photos/${selectedService.img}`}
+                  alt={selectedService.name}
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[rgba(26,20,8,0.4)] to-transparent"></div>
+              </div>
+
+              {/* Left Column (Content) */}
+              <div 
+                className="w-full md:w-[42%] h-full bg-[#FDFAF5] border-r border-[#EDE8DC] flex flex-col overflow-y-auto"
+                data-lenis-prevent
+              >
+                <div className="p-8 md:p-[32px] flex flex-col items-start">
+                  <p className="text-[10px] font-body uppercase text-[#E87B3A] tracking-[0.5em] mb-0">{selectedService.number}</p>
+                  <h2 className="text-[36px] md:text-[48px] font-heading text-[#1A1408] leading-[1.05] mt-[8px] mb-0">{selectedService.name}</h2>
+                  <div className="h-[1px] w-14 bg-[#C9A234] mt-[12px] mb-0"></div>
+                  
+                  <p className="text-[14px] md:text-[15px] font-body text-[#9A8F7E] leading-relaxed max-w-[340px] mt-[16px] mb-0">
+                    {selectedService.description}
+                  </p>
+
+                  <p className="text-[10px] font-body uppercase text-[#9A8F7E] tracking-[0.3em] mt-[24px] mb-0">What's Included</p>
+                  <div className="flex flex-col gap-[12px] mt-[12px] mb-0">
+                    {selectedService.includes.map((item, idx) => (
+                      <div key={idx} className="include-item flex items-center gap-3.5 opacity-0">
+                        <span className="text-[#C9A234] text-xs">✓</span>
+                        <span className="text-[13px] font-body text-[#1A1408] leading-tight">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-[32px] w-full flex flex-col items-center">
+                    <div className="flex flex-col gap-3 w-full">
+                      <Link href="/contact" className="w-full h-[50px] bg-[#C9A234] rounded-md flex items-center justify-center text-white text-[11px] font-body uppercase tracking-[0.3em] hover:brightness-110 transition-all text-center">
+                        Enquire About This Service
+                      </Link>
+                      <button 
+                        onClick={closeLightbox}
+                        className="w-full h-[50px] border border-[#C9A234] rounded-md flex items-center justify-center text-[#C9A234] text-[11px] font-body uppercase tracking-[0.3em] hover:bg-[#C9A234]/5 transition-all"
+                      >
+                        View All Services
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column (Image - Desktop Only) */}
+              <div className="hidden md:block md:w-[58%] h-full relative overflow-hidden group/img">
+                <Image
+                  src={`/assets/photos/${selectedService.img}`}
+                  alt={selectedService.name}
+                  fill
+                  className="object-cover ken-burns"
+                />
+                {/* Soft Edge Gradient */}
+                <div className="absolute inset-y-0 left-0 w-[30%] bg-gradient-to-r from-[rgba(249,246,245,0.15)] to-transparent pointer-events-none"></div>
+                
+                {/* Attribution */}
+                <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[rgba(26,20,8,0.6)] to-transparent flex items-center px-7">
+                  <p className="text-[11px] font-body uppercase text-[#C9A234] tracking-[0.3em]">
+                    Photography by {selectedService.photographer || "Vows & Vedas"}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <style jsx>{`
-        /* Sticky jump nav */
-        .svc-jumpnav {
-          position: sticky;
-          top: 64px;
-          z-index: 40;
-          background: rgba(253, 250, 245, 0.94);
-          backdrop-filter: blur(14px);
-          border-bottom: 1px solid rgba(201, 162, 52, 0.22);
-          padding: 14px 24px;
+        .preserve-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        
+        .custom-scrollbar::-webkit-scrollbar { height: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(201, 162, 52, 0.05); }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(201, 162, 52, 0.2); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(201, 162, 52, 0.4); }
+        
+        @keyframes kenBurns {
+          0% { transform: scale(1); }
+          100% { transform: scale(1.08); }
         }
-        .svc-jumpnav-list {
-          list-style: none;
-          display: flex;
-          gap: 10px;
-          max-width: 1400px;
-          margin: 0 auto;
-          overflow-x: auto;
-          scrollbar-width: none;
-          padding: 0;
-          justify-content: center;
-        }
-        .svc-jumpnav-list::-webkit-scrollbar { display: none; }
-        .svc-pill {
-          display: inline-block;
-          padding: 8px 18px;
-          border: 1px solid var(--color-gold);
-          color: var(--color-gold);
-          background: transparent;
-          font-family: var(--font-body);
-          font-size: 10px;
-          letter-spacing: 0.22em;
-          text-transform: uppercase;
-          font-weight: 500;
-          white-space: nowrap;
-          border-radius: 999px;
-          transition: background-color 0.3s var(--ease-custom), color 0.3s var(--ease-custom);
-        }
-        .svc-pill:hover { background: rgba(201, 162, 52, 0.12); }
-        .svc-pill[data-active] {
-          background: var(--color-gold);
-          color: var(--color-surface);
+        .ken-burns {
+          animation: kenBurns 8s ease-in-out infinite alternate;
         }
 
-        /* Service sections */
-        .service-section {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          align-items: start;
-          overflow: hidden;
-          scroll-margin-top: 120px;
-        }
-        .service-section.reverse { direction: rtl; }
-        .service-section.reverse > * { direction: ltr; }
-
-        .svc-image {
-          position: sticky;
-          top: 120px;
-          height: 70vh;
-          min-height: 440px;
-          max-height: 680px;
-          overflow: hidden;
-        }
-        .svc-image-inner {
-          position: relative;
-          width: 100%;
-          height: 100%;
+        :global(.overlay-open) {
+          pointer-events: none !important;
+          z-index: 50 !important;
         }
 
-        .svc-content {
-          position: relative;
-          padding: 96px 64px;
-          display: flex;
-          flex-direction: column;
-          border-left: 2px solid var(--color-gold);
-        }
-        .service-section.reverse .svc-content {
-          border-left: none;
-          border-right: 2px solid var(--color-gold);
-        }
-
-        .svc-number-watermark {
-          position: absolute;
-          top: 32px;
-          left: 40px;
-          font-family: var(--font-heading);
-          font-weight: 300;
-          font-size: clamp(140px, 14vw, 220px);
-          line-height: 0.85;
-          color: var(--color-gold);
-          opacity: 0.07;
-          pointer-events: none;
-          user-select: none;
-          z-index: 0;
-        }
-        .service-section.reverse .svc-number-watermark {
-          left: auto;
-          right: 40px;
-        }
-
-        .svc-category {
-          position: relative;
-          z-index: 1;
-          font-family: var(--font-body);
-          font-weight: 500;
-          text-transform: uppercase;
-          color: var(--color-gold);
-          font-size: 10px;
-          letter-spacing: 0.4em;
-          margin-bottom: 10px;
-        }
-        .svc-number {
-          position: relative;
-          z-index: 1;
-          font-size: 10px;
-          letter-spacing: 0.5em;
-          color: var(--color-gold);
-          margin-bottom: 12px;
-          font-weight: 500;
-          opacity: 0.65;
-        }
-        .svc-title {
-          position: relative;
-          z-index: 1;
-          font-family: var(--font-heading);
-          font-size: clamp(32px, 3.6vw, 50px);
-          font-weight: 300;
-          line-height: 1.1;
-          margin-bottom: 24px;
-          color: var(--color-ink);
-          text-wrap: balance;
-        }
-        .svc-desc {
-          position: relative;
-          z-index: 1;
-          font-size: 14px;
-          line-height: 1.85;
-          color: #3D3020;
-          font-weight: 300;
-          margin-bottom: 24px;
-        }
-        .svc-inline-cta {
-          position: relative;
-          z-index: 1;
-          align-self: flex-start;
-          margin-bottom: 28px;
-        }
-        .svc-checklist {
-          position: relative;
-          z-index: 1;
-          list-style: none;
-          margin-bottom: 24px;
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          color: #3D3020;
-          font-size: 13px;
-          line-height: 1.55;
-        }
-
-        /* Add-ons */
-        .addons-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 16px;
-          margin-top: 64px;
-        }
-        .addon-card {
-          aspect-ratio: 4 / 3;
-          min-height: 240px;
-          perspective: 1000px;
-        }
-        .addon-inner {
-          position: relative;
-          width: 100%;
-          height: 100%;
-          transition: transform .6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-          transform-style: preserve-3d;
-        }
-        .addon-card:hover .addon-inner { transform: rotateY(180deg); }
-        .addon-front, .addon-back {
-          position: absolute;
-          inset: 0;
-          -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-        }
-        .addon-front { background: #252220; transform: translateZ(1px); }
-        .addon-back {
-          background: var(--color-gold);
-          transform: rotateY(180deg) translateZ(1px);
-          justify-content: space-between;
-          align-items: flex-start;
-          gap: 16px;
-          padding: 28px 26px;
-        }
-        .addon-name { font-family: var(--font-heading); font-size: 22px; color: var(--color-surface); }
-        .addon-desc {
-          font-size: 13px;
-          line-height: 1.6;
-          color: rgba(255,255,255,0.95);
-          font-weight: 300;
-        }
-        .addon-back-cta {
-          font-size: 10px;
-          letter-spacing: 0.22em;
-          text-transform: uppercase;
-          color: var(--color-surface);
-          font-weight: 500;
-          padding-top: 14px;
-          border-top: 1px solid rgba(255,255,255,0.35);
-          width: 100%;
-        }
-        .addons-footer {
-          display: flex;
-          justify-content: center;
-          margin-top: 56px;
-        }
-
-        /* Scroll progress bar */
-        .svc-progress {
-          position: fixed;
-          top: 0;
-          right: 0;
-          width: 3px;
-          height: 100vh;
-          background: var(--color-gold);
-          transform-origin: top;
-          transform: scaleY(0);
-          z-index: 60;
-          pointer-events: none;
-          transition: transform 0.1s linear;
-        }
-
-        /* Back to top button */
-        .svc-back-top {
-          position: fixed;
-          left: 24px;
-          bottom: 24px;
-          width: 48px;
-          height: 48px;
-          border-radius: 50%;
-          background: var(--color-gold);
-          color: var(--color-surface);
-          border: none;
-          cursor: pointer;
-          z-index: 55;
-          font-size: 20px;
-          line-height: 1;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 6px 18px rgba(26,20,8,0.25);
-          opacity: 0;
-          transform: translateY(12px);
-          pointer-events: none;
-          transition: opacity 0.4s var(--ease-custom), transform 0.4s var(--ease-custom), background-color 0.3s var(--ease-custom);
-        }
-        .svc-back-top[data-visible] {
-          opacity: 1;
-          transform: translateY(0);
-          pointer-events: auto;
-        }
-        .svc-back-top:hover { background: #B8860B; }
-
-        /* Tablet */
-        @media (min-width: 769px) and (max-width: 1024px) {
-          .addons-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        /* Mobile */
         @media (max-width: 768px) {
-          .svc-jumpnav { top: 60px; padding: 12px 16px; }
-          .svc-jumpnav-list { justify-content: flex-start; }
-          .svc-pill { padding: 7px 14px; font-size: 9px; }
-
-          .service-section {
-            grid-template-columns: 1fr;
-            min-height: auto;
-            scroll-margin-top: 110px;
+          .mobile-bottom-sheet {
+            width: 100vw !important;
+            height: 95vh !important;
+            border-radius: 20px 20px 0 0 !important;
+            position: fixed !important;
+            bottom: 0 !important;
+            max-width: none !important;
           }
-          .service-section.reverse { direction: ltr; }
-
-          .svc-image {
-            position: relative;
-            top: auto;
-            height: 55vw;
-            min-height: 260px;
-          }
-          .svc-content {
-            padding: 48px 24px;
-            border-left: none;
-            border-top: 2px solid var(--color-gold);
-            min-height: auto;
-          }
-          .service-section.reverse .svc-content {
-            border-right: none;
-            border-top: 2px solid var(--color-gold);
-          }
-          .svc-number-watermark {
-            font-size: 100px;
-            top: 16px;
-            left: 16px;
-          }
-          .service-section.reverse .svc-number-watermark {
-            right: 16px;
-            left: auto;
-          }
-          .svc-checklist { padding: 0 4px; }
-
-          .addons-grid { grid-template-columns: 1fr; }
-          .addon-card { aspect-ratio: 16 / 10; min-height: 220px; }
-
-          .svc-back-top { left: 16px; bottom: 16px; width: 42px; height: 42px; }
         }
       `}</style>
     </div>
