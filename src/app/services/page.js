@@ -17,7 +17,7 @@ const services = [
     tagline: "Global footprint, local expertise — every setting handpicked",
     description: "From an intimate hilltop ceremony to coordinating guests across three days at a palace — we scout, negotiate and plan every spatial detail so you never have to.",
     includes: ["Global Footprint & Local Expertise", "Location Scouting", "Contracting & Negotiation", "Feasibility & Spatial Planning"],
-    img: "destination/TSR50501.jpg",
+    img: "services/destinations-service.JPG",
     photographer: "The Wedding Filmer"
   },
   {
@@ -66,37 +66,37 @@ const services = [
     name: "Hospitality",
     tagline: "White-glove guest management from arrival to departure",
     description: "Every guest at your wedding is our responsibility. From airport transfers to room upgrades — we ensure everyone feels taken care of.",
-    includes: ["Guest travel & transfer coordination", "Hotel room blocking & upgrade management", "Welcome hamper curation & delivery", "On-site guest concierge team", "Special requirements & dietary management"],
+    includes: ["Dedicated RSVP Team", "Bespoke Welcome Experiences", "Comprehensive Ground Travel & Logistics", "24/7 Concierge & Helpdesk Support", "Shadow & VVIP Management", "Vendor Management"],
     img: "services/hospitality_service.png",
     photographer: "Palace Hospitality"
   },
-  { 
-    id: "vendor-management", 
-    number: "07", 
-    name: "Vendor Management", 
-    tagline: "Curated network of India's elite artisans", 
-    description: "We bring you access to the most exclusive wedding partners — from bespoke couturiers and award-winning caterers to artisanal invitation designers.", 
-    includes: ["Bespoke vendor matching & selection", "Contract negotiation & management", "Quality control & briefing", "Timeline synchronization across partners", "Payment schedule & final settlement handling"],
+  {
+    id: "vendor-management",
+    number: "07",
+    name: "Vendor Management",
+    tagline: "Curated network of India's elite artisans",
+    description: "We bring you access to the most exclusive wedding partners — from bespoke couturiers and award-winning caterers to artisanal invitation designers.",
+    includes: ["Elite Network Access", "Comprehensive Contract & Rate Negotiation", "Centralized Communication Hub", "Integrated Timeline & Delivery Schedule", "Financial Tracking & Payment Milestones"],
     img: "couple-shots/hospitality1.jpg",
     photographer: "Vows & Vedas Artisan Network"
   },
-  { 
-    id: "transport-logistics", 
-    number: "08", 
-    name: "Transport & Logistics", 
-    tagline: "Seamless fleet management and guest transit", 
-    description: "We handle the complex movement of hundreds of guests across venues and cities with precision, from luxury airport transfers to venue shuttles.", 
+  {
+    id: "travel-logistics",
+    number: "08",
+    name: "Travel & Logistics",
+    tagline: "Seamless fleet management and guest transit",
+    description: "We handle the complex movement of hundreds of guests across venues and cities with precision, from luxury airport transfers to venue shuttles.",
     includes: ["Guest travel & ticket coordination", "Luxury car fleet & coach management", "On-site transport concierge desk", "Real-time transit tracking & communication", "Venue-to-hotel shuttle coordination"],
     img: "services/transport-logistics.jpg",
     photographer: "Logistics Excellence"
   },
-  { 
-    id: "food-beverages", 
-    number: "09", 
-    name: "Food & Beverages", 
-    tagline: "Bespoke menus and world-class bar curation", 
-    description: "We curate culinary journeys that span continents, from traditional regional feasts to avant-garde international fine dining and specialty bar experiences.", 
-    includes: ["Menu curation & tasting sessions", "Specialty bar & mixology management", "Catering vendor oversight & briefing", "Thematic dining setup & styling", "Dietary requirement & guest preference management"],
+  {
+    id: "food-beverages",
+    number: "09",
+    name: "Food & Beverage",
+    tagline: "Bespoke menus and world-class bar curation",
+    description: "We curate culinary journeys that span continents, from traditional regional feasts to avant-garde international fine dining and specialty bar experiences.",
+    includes: ["Bespoke Menu Engineering", "Signature Mixology & Craft Bar Concept", "Immersive Live Stations & Food Theatre", "Thematic Styling & Presentation Design", "Meticulous Dietary & Allergens Planning", "Flawless Banquet & Service Logistics"],
     img: "services/decoration/059A4328.jpg",
     photographer: "Culinary Arts by V&V"
   }
@@ -518,12 +518,6 @@ export default function ServicesPage() {
                 {/* Soft Edge Gradient */}
                 <div className="absolute inset-y-0 left-0 w-[30%] bg-gradient-to-r from-[rgba(249,246,245,0.15)] to-transparent pointer-events-none"></div>
                 
-                {/* Attribution */}
-                <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[rgba(26,20,8,0.6)] to-transparent flex items-center px-7">
-                  <p className="text-[11px] font-body uppercase text-[#C9A234] tracking-[0.3em]">
-                    Photography by {selectedService.photographer || "Vows & Vedas"}
-                  </p>
-                </div>
               </div>
             </div>
           </div>

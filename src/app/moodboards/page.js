@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import FloatingSidebar from "@/components/FloatingSidebar";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -359,7 +358,6 @@ export default function MoodBoardsPage() {
 
   return (
     <div className="bg-[#FDFAF5] min-h-screen">
-      <FloatingSidebar />
       
       {/* HERO SECTION */}
       <header className="pt-20 pb-12 px-6 text-center">

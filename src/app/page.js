@@ -8,7 +8,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CircularGallery from "@/components/CircularGallery";
 import HashtagGeneratorPopup from "@/components/HashtagGeneratorPopup";
 import GoldDivider from "@/components/GoldDivider";
-import FloatingSidebar from "@/components/FloatingSidebar";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -148,7 +147,6 @@ export default function HomePage() {
 
   return (
     <div className="overflow-hidden">
-      <FloatingSidebar />
 
       {/* HERO SECTION */}
       <section id="hero" ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden">
@@ -185,62 +183,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SERVICES */}
-      <section id="our-services" className="pt-16 pb-12 px-6 md:px-12 bg-bg">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-12 flex flex-col items-center text-center">
-            <GoldDivider className="mb-4 reveal" />
-            <p className="section-label reveal uppercase">What We Offer</p>
-            <h2 className="section-title reveal">Our <em className="italic">Services</em></h2>
-            <GoldDivider flip className="mt-2 reveal" />
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 group/grid">
-            {[
-              { num: "01", name: "Decor & Styling", desc: "Bespoke floral artistry and immersive aesthetic environments.", img: "services/decoration/haldi_decor1.jpg" },
-              { num: "02", name: "Entertainment", desc: "Live bands, DJs, and captivating performances.", img: "services/entertainment/entertainment_band.jpg" },
-              { num: "03", name: "Hospitality", desc: "White-glove guest management and concierge services.", img: "couple-shots/hospitality1.jpg" },
-              { num: "04", name: "Destination Selection", desc: "Scouting breathtaking venues around the globe.", img: "destination/TSR50967.jpg" },
-              { num: "05", name: "Food & Beverages", desc: "Curated menus from Michelin-quality chefs.", img: "services/decoration/059A4328.jpg" },
-              { num: "06", name: "Full Planning", desc: "End-to-end curation of your entire wedding journey.", img: "destination/pool_venue.jpg" }
-            ].map((service, i) => (
-              <div 
-                key={i} 
-                className={`group/card relative overflow-hidden bg-ink/5 reveal border transition-all duration-300 ease-in-out border-gold/15 hover:border-gold hover:shadow-[0_0_20px_rgba(201,162,52,0.15)] group-hover/grid:brightness-[0.65] hover:!brightness-100 h-[250px] sm:h-[300px] ${
-                  i === 0 ? "md:col-span-2 md:h-[320px]" : 
-                  (i === 5 ? "md:col-span-3 md:h-[320px]" : "md:col-span-1 md:h-[320px]")
-                }`}
-              >
-                <div className="absolute top-4 right-4 font-heading text-[64px] text-white/10 select-none z-10 leading-none">{service.num}</div>
-                <Image 
-                  src={`/assets/photos/${service.img}`} 
-                  alt={service.name} 
-                  fill 
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/60 to-transparent translate-y-full transition-transform duration-[350ms] ease-out group-hover/card:translate-y-0 z-20">
-                  <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-col justify-end">
-                    <p className="font-heading text-gold text-[14px] tracking-[0.3em] uppercase mb-1">{service.num}</p>
-                    <h3 className="font-heading text-surface text-[28px] font-light leading-tight mb-2">{service.name}</h3>
-                    <p className="font-body text-surface/70 text-[13px] font-light truncate mb-4">{service.desc}</p>
-                    <div className="h-[1px] bg-gold w-[48px] origin-left scale-x-0 transition-transform duration-[400ms] delay-100 ease-out group-hover/card:scale-x-100"></div>
-                  </div>
-                </div>
-                <Link href="/services" className="absolute inset-0 z-30">
-                  <span className="sr-only">Explore {service.name}</span>
-                </Link>
-              </div>
-            ))}
-          </div>
-          <div className="mt-12 text-center reveal">
-             <Link href="/services" className="inline-block relative font-body text-[11px] uppercase tracking-[0.3em] text-gold pb-1 group/btn">
-               View All Services &nbsp;→
-               <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gold transition-all duration-300 ease-out group-hover/btn:w-full"></span>
-             </Link>
-          </div>
-        </div>
-      </section>
-
       {/* ORNAMENTAL DIVIDER */}
       <GoldDivider variant="section" />
 
@@ -249,11 +191,11 @@ export default function HomePage() {
         <div className="flex flex-col items-center text-center px-12">
           <GoldDivider className="mb-4 reveal" />
           <p className="section-label reveal">Our Process</p>
-          <h2 className="section-title reveal text-ink">How We Craft<br /><em className="italic">Your Day</em></h2>
+          <h2 className="section-title reveal text-ink">How We Craft <em className="italic">Your Day</em></h2>
         </div>
-        
+
         {/* DESKTOP HORIZONTAL TIMELINE */}
-        <div className="hidden md:flex relative w-full h-[320px] mt-16 items-center">
+        <div className="hidden md:flex relative w-full h-[320px] mt-8 items-center">
           {/* Connector Line Progress */}
           <div className="absolute top-1/2 left-[8%] right-[8%] h-[1px] -translate-y-1/2 z-0 pointer-events-none">
             <div className="timeline-line-progress absolute top-0 left-0 h-[1px] bg-gold origin-left opacity-60" style={{ width: '0%' }}></div>
@@ -390,9 +332,6 @@ export default function HomePage() {
       </section>
 
 
-      {/* ORNAMENTAL DIVIDER */}
-      <GoldDivider variant="section" />
-
       {/* IDEAS TEASER */}
       <section id="ideas-moods" className="py-16 bg-bg">
         <div className="max-w-[1440px] mx-auto px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -404,7 +343,7 @@ export default function HomePage() {
             <p className="text-muted text-[13px] leading-[2] font-light mb-8 max-w-[480px]">
               From mandap silhouettes under Rajasthan skies to candlelit cliffside ceremonies in Santorini — explore our curated library of ideas, mood boards, and styling references.
             </p>
-            <Link href="/moodboards" className="btn-underline">Explore Mood Boards &nbsp;→</Link>
+            <Link href="/moodboards" className="btn-gold">Explore All Moodboards &nbsp;→</Link>
           </div>
           <div className="flex flex-col items-center">
             <div className="ideas-mosaic reveal grid grid-cols-2 grid-rows-3 gap-2 h-[500px] w-full">
@@ -444,22 +383,18 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <Link href="/moodboards" className="mt-6 font-body text-[11px] uppercase tracking-[0.3em] text-gold hover:opacity-80 transition-opacity">
-              View all 8 mood boards &nbsp;→
-            </Link>
           </div>
         </div>
       </section>
 
-      {/* ORNAMENTAL DIVIDER */}
       <GoldDivider variant="section" />
 
       {/* TESTIMONIALS */}
-      <section id="couples-say">
+      <section id="couples-say" className="pt-8">
         <div className="flex flex-col items-center text-center">
           <GoldDivider className="mb-4 reveal" />
           <p className="section-label reveal">Love Stories</p>
-          <h2 className="section-title reveal">What Our<br /><em className="italic">Couples Say</em></h2>
+          <h2 className="section-title reveal">What Our <em className="italic">Couples Say</em></h2>
           <GoldDivider flip className="mt-2 mb-8 reveal" />
         </div>
         <div className="overflow-hidden mt-0">
@@ -510,13 +445,15 @@ export default function HomePage() {
         </div>
       </section>
 
+      <GoldDivider variant="section" />
+
       {/* FINAL CTA */}
       <section id="final-cta" className="relative overflow-hidden">
         <div id="cta-bg" className="absolute inset-[-10%] bg-cover bg-center filter brightness-[0.3] saturate-[0.5]" style={{ backgroundImage: "url('/assets/photos/destination/TSR50355.jpg')" }}></div>
         <div className="relative z-[2] flex flex-col items-center text-center">
           <GoldDivider darkBg className="mb-4 reveal" />
           <p className="section-label reveal" style={{ color: "var(--color-gold)" }}>Your Story Awaits</p>
-          <h2 className="section-title reveal text-gold">Begin Your<br /><em className="italic">Journey With Us</em></h2>
+          <h2 className="section-title reveal text-gold">Begin Your <em className="italic">Journey With Us</em></h2>
           <GoldDivider darkBg flip className="mt-2 mb-8 reveal" />
           <p className="subtitle reveal text-surface/60 text-sm tracking-widest mb-12 uppercase">Let's craft the wedding you've always envisioned.</p>
           <Link href="/contact" className="btn-gold btn-pulse reveal">Start Planning →</Link>

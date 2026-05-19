@@ -3,14 +3,51 @@
 import { useState, useEffect } from 'react';
 import html2canvas from 'html2canvas';
 
+const TYPEWRITER_WORDS = ['#ForeverUs', '#SoulMates', '#LoveStory', '#TiedTheKnot', '#HappilyEverAfter'];
+const TYPE_SPEED = 90;
+const DELETE_SPEED = 55;
+const PAUSE_AFTER = 1400;
+const PAUSE_BEFORE = 300;
+
 const HashtagGeneratorPopup = () => {
   const [open, setOpen] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [typed, setTyped] = useState('');
+  const [wordIndex, setWordIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [formData, setFormData] = useState({ bride: '', groom: '', vibe: '', loveWord: '' });
   const [loading, setLoading] = useState(false);
   const [hashtags, setHashtags] = useState([]);
   const [error, setError] = useState('');
 
   const vibes = ['Royal', 'Romantic', 'Whimsical', 'Modern'];
+
+  // Scroll-triggered appearance — show after scrolling past hero
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.6);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Typewriter loop
+  useEffect(() => {
+    const word = TYPEWRITER_WORDS[wordIndex];
+    let timeout;
+    if (!isDeleting && typed === word) {
+      timeout = setTimeout(() => setIsDeleting(true), PAUSE_AFTER);
+    } else if (isDeleting && typed === '') {
+      timeout = setTimeout(() => {
+        setIsDeleting(false);
+        setWordIndex((i) => (i + 1) % TYPEWRITER_WORDS.length);
+      }, PAUSE_BEFORE);
+    } else {
+      timeout = setTimeout(() => {
+        setTyped(isDeleting ? word.slice(0, typed.length - 1) : word.slice(0, typed.length + 1));
+      }, isDeleting ? DELETE_SPEED : TYPE_SPEED);
+    }
+    return () => clearTimeout(timeout);
+  }, [typed, isDeleting, wordIndex]);
 
   useEffect(() => {
     const handler = (e) => { if (e.key === 'Escape') setOpen(false); };
@@ -68,49 +105,36 @@ const HashtagGeneratorPopup = () => {
 
   return (
     <>
-      {/* Floating Left Tab Button */}
+      {/* Vertical Spark + Text Tab — scroll-triggered */}
       <button
         onClick={() => setOpen(true)}
-        aria-label="Open Wedding Hashtag Generator"
-        className="fixed left-0 top-1/2 -translate-y-1/2 z-40 group flex flex-col items-center gap-0 focus:outline-none"
-        style={{ filter: 'drop-shadow(2px 0 18px rgba(201,162,52,0.18))' }}
+        aria-label="Wedding Hashtag Generator"
+        className="fixed left-0 top-1/2 z-40 group focus:outline-none"
+        style={{
+          transform: `translateY(-50%) translateX(${visible ? '0px' : '-100%'})`,
+          transition: 'transform 0.7s cubic-bezier(0.23, 1, 0.32, 1)',
+        }}
       >
-        {/* Tab body */}
         <div
-          className="relative flex flex-col items-center justify-center bg-[#0E0E0E] border border-l-0 border-gold/40 group-hover:border-gold/80 transition-all duration-500"
+          className="flex flex-col items-center gap-3 bg-[#0E0E0E] border border-l-0 border-gold/40 group-hover:border-gold/80 transition-all duration-300 px-[10px] py-5"
           style={{
-            width: '36px',
-            paddingTop: '56px',
-            paddingBottom: '56px',
             borderRadius: '0 10px 10px 0',
-            background: 'linear-gradient(180deg, #0E0E0E 0%, #1a1408 100%)',
+            boxShadow: '4px 0 24px rgba(201,162,52,0.14)',
           }}
         >
-          {/* Top diamond ornament */}
-          <span className="absolute top-4 left-1/2 -translate-x-1/2 text-gold/70 group-hover:text-gold transition-colors duration-300" style={{ fontSize: '10px', lineHeight: 1 }}>◆</span>
+          {/* Sparkle */}
+          <span className="text-[#C9A234] text-[13px] leading-none group-hover:scale-110 transition-transform duration-300">✦</span>
 
-          {/* Vertical label */}
+          {/* Divider */}
+          <div className="w-px h-4 bg-[#C9A234]/30" />
+
+          {/* # Generator — vertical */}
           <span
-            className="text-gold/80 group-hover:text-gold transition-colors duration-300 font-body uppercase tracking-[0.35em] select-none"
-            style={{
-              fontSize: '9px',
-              writingMode: 'vertical-rl',
-              textOrientation: 'mixed',
-              transform: 'rotate(180deg)',
-              letterSpacing: '0.35em',
-            }}
+            className="font-body uppercase tracking-[0.25em] text-[#FDFAF5] text-[9px] group-hover:text-[#C9A234] transition-colors duration-300 whitespace-nowrap"
+            style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
           >
-            #Hashtag
+            # Generator
           </span>
-
-          {/* Bottom diamond ornament */}
-          <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-gold/70 group-hover:text-gold transition-colors duration-300" style={{ fontSize: '10px', lineHeight: 1 }}>◆</span>
-
-          {/* Gold left-edge accent line that grows on hover */}
-          <span
-            className="absolute left-0 top-[20%] w-[2px] bg-gold/60 group-hover:bg-gold group-hover:top-[10%] group-hover:h-[80%] transition-all duration-500 rounded-r"
-            style={{ height: '60%' }}
-          />
         </div>
       </button>
 
