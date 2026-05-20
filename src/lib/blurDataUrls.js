@@ -209,4 +209,9 @@ const blurDataUrls = {
   "/assets/photos/services/website-addson.png": "data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAKAAoDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAQIDBv/EAB4QAAICAAcAAAAAAAAAAAAAAAEDAAQCEhUyUlSS/8QAFAEBAAAAAAAAAAAAAAAAAAAAAv/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/ANOayMLAoV1ZSOIh06p1leBLHdGgJ//Z"
 };
 
+export const getBlurProps = (src) => {
+  const url = blurDataUrls[src];
+  return url ? { placeholder: "blur", blurDataURL: url } : {};
+};
+
 export default blurDataUrls;
