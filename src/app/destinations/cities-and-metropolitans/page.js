@@ -27,7 +27,13 @@ const cityDestinations = [
       { label: "Parking", value: "2,000+ Vehicles" },
     ],
     slides: [
-      { label: "Zora Delhi", desc: "A nature-inspired convention center on Lodhi Road.", img: "/assets/photos/citiy luxe/zora-delhi.jpg" },
+      { label: "The Zora", desc: "A nature-inspired luxury event space on Lodhi Road.", img: "/assets/photos/citiy luxe/Delhi/The Zora/2024-11-15.webp" },
+      { label: "Garden Setting", desc: "Lush open-air spaces at The Zora.", img: "/assets/photos/citiy luxe/Delhi/The Zora/2025-10-03.webp" },
+      { label: "Celebrations", desc: "Grand celebrations amid The Zora's natural landscape.", img: "/assets/photos/citiy luxe/Delhi/The Zora/2025-10-03 (1).webp" },
+      { label: "Evening Ambience", desc: "The Zora glowing beautifully at dusk.", img: "/assets/photos/citiy luxe/Delhi/The Zora/2026-03-18.webp" },
+      { label: "Venue", desc: "The Zora's distinctive open-canvas event spaces.", img: "/assets/photos/citiy luxe/Delhi/The Zora/unnamed.webp" },
+      { label: "Interiors", desc: "Contemporary elegance within The Zora.", img: "/assets/photos/citiy luxe/Delhi/The Zora/unnamed (1).webp" },
+      { label: "Outdoor", desc: "Scenic outdoor settings at The Zora.", img: "/assets/photos/citiy luxe/Delhi/The Zora/unnamed (2).webp" },
     ],
   },
   {
@@ -43,7 +49,14 @@ const cityDestinations = [
       { label: "Setting", value: "Luxury Farmhouse Estate" },
     ],
     slides: [
-      { label: "Morebagh Chattarpur", desc: "A Mediterranean-inspired luxury farmhouse estate.", img: "/assets/photos/citiy luxe/morbagh-delhi.jpg" },
+      { label: "The Estate", desc: "Morebagh's sprawling Mediterranean-inspired farmhouse estate.", img: "/assets/photos/citiy luxe/Delhi/MorBagh/476314502_1556986441637501_4368532176966872427_n.jpg" },
+      { label: "Gardens", desc: "Meticulously manicured gardens at Morebagh.", img: "/assets/photos/citiy luxe/Delhi/MorBagh/479178247_1560703341265811_7952591980526054025_n.jpg" },
+      { label: "The Villa", desc: "Morebagh's stunning white villa backdrop.", img: "/assets/photos/citiy luxe/Delhi/MorBagh/479440165_1560842807918531_2029291331342882243_n.jpg" },
+      { label: "Celebrations", desc: "A grand celebration under the open sky at Morebagh.", img: "/assets/photos/citiy luxe/Delhi/MorBagh/480231989_1560703331265812_6722740456509888607_n.jpg" },
+      { label: "Evening", desc: "Morebagh lit beautifully for an evening reception.", img: "/assets/photos/citiy luxe/Delhi/MorBagh/480264744_1560851777917634_3752884866447731567_n.jpg" },
+      { label: "Outdoor Setting", desc: "Lush outdoor spaces for alfresco ceremonies.", img: "/assets/photos/citiy luxe/Delhi/MorBagh/77238867_423697344966422_4984726687116689408_n.jpg" },
+      { label: "Farmhouse Lawn", desc: "Verdant lawns at the heart of Morebagh.", img: "/assets/photos/citiy luxe/Delhi/MorBagh/78405981_423697488299741_1901688175797993472_n.jpg" },
+      { label: "Ceremony", desc: "An intimate ceremony set up at Morebagh.", img: "/assets/photos/citiy luxe/Delhi/MorBagh/83478000_465201604149329_9052154754737635328_n.jpg" },
     ],
   },
   {
@@ -64,7 +77,13 @@ const cityDestinations = [
       { label: "Decor & Production", value: "₹40 – ₹90 Lacs" },
     ],
     slides: [
-      { label: "ITC Grand Bharat", desc: "A 300-acre all-suite estate in the Aravalli Range.", img: "/assets/photos/citiy luxe/ITC-grand-bharat-delhi.png" },
+      { label: "The Estate", desc: "ITC Grand Bharat's 300-acre estate in the Aravalli Range.", img: "/assets/photos/citiy luxe/Delhi/ITC Grand Bharat/ITC GRand Bharat.jpg" },
+      { label: "Property", desc: "The palatial grounds of ITC Grand Bharat.", img: "/assets/photos/citiy luxe/Delhi/ITC Grand Bharat/ITC GRand Bharat 2.jpg" },
+      { label: "Celebration", desc: "A grand wedding celebration at ITC Grand Bharat.", img: "/assets/photos/citiy luxe/Delhi/ITC Grand Bharat/ITC Grand Bharat 3.jpg" },
+      { label: "Interiors", desc: "Opulent interiors inspired by Indian dynastic heritage.", img: "/assets/photos/citiy luxe/Delhi/ITC Grand Bharat/ITC Grand Bharat 4.jpg" },
+      { label: "Peacock Lawn", desc: "The sprawling Peacock Lawn for grand alfresco celebrations.", img: "/assets/photos/citiy luxe/Delhi/ITC Grand Bharat/ITC Grand BHarat 5.webp" },
+      { label: "Evening Ambience", desc: "ITC Grand Bharat glowing magnificently at dusk.", img: "/assets/photos/citiy luxe/Delhi/ITC Grand Bharat/ITC Brand Bharat 6.webp" },
+      { label: "Prithvi Ballroom", desc: "The pillar-less Prithvi Ballroom for regal indoor functions.", img: "/assets/photos/citiy luxe/Delhi/ITC Grand Bharat/ITC Grand Bharat 7.webp" },
     ],
   },
   {
@@ -84,7 +103,14 @@ const cityDestinations = [
       { label: "Decor & Production", value: "₹60 Lacs – ₹1.2 Cr" },
     ],
     slides: [
-      { label: "Leela Palace New Delhi", desc: "A Lutyens-era inspired palace in the Diplomatic Enclave.", img: "/assets/photos/citiy luxe/The-Leela-Palace-New-Delhi.jpg" },
+      { label: "The Palace", desc: "The Leela Palace New Delhi in the Diplomatic Enclave.", img: "/assets/photos/citiy luxe/Delhi/Leela Palace Delhi/The-Leela-Palace-New-Delhi.webp" },
+      { label: "Celebrations", desc: "Grand wedding celebrations at The Leela Palace.", img: "/assets/photos/citiy luxe/Delhi/Leela Palace Delhi/Celebrations_1920x950_1.webp" },
+      { label: "Presidential Suite", desc: "The opulent Presidential Suite at The Leela Palace.", img: "/assets/photos/citiy luxe/Delhi/Leela Palace Delhi/Presidential Suite_1920x950_1.webp" },
+      { label: "Maharaja Suite", desc: "The majestic Maharaja Suite with palace views.", img: "/assets/photos/citiy luxe/Delhi/Leela Palace Delhi/Maharaja Suite_Leela-New-Delhi.webp" },
+      { label: "Parlour Suite", desc: "Elegantly appointed Parlour Suite at The Leela.", img: "/assets/photos/citiy luxe/Delhi/Leela Palace Delhi/Parlour-Suite-Leela-Delhi.webp" },
+      { label: "Lobby Lounge", desc: "The grand Lobby Lounge welcoming guests in style.", img: "/assets/photos/citiy luxe/Delhi/Leela Palace Delhi/The-Lobby-Lounge.jpg" },
+      { label: "Le Cirque", desc: "Fine dining at Le Cirque Signature within The Leela.", img: "/assets/photos/citiy luxe/Delhi/Leela Palace Delhi/Le Circue_560x665_0.webp" },
+      { label: "Destination Delhi", desc: "The Leela Palace — Delhi's premier wedding address.", img: "/assets/photos/citiy luxe/Delhi/Leela Palace Delhi/Destination-Delhi-North-India.webp" },
     ],
   },
   {
@@ -104,7 +130,15 @@ const cityDestinations = [
       { label: "Decor & Production", value: "₹40 Lacs – ₹1.1 Cr" },
     ],
     slides: [
-      { label: "ITC Maurya Delhi", desc: "A landmark of Mauryan-inspired architecture in New Delhi.", img: "/assets/photos/citiy luxe/itc-maurya-delhi.png" },
+      { label: "Exterior", desc: "ITC Maurya's iconic Mauryan-inspired facade at night.", img: "/assets/photos/citiy luxe/Delhi/ITC Maurya /exterior-night.jpg" },
+      { label: "Kamal Mahal", desc: "The pillar-less Kamal Mahal ballroom for grand celebrations.", img: "/assets/photos/citiy luxe/Delhi/ITC Maurya /kamal-mahal.jpg" },
+      { label: "Celebrations", desc: "A grand wedding celebration at ITC Maurya.", img: "/assets/photos/citiy luxe/Delhi/ITC Maurya /Celebrations_1920x950_1.webp" },
+      { label: "Chandragupta Suite", desc: "The opulent Chandragupta Suite bedroom.", img: "/assets/photos/citiy luxe/Delhi/ITC Maurya /chandragupta-suite-bedroom.jpg" },
+      { label: "Presidential Suite", desc: "Lavish Presidential Suite living area.", img: "/assets/photos/citiy luxe/Delhi/ITC Maurya /presidential-suite-living-area.jpg" },
+      { label: "Bukhara", desc: "The legendary Bukhara — India's most iconic restaurant.", img: "/assets/photos/citiy luxe/Delhi/ITC Maurya /bukhara.jpg" },
+      { label: "Dum Pukht", desc: "Dum Pukht — a culinary masterpiece within ITC Maurya.", img: "/assets/photos/citiy luxe/Delhi/ITC Maurya /dum-pukht-detail.jpg" },
+      { label: "Poolside", desc: "The serene poolside at ITC Maurya.", img: "/assets/photos/citiy luxe/Delhi/ITC Maurya /poolside.jpg" },
+      { label: "Lobby", desc: "The grand lobby welcoming guests at ITC Maurya.", img: "/assets/photos/citiy luxe/Delhi/ITC Maurya /lobby.jpg" },
     ],
   },
   // MUMBAI
@@ -126,7 +160,15 @@ const cityDestinations = [
       { label: "Decor & Production", value: "₹50 Lacs – ₹1 Cr" },
     ],
     slides: [
-      { label: "Taj Lands End Mumbai", desc: "A seaside luxury landmark in Bandra with Sea Link views.", img: "/assets/photos/citiy luxe/taj-mumbai.jpg" },
+      { label: "Taj Lands End", desc: "Taj Lands End perched above the Arabian Sea in Bandra.", img: "/assets/photos/citiy luxe/Mumbai/Taj Lands In , Mumbai/d73db84c8d96fcc30bf87b217bfd1e49c065e720-3840x1860.avif" },
+      { label: "Grand Ballroom", desc: "The majestic ballroom at Taj Lands End.", img: "/assets/photos/citiy luxe/Mumbai/Taj Lands In , Mumbai/0176b2325d2d14c1c700f4646e06d87b046c68a5-1920x1280.avif" },
+      { label: "Poolside Lawn", desc: "The stunning poolside lawn for alfresco celebrations.", img: "/assets/photos/citiy luxe/Mumbai/Taj Lands In , Mumbai/4e7530ee9e404907e3db62a082ea6529be948b80-1920x1280.avif" },
+      { label: "Sea View", desc: "Panoramic Arabian Sea and Sea Link views from Taj Lands End.", img: "/assets/photos/citiy luxe/Mumbai/Taj Lands In , Mumbai/642fb6b1f99db44924941617cd883e8b55d2d3c3-6419x4401.avif" },
+      { label: "Celebrations", desc: "A spectacular wedding celebration at Taj Lands End.", img: "/assets/photos/citiy luxe/Mumbai/Taj Lands In , Mumbai/7e38e15e8f79d581d45502b3f9583fc2bb43cb0c-7008x4672.avif" },
+      { label: "Suites", desc: "Elegantly appointed suites with sea and city views.", img: "/assets/photos/citiy luxe/Mumbai/Taj Lands In , Mumbai/805cf95900b44e9204c9d95a1d1199b6df07089f-1920x1280.avif" },
+      { label: "Ceremony", desc: "A beautiful ceremony setup at Taj Lands End.", img: "/assets/photos/citiy luxe/Mumbai/Taj Lands In , Mumbai/b57da7f73c0d1d13628ff8e03668f0a62a9a747a-7008x4672.avif" },
+      { label: "Reception", desc: "A glamorous reception evening at Taj Lands End.", img: "/assets/photos/citiy luxe/Mumbai/Taj Lands In , Mumbai/cad79b171fb7e7175f342ac6b0f84b27de73d4de-7008x4672.avif" },
+      { label: "Dining", desc: "World-class Taj dining with a sea backdrop.", img: "/assets/photos/citiy luxe/Mumbai/Taj Lands In , Mumbai/db974df5744381ae096b5b997b11f53c887964a1-1920x1280.avif" },
     ],
   },
   {
@@ -147,7 +189,14 @@ const cityDestinations = [
       { label: "Decor & Production", value: "₹50 Lacs – ₹1.2 Cr" },
     ],
     slides: [
-      { label: "Grand Hyatt BKC Mumbai", desc: "A 12-acre luxury landmark in Bandra Kurla Complex.", img: "/assets/photos/citiy luxe/hyatt-mumbai.jpg" },
+      { label: "Exterior & Grand Lawns", desc: "Grand Hyatt Mumbai's iconic exterior with sprawling lawns.", img: "/assets/photos/citiy luxe/Mumbai/Grand Hyatt Mumbai Hotel & Residences/Grand-Hyatt-Mumbai-P452-Exterior-and-Grand-Lawns.16x9.webp" },
+      { label: "Grand Ballroom", desc: "The pillar-less Grand Ballroom for spectacular receptions.", img: "/assets/photos/citiy luxe/Mumbai/Grand Hyatt Mumbai Hotel & Residences/MUMGH-P0921-Grand-Ballroom-Social-Cluster-Seating.16x9.webp" },
+      { label: "Grand Alfresco", desc: "The Grand Alfresco at sunset — a stunning outdoor venue.", img: "/assets/photos/citiy luxe/Mumbai/Grand Hyatt Mumbai Hotel & Residences/MUMGH-P0929-The-Grand-Alfresco-Sunset-Expanse.16x9.webp" },
+      { label: "Inner Courtyard", desc: "The serene inner courtyard at dusk.", img: "/assets/photos/citiy luxe/Mumbai/Grand Hyatt Mumbai Hotel & Residences/MUMGH-P0765-Inner-Courtyard-Hotel-Exterior-Evening.16x9.webp" },
+      { label: "Presidential Suite", desc: "The lavish Presidential Suite at Grand Hyatt Mumbai.", img: "/assets/photos/citiy luxe/Mumbai/Grand Hyatt Mumbai Hotel & Residences/MUMGH-P344-Presidential-Suite.16x9.webp" },
+      { label: "Grand Executive Suite", desc: "Elegantly appointed Grand Executive Suite.", img: "/assets/photos/citiy luxe/Mumbai/Grand Hyatt Mumbai Hotel & Residences/MUMGH-P0933-Grand-Executive-Suite-Room.16x9.webp" },
+      { label: "Outdoor Pool", desc: "The outdoor pool — a serene art-filled retreat.", img: "/assets/photos/citiy luxe/Mumbai/Grand Hyatt Mumbai Hotel & Residences/MUMGH-P0767-Outdoor-Pool.16x9.webp" },
+      { label: "Celini", desc: "Celini — world-class Italian dining at Grand Hyatt.", img: "/assets/photos/citiy luxe/Mumbai/Grand Hyatt Mumbai Hotel & Residences/MUMGH-P0908-Celini-Master-Image.16x9.webp" },
     ],
   },
   {
@@ -168,31 +217,21 @@ const cityDestinations = [
       { label: "Decor & Production", value: "₹60 Lacs – ₹1.5 Cr" },
     ],
     slides: [
-      { label: "Fairmont Sahar Mumbai", desc: "A modern palace near Mumbai's international airport.", img: "/assets/photos/citiy luxe/fairmont-mumbai.jpg" },
+      { label: "The Hotel", desc: "Fairmont Sahar — a sophisticated urban palace in Mumbai.", img: "/assets/photos/citiy luxe/Mumbai/Fairmont , Mumbai/HCM_P_1738946_4by3.webp" },
+      { label: "Grand Ballroom", desc: "One of Mumbai's most impressive pillar-less Grand Ballrooms.", img: "/assets/photos/citiy luxe/Mumbai/Fairmont , Mumbai/HCM_P_2015541_4by3.webp" },
+      { label: "Celebrations", desc: "A grand wedding celebration at Fairmont Sahar.", img: "/assets/photos/citiy luxe/Mumbai/Fairmont , Mumbai/HCM_P_3362367_4by3.webp" },
+      { label: "Terrace Gardens", desc: "The beautifully landscaped Terrace Gardens for alfresco rituals.", img: "/assets/photos/citiy luxe/Mumbai/Fairmont , Mumbai/HCM_P_4197997_4by3.webp" },
+      { label: "Suites", desc: "Elegantly designed suites at Fairmont Sahar.", img: "/assets/photos/citiy luxe/Mumbai/Fairmont , Mumbai/HCM_P_4251596_4by3.webp" },
+      { label: "Dining", desc: "World-class culinary innovation at Fairmont Sahar.", img: "/assets/photos/citiy luxe/Mumbai/Fairmont , Mumbai/HCM_P_4661071_4by3.webp" },
+      { label: "Pool", desc: "The stunning pool area at Fairmont Sahar.", img: "/assets/photos/citiy luxe/Mumbai/Fairmont , Mumbai/HCM_P_4680405_4by3.webp" },
+      { label: "Ceremony", desc: "An elegantly arranged ceremony at Fairmont Sahar.", img: "/assets/photos/citiy luxe/Mumbai/Fairmont , Mumbai/HCM_P_4793211_4by3.webp" },
+      { label: "Lobby", desc: "The grand lobby of Fairmont Sahar.", img: "/assets/photos/citiy luxe/Mumbai/Fairmont , Mumbai/HCM_P_5705644_4by3.webp" },
+      { label: "Reception", desc: "A glamorous evening reception at Fairmont Sahar.", img: "/assets/photos/citiy luxe/Mumbai/Fairmont , Mumbai/HCM_P_6219018_4by3.webp" },
+      { label: "Exterior", desc: "The striking modern palace facade of Fairmont Sahar.", img: "/assets/photos/citiy luxe/Mumbai/Fairmont , Mumbai/HCM_P_8147067_4by3.webp" },
+      { label: "Banquet", desc: "Exquisitely arranged banquet spaces at Fairmont Sahar.", img: "/assets/photos/citiy luxe/Mumbai/Fairmont , Mumbai/HCM_P_9808711_4by3.webp" },
     ],
   },
   // BANGALORE
-  {
-    id: "C09",
-    name: "Sheraton Grand Whitefield",
-    location: "BENGALURU · WHITEFIELD",
-    desc1: "Sheraton Grand Bengaluru Whitefield is a landmark property in Bengaluru's premier tech corridor, housing one of the city's largest convention centers with vast indoor and alfresco wedding spaces...",
-    img: "citiy luxe/sheraton-whitefield-bangalore.jpg",
-    stats: { rooms: "360", guests: "2,000+" },
-    writeup: "Sheraton Grand Bengaluru Whitefield Hotel & Convention Center is a landmark property, featuring a masterclass in modern grandeur. As a premier wedding destination, it boasts one of the city's largest convention centers with extensive versatile event space. Celebrations are anchored by the majestic, pillar-less Grand Ballroom for large-scale indoor functions, while the lush Outdoor Lawns provide a sophisticated setting for alfresco rituals. Couples are drawn to its seamless logistical efficiency, world-class culinary expertise, and the prestige of a venue designed for high-profile, large-scale celebrations.",
-    glance: [
-      { label: "Rooms", value: "360" },
-      { label: "Guests", value: "2,000+" },
-      { label: "Space", value: "65,000+ Sq. Ft." },
-      { label: "Buyout Cost", value: "₹2.8 Cr – ₹4.5 Cr" },
-      { label: "Accommodation", value: "₹1.8 – ₹2.6 Cr / Night" },
-      { label: "F&B", value: "₹70 Lacs – ₹1.2 Cr" },
-      { label: "Decor & Production", value: "₹35 – ₹90 Lacs" },
-    ],
-    slides: [
-      { label: "Sheraton Grand Whitefield", desc: "A modern grand convention hotel in Bengaluru's Whitefield.", img: "/assets/photos/citiy luxe/sheraton-whitefield-bangalore.jpg" },
-    ],
-  },
   {
     id: "C10",
     name: "ITC Gardenia",
@@ -210,7 +249,14 @@ const cityDestinations = [
       { label: "Decor & Production", value: "₹35 – ₹85 Lacs" },
     ],
     slides: [
-      { label: "ITC Gardenia Bengaluru", desc: "A LEED Platinum hotel with vertical gardens in Bengaluru.", img: "/assets/photos/citiy luxe/itc-banglore.jpg" },
+      { label: "Exterior", desc: "ITC Gardenia's striking facade amid Bengaluru's Garden City.", img: "/assets/photos/citiy luxe/Bangalore/ITC Gardenia, a Luxury Collection Hotel, Bengaluru/blrgl-exterior-9880-hor-wide.webp" },
+      { label: "Mysore Hall", desc: "The pillar-less Mysore Hall for grand indoor celebrations.", img: "/assets/photos/citiy luxe/Bangalore/ITC Gardenia, a Luxury Collection Hotel, Bengaluru/blrgl-banquet-9936-hor-wide.avif" },
+      { label: "Pool", desc: "The stunning pool surrounded by vertical gardens.", img: "/assets/photos/citiy luxe/Bangalore/ITC Gardenia, a Luxury Collection Hotel, Bengaluru/blrgl-pool-9948-hor-wide.webp" },
+      { label: "Lobby", desc: "The elegant lobby of ITC Gardenia.", img: "/assets/photos/citiy luxe/Bangalore/ITC Gardenia, a Luxury Collection Hotel, Bengaluru/blrgl-lobby-9914-hor-wide.avif" },
+      { label: "Suite", desc: "Luxuriously appointed suites at ITC Gardenia.", img: "/assets/photos/citiy luxe/Bangalore/ITC Gardenia, a Luxury Collection Hotel, Bengaluru/blrgl-suite-9921-hor-wide.avif" },
+      { label: "Guest Room", desc: "Elegantly designed guestrooms with garden views.", img: "/assets/photos/citiy luxe/Bangalore/ITC Gardenia, a Luxury Collection Hotel, Bengaluru/blrgl-room-9917-hor-wide.webp" },
+      { label: "Restaurant", desc: "Award-winning dining at ITC Gardenia's signature restaurant.", img: "/assets/photos/citiy luxe/Bangalore/ITC Gardenia, a Luxury Collection Hotel, Bengaluru/blrgl-restaurant-9300-hor-wide.avif" },
+      { label: "Dinner Setting", desc: "An intimate dinner set amid ITC Gardenia's lush spaces.", img: "/assets/photos/citiy luxe/Bangalore/ITC Gardenia, a Luxury Collection Hotel, Bengaluru/blrgl-dinner-9934-hor-wide.avif" },
     ],
   },
   {
@@ -231,7 +277,14 @@ const cityDestinations = [
       { label: "Decor & Production", value: "₹30 – ₹85 Lacs" },
     ],
     slides: [
-      { label: "Taj West End Bengaluru", desc: "A legendary 20-acre Victorian heritage estate in Bengaluru.", img: "/assets/photos/citiy luxe/taj-westend-banglore.jpg" },
+      { label: "The Estate", desc: "Taj West End's legendary 20-acre Victorian heritage estate.", img: "/assets/photos/citiy luxe/Bangalore/Taj West End, Bengaluru/84fcb6940fa56fd0fe843e0b092affb417be8b9b-3840x1860.avif" },
+      { label: "Prince of Wales Lawns", desc: "The iconic Prince of Wales Lawns for grand alfresco ceremonies.", img: "/assets/photos/citiy luxe/Bangalore/Taj West End, Bengaluru/4ce6c5815247af57cfb7e451839d130a8c3f3622-4660x3495.avif" },
+      { label: "Grand Ballroom", desc: "The Grand Ballroom for intimate to grand indoor affairs.", img: "/assets/photos/citiy luxe/Bangalore/Taj West End, Bengaluru/5790f3969d59fcfbfae2e645fe84676be3c64cd6-1920x1274.avif" },
+      { label: "Heritage Gardens", desc: "Century-old tropical gardens surrounding the estate.", img: "/assets/photos/citiy luxe/Bangalore/Taj West End, Bengaluru/658a602eb7e9b0af07f54193c1d3a2ac11ce8531-2048x1536.avif" },
+      { label: "Celebrations", desc: "A grand wedding celebration at Taj West End.", img: "/assets/photos/citiy luxe/Bangalore/Taj West End, Bengaluru/bb9663695af1a8b6fed00e6bcd6dd3ab6409b96b-2500x1662.avif" },
+      { label: "Colonial Suites", desc: "Colonial-style rooms and suites nestled amid lush gardens.", img: "/assets/photos/citiy luxe/Bangalore/Taj West End, Bengaluru/bc9c310902c60f66cb6b39c2d15c6e22776049ba-1920x1316.avif" },
+      { label: "Evening Ambience", desc: "Taj West End beautifully lit for an evening celebration.", img: "/assets/photos/citiy luxe/Bangalore/Taj West End, Bengaluru/ce5858e29ff6e93f7f9d15c76b4bcf0205230b2e-1920x1404.avif" },
+      { label: "Garden Setting", desc: "The famed 150-year-old Rain Tree amid heritage gardens.", img: "/assets/photos/citiy luxe/Bangalore/Taj West End, Bengaluru/2f933d5e3d90de64c4362d35a394eb5342864f0f-1920x1438.avif" },
     ],
   },
   {
@@ -252,7 +305,14 @@ const cityDestinations = [
       { label: "Decor & Production", value: "₹50 Lacs – ₹1.2 Cr" },
     ],
     slides: [
-      { label: "Prestige Golfshire", desc: "JW Marriott resort with an 18-hole golf course near Nandi Hills.", img: "/assets/photos/citiy luxe/prestigegolfshire-banglore.jpg" },
+      { label: "Prestige Golfshire", desc: "JW Marriott Prestige Golfshire set against Nandi Hills.", img: "/assets/photos/citiy luxe/Bangalore/Prestige Golfshire, JW Marriot/Prestige Golfshire.jpg" },
+      { label: "The Estate", desc: "The sprawling Prestige Golfshire estate.", img: "/assets/photos/citiy luxe/Bangalore/Prestige Golfshire, JW Marriot/Prestige Golfshire 1.jpg" },
+      { label: "Celebrations", desc: "A grand wedding celebration at Prestige Golfshire.", img: "/assets/photos/citiy luxe/Bangalore/Prestige Golfshire, JW Marriot/Prestige Golfshire 2.jpg" },
+      { label: "Venue Spaces", desc: "Versatile event spaces at JW Marriott Golfshire.", img: "/assets/photos/citiy luxe/Bangalore/Prestige Golfshire, JW Marriot/Prestige Golfshire 3.jpg" },
+      { label: "Outdoor Setting", desc: "Manicured lawns for alfresco ceremonies.", img: "/assets/photos/citiy luxe/Bangalore/Prestige Golfshire, JW Marriot/Prestige Golfshire 4.jpg" },
+      { label: "Golf Course", desc: "The world-class 18-hole golf course at Prestige Golfshire.", img: "/assets/photos/citiy luxe/Bangalore/Prestige Golfshire, JW Marriot/Prestige Golfshire 5.jpg" },
+      { label: "Interiors", desc: "Elegantly appointed interiors at JW Marriott Golfshire.", img: "/assets/photos/citiy luxe/Bangalore/Prestige Golfshire, JW Marriot/Prestige Golfshire 6.jpg" },
+      { label: "Evening Ambience", desc: "Prestige Golfshire beautifully lit for an evening celebration.", img: "/assets/photos/citiy luxe/Bangalore/Prestige Golfshire, JW Marriot/Prestige Golfshire 7.jpg" },
     ],
   },
   {
@@ -272,7 +332,13 @@ const cityDestinations = [
       { label: "Decor & Production", value: "₹12 – ₹25 Lacs" },
     ],
     slides: [
-      { label: "Kings Meadow Bengaluru", desc: "A purpose-built luxury wedding venue in North Bengaluru.", img: "/assets/photos/citiy luxe/kings-meadows-banglore.jpg" },
+      { label: "The Venue", desc: "Kings Meadow — a purpose-built luxury wedding destination.", img: "/assets/photos/citiy luxe/Bangalore/The King_s Meadows _ Luxury Wedding Venue in Bangalore/ASHK1710-scaled.jpg" },
+      { label: "Grand Ballroom", desc: "The pillar-less ballroom — one of Bengaluru's largest.", img: "/assets/photos/citiy luxe/Bangalore/The King_s Meadows _ Luxury Wedding Venue in Bangalore/DSC_5804-new-copy-scaled.jpg" },
+      { label: "Manicured Lawns", desc: "Beautifully landscaped lawns for grand outdoor ceremonies.", img: "/assets/photos/citiy luxe/Bangalore/The King_s Meadows _ Luxury Wedding Venue in Bangalore/DSC_5868-new-3-2-1.jpg" },
+      { label: "Celebration", desc: "A grand wedding celebration at Kings Meadow.", img: "/assets/photos/citiy luxe/Bangalore/The King_s Meadows _ Luxury Wedding Venue in Bangalore/DSC_6035.jpg" },
+      { label: "Poolside", desc: "The charming poolside area for haldi and daytime rituals.", img: "/assets/photos/citiy luxe/Bangalore/The King_s Meadows _ Luxury Wedding Venue in Bangalore/SPX02745.jpg" },
+      { label: "Outdoor Setting", desc: "Kings Meadow's open-canvas outdoor event spaces.", img: "/assets/photos/citiy luxe/Bangalore/The King_s Meadows _ Luxury Wedding Venue in Bangalore/f6f24c_0058c24483114c2eb919d70808b983f6mv2.webp" },
+      { label: "Evening", desc: "Kings Meadow brilliantly lit for a starlit reception.", img: "/assets/photos/citiy luxe/Bangalore/The King_s Meadows _ Luxury Wedding Venue in Bangalore/f6f24c_0a5d260b843b49a590cdb83e213e7348mv2.jpg" },
     ],
   },
   {
@@ -292,7 +358,16 @@ const cityDestinations = [
       { label: "Decor & Production", value: "₹10 – ₹25 Lacs" },
     ],
     slides: [
-      { label: "Angsana Oasis Bengaluru", desc: "A Mediterranean-inspired spa resort in North Bengaluru.", img: "/assets/photos/citiy luxe/angsana-banglore.jpg" },
+      { label: "The Resort", desc: "Angsana Oasis — a tranquil Mediterranean-inspired sanctuary.", img: "/assets/photos/citiy luxe/Bangalore/Angsana Oasis Spa And Resort/unnamed.webp" },
+      { label: "Senate Hall", desc: "The elegant Senate Hall for indoor ceremonies and receptions.", img: "/assets/photos/citiy luxe/Bangalore/Angsana Oasis Spa And Resort/Senate_Hall_3jSYP60_If9UzhP.jpg" },
+      { label: "Main Lawn", desc: "The sprawling Main Lawn for grand outdoor gatherings.", img: "/assets/photos/citiy luxe/Bangalore/Angsana Oasis Spa And Resort/unnamed (1).webp" },
+      { label: "Celebrations", desc: "A beautiful celebration set amid Angsana's open-air courtyards.", img: "/assets/photos/citiy luxe/Bangalore/Angsana Oasis Spa And Resort/_DSC8693-Edit.webp" },
+      { label: "Garden Setting", desc: "Lush garden spaces at Angsana Oasis.", img: "/assets/photos/citiy luxe/Bangalore/Angsana Oasis Spa And Resort/_DSC8766-Edit.webp" },
+      { label: "Presidential Suite", desc: "The Presidential Suite bedroom at Angsana Oasis.", img: "/assets/photos/citiy luxe/Bangalore/Angsana Oasis Spa And Resort/an-bangalore-Presidential-Suite-Bedroom-1200X675.webp" },
+      { label: "Garden Suite", desc: "The Garden Suite living room — serene and elegantly appointed.", img: "/assets/photos/citiy luxe/Bangalore/Angsana Oasis Spa And Resort/an-bangalore-garden-suite-living-room-1200X675 (1).webp" },
+      { label: "Sundance Bistro", desc: "Sundance Bistro — casual dining in a tropical setting.", img: "/assets/photos/citiy luxe/Bangalore/Angsana Oasis Spa And Resort/an-bangalore-Sundance-Bistro-Sitting-Area-1200X675.webp" },
+      { label: "Tangerine Restaurant", desc: "Tangerine Restaurant — award-winning dining at Angsana.", img: "/assets/photos/citiy luxe/Bangalore/Angsana Oasis Spa And Resort/an-bangalore-Tangerine-Restaurant-Side-View-1200X675.webp" },
+      { label: "Property View", desc: "The beautiful grounds of Angsana Oasis Spa & Resort.", img: "/assets/photos/citiy luxe/Bangalore/Angsana Oasis Spa And Resort/34 - Copy.webp" },
     ],
   },
 ];
@@ -441,7 +516,7 @@ export default function CitiesMetropolitansPage() {
   return (
     <div ref={containerRef} className="bg-bg overflow-x-hidden flex flex-col gap-0 p-0 m-0">
       {/* HERO BANNER */}
-      <section className="relative h-[90vh] w-full flex items-center justify-center overflow-hidden m-0 p-0">
+      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden m-0 p-0">
         <div className="absolute inset-0 z-0">
           <Image
             src="/assets/photos/destination/cities-wedding.jpg"

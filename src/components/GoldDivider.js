@@ -23,8 +23,8 @@ const GoldDivider = ({ variant = "heading", flip = false, darkBg = false, classN
   return (
     <svg
       width="500"
-      height="52"
-      viewBox="0 0 500 52"
+      height="35"
+      viewBox="0 13 500 35"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={`opacity-90 max-w-full ${className}`}

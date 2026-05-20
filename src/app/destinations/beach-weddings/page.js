@@ -390,7 +390,7 @@ export default function BeachWeddingsPage() {
   return (
     <div ref={containerRef} className="bg-bg overflow-x-hidden flex flex-col gap-0 p-0 m-0">
       {/* HERO BANNER */}
-      <section className="relative h-[90vh] w-full flex items-center justify-center overflow-hidden m-0 p-0">
+      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden m-0 p-0">
         <div className="absolute inset-0 z-0">
           <Image
             src="/assets/photos/destination/beach-wedding-img.jpg"

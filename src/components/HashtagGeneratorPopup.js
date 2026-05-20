@@ -1,53 +1,70 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import html2canvas from 'html2canvas';
 
-const TYPEWRITER_WORDS = ['#ForeverUs', '#SoulMates', '#LoveStory', '#TiedTheKnot', '#HappilyEverAfter'];
-const TYPE_SPEED = 90;
-const DELETE_SPEED = 55;
-const PAUSE_AFTER = 1400;
-const PAUSE_BEFORE = 300;
+const TAB_WORDS = ['#ForUs', '#OurVows', '#JustUs', '#InLove', '#Bliss'];
+const TAB_TYPE = 105;
+const TAB_DELETE = 65;
+const TAB_PAUSE = 1300;
 
 const HashtagGeneratorPopup = () => {
   const [open, setOpen] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [typed, setTyped] = useState('');
-  const [wordIndex, setWordIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [popIn, setPopIn] = useState(false);
   const [formData, setFormData] = useState({ bride: '', groom: '', vibe: '', loveWord: '' });
   const [loading, setLoading] = useState(false);
   const [hashtags, setHashtags] = useState([]);
   const [error, setError] = useState('');
 
+  // Ref for direct DOM text update — no React re-renders for typewriter
+  const tabTextRef = useRef(null);
+  const tabStateRef = useRef({ word: 0, text: '', deleting: false });
+
   const vibes = ['Royal', 'Romantic', 'Whimsical', 'Modern'];
 
-  // Scroll-triggered appearance — show after scrolling past hero
+  // Scroll-triggered appearance — fires setVisible once, setPopIn once
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.6);
+    const onScroll = () => {
+      const isNowVisible = window.scrollY > window.innerHeight * 0.6;
+      setVisible(prev => {
+        if (!prev && isNowVisible) {
+          setPopIn(true);
+          setTimeout(() => setPopIn(false), 750);
+        }
+        return isNowVisible;
+      });
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Typewriter loop
+  // Tab typewriter — runs once, updates DOM directly, zero re-renders
   useEffect(() => {
-    const word = TYPEWRITER_WORDS[wordIndex];
-    let timeout;
-    if (!isDeleting && typed === word) {
-      timeout = setTimeout(() => setIsDeleting(true), PAUSE_AFTER);
-    } else if (isDeleting && typed === '') {
-      timeout = setTimeout(() => {
-        setIsDeleting(false);
-        setWordIndex((i) => (i + 1) % TYPEWRITER_WORDS.length);
-      }, PAUSE_BEFORE);
-    } else {
-      timeout = setTimeout(() => {
-        setTyped(isDeleting ? word.slice(0, typed.length - 1) : word.slice(0, typed.length + 1));
-      }, isDeleting ? DELETE_SPEED : TYPE_SPEED);
-    }
-    return () => clearTimeout(timeout);
-  }, [typed, isDeleting, wordIndex]);
+    let timer;
+    const tick = () => {
+      const s = tabStateRef.current;
+      const word = TAB_WORDS[s.word];
+      if (!s.deleting && s.text === word) {
+        timer = setTimeout(() => { s.deleting = true; tick(); }, TAB_PAUSE);
+      } else if (s.deleting && s.text === '') {
+        timer = setTimeout(() => {
+          s.deleting = false;
+          s.word = (s.word + 1) % TAB_WORDS.length;
+          tick();
+        }, 300);
+      } else {
+        s.text = s.deleting
+          ? word.slice(0, s.text.length - 1)
+          : word.slice(0, s.text.length + 1);
+        if (tabTextRef.current) tabTextRef.current.textContent = s.text || '#';
+        timer = setTimeout(tick, s.deleting ? TAB_DELETE : TAB_TYPE);
+      }
+    };
+    tick();
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handler = (e) => { if (e.key === 'Escape') setOpen(false); };
@@ -105,38 +122,191 @@ const HashtagGeneratorPopup = () => {
 
   return (
     <>
-      {/* Vertical Spark + Text Tab — scroll-triggered */}
+      {/* Hashtag Tab — scroll-triggered, spring pop entrance */}
       <button
         onClick={() => setOpen(true)}
         aria-label="Wedding Hashtag Generator"
-        className="fixed left-0 top-1/2 z-40 group focus:outline-none"
+        className="hashtag-btn fixed left-0 top-1/2 z-40 focus:outline-none"
         style={{
-          transform: `translateY(-50%) translateX(${visible ? '0px' : '-100%'})`,
-          transition: 'transform 0.7s cubic-bezier(0.23, 1, 0.32, 1)',
+          transform: `translateY(-50%) translateX(${visible ? '0px' : '-115%'})`,
+          transition: 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)',
         }}
       >
+        {/* Glow ring — static border+shadow, only opacity animates (compositor-only) */}
         <div
-          className="flex flex-col items-center gap-3 bg-[#0E0E0E] border border-l-0 border-gold/40 group-hover:border-gold/80 transition-all duration-300 px-[10px] py-5"
+          className="hashtag-glow-ring"
           style={{
-            borderRadius: '0 10px 10px 0',
-            boxShadow: '4px 0 24px rgba(201,162,52,0.14)',
+            position: 'absolute',
+            inset: '-3px',
+            borderRadius: '0 13px 13px 0',
+            border: '1.5px solid rgba(201,162,52,0.65)',
+            boxShadow: '0 0 18px rgba(201,162,52,0.3), 4px 0 28px rgba(201,162,52,0.2)',
+            pointerEvents: 'none',
+            zIndex: 0,
+          }}
+        />
+
+        {/* Main pill — hover handled entirely by CSS */}
+        <div
+          className={`hashtag-pill${popIn ? ' hashtag-pop-in' : ''}`}
+          style={{
+            position: 'relative',
+            zIndex: 1,
+            borderRadius: '0 11px 11px 0',
+            minHeight: '150px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            overflow: 'hidden',
+            padding: '22px 0',
           }}
         >
-          {/* Sparkle */}
-          <span className="text-[#C9A234] text-[13px] leading-none group-hover:scale-110 transition-transform duration-300">✦</span>
+          {/* Default: sparkle + typewriter word (ref-driven, no re-renders) */}
+          <div className="hashtag-default" style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '9px',
+            position: 'absolute',
+            pointerEvents: 'none',
+          }}>
+            <span className="hashtag-sparkle-pulse" style={{ color: '#C9A234', fontSize: '12px', lineHeight: 1 }}>✦</span>
+            <div style={{ width: '1px', height: '14px', background: 'rgba(201,162,52,0.25)' }} />
+            <span style={{
+              writingMode: 'vertical-rl',
+              transform: 'rotate(180deg)',
+              color: '#F5EDD6',
+              fontSize: '9.5px',
+              letterSpacing: '0.2em',
+              whiteSpace: 'nowrap',
+              fontFamily: 'var(--font-body, sans-serif)',
+            }}>
+              <span ref={tabTextRef}>#</span>
+              <span className="hashtag-cursor" />
+            </span>
+          </div>
 
-          {/* Divider */}
-          <div className="w-px h-4 bg-[#C9A234]/30" />
-
-          {/* # Generator — vertical */}
-          <span
-            className="font-body uppercase tracking-[0.25em] text-[#FDFAF5] text-[9px] group-hover:text-[#C9A234] transition-colors duration-300 whitespace-nowrap"
-            style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
-          >
-            # Generator
-          </span>
+          {/* Hover reveal */}
+          <div className="hashtag-hover-reveal" style={{
+            textAlign: 'center',
+            padding: '0 14px',
+            width: '100%',
+            pointerEvents: 'none',
+          }}>
+            <span style={{ color: '#C9A234', fontSize: '18px', display: 'block', marginBottom: '10px', filter: 'drop-shadow(0 0 6px rgba(201,162,52,0.6))' }}>✦</span>
+            <span style={{
+              color: 'rgba(201,162,52,0.8)',
+              fontSize: '8.5px',
+              letterSpacing: '0.25em',
+              textTransform: 'uppercase',
+              display: 'block',
+              fontFamily: 'var(--font-body, sans-serif)',
+              whiteSpace: 'nowrap',
+            }}>
+              Create Your
+            </span>
+            <span style={{
+              color: '#FDFAF5',
+              fontSize: '14px',
+              fontStyle: 'italic',
+              display: 'block',
+              marginTop: '5px',
+              fontFamily: 'var(--font-heading, Georgia, serif)',
+              whiteSpace: 'nowrap',
+              letterSpacing: '0.03em',
+            }}>
+              Hashtag
+            </span>
+            <div style={{ width: '24px', height: '1px', background: 'rgba(201,162,52,0.4)', margin: '10px auto 0' }} />
+            <span style={{
+              color: 'rgba(201,162,52,0.5)',
+              fontSize: '7.5px',
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              display: 'block',
+              marginTop: '8px',
+              fontFamily: 'var(--font-body, sans-serif)',
+              whiteSpace: 'nowrap',
+            }}>
+              Just For You
+            </span>
+          </div>
         </div>
       </button>
+
+      <style>{`
+        /* Pill — hover via CSS, no JS state */
+        .hashtag-pill {
+          width: 38px;
+          background: linear-gradient(135deg, #111000 0%, #0A0800 100%);
+          border: 1px solid rgba(201,162,52,0.45);
+          border-left: none;
+          transition: width 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                      background 0.35s ease,
+                      border-color 0.3s ease;
+        }
+        .hashtag-btn:hover .hashtag-pill {
+          width: 156px;
+          background: linear-gradient(135deg, #1a1200 0%, #0E0900 100%);
+          border-color: rgba(201,162,52,0.9);
+        }
+        .hashtag-default {
+          opacity: 1;
+          transition: opacity 0.15s ease;
+        }
+        .hashtag-btn:hover .hashtag-default { opacity: 0; }
+        .hashtag-hover-reveal {
+          opacity: 0;
+          transition: opacity 0.28s ease 0.2s;
+        }
+        .hashtag-btn:hover .hashtag-hover-reveal { opacity: 1; }
+
+        /* Spring pop on entry — compositor-friendly (transform + opacity only) */
+        @keyframes hashtagPopIn {
+          0%   { transform: scale(0.45); opacity: 0; }
+          55%  { transform: scale(1.14); opacity: 1; }
+          75%  { transform: scale(0.93); }
+          90%  { transform: scale(1.04); }
+          100% { transform: scale(1); }
+        }
+        .hashtag-pop-in {
+          animation: hashtagPopIn 0.72s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+          will-change: transform, opacity;
+        }
+
+        /* Glow ring — opacity-only animation, no paint cost */
+        @keyframes hashtagGlowRing {
+          0%, 100% { opacity: 0.35; }
+          50%      { opacity: 1; }
+        }
+        .hashtag-glow-ring {
+          animation: hashtagGlowRing 2.8s ease-in-out infinite;
+          will-change: opacity;
+        }
+
+        /* Sparkle — transform + opacity only */
+        @keyframes hashtagSparklePulse {
+          0%, 100% { opacity: 0.7; transform: scale(1); }
+          50%      { opacity: 1;   transform: scale(1.25); }
+        }
+        .hashtag-sparkle-pulse {
+          animation: hashtagSparklePulse 2s ease-in-out infinite;
+          will-change: transform, opacity;
+        }
+
+        /* Cursor blink */
+        @keyframes hashtagCursorBlink {
+          0%, 100% { opacity: 1; }
+          50%      { opacity: 0; }
+        }
+        .hashtag-cursor {
+          display: inline-block;
+          width: 0;
+          border-right: 1.5px solid rgba(201,162,52,0.7);
+          animation: hashtagCursorBlink 1s step-end infinite;
+          will-change: opacity;
+        }
+      `}</style>
 
       {/* Modal Overlay */}
       {open && (

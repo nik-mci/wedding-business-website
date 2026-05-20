@@ -68,22 +68,30 @@ export default function AboutPage() {
         <div className="hero-left bg-bg flex flex-col justify-center items-center text-center p-16 pt-[140px] relative w-full">
           <CornerOrnament size={44} inset={16} opacity={0.4} />
 
-          {/* Decorative vertical motif */}
-          <div className="absolute top-[18%] left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none" style={{ opacity: 0.2, color: '#C9A234' }}>
-            <div className="w-px h-20 bg-current"></div>
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          {/* Decorative vertical motif — anchored near top, clear of content */}
+          <div className="absolute top-[8%] left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none" style={{ opacity: 0.22, color: '#C9A234' }}>
+            <div className="w-px h-12 bg-current"></div>
+            <svg width="18" height="18" viewBox="0 0 22 22" fill="none">
               <path d="M11 1 L21 11 L11 21 L1 11 Z" stroke="currentColor" strokeWidth="1.2" fill="none"/>
               <path d="M11 5 L17 11 L11 17 L5 11 Z" stroke="currentColor" strokeWidth="0.7" fill="none" opacity="0.6"/>
               <circle cx="11" cy="11" r="1.5" fill="currentColor"/>
             </svg>
-            <div className="w-px h-10 bg-current"></div>
+            <div className="w-px h-5 bg-current"></div>
           </div>
 
-          <div className="flex flex-col items-center w-full" style={{ textAlign: 'center' }}>
-            <GoldDivider className="mb-5" />
-            <p className="hero-left-eyebrow opacity-0 translate-y-6 text-[10px] tracking-[0.5em] uppercase font-medium mb-4" style={{ color: 'var(--color-gold)' }}>Our Story</p>
-            <h1 className="hero-left-title opacity-0 translate-y-6 font-heading text-ink text-7xl font-light leading-[1.05]">Where <em className="italic">Vision</em><br />Meets <em className="italic">Devotion</em></h1>
-            <GoldDivider flip className="mt-5" />
+          <div className="flex flex-col items-center w-full text-center">
+            <GoldDivider className="mb-3" />
+            <p className="hero-left-eyebrow opacity-0 translate-y-6 text-[10px] tracking-[0.5em] uppercase font-medium mb-1" style={{ color: 'var(--color-gold)' }}>Our Story</p>
+            <h1 className="hero-left-title opacity-0 translate-y-6 font-heading text-ink text-7xl font-light leading-none tracking-[-0.02em]">
+              <span className="block">Where <em className="italic">Vision</em></span>
+              <span className="flex items-center justify-center gap-3 py-[10px]">
+                <span className="w-8 h-px bg-[#C9A234] opacity-50"></span>
+                <span className="w-[5px] h-[5px] rounded-full bg-[#C9A234] opacity-65 flex-shrink-0"></span>
+                <span className="w-8 h-px bg-[#C9A234] opacity-50"></span>
+              </span>
+              <span className="block">Meets <em className="italic">Devotion</em></span>
+            </h1>
+            <GoldDivider flip className="mt-8" />
           </div>
         </div>
         <div className="hero-right relative overflow-hidden hidden md:block">
@@ -173,23 +181,22 @@ export default function AboutPage() {
       </div>
 
       {/* SECTION 4 — VALUES */}
-      <section id="values" className="bg-ink py-16 md:py-20 px-12 border-none">
+      <section id="values" className="bg-ink py-10 md:py-12 px-12 border-none">
         <div className="flex flex-col items-center text-center">
           <GoldDivider darkBg className="mb-4 reveal" />
           <p className="section-label reveal">What Drives Us</p>
           <h2 className="section-title reveal text-surface">Our <em className="italic">Values</em></h2>
           <GoldDivider darkBg flip className="mt-2 reveal" />
         </div>
-        <div className="values-grid mt-16 grid grid-cols-1 md:grid-cols-3 gap-0.5">
+        <div className="values-grid mt-8 grid grid-cols-1 md:grid-cols-3 gap-0.5">
           {[
-            { num: "01", name: "Intention", desc: "Every decision we make is purposeful. From the colour of the marigolds to the sequencing of the evening — nothing is accidental." },
-            { num: "02", name: "Craft", desc: "We treat wedding design as an art form. Our team brings mastery, imagination and years of experience to every celebration." },
-            { num: "03", name: "Devotion", desc: "We fall a little in love with every couple we work with. Your joy is our purpose — and it shows in everything we do." }
+            { name: "Intention", desc: "Every decision we make is purposeful. From the colour of the marigolds to the sequencing of the evening — nothing is accidental." },
+            { name: "Craft", desc: "We treat wedding design as an art form. Our team brings mastery, imagination and years of experience to every celebration." },
+            { name: "Devotion", desc: "We fall a little in love with every couple we work with. Your joy is our purpose — and it shows in everything we do." }
           ].map((val, i) => (
             <div key={i} className={`value-card reveal stagger-${i + 1}`}>
-              <p className="value-num">{val.num}</p>
-              <h3 className="value-name font-heading text-surface text-3xl mb-1 relative inline-block after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-gold after:transition-all after:duration-400 group-hover:after:w-full">{val.name}</h3>
-              <p className="value-desc text-[12px] leading-[1.9] text-surface/50 font-light mt-5">{val.desc}</p>
+              <h3 className="value-name font-heading text-ink text-2xl mb-1 relative inline-block">{val.name}</h3>
+              <p className="value-desc text-[12px] leading-[1.9] text-ink/60 font-light mt-3">{val.desc}</p>
             </div>
           ))}
         </div>
@@ -255,10 +262,10 @@ export default function AboutPage() {
         .hero-left-title { animation: fadeUp .9s .5s both; }
         @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
         
-        .value-card { background: #252220; padding: 56px 40px; border-bottom: 2px solid transparent; transition: border-color .3s, transform .3s; }
+        .value-card { background: #F5EDD4; padding: 28px 28px; border-bottom: 2px solid transparent; transition: border-color .3s, transform .3s; }
         .value-card:hover { border-color: var(--color-gold); transform: translateY(-4px); }
-        .value-num { font-family: var(--font-heading); font-size: 64px; color: rgba(191,164,106,0.15); font-weight: 300; line-height: 1; margin-bottom: 24px; }
-        .value-name::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--color-gold); transition:width .4s var(--ease-custom); }
+        .value-name { position: relative; }
+        .value-name::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--color-gold); transition:width .4s; }
         .value-card:hover .value-name::after { width: 100%; }
       `}</style>
     </div>

@@ -113,7 +113,12 @@ const hillDestinations = [
       { label: "Decor & Production", value: "₹25 – ₹65 Lacs" },
     ],
     slides: [
-      { label: "The Lalit Grand Palace", desc: "A royal palace overlooking Dal Lake in Srinagar.", img: "/assets/photos/hill-weddings/srinagar-the-lalit.png" },
+      { label: "The Palace", desc: "The Lalit Grand Palace overlooking the serene Dal Lake.", img: "/assets/photos/hill-weddings/Lalit Srinagar/Lalit Srinagar.jpg" },
+      { label: "Palace Grounds", desc: "Manicured historic lawns beneath century-old Chinar trees.", img: "/assets/photos/hill-weddings/Lalit Srinagar/Lalit Srinagar 1.jpg" },
+      { label: "Heritage View", desc: "The palace's Himalayan heritage architecture in full grandeur.", img: "/assets/photos/hill-weddings/Lalit Srinagar/Lali Srinagar 2.jpg" },
+      { label: "Dal Lake Setting", desc: "Breathtaking Dal Lake valley views from the palace.", img: "/assets/photos/hill-weddings/Lalit Srinagar/Lalit Srinagar 3.jpg" },
+      { label: "Celebrations", desc: "A royal wedding celebration at The Lalit Grand Palace.", img: "/assets/photos/hill-weddings/Lalit Srinagar/Lalit Srinagar 4.jpg" },
+      { label: "Evening Ambience", desc: "The Lalit Grand Palace beautifully lit at dusk.", img: "/assets/photos/hill-weddings/Lalit Srinagar/Lalit Srinagar 5.jpg" },
     ],
   },
 ];
@@ -262,7 +267,7 @@ export default function HillsWeddingsPage() {
   return (
     <div ref={containerRef} className="bg-bg overflow-x-hidden flex flex-col gap-0 p-0 m-0">
       {/* HERO BANNER */}
-      <section className="relative h-[90vh] w-full flex items-center justify-center overflow-hidden m-0 p-0">
+      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden m-0 p-0">
         <div className="absolute inset-0 z-0">
           <Image
             src="/assets/photos/destination/hills-image.jpg"

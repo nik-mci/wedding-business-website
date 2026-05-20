@@ -256,7 +256,7 @@ export default function ServicesPage() {
   }, []);
 
   return (
-    <div className="pt-20 bg-[#FDFAF5]">
+    <div className="bg-[#FDFAF5]">
       {/* PAGE HERO (EXISTING) */}
       <div className="page-hero">
         <div

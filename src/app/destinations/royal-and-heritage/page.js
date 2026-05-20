@@ -29,7 +29,14 @@ const heritageDestinations = [
       { label: "Decor & Production", value: "₹35 – ₹70 Lacs" },
     ],
     slides: [
-      { label: "Leela Palace Jaipur", desc: "A majestic tribute to Rajasthan's royal heritage.", img: "/assets/photos/royal-and-heritage/leela palace-jaipur.jpg" },
+      { label: "Celebrations", desc: "Grand celebration spaces at The Leela Palace Jaipur.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/The Leela Palace Jaipur/Celebrations 1920x950.webp" },
+      { label: "Fountain Courtyard", desc: "The iconic fountain courtyard at The Leela Palace.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/The Leela Palace Jaipur/Fountain Courtyard_1920x950.webp" },
+      { label: "Maharaja Suite", desc: "Opulent Maharaja Suite overlooking palace grounds.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/The Leela Palace Jaipur/Maharaja Suite_1920x950_2.webp" },
+      { label: "Royal Villa Outdoor", desc: "Private outdoor space at the Royal Villa.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/The Leela Palace Jaipur/Royal Villa Outdoor-1200x790-a6302a1.jpg" },
+      { label: "Swimming Pool", desc: "Serene pool set against the Aravalli hills.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/The Leela Palace Jaipur/Swimming Pool_1920x950.webp" },
+      { label: "Culinary", desc: "Award-winning dining at The Leela Palace Jaipur.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/The Leela Palace Jaipur/Culinary1.jpg" },
+      { label: "Spa", desc: "The Leela's world-class wellness and spa.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/The Leela Palace Jaipur/Spa-4297x6621-788a7b4_810x520.webp" },
+      { label: "Lobby", desc: "The grand entrance and lobby of The Leela Palace.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/The Leela Palace Jaipur/DDS01230_0.jpg" },
     ],
   },
   {
@@ -50,7 +57,13 @@ const heritageDestinations = [
       { label: "Decor & Production", value: "₹30 – ₹65 Lacs" },
     ],
     slides: [
-      { label: "Hyatt Regency Jaipur", desc: "A palatial marvel blending Rajasthani grandeur with modern luxury.", img: "/assets/photos/royal-and-heritage/hyatt_jaipur.jpg" },
+      { label: "Central Courtyard", desc: "The grand central courtyard of Hyatt Regency Jaipur.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Hyatt Regency Jaipur Mansarovar/JAIRJ-P0001-Central-Courtyard.16x9.webp" },
+      { label: "Chauras Bagh", desc: "Expansive Chauras Bagh lawn for grand outdoor celebrations.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Hyatt Regency Jaipur Mansarovar/JAIRJ-P0005-Chauras-Bagh.16x9.webp" },
+      { label: "Regency Ballroom", desc: "The pillarless Regency Ballroom for lavish receptions.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Hyatt Regency Jaipur Mansarovar/JAIRJ-P0098-Regency-Ballroom.16x9.webp" },
+      { label: "Presidential Suite", desc: "Luxurious Presidential Suite living room.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Hyatt Regency Jaipur Mansarovar/JAIRJ-P0097-Presidential-Suite-Living-Room.16x9.webp" },
+      { label: "Tower King Room", desc: "Elegantly appointed Tower King guestroom.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Hyatt Regency Jaipur Mansarovar/JAIRJ-P0030-Tower-King-Room.16x9.webp" },
+      { label: "Swimming Pool", desc: "The resort-style pool set within palace gardens.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Hyatt Regency Jaipur Mansarovar/JAIRJ-P0014-Swimming-Pool.16x9.webp" },
+      { label: "Royal Bakery Bar", desc: "The Royal Bakery Bar with artisanal bites and cocktails.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Hyatt Regency Jaipur Mansarovar/JAIRJ-P0009-Royal-Bakery-Bar-Seating.16x9.webp" },
     ],
   },
   {
@@ -70,7 +83,16 @@ const heritageDestinations = [
       { label: "Decor & Production", value: "₹40 Lacs – ₹1.2 Cr" },
     ],
     slides: [
-      { label: "Alila Fort Bishangarh", desc: "A 236-year-old warrior fortress perched on a granite hill.", img: "/assets/photos/royal-and-heritage/alila_fort.jpg" },
+      { label: "Fort View", desc: "Alila Fort Bishangarh rising above the Aravalli landscape.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Alila Fort Bishangarh/JAIAL-R0001-View.16x9.webp" },
+      { label: "Aravalli View", desc: "Sweeping 360-degree views from the Nazaara terrace.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Alila Fort Bishangarh/Alila-Fort-Bishangarh-P035-Aravali-View.16x9.webp" },
+      { label: "Exterior at Night", desc: "The fort dramatically lit against the night sky.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Alila Fort Bishangarh/Alila-Fort-Bishangarh-P021-Exterior-at-Night.16x9.webp" },
+      { label: "Wedding Couple", desc: "A royal celebration within the fort's ancient walls.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Alila Fort Bishangarh/Alila-Fort-Bishangarh-P037-Wedding-Couple.4x3.webp" },
+      { label: "Kachchawa Deck", desc: "The Kachchawa Deck for sundowners and ceremonies.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Alila Fort Bishangarh/Alila-Fort-Bishangarh-P025-Kachchawa-Deck.16x9.webp" },
+      { label: "Heritage Twin Room", desc: "Richly appointed Heritage Twin Room with fort views.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Alila Fort Bishangarh/Alila-Fort-Bishangarh-P007-Heritage-Twin-Room.16x9.webp" },
+      { label: "Tented Suite", desc: "Luxurious tented suite nestled within the fort grounds.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Alila Fort Bishangarh/JAIAL-P0058-Tented-Suite-Front-View.16x9.webp" },
+      { label: "Amarsar Restaurant", desc: "Heritage dining at the Amarsar Restaurant.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Alila Fort Bishangarh/Alila-Fort-Bishangarh-P015-Amarsar-Restaurant.16x9.webp" },
+      { label: "Celebrations", desc: "A grand wedding celebration within the fort.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Alila Fort Bishangarh/TSR52812.jpg" },
+      { label: "Ceremony", desc: "A candlelit ceremony at Alila Fort Bishangarh.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Alila Fort Bishangarh/TSR53156.jpg" },
     ],
   },
   {
@@ -90,7 +112,14 @@ const heritageDestinations = [
       { label: "Decor & Production", value: "₹15 – ₹35 Lacs" },
     ],
     slides: [
-      { label: "Samode Palace", desc: "A 475-year-old Indo-Saracenic marvel in the Aravalli hills.", img: "/assets/photos/royal-and-heritage/samode_jaipur.jpg" },
+      { label: "The Palace", desc: "Samode Palace rising from the Aravalli hills.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Samode Palace/1-24.jpg" },
+      { label: "Palace Grounds", desc: "The sprawling courtyards and gardens of Samode.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Samode Palace/1-29.jpg" },
+      { label: "Celebration", desc: "A grand celebration in the palace halls.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Samode Palace/2-1.jpg" },
+      { label: "Heritage Interior", desc: "Intricately hand-painted interiors and frescoed halls.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Samode Palace/2-2.jpg" },
+      { label: "Garden Setting", desc: "Lush palace gardens for open-air ceremonies.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Samode Palace/4-2.jpg" },
+      { label: "Royal Suite", desc: "A Royal Suite with ornate Rajasthani detailing.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Samode Palace/DSC8352_High_Res.jpg" },
+      { label: "Wedding Ceremony", desc: "A traditional wedding ceremony at Samode Palace.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Samode Palace/MG_8992.jpg" },
+      { label: "Evening Celebrations", desc: "The palace lit magnificently for an evening celebration.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaipur/Samode Palace/MG_9755.jpg" },
     ],
   },
   {
@@ -111,7 +140,17 @@ const heritageDestinations = [
       { label: "Decor & Production", value: "₹30 – ₹65 Lacs" },
     ],
     slides: [
-      { label: "Raffles Udaipur", desc: "A private island estate on Udai Sagar Lake.", img: "/assets/photos/royal-and-heritage/raffles.jpg" },
+      { label: "Island Estate", desc: "Raffles Udaipur — a private island on Udai Sagar Lake.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Raffles/2024-01-24.webp" },
+      { label: "Palace Gardens", desc: "Baroque-inspired gardens overlooking the lake.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Raffles/2024-06-17.webp" },
+      { label: "Celebrations", desc: "Grand celebrations at Raffles Udaipur.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Raffles/2024-08-16.webp" },
+      { label: "Ceremony Setup", desc: "An intimate ceremony set up on the Compass Lawn.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Raffles/2024-08-16 (1).webp" },
+      { label: "Property View", desc: "Sweeping views of the island and surrounding Aravallis.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Raffles/unnamed.webp" },
+      { label: "Interiors", desc: "Elegantly appointed suites at Raffles Udaipur.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Raffles/unnamed (1).webp" },
+      { label: "Dining", desc: "World-class dining with lake and garden views.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Raffles/unnamed (2).webp" },
+      { label: "Pool", desc: "The stunning infinity pool overlooking Udai Sagar Lake.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Raffles/unnamed (3).webp" },
+      { label: "Great Hall", desc: "The grand Great Hall ballroom at Raffles.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Raffles/unnamed (4).webp" },
+      { label: "Patisserie", desc: "Raffles Patisserie — intimate gatherings and high tea.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Raffles/unnamed (5).webp" },
+      { label: "Evening Ambience", desc: "Raffles Udaipur glowing at dusk.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Raffles/unnamed (6).webp" },
     ],
   },
   {
@@ -132,7 +171,18 @@ const heritageDestinations = [
       { label: "Decor & Production", value: "₹40 – ₹90 Lacs" },
     ],
     slides: [
-      { label: "Fairmont Udaipur", desc: "A grand palatial resort in the Aravalli Hills.", img: "/assets/photos/royal-and-heritage/fairmont.jpg" },
+      { label: "The Palace", desc: "Fairmont Udaipur Palace rising above the Aravalli Hills.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Fairmont Udaipur Palace/2025-08-01.webp" },
+      { label: "Grand Facade", desc: "The ornate facade of Fairmont Udaipur Palace.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Fairmont Udaipur Palace/2025-08-01 (1).webp" },
+      { label: "Jewel Ballroom", desc: "The majestic Jewel Ballroom for grand receptions.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Fairmont Udaipur Palace/2025-08-12.webp" },
+      { label: "Jashn Palace Garden", desc: "The expansive Jashn Palace Garden for outdoor celebrations.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Fairmont Udaipur Palace/2025-08-12 (1).webp" },
+      { label: "Chand Baori", desc: "The mystical Chand Baori stepwell-inspired setting.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Fairmont Udaipur Palace/2025-08-19.webp" },
+      { label: "Suites", desc: "Exquisitely designed suites with Aravalli views.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Fairmont Udaipur Palace/2025-08-19 (1).webp" },
+      { label: "Pool Terrace", desc: "The palatial pool terrace with sweeping hilltop views.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Fairmont Udaipur Palace/2025-09-10.webp" },
+      { label: "Celebrations", desc: "A grand wedding celebration at Fairmont Udaipur.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Fairmont Udaipur Palace/2025-12-18.webp" },
+      { label: "Evening Glow", desc: "Fairmont Udaipur Palace illuminated at dusk.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Fairmont Udaipur Palace/2025-12-25.webp" },
+      { label: "Interiors", desc: "Hand-painted domes and ornate marble columns within.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Fairmont Udaipur Palace/unnamed.webp" },
+      { label: "Decor", desc: "Richly detailed décor across the palace.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Fairmont Udaipur Palace/unnamed (1).webp" },
+      { label: "Aerial View", desc: "An aerial perspective of Fairmont's hilltop palace grounds.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Udaipur/Fairmont Udaipur Palace/unnamed.jpg" },
     ],
   },
   {
@@ -152,26 +202,14 @@ const heritageDestinations = [
       { label: "Decor & Production", value: "₹10 – ₹20 Lacs" },
     ],
     slides: [
-      { label: "Ajit Bhawan Jodhpur", desc: "India's first heritage hotel in the Blue City.", img: "/assets/photos/royal-and-heritage/ajitbhawan_jodhpur.jpg" },
-    ],
-  },
-  {
-    id: "H32",
-    name: "Rawla Narlai",
-    location: "ARAVALLI HILLS · NARLAI",
-    desc1: "Rawla Narlai is a meticulously restored 17th-century royal hunting lodge located in the Aravalli Hills, halfway between Jodhpur and Udaipur. This boutique heritage destination features individually decorated rooms offering an intimate yet grand setting for destination weddings...",
-    img: "royal-and-heritage/rawla_narai_royal.png",
-    stats: { rooms: "32" },
-    writeup: "Rawla Narlai is a meticulously restored 17th-century royal hunting lodge located in the Aravalli Hills, halfway between Jodhpur and Udaipur. This boutique heritage destination features individually decorated rooms — including the ornate Grand Heritage rooms — offering an intimate yet grand setting for destination weddings. The venue's crown jewel is the Stepwell Dinner at an 11th-century reservoir, where hundreds of lanterns and soulful folk music create a mystical atmosphere for pre-wedding functions. Additional spaces include lush frangipani-scented gardens, traditional courtyards, and the Jharokha Café. Known for its authentic Rajasthani hospitality and living-in-the-past charm, it is a premier choice for couples seeking a secluded, fairytale-like heritage celebration.",
-    glance: [
-      { label: "Rooms", value: "32" },
-      { label: "Buyout Cost", value: "₹35 – ₹60 Lacs" },
-      { label: "Accommodation", value: "₹16 – ₹35 Lacs / Night" },
-      { label: "F&B", value: "₹10 – ₹18 Lacs" },
-      { label: "Decor & Production", value: "₹12 – ₹20 Lacs" },
-    ],
-    slides: [
-      { label: "Rawla Narlai", desc: "A 17th-century royal hunting lodge in the Aravalli Hills.", img: "/assets/photos/royal-and-heritage/rawla_narai_royal.png" },
+      { label: "The Estate", desc: "Ajit Bhawan's sprawling crimson-sandstone estate in Jodhpur.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jodhpur/Ajit Bhawan/2021-12-18.webp" },
+      { label: "Heritage Grounds", desc: "The lush gardens and courtyards of Ajit Bhawan.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jodhpur/Ajit Bhawan/2024-03-15.webp" },
+      { label: "Palace View", desc: "The palace facade and surrounding grounds.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jodhpur/Ajit Bhawan/unnamed.webp" },
+      { label: "Zenana Garden", desc: "The lush Zenana Garden — perfect for traditional ceremonies.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jodhpur/Ajit Bhawan/unnamed (1).webp" },
+      { label: "Courtyard", desc: "The elegant Courtyard at the heart of the estate.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jodhpur/Ajit Bhawan/unnamed (2).webp" },
+      { label: "Heritage Suites", desc: "Uniquely designed heritage rooms and suites.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jodhpur/Ajit Bhawan/unnamed (3).webp" },
+      { label: "Celebrations", desc: "A royal celebration amidst Rajputana heritage.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jodhpur/Ajit Bhawan/unnamed (4).webp" },
+      { label: "Evening Ambience", desc: "Ajit Bhawan glowing under the Jodhpur night sky.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jodhpur/Ajit Bhawan/unnamed (5).webp" },
     ],
   },
   {
@@ -192,7 +230,15 @@ const heritageDestinations = [
       { label: "Decor & Production", value: "₹25 – ₹66 Lacs" },
     ],
     slides: [
-      { label: "Six Senses Fort Barwara", desc: "A 14th-century citadel restored into a luxury sanctuary.", img: "/assets/photos/royal-and-heritage/six senses_ranthambore.jpg" },
+      { label: "The Fort", desc: "Six Senses Fort Barwara — a 14th-century citadel near Ranthambore.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Ranthambore/Six Senses Fort Barwara/ADD_040517.webp" },
+      { label: "Zenana Bagh", desc: "The Zenana Bagh — Queen's Garden for outdoor celebrations.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Ranthambore/Six Senses Fort Barwara/1_Zenana_Mahal_.webp" },
+      { label: "Stepwell Celebrations", desc: "The mystical stepwell setting for pre-wedding functions.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Ranthambore/Six Senses Fort Barwara/Stepwell_-_Celebrations.webp" },
+      { label: "Barwara State Room", desc: "The majestic Barwara State Room for intimate gatherings.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Ranthambore/Six Senses Fort Barwara/1_Barwara_State_Room_.webp" },
+      { label: "Fort Grounds", desc: "The sweeping grounds of Six Senses Fort Barwara.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Ranthambore/Six Senses Fort Barwara/2022-06-26.webp" },
+      { label: "Spa Relaxation", desc: "World-class wellness at the Six Senses Spa.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Ranthambore/Six Senses Fort Barwara/170115_Spa Relaxation_Final.webp" },
+      { label: "Heritage Suites", desc: "Magnificently restored suites within the ancient fort.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Ranthambore/Six Senses Fort Barwara/unnamed.webp" },
+      { label: "Celebrations", desc: "A royal celebration within the fort's storied walls.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Ranthambore/Six Senses Fort Barwara/unnamed (1).webp" },
+      { label: "Evening Setting", desc: "Six Senses Fort Barwara beautifully lit at dusk.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Ranthambore/Six Senses Fort Barwara/unnamed (2).webp" },
     ],
   },
   {
@@ -212,7 +258,18 @@ const heritageDestinations = [
       { label: "Decor & Production", value: "₹40 – ₹90 Lacs" },
     ],
     slides: [
-      { label: "Suryagarh Jaisalmer", desc: "A golden-sandstone fortress at the gateway to the Thar Desert.", img: "/assets/photos/royal-and-heritage/suryagarh_jailasmer.jpg" },
+      { label: "The Fortress", desc: "Suryagarh — a golden-sandstone fortress at the gateway to the Thar.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaiselmer/Suryagarh /ic103503.jpg" },
+      { label: "Dinner on the Dunes", desc: "A magical dinner-on-the-dunes experience under desert stars.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaiselmer/Suryagarh /suryagarh_dining_dinner-on-the-dunes_1.jpg" },
+      { label: "Wedding Celebrations", desc: "A grand wedding celebration in Suryagarh's open courtyards.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaiselmer/Suryagarh /suryagarh_misc_weddings_58.jpg" },
+      { label: "Heritage Room", desc: "Twin bedroom in the elegantly crafted Heritage Room.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaiselmer/Suryagarh /suryagarh_rooms_heritage-room_twin-bedroom_1.jpg" },
+      { label: "Jaisalmer Haveli", desc: "The opulent Jaisalmer Haveli suite.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaiselmer/Suryagarh /suryagarh_rooms_jaisalmer-haveli_4.jpg" },
+      { label: "Luxury Suite", desc: "A signature Thar Villa with private courtyard.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaiselmer/Suryagarh /suryagarh_rooms_luxury-suite_2.jpg" },
+      { label: "Property", desc: "Suryagarh set against the golden Thar landscape.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaiselmer/Suryagarh /unnamed.webp" },
+      { label: "Celebration Gardens", desc: "The expansive Celebration Gardens of Suryagarh.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaiselmer/Suryagarh /unnamed (1).webp" },
+      { label: "The Bawdi", desc: "The mystical Bawdi step-well for intimate ceremonies.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaiselmer/Suryagarh /unnamed (2).webp" },
+      { label: "Desert Sundowner", desc: "A golden sundowner in the heart of the Thar Desert.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaiselmer/Suryagarh /unnamed (3).webp" },
+      { label: "Evening Ambience", desc: "Suryagarh glowing magnificently at dusk.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaiselmer/Suryagarh /unnamed (4).webp" },
+      { label: "Folk Evenings", desc: "Soulful Manganiyar folk performances under the stars.", img: "/assets/photos/royal-and-heritage/Royal Circuit/Jaiselmer/Suryagarh /unnamed (5).webp" },
     ],
   },
 ];
@@ -361,7 +418,7 @@ export default function RoyalHeritagePage() {
   return (
     <div ref={containerRef} className="bg-bg overflow-x-hidden flex flex-col gap-0 p-0 m-0">
       {/* HERO BANNER */}
-      <section className="relative h-[90vh] w-full flex items-center justify-center overflow-hidden m-0 p-0">
+      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden m-0 p-0">
         <div className="absolute inset-0 z-0">
           <Image
             src="/assets/photos/destination/TSR50334.jpg"

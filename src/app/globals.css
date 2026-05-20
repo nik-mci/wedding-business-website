@@ -325,10 +325,11 @@
   /* Page Hero (shared across Services, Portfolio, FAQ, Destinations, etc.) */
   .page-hero {
     position: relative;
-    height: 70vh;
-    min-height: 520px;
+    height: 100vh;
+    min-height: 600px;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
   }
 
@@ -350,7 +351,7 @@
   .page-hero-content {
     position: relative;
     z-index: 2;
-    padding: 0 48px 56px;
+    padding: 0 48px;
     width: 100%;
     display: flex;
     flex-direction: column;

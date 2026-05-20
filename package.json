@@ -9,7 +9,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "compress-images": "node scripts/compress-images.mjs",
+    "compress-images:dry": "node scripts/compress-images.mjs --dry-run"
   },
   "dependencies": {
     "@studio-freight/react-lenis": "^0.0.47",
