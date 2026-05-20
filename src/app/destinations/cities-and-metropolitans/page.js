@@ -470,6 +470,7 @@ export default function CitiesMetropolitansPage() {
               src={`/assets/photos/${dest.img}`}
               alt={dest.name}
               fill
+              sizes="(max-width: 768px) 100vw, 360px"
               className="object-cover parallax-img"
             />
           </div>
@@ -630,21 +631,28 @@ export default function CitiesMetropolitansPage() {
               {/* IMAGE CAROUSEL */}
               <div className="w-full h-[45%] md:w-[50%] md:h-full flex flex-col order-1 md:order-2 shrink-0">
                 <div className="relative w-full h-full overflow-hidden bg-[#1A1408]">
-                  {slides.map((slide, i) => (
-                    <div
-                      key={i}
-                      className={`absolute inset-0 transition-opacity duration-[400ms] ease-in-out ${i === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`}
-                    >
-                      <div className="w-full h-full transform scale-[1.0] animate-kenBurns origin-center">
-                        <Image
-                          src={slide.img}
-                          alt={slide.label}
-                          fill
-                          className="object-cover"
-                        />
+                  {slides.map((slide, i) => {
+                    const isActive = i === currentSlide;
+                    const isPrev = i === (currentSlide - 1 + slides.length) % slides.length;
+                    const isNext = i === (currentSlide + 1) % slides.length;
+                    if (!isActive && !isPrev && !isNext) return null;
+                    return (
+                      <div
+                        key={i}
+                        className={`absolute inset-0 transition-opacity duration-[400ms] ease-in-out ${isActive ? "opacity-100 z-10" : "opacity-0 z-0"}`}
+                      >
+                        <div className="w-full h-full transform scale-[1.0] animate-kenBurns origin-center">
+                          <Image
+                            src={slide.img}
+                            alt={slide.label}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className="object-cover"
+                          />
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
 
                   <div className="absolute top-4 right-4 z-20 font-heading text-[14px] text-[#C9A234]">
                     {(currentSlide + 1).toString().padStart(2, '0')} / {slides.length.toString().padStart(2, '0')}
