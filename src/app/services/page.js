@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import blurDataUrls from "@/lib/blurDataUrls";
+import blurDataUrls, { getBlurProps } from "@/lib/blurDataUrls";
 import GoldDivider from "@/components/GoldDivider";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -335,8 +335,7 @@ export default function ServicesPage() {
                     alt={svc.name}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    placeholder="blur"
-                    blurDataURL={blurDataUrls[`/assets/photos/${svc.img}`]}
+                    {...getBlurProps(`/assets/photos/${svc.img}`)}
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.1]"
                     priority
                   />
@@ -467,8 +466,7 @@ export default function ServicesPage() {
                   alt={selectedService.name}
                   fill
                   sizes="100vw"
-                  placeholder="blur"
-                  blurDataURL={blurDataUrls[`/assets/photos/${selectedService.img}`]}
+                  {...getBlurProps(`/assets/photos/${selectedService.img}`)}
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[rgba(26,20,8,0.4)] to-transparent"></div>
@@ -521,8 +519,7 @@ export default function ServicesPage() {
                   alt={selectedService.name}
                   fill
                   sizes="58vw"
-                  placeholder="blur"
-                  blurDataURL={blurDataUrls[`/assets/photos/${selectedService.img}`]}
+                  {...getBlurProps(`/assets/photos/${selectedService.img}`)}
                   className="object-cover ken-burns"
                 />
                 {/* Soft Edge Gradient */}

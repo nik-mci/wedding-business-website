@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import blurDataUrls from "@/lib/blurDataUrls";
+import blurDataUrls, { getBlurProps } from "@/lib/blurDataUrls";
 import gsap from "gsap";
 
 export default function IdeasPage() {
@@ -121,8 +121,7 @@ export default function IdeasPage() {
                       alt={idea.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      placeholder="blur"
-                      blurDataURL={blurDataUrls[`/assets/photos/${idea.img}`]}
+                      {...getBlurProps(`/assets/photos/${idea.img}`)}
                       className="object-cover brightness-75 group-hover:brightness-90 transition-all duration-500"
                     />
                     <div className="absolute inset-0 bg-ink/10 group-hover:bg-transparent transition-colors duration-500"></div>
@@ -166,8 +165,7 @@ export default function IdeasPage() {
                 alt={selectedIdea.title}
                 fill
                 sizes="(max-width: 768px) 100vw, 500px"
-                placeholder="blur"
-                blurDataURL={blurDataUrls[`/assets/photos/${selectedIdea.img}`]}
+                {...getBlurProps(`/assets/photos/${selectedIdea.img}`)}
                 className="object-cover"
               />
             </div>

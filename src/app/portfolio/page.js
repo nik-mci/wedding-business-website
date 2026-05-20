@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import blurDataUrls from "@/lib/blurDataUrls";
+import blurDataUrls, { getBlurProps } from "@/lib/blurDataUrls";
 import GoldDivider from "@/components/GoldDivider";
 import gsap from "gsap";
 
@@ -83,8 +83,7 @@ export default function PortfolioPage() {
                   width={600}
                   height={800}
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  placeholder="blur"
-                  blurDataURL={blurDataUrls[`/assets/photos/${wedding.img}`]}
+                  {...getBlurProps(`/assets/photos/${wedding.img}`)}
                   className="wed-photo w-full transition-all duration-500 group-hover:scale-105 group-hover:saturate-100 filter saturate-0 brightness-[0.85] group-hover:brightness-100"
                 />
                 <div className="wed-overlay absolute inset-0 bg-gradient-to-t from-black/85 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-6">
@@ -117,8 +116,7 @@ export default function PortfolioPage() {
                 alt={selectedWedding.name}
                 fill
                 sizes="(max-width: 768px) 100vw, 700px"
-                placeholder="blur"
-                blurDataURL={blurDataUrls[`/assets/photos/${selectedWedding.img}`]}
+                {...getBlurProps(`/assets/photos/${selectedWedding.img}`)}
                 className="modal-hero-img object-cover animate-kenBurns"
               />
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>

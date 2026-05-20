@@ -7,7 +7,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GoldDivider from "@/components/GoldDivider";
 import CornerOrnament from "@/components/CornerOrnament";
-import blurDataUrls from "@/lib/blurDataUrls";
+import blurDataUrls, { getBlurProps } from "@/lib/blurDataUrls";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -80,8 +80,7 @@ export default function BackwatersAndLakesPage() {
               alt={dest.name}
               fill
               sizes="(max-width: 768px) 100vw, 360px"
-              placeholder="blur"
-              blurDataURL={blurDataUrls[`/assets/photos/${dest.img}`]}
+              {...getBlurProps(`/assets/photos/${dest.img}`)}
               className="object-cover parallax-img"
             />
           </div>
@@ -143,8 +142,7 @@ export default function BackwatersAndLakesPage() {
             fill
             priority
             sizes="100vw"
-            placeholder="blur"
-            blurDataURL={blurDataUrls["/assets/photos/destination/backwaterandlakes.jpg"]}
+            {...getBlurProps("/assets/photos/destination/backwaterandlakes.jpg")}
             className="object-cover"
           />
           <div className="absolute inset-0 bg-black/45"></div>

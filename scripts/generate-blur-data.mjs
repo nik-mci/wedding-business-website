@@ -13,10 +13,15 @@ const SRC_DIR = path.join(process.cwd(), "src");
 const PUBLIC_DIR = path.join(process.cwd(), "public");
 const OUT_FILE = path.join(process.cwd(), "src/lib/blurDataUrls.js");
 
-// Collect every /assets/... path referenced in source files
+// Collect every /assets/... path referenced in source files.
+// Also catches partial paths used in data arrays (e.g. img: "beach-wedding/st regis goa.jpeg")
+// by checking if the quoted string resolves to a real file under public/assets/photos/.
 function collectImagePaths() {
   const paths = new Set();
-  const re = /["'`](\/assets\/photos\/[^"'`\s]+\.(jpg|jpeg|png|webp|avif))["'`]/g;
+  // Full paths: "/assets/photos/foo.jpg"
+  const reFull = /["'`](\/assets\/photos\/[^"'`\s]+\.(jpg|jpeg|png|webp|avif))["'`]/g;
+  // Partial paths inside data arrays: "beach-wedding/foo.jpg"
+  const rePartial = /"([^"\/][^"]*\.(jpg|jpeg|png|webp|avif))"/g;
 
   const walk = (dir) => {
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -24,7 +29,11 @@ function collectImagePaths() {
       if (entry.isDirectory()) { walk(full); continue; }
       if (!/\.(js|jsx|ts|tsx)$/.test(entry.name)) continue;
       const src = fs.readFileSync(full, "utf8");
-      for (const [, imgPath] of src.matchAll(re)) paths.add(imgPath);
+      for (const [, imgPath] of src.matchAll(reFull)) paths.add(imgPath);
+      for (const [, partial] of src.matchAll(rePartial)) {
+        const candidate = `/assets/photos/${partial}`;
+        if (fs.existsSync(path.join(PUBLIC_DIR, candidate))) paths.add(candidate);
+      }
     }
   };
   walk(SRC_DIR);

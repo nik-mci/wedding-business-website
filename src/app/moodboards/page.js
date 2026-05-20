@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import blurDataUrls from "@/lib/blurDataUrls";
+import blurDataUrls, { getBlurProps } from "@/lib/blurDataUrls";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
