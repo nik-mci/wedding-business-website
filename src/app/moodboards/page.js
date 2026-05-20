@@ -118,8 +118,8 @@ const moodBoards = [
       "moodboards/Mehendi Option 2 - Tropical Rhapsody/UC-TE-ybNxGtzRp1h7K_x_2RYeVfkEQ-ul1o4nPel45kudCMIMHMvCzoJxRDxItR3yI-RjNbi9cM9Mg2NhzkpuYkKyGiM5MFhWmOQ0kinJ1kn9pAPlIo9TgKiPw9lqRbdUi91VLeJoO9Yo1YI0lBCdjHlcIPUkSOiNXTou_ITBM9tpsTVWfL-RgEHUvfkWKm.jpg",
       "moodboards/Mehendi Option 2 - Tropical Rhapsody/f7c446a7ce64b1c841652dae400b3508.jpg",
       "moodboards/Mehendi Option 2 - Tropical Rhapsody/nqDjeuwd95p3c-4ixo9LLj77XsR46RJ6aDe8vTT2t5qmlzTu2wAsI3CqiL5fX9xEMrnIzStWxQ1OrCe5Pf2YdVI-tV7niYxP1ul1KQg7ogx9UC_tI-k3giWIRujnObgZOYthTB79y5GU4kAXgDsl89e5mygE0cgi9d7aqFrSjj40BUD0bFVrQBKQLEh7MSDc.jpg",
-      "moodboards/Mehendi Option 2 - Tropical Rhapsody/ChatGPT Image May 13, 2026, 05_14_30 PM.png",
-      "moodboards/Mehendi Option 2 - Tropical Rhapsody/ChatGPT Image May 13, 2026, 05_30_10 PM.png"
+      "moodboards/Mehendi Option 2 - Tropical Rhapsody/ChatGPT Image May 13, 2026, 05_14_30 PM.jpg",
+      "moodboards/Mehendi Option 2 - Tropical Rhapsody/ChatGPT Image May 13, 2026, 05_30_10 PM.jpg"
     ]
   },
   { 
@@ -152,7 +152,7 @@ const moodBoards = [
       "moodboards/Wedding-Royal Indian/0G4A5280.jpg",
       "moodboards/Wedding-Royal Indian/0G4A5285.jpg",
       "moodboards/Wedding-Royal Indian/0G4A5286.jpg",
-      "moodboards/Wedding-Royal Indian/ChatGPT Image May 13, 2026, 05_51_34 PM.png",
+      "moodboards/Wedding-Royal Indian/ChatGPT Image May 13, 2026, 05_51_34 PM.jpg",
       "moodboards/Wedding-Royal Indian/TSR53198.jpg",
       "moodboards/Wedding-Royal Indian/TSR53206.jpg",
       "moodboards/Wedding-Royal Indian/TSR53220.jpg",
@@ -204,7 +204,7 @@ const moodBoards = [
       "moodboards/Sangeet-Disco Shimmer/0G4A2325.jpg",
       "moodboards/Sangeet-Disco Shimmer/0G4A2327.jpg",
       "moodboards/Sangeet-Disco Shimmer/0G4A2906.jpg",
-      "moodboards/Sangeet-Disco Shimmer/ChatGPT Image May 11, 2026, 05_59_37 PM.png",
+      "moodboards/Sangeet-Disco Shimmer/ChatGPT Image May 11, 2026, 05_59_37 PM.jpg",
       "moodboards/Sangeet-Disco Shimmer/TSR51027.jpg",
       "moodboards/Sangeet-Disco Shimmer/TSR51040.jpg",
       "moodboards/Sangeet-Disco Shimmer/TSR51041.jpg",

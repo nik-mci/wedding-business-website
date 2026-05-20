@@ -26,7 +26,7 @@ const categoryData = {
   "royal-and-heritage": {
     title: "Royal and Heritage",
     locations: "Udaipur, Jaipur, Jodhpur, Jaisalmer, Neemrana, Ranthambore",
-    bg: "destination/TSR50355.jpg",
+    bg: "royal-and-heritage/alila_fort.jpg",
     desc: "Step into a world of regal splendor and timeless history. Our Royal and Heritage weddings bring majestic forts, ornate palaces, and ancient stories to life, giving you a celebration fit for royalty."
   },
   "cities-and-metropolitans": {

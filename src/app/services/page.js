@@ -68,7 +68,7 @@ const services = [
     tagline: "White-glove guest management from arrival to departure",
     description: "Every guest at your wedding is our responsibility. From airport transfers to room upgrades — we ensure everyone feels taken care of.",
     includes: ["Dedicated RSVP Team", "Bespoke Welcome Experiences", "Comprehensive Ground Travel & Logistics", "24/7 Concierge & Helpdesk Support", "Shadow & VVIP Management", "Vendor Management"],
-    img: "services/hospitality_service.png",
+    img: "services/hospitality_service.jpeg",
     photographer: "Palace Hospitality"
   },
   {
@@ -258,20 +258,23 @@ export default function ServicesPage() {
 
   return (
     <div className="bg-[#FDFAF5]">
-      {/* PAGE HERO (EXISTING) */}
-      <div className="page-hero">
-        <div
-          className="page-hero-bg"
-          style={{ backgroundImage: "url('/assets/photos/destination/pool_venue.jpg')", backgroundPosition: "center top" }}
-        ></div>
-        <div className="page-hero-overlay"></div>
-        <div className="page-hero-content">
+      {/* PAGE HERO */}
+      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <Image
+          src="/assets/photos/destination/pool_venue.jpg"
+          alt="Services Hero"
+          fill
+          priority
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/35 to-ink/65" />
+        <div className="relative z-10 flex flex-col items-center text-center px-6">
           <GoldDivider darkBg className="mb-4" />
-          <p className="page-hero-eyebrow">What We Offer</p>
-          <h1 className="page-hero-title">Our <em className="italic">Services</em></h1>
+          <p className="font-body uppercase text-gold tracking-[0.5em] text-[10px] mb-4">What We Offer</p>
+          <h1 className="font-heading font-light text-white leading-[1.05]" style={{ fontSize: "clamp(48px, 7vw, 88px)" }}>Our <em className="italic">Services</em></h1>
           <GoldDivider darkBg flip className="mt-4" />
         </div>
-      </div>
+      </section>
 
       {/* NEW SERVICES GRID SECTION */}
       <section className="services-grid-container pt-12 pb-24 px-6 md:px-12 overflow-hidden">

@@ -65,7 +65,7 @@ const cityDestinations = [
     name: "ITC Grand Bharat",
     location: "GURGAON · ARAVALLI RANGE",
     desc1: "A LEED Platinum-certified 300-acre all-suite estate in the Aravalli Range, paying homage to India's diverse architectural heritage — its suites and Presidential Villas each inspired by legendary Indian dynasties...",
-    img: "citiy luxe/ITC-grand-bharat-delhi.png",
+    img: "citiy luxe/ITC-grand-bharat-delhi.jpg",
     stats: { rooms: "104", guests: "1,300+" },
     writeup: "ITC Grand Bharat, located in the Aravalli Range near Gurgaon, is a LEED Platinum-certified luxury retreat that pays homage to India's diverse architectural heritage. This expansive all-suite estate features deluxe suites and four palatial Presidential Villas, each inspired by legendary Indian dynasties. It serves as a premier wedding destination with vast event spaces, including the pillar-less Prithvi Ballroom and sprawling manicured lawns like Peacock Lawn for grander celebrations. From poolside haldi ceremonies to the mystical Ghats of Yamuna evening rituals, the resort offers regal backdrops supported by ITC's renowned hospitality and world-class culinary experiences.",
     glance: [
@@ -119,7 +119,7 @@ const cityDestinations = [
     name: "ITC Maurya",
     location: "NEW DELHI · DIPLOMATIC ENCLAVE",
     desc1: "A landmark of Mauryan-inspired architecture and elite hospitality at the heart of New Delhi's Diplomatic Enclave, home to the legendary Bukhara and Dum Pukht dining experiences...",
-    img: "citiy luxe/itc-maurya-delhi.png",
+    img: "citiy luxe/itc-maurya-delhi.jpg",
     stats: { rooms: "437", guests: "600+" },
     writeup: "ITC Maurya is a landmark of Mauryan-inspired architecture and elite hospitality located in the heart of New Delhi's Diplomatic Enclave. This iconic property features an ideal inventory for residential weddings requiring significant capacity. Its crown jewel is the Kamal Mahal ballroom, a pillar-less masterpiece capable of hosting large celebrations in a regal, traditional setting. Renowned for its world-class culinary heritage, including the legendary Bukhara and Dum Pukht, the hotel offers an unparalleled gastronomic experience. With its blend of historic grandeur, sprawling gardens, and central accessibility, ITC Maurya remains a prestigious destination for sophisticated and high-profile celebrations.",
     glance: [

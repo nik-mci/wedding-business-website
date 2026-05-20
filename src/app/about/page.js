@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import GoldDivider from "@/components/GoldDivider";
 import CornerOrnament from "@/components/CornerOrnament";
@@ -12,6 +11,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutPage() {
   const containerRef = useRef(null);
+  const [expanded, setExpanded] = useState({});
+  const toggleBio = (i) => setExpanded(prev => ({ ...prev, [i]: !prev[i] }));
 
   useEffect(() => {
     // Reveal animations
@@ -105,7 +106,7 @@ export default function AboutPage() {
       </section>
 
       {/* SECTION 1 — BRAND INTRO */}
-      <section className="bg-[#FDFAF5] py-12 md:py-16 px-12 relative border-l-4 border-gold/40">
+      <section className="bg-[#FDFAF5] py-8 md:py-10 px-12 relative border-l-4 border-gold/40">
         <div className="max-w-[900px] mx-auto reveal">
           <div className="flex items-center gap-4 mb-10 opacity-30">
             <div className="h-[0.5px] bg-[#C8A84B] w-12"></div>
@@ -124,14 +125,14 @@ export default function AboutPage() {
           <div className="w-1.5 h-1.5 bg-[#C8A84B]/40 rotate-45"></div>
         </div>
 
-        <div className="p-12 md:p-16 border-b md:border-b-0 flex flex-col justify-center reveal">
+        <div className="p-8 md:p-11 border-b md:border-b-0 flex flex-col justify-center reveal">
           <p className="text-gold text-[10px] tracking-[0.4em] uppercase mb-4 font-medium">Our Story</p>
           <h2 className="font-heading text-ink text-5xl md:text-6xl mb-4 leading-[1.1]">Born in 2015.<br /><em className="italic">Built on love.</em></h2>
           <p className="text-muted text-[14px] leading-[1.8] font-light max-w-[460px]">
             Vows & Vedas was born from a singular passion — to redefine the Indian wedding experience. What began as a dream to create deeply meaningful celebrations has grown into one of India's most trusted names in luxury wedding planning. Our journey has been built on love — for detail, for culture, for storytelling, and above all, for the couples who place their trust in us.
           </p>
         </div>
-        <div className="p-12 md:p-16 flex flex-col justify-center reveal stagger-1">
+        <div className="p-8 md:p-11 flex flex-col justify-center reveal stagger-1">
           <p className="text-gold text-[10px] tracking-[0.4em] uppercase mb-4 font-medium">What Makes Us Different</p>
           <h2 className="font-heading text-ink text-5xl md:text-6xl mb-4 leading-[1.1] italic">We don't plan weddings.<br /><em className="not-italic font-light">We build worlds.</em></h2>
           <p className="text-muted text-[14px] leading-[1.8] font-light max-w-[460px]">
@@ -141,7 +142,7 @@ export default function AboutPage() {
       </section>
 
       {/* SECTION 3 — GetsHolidays LEGACY */}
-      <section className="bg-[#1a1200] py-12 md:py-14 px-12 relative overflow-hidden">
+      <section className="bg-[#1a1200] py-8 md:py-10 px-12 relative overflow-hidden">
         <CornerOrnament size={60} inset={20} opacity={0.3} strokeWidth={1.5} />
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 items-center">
           <div className="reveal">
@@ -175,69 +176,148 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* DIVIDER — EMBEDDED IN DARK THEME */}
-      <div className="bg-[#1a1200] py-4 flex items-center justify-center relative z-10">
-        <GoldDivider variant="section" darkBg className="opacity-100" />
-      </div>
+      {/* SECTION 4+5 — OUR TEAM (unified) */}
+      <section id="our-team" className="bg-ink border border-[#C9A234]/30 rounded-2xl mx-6 md:mx-12 my-8 shadow-[0_0_60px_rgba(0,0,0,0.5)] overflow-hidden">
 
-      {/* SECTION 4 — VALUES */}
-      <section id="values" className="bg-ink py-10 md:py-12 px-12 border-none">
-        <div className="flex flex-col items-center text-center">
+        {/* Shared section header */}
+        <div className="pt-8 pb-6 px-12 flex flex-col items-center text-center">
           <GoldDivider darkBg className="mb-4 reveal" />
-          <p className="section-label reveal">What Drives Us</p>
-          <h2 className="section-title reveal text-surface">Our <em className="italic">Values</em></h2>
+          <p className="section-label reveal">The People Behind Vows &amp; Vedas</p>
+          <h2 className="section-title reveal text-surface">Our <em className="italic">Team</em></h2>
           <GoldDivider darkBg flip className="mt-2 reveal" />
         </div>
-        <div className="values-grid mt-8 grid grid-cols-1 md:grid-cols-3 gap-0.5">
-          {[
-            { name: "Intention", desc: "Every decision we make is purposeful. From the colour of the marigolds to the sequencing of the evening — nothing is accidental." },
-            { name: "Craft", desc: "We treat wedding design as an art form. Our team brings mastery, imagination and years of experience to every celebration." },
-            { name: "Devotion", desc: "We fall a little in love with every couple we work with. Your joy is our purpose — and it shows in everything we do." }
-          ].map((val, i) => (
-            <div key={i} className={`value-card reveal stagger-${i + 1}`}>
-              <h3 className="value-name font-heading text-ink text-2xl mb-1 relative inline-block">{val.name}</h3>
-              <p className="value-desc text-[12px] leading-[1.9] text-ink/60 font-light mt-3">{val.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
 
-      {/* SECTION 5 — TEAM */}
-      <section id="team" className="bg-bg py-24 px-12">
-        <div className="flex flex-col items-center text-center">
-          <GoldDivider className="mb-4 reveal" />
-          <p className="section-label reveal">The People Behind The Magic</p>
-          <h2 className="section-title reveal">Meet Our <em className="italic">Team</em></h2>
-          <GoldDivider flip className="mt-2 reveal" />
-        </div>
-        <div className="team-grid mt-16 grid grid-cols-1 md:grid-cols-3 gap-0.5">
-          {[
-            { name: "Ananya Sharma", role: "Founder & Creative Director", vibe: "Every wedding is a love letter to the future.", color: "linear-gradient(135deg, #2a2518 0%, #1a1608 100%)" },
-            { name: "Rahul Mehta", role: "Décor & Design Lead", vibe: "Beauty is in the details no one else notices.", color: "linear-gradient(135deg, #1e2018 0%, #0e1008 100%)" },
-            { name: "Priya Nair", role: "Destination Specialist", vibe: "The world is full of perfect wedding venues — let me find yours.", color: "linear-gradient(135deg, #2a1a20 0%, #1a0a10 100%)" }
-          ].map((member, i) => (
-            <div key={i} className={`team-card reveal stagger-${i + 1} group cursor-none`}>
-              <div className="team-photo aspect-[3/4] relative overflow-hidden transition-all duration-400 group-hover:brightness-110" style={{ background: member.color }}>
-                <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_20px,rgba(191,164,106,0.05)_20px,rgba(191,164,106,0.05)_21px)]"></div>
-                <div className="team-overlay absolute inset-0 bg-gradient-to-t from-black/85 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-8">
-                  <div className="team-info translate-y-2 group-hover:translate-y-0 transition-transform duration-400">
-                    <p className="team-name font-heading text-surface text-3xl">{member.name}</p>
-                    <p className="team-role text-[10px] tracking-[0.3em] text-gold mt-1 uppercase">{member.role}</p>
-                    <p className="team-vibe text-[11px] text-surface/60 mt-2 font-light italic">"{member.vibe}"</p>
-                  </div>
+        {/* TIER 1 — The Operational Backbone */}
+        <div className="px-12 pb-8">
+          <div className="flex flex-col items-center text-center mb-6 reveal">
+            <p className="text-[9px] tracking-[0.45em] uppercase font-medium mb-2" style={{ color: 'var(--color-gold)' }}>The Operational Backbone</p>
+            <h3 className="font-heading text-surface text-3xl md:text-4xl font-light">Behind Every <em className="italic">Wedding</em></h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px">
+            {[
+              {
+                name: "Travel & Transport",
+                descriptor: "Fleet & Guest Logistics",
+                desc: "Our dedicated logistics team brings efficient fleet management to your wedding day. Managing everything from travel ticketing to VIP arrivals to welcoming to multi-venue guest shuttles, they ensure perfectly timed, stress-free transit.\n\nWe guarantee your guests experience seamless, hospitality-driven travel from arrival to departure.",
+                image: "/assets/photos/destination/beach-wedding-img.jpg"
+              },
+              {
+                name: "Hotel & Venue Procurement",
+                descriptor: "Luxury Venue Contracting",
+                desc: "Leveraging years of global corporate negotiations, this team secures the finest luxury venues and room blocks at unmatched value. They handle complex contracting, attrition clauses and finer details effortlessly.\n\nThis means elevated insider perks and a completely seamless, legally secure booking experience.",
+                image: "/assets/photos/destination/pool_venue.jpg"
+              },
+              {
+                name: "Operations & Event Production",
+                descriptor: "Production & Execution",
+                desc: "The technical powerhouse, this division converts ambitious creative visions into structurally flawless realities. They manage high-stakes timelines, sound, lighting, and vendor coordination with absolute military precision.\n\nTheir vast experience guarantees your wedding day runs like clockwork, entirely behind the scenes.",
+                image: "/assets/photos/services/decoration/sangeet_decoration.jpg"
+              }
+            ].map((team, i) => (
+              <div key={i} className={`ts-card reveal stagger-${i + 1}`}>
+                <div className="aspect-video overflow-hidden">
+                  <img src={team.image} alt={team.name} className="ts-card-img w-full h-full object-cover" />
+                </div>
+                <div className="h-px bg-[#C9A234]/35"></div>
+                <div className="p-6 md:p-7">
+                  <p className="text-[9px] tracking-[0.45em] uppercase font-medium mb-3" style={{ color: 'var(--color-gold)' }}>{team.descriptor}</p>
+                  <h3 className="font-heading text-surface text-[28px] font-light leading-tight mb-3">{team.name}</h3>
+                  <p className="text-[13px] leading-[1.75] font-light whitespace-pre-line" style={{ color: 'rgba(253,250,245,0.55)' }}>{team.desc}</p>
                 </div>
               </div>
-              <div className="team-static py-6 pb-2">
-                <h4 className="font-heading text-ink text-2xl">{member.name}</h4>
-                <p className="text-[10px] tracking-[0.25em] uppercase text-gold mt-1">{member.role}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+
+        {/* Bridging sentence */}
+        <div className="py-8 px-12 flex flex-col items-center text-center reveal">
+          <div className="h-px w-16 bg-[#C9A234]/30 mb-6"></div>
+          <p className="font-heading italic text-surface/50 text-[18px] md:text-[20px] leading-[1.7] max-w-lg">
+            And leading all of this — the people you'll actually work with.
+          </p>
+          <div className="h-px w-16 bg-[#C9A234]/30 mt-6"></div>
+        </div>
+
+        {/* TIER 2 — Your Planning Team */}
+        <div className="px-12 pb-10">
+          <div className="flex flex-col items-center text-center mb-6 reveal">
+            <p className="text-[9px] tracking-[0.45em] uppercase font-medium mb-2" style={{ color: 'var(--color-gold)' }}>Who You'll Work With</p>
+            <h3 className="font-heading text-surface text-3xl md:text-4xl font-light">Your Planning <em className="italic">Team</em></h3>
+          </div>
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
+            {[
+              {
+                name: "Manmeet Soundh",
+                role: "Creative Director / Creative Direction",
+                vibe: "Where emotion meets elegance, the extraordinary begins.",
+                bio: "With over two decades of experience in the experiential and luxury wedding industry, Manmeet Soundh is the creative force behind Vows & Vedas, crafting celebrations that beautifully blend emotion, elegance and the art of curating rare moments.\n\nKnown for transforming concepts into timeless wedding experiences, his signature style reflects contemporary luxury, refined aesthetics and detail-driven storytelling.",
+                image: "/assets/photos/about-us/383c1d15-b27d-4b3a-934c-0e9b8db51f7d.JPG",
+                imagePosition: "center top"
+              },
+              {
+                name: "Arunima",
+                role: "Lead Planner / Planning",
+                vibe: "Precision behind the scenes, magic in every moment.",
+                bio: "A part time side hustle of managing hospitality teams at weddings made her fall in love with bringing couples' dreams to life and making their most special day extra special and stress free. The 7 years of blending corporate precision with on-the-ground execution help her turn complex logistics into effortless, beautiful celebrations.\n\nShe looks at wedding planning through two lenses: impeccable, on-ground hospitality and sharp, strategic organisation. You get the best of both worlds — a beautifully cohesive and a highly personalised experience.",
+                image: "/assets/photos/about-us/40c37516-6448-4c5e-929f-27cd4132fe0e.JPG",
+                imagePosition: "center top"
+              },
+              {
+                name: "Priya Nair",
+                role: "Destination Specialist",
+                vibe: "The world is full of perfect wedding venues — let me find yours.",
+                bio: "Priya has scouted wedding venues in 14 countries and counting. From alpine resorts in Austria to riad courtyards in Morocco and heritage havelis in Rajasthan, she holds an encyclopaedic knowledge of what makes each location work for a wedding. Priya manages all destination logistics — guest travel programmes, hotel negotiations, local vendor sourcing, and on-ground coordination — and is the reason our destination weddings look effortless.",
+                image: "/assets/photos/about-us/7184c718-f5e6-4054-b35b-e56bc79213a5.JPG",
+                imagePosition: "center 20%"
+              }
+            ].map((member, i) => (
+              <div key={i} className={`reveal stagger-${i + 1} group`} style={{ background: 'rgba(255,255,255,0.04)', borderRadius: '2px' }}>
+                {/* Square portrait */}
+                <div className="aspect-[1/1] relative overflow-hidden">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    style={{ objectPosition: member.imagePosition }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-6">
+                    <div className="translate-y-2 group-hover:translate-y-0 transition-transform duration-400">
+                      <p className="font-heading text-surface text-2xl">{member.name}</p>
+                      <p className="text-[9px] tracking-[0.3em] text-gold mt-1 uppercase">{member.role}</p>
+                      <p className="text-[11px] text-surface/60 mt-2 font-light italic">"{member.vibe}"</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Info panel */}
+                <div className="pt-5 px-5 pb-5">
+                  <h4 className="font-heading text-surface text-xl leading-tight">{member.name}</h4>
+                  <p className="text-[9px] tracking-[0.3em] uppercase text-gold mt-1 font-medium">{member.role}</p>
+                  <div className="h-px bg-[#C9A234]/30 mt-3"></div>
+
+                  {/* Bio — always visible on mobile, collapsed on desktop */}
+                  <div className={`bio-panel overflow-hidden transition-[max-height] duration-500 ease-in-out${expanded[i] ? ' bio-open' : ''}`}>
+                    <p className="text-[12px] leading-[1.85] text-surface/60 font-light pt-4 pb-6 whitespace-pre-line">{member.bio}</p>
+                  </div>
+
+                  {/* Toggle — desktop only */}
+                  <button
+                    className="hidden md:block text-[9px] tracking-[0.35em] uppercase font-medium mt-3 bg-transparent border-0 p-0 cursor-pointer bio-toggle"
+                    style={{ color: 'var(--color-gold)' }}
+                    onClick={() => toggleBio(i)}
+                  >
+                    {expanded[i] ? '— Less' : '+ Read more'}
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </section>
 
       {/* SECTION 6 — OUR PROMISE */}
-      <section className="bg-[#1a1200] py-32 px-12 relative overflow-hidden flex flex-col items-center text-center">
+      <section className="bg-[#1a1200] py-16 md:py-20 px-12 relative overflow-hidden flex flex-col items-center text-center">
         <CornerOrnament size={80} inset={30} opacity={0.1} />
         <div className="max-w-[800px] reveal flex flex-col items-center">
           <p className="text-gold text-[10px] tracking-[0.6em] uppercase mb-8 font-medium">Our Promise</p>
@@ -262,11 +342,15 @@ export default function AboutPage() {
         .hero-left-title { animation: fadeUp .9s .5s both; }
         @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
         
-        .value-card { background: #F5EDD4; padding: 28px 28px; border-bottom: 2px solid transparent; transition: border-color .3s, transform .3s; }
-        .value-card:hover { border-color: var(--color-gold); transform: translateY(-4px); }
-        .value-name { position: relative; }
-        .value-name::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--color-gold); transition:width .4s; }
-        .value-card:hover .value-name::after { width: 100%; }
+        .ts-card { border: 1px solid rgba(201,162,52,0.28); overflow: hidden; transition: border-color .35s, transform .35s; }
+        .ts-card:hover { border-color: rgba(201,162,52,0.6); transform: translateY(-4px); }
+        .ts-card-img { transition: transform .7s ease; }
+        .ts-card:hover .ts-card-img { transform: scale(1.04); }
+
+        .bio-panel { max-height: 300px; }
+        @media (min-width: 768px) { .bio-panel { max-height: 0; } .bio-panel.bio-open { max-height: 300px; } }
+        .bio-toggle { opacity: 0.75; transition: opacity .2s; }
+        .bio-toggle:hover { opacity: 1; }
       `}</style>
     </div>
   );

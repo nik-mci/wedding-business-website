@@ -50,19 +50,22 @@ export default function DestinationsPage() {
   return (
     <div>
       {/* PAGE HERO */}
-      <div className="page-hero">
-        <div 
-          className="page-hero-bg" 
-          style={{ backgroundImage: "url('/assets/photos/destination/TSR50334.jpg')", backgroundPosition: "center 35%" }}
-        ></div>
-        <div className="page-hero-overlay"></div>
-        <div className="page-hero-content">
+      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <Image
+          src="/assets/photos/services/destinations-service.JPG"
+          alt="Destinations Hero"
+          fill
+          priority
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/35 to-ink/65" />
+        <div className="relative z-10 flex flex-col items-center text-center px-6">
           <GoldDivider darkBg className="mb-4" />
-          <p className="page-hero-eyebrow">Around the World</p>
-          <h1 className="page-hero-title">Our <em className="italic">Destinations</em></h1>
+          <p className="font-body uppercase text-gold tracking-[0.5em] text-[10px] mb-4">Around the World</p>
+          <h1 className="font-heading font-light text-white leading-[1.05]" style={{ fontSize: "clamp(48px, 7vw, 88px)" }}>Our <em className="italic">Destinations</em></h1>
           <GoldDivider darkBg flip className="mt-4" />
         </div>
-      </div>
+      </section>
 
       {/* DESTINATIONS GRID */}
       <section className="py-24 px-12">
