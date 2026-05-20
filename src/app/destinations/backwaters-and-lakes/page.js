@@ -7,6 +7,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GoldDivider from "@/components/GoldDivider";
 import CornerOrnament from "@/components/CornerOrnament";
+import blurDataUrls from "@/lib/blurDataUrls";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -74,10 +75,13 @@ export default function BackwatersAndLakesPage() {
         
         <div className="relative w-full flex-grow overflow-hidden shadow-sm min-h-[450px] md:min-h-0 md:h-full">
           <div className="absolute inset-0 scale-110 transition-transform duration-[2s] ease-out group-hover/img:scale-[1.2]">
-            <Image 
-              src={`/assets/photos/${dest.img}`} 
+            <Image
+              src={`/assets/photos/${dest.img}`}
               alt={dest.name}
               fill
+              sizes="(max-width: 768px) 100vw, 360px"
+              placeholder="blur"
+              blurDataURL={blurDataUrls[`/assets/photos/${dest.img}`]}
               className="object-cover parallax-img"
             />
           </div>
@@ -133,11 +137,14 @@ export default function BackwatersAndLakesPage() {
       {/* HERO BANNER */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden m-0 p-0">
         <div className="absolute inset-0 z-0">
-          <Image 
-            src="/assets/photos/destination/backwaterandlakes.jpg" 
+          <Image
+            src="/assets/photos/destination/backwaterandlakes.jpg"
             alt="Backwaters Wedding Hero"
             fill
             priority
+            sizes="100vw"
+            placeholder="blur"
+            blurDataURL={blurDataUrls["/assets/photos/destination/backwaterandlakes.jpg"]}
             className="object-cover"
           />
           <div className="absolute inset-0 bg-black/45"></div>

@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GoldDivider from "@/components/GoldDivider";
 import CornerOrnament from "@/components/CornerOrnament";
 import TiltedCard from "@/components/TiltedCard";
+import blurDataUrls from "@/lib/blurDataUrls";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -344,6 +345,8 @@ export default function BeachWeddingsPage() {
                 alt={dest.name}
                 fill
                 sizes="(max-width: 768px) 100vw, 360px"
+                placeholder="blur"
+                blurDataURL={blurDataUrls[`/assets/photos/${dest.img}`]}
                 className="object-cover parallax-img"
               />
             </div>
@@ -398,6 +401,9 @@ export default function BeachWeddingsPage() {
             alt="Beach Wedding Hero"
             fill
             priority
+            sizes="100vw"
+            placeholder="blur"
+            blurDataURL={blurDataUrls["/assets/photos/destination/beach-wedding-img.jpg"]}
             className="object-cover"
           />
           <div className="absolute inset-0 bg-black/45"></div>

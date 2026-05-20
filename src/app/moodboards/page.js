@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import blurDataUrls from "@/lib/blurDataUrls";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -326,10 +327,13 @@ export default function MoodBoardsPage() {
         <div className="grid grid-cols-2 grid-rows-2 h-full w-full">
           {board.images.map((img, i) => (
             <div key={i} className="relative overflow-hidden">
-              <Image 
-                src={`/assets/photos/${img}`} 
-                alt={board.name} 
-                fill 
+              <Image
+                src={`/assets/photos/${img}`}
+                alt={board.name}
+                fill
+                sizes="(max-width: 768px) 50vw, 25vw"
+                placeholder="blur"
+                blurDataURL={blurDataUrls[`/assets/photos/${img}`] ?? "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAKAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABgUE/8QAIhAAAQQCAgMBAAAAAAAAAAAAAQIDBAUREiExQWH/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8Amae5qKlkke+VzWMYN3OcdgAPUkp1f8bX1PBHUQyQytyZI0tcPYjoqJ5e2NjnvcGtaCSSdgAOpUHbNW0Nn1RV1VVHmkqJXSPO5J8k7nf1JKD/2Q=="}
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
               />
             </div>
@@ -480,11 +484,12 @@ export default function MoodBoardsPage() {
                 <div className="columns-2 gap-3 space-y-3">
                   {selectedBoard.images.map((img, i) => (
                     <div key={i} className="relative group rounded-[8px] overflow-hidden break-inside-avoid">
-                      <Image 
-                        src={`/assets/photos/${img}`} 
-                        alt="Mood board detail" 
-                        width={400} 
-                        height={i % 2 === 0 ? 500 : 300} 
+                      <Image
+                        src={`/assets/photos/${img}`}
+                        alt="Mood board detail"
+                        width={400}
+                        height={i % 2 === 0 ? 500 : 300}
+                        sizes="(max-width: 768px) 50vw, 22vw"
                         className="w-full object-cover rounded-[8px] transition-all duration-500 blur-none hover:ring-1 hover:ring-[#C9A234]"
                       />
                       <div className="absolute top-3 right-3 w-7 h-7 bg-white/90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-90 group-hover:scale-100 translate-y-1 group-hover:translate-y-0">
@@ -504,7 +509,7 @@ export default function MoodBoardsPage() {
                         onClick={() => setSelectedBoard(board)}
                         className="relative w-[180px] h-[120px] rounded-[8px] overflow-hidden shrink-0 cursor-pointer group"
                       >
-                        <Image src={`/assets/photos/${board.images[0]}`} alt={board.name} fill className="object-cover transition-transform duration-500 group-hover:scale-110" />
+                        <Image src={`/assets/photos/${board.images[0]}`} alt={board.name} fill sizes="180px" className="object-cover transition-transform duration-500 group-hover:scale-110" />
                         <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors"></div>
                         <p className="absolute bottom-3 left-3 font-heading text-white text-[16px] leading-tight">{board.name}</p>
                       </div>

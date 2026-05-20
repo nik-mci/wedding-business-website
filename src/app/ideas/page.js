@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import blurDataUrls from "@/lib/blurDataUrls";
 import gsap from "gsap";
 
 export default function IdeasPage() {
@@ -115,10 +116,13 @@ export default function IdeasPage() {
               >
                 <div className="idea-inner relative overflow-hidden transition-all duration-500 group-hover:shadow-[0_0_0_2px_#C9A234]">
                   <div className="idea-bg w-full aspect-[3/4] relative overflow-hidden transition-transform duration-500 group-hover:scale-105">
-                    <Image 
-                      src={`/assets/photos/${idea.img}`} 
-                      alt={idea.title} 
-                      fill 
+                    <Image
+                      src={`/assets/photos/${idea.img}`}
+                      alt={idea.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      placeholder="blur"
+                      blurDataURL={blurDataUrls[`/assets/photos/${idea.img}`]}
                       className="object-cover brightness-75 group-hover:brightness-90 transition-all duration-500"
                     />
                     <div className="absolute inset-0 bg-ink/10 group-hover:bg-transparent transition-colors duration-500"></div>
@@ -157,10 +161,13 @@ export default function IdeasPage() {
               onClick={() => setSelectedIdea(null)}
             >✕</button>
             <div className="drawer-hero h-[300px] relative overflow-hidden">
-              <Image 
-                src={`/assets/photos/${selectedIdea.img}`} 
-                alt={selectedIdea.title} 
-                fill 
+              <Image
+                src={`/assets/photos/${selectedIdea.img}`}
+                alt={selectedIdea.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 500px"
+                placeholder="blur"
+                blurDataURL={blurDataUrls[`/assets/photos/${selectedIdea.img}`]}
                 className="object-cover"
               />
             </div>
