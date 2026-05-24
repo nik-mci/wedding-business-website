@@ -98,7 +98,7 @@ const services = [
     tagline: "Bespoke menus and world-class bar curation",
     description: "We curate culinary journeys that span continents, from traditional regional feasts to avant-garde international fine dining and specialty bar experiences.",
     includes: ["Bespoke Menu Engineering", "Signature Mixology & Craft Bar Concept", "Immersive Live Stations & Food Theatre", "Thematic Styling & Presentation Design", "Meticulous Dietary & Allergens Planning", "Flawless Banquet & Service Logistics"],
-    img: "services/decoration/059A4328.jpg",
+    img: "services/F&B.jpg",
     photographer: "Culinary Arts by V&V"
   }
 ];
@@ -422,31 +422,31 @@ export default function ServicesPage() {
               description: "A bespoke digital hub for your guests with RSVPs, gallery, and travel itineraries." 
             },
             { 
-              img: "couple-shots/TSR53127.jpg",
+              img: "services/trousseau shppoing.jpg",
               name: "Trousseau Shopping", 
               tagline: "Designer Curation & Wardrobe Styling", 
               description: "Access exclusive designer previews, personalized shopping trials, and bridal wardrobe styling assistance." 
             },
             { 
-              img: "services/mehendi.jpg",
+              img: "services/gifting.jpg",
               name: "Gifting & Favours", 
               tagline: "Bespoke Curated Memorabilia", 
               description: "Thoughtfully designed hampers, local artisanal souvenirs, and custom welcome favors for your guests." 
             },
             { 
-              img: "destination/pool_venue.jpg",
+              img: "services/honemoon-planning.jpg",
               name: "Honeymoon Planning", 
               tagline: "Luxury Romantic Escapes", 
               description: "Tailored itineraries, luxury couples' retreats, and private experience curation across global destinations." 
             },
             { 
-              img: "destination/hospitality2.jpg",
+              img: "services/marriage-registrtion.jpg",
               name: "Marriage Registration", 
               tagline: "Official Registry Assistance", 
               description: "Laying down smooth paperwork, slot booking, and local registry guidance to officially certify your union." 
             },
             { 
-              img: "services/Travel and transport.jpeg",
+              img: "services/visa.jpg",
               name: "Visa Assistance", 
               tagline: "Seamless Global Travel Prep", 
               description: "Dedicated assistance for guest visa processing, documentation support, and embassy appointments." 
