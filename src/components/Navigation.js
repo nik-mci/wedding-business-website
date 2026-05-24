@@ -55,7 +55,7 @@ export default function Navigation() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-[100] flex items-center h-[72px] md:h-[84px] px-4 sm:px-8 lg:px-14 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-[100] flex items-center h-[60px] md:h-[68px] px-4 sm:px-8 lg:px-10 transition-all duration-300 ${
           isTransparent
             ? "bg-transparent"
             : "bg-[#FDFAF5]/96 backdrop-blur-md shadow-sm border-b border-black/8"
@@ -63,7 +63,7 @@ export default function Navigation() {
       >
         {/* Left — Logo */}
         <div className="flex-1 flex items-center">
-          <Link href="/" className="relative h-[56px] w-[178px] md:h-[64px] md:w-[204px] shrink-0 group">
+          <Link href="/" className="relative h-[44px] w-[140px] md:h-[52px] md:w-[164px] shrink-0 group">
             <Image
               src="/assets/photos/V&V_A_PNG.png"
               alt="Vows & Vedas"
@@ -127,7 +127,7 @@ export default function Navigation() {
 
           <Link
             href="/contact"
-            className={`hidden sm:inline-flex items-center text-[10px] lg:text-[11px] uppercase tracking-[0.22em] font-medium px-4 py-2 lg:px-5 lg:py-[9px] border transition-all duration-300 overflow-hidden relative group whitespace-nowrap ${
+            className={`hidden sm:inline-flex items-center text-[9px] lg:text-[10px] uppercase tracking-[0.22em] font-medium px-3 py-[6px] lg:px-4 lg:py-[7px] border transition-all duration-300 overflow-hidden relative group whitespace-nowrap ${
               isTransparent
                 ? "border-white/60 text-white"
                 : "border-gold text-ink"

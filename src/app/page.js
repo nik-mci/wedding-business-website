@@ -187,7 +187,7 @@ export default function HomePage() {
       <GoldDivider variant="section" />
 
       {/* HOW WE DO IT */}
-      <section id="our-process" ref={processRef} className="overflow-hidden bg-bg pt-10 pb-12">
+      <section id="our-process" ref={processRef} className="overflow-hidden bg-bg pt-6 pb-8">
         <div className="flex flex-col items-center text-center px-12">
           <GoldDivider className="mb-4 reveal" />
           <p className="section-label reveal">Our Process</p>
@@ -195,7 +195,7 @@ export default function HomePage() {
         </div>
 
         {/* DESKTOP HORIZONTAL TIMELINE */}
-        <div className="hidden md:flex relative w-full h-[320px] mt-8 items-center">
+        <div className="hidden md:flex relative w-full h-[220px] mt-4 items-center">
           {/* Connector Line Progress */}
           <div className="absolute top-1/2 left-[8%] right-[8%] h-[1px] -translate-y-1/2 z-0 pointer-events-none">
             <div className="timeline-line-progress absolute top-0 left-0 h-[1px] bg-gold origin-left opacity-60" style={{ width: '0%' }}></div>
@@ -215,12 +215,12 @@ export default function HomePage() {
                   <div className="timeline-step-horizontal flex flex-col items-center justify-center relative w-[18%]">
                     {isOdd ? (
                       <>
-                        <div className="step-content absolute bottom-[calc(50%+36px)] flex flex-col items-center text-center w-full translate-y-4 opacity-0">
-                          <p className="font-body uppercase text-ink text-[13px] tracking-widest mb-2 font-medium">{step.title}</p>
-                          <p className="font-body font-light text-muted text-[11px] leading-[1.6] px-2 max-w-[200px] mx-auto whitespace-normal break-keep">{step.desc}</p>
+                        <div className="step-content absolute bottom-[calc(50%+28px)] flex flex-col items-center text-center w-full translate-y-4 opacity-0">
+                          <p className="font-body uppercase text-ink text-[11px] tracking-widest mb-2 font-medium">{step.title}</p>
+                          <p className="font-body font-light text-muted text-[10px] leading-[1.6] px-2 max-w-[200px] mx-auto whitespace-normal break-keep">{step.desc}</p>
                         </div>
-                        <div className="step-dot relative z-10 opacity-0 scale-0 flex items-center justify-center w-[56px] h-[56px] text-gold bg-bg">
-                          <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0">
+                        <div className="step-dot relative z-10 opacity-0 scale-0 flex items-center justify-center w-[44px] h-[44px] text-gold bg-bg">
+                          <svg width="44" height="44" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0">
                             <path d="M 28 3 L 53 28 L 28 53 L 3 28 Z" stroke="currentColor" strokeWidth="1.5" />
                             <path d="M 28 9 L 47 28 L 28 47 L 9 28 Z" stroke="currentColor" strokeWidth="0.8" opacity="0.6" />
                             <circle cx="3" cy="28" r="2" fill="currentColor" />
@@ -231,8 +231,8 @@ export default function HomePage() {
                       </>
                     ) : (
                       <>
-                        <div className="step-dot relative z-10 opacity-0 scale-0 flex items-center justify-center w-[56px] h-[56px] text-gold bg-bg">
-                          <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0">
+                        <div className="step-dot relative z-10 opacity-0 scale-0 flex items-center justify-center w-[44px] h-[44px] text-gold bg-bg">
+                          <svg width="44" height="44" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0">
                             <path d="M 28 3 L 53 28 L 28 53 L 3 28 Z" stroke="currentColor" strokeWidth="1.5" />
                             <path d="M 28 9 L 47 28 L 28 47 L 9 28 Z" stroke="currentColor" strokeWidth="0.8" opacity="0.6" />
                             <circle cx="3" cy="28" r="2" fill="currentColor" />
@@ -240,9 +240,9 @@ export default function HomePage() {
                           </svg>
                           <span style={{ fontFamily: "Georgia, serif", fontStyle: "italic", fontSize: "16px", color: "#C8A84B" }} className="relative z-10 bg-bg px-1">{step.num}</span>
                         </div>
-                        <div className="step-content absolute top-[calc(50%+36px)] flex flex-col items-center text-center w-full -translate-y-4 opacity-0">
-                          <p className="font-body uppercase text-ink text-[13px] tracking-widest mb-2 font-medium">{step.title}</p>
-                          <p className="font-body font-light text-muted text-[11px] leading-[1.6] px-2 max-w-[200px] mx-auto whitespace-normal break-keep">{step.desc}</p>
+                        <div className="step-content absolute top-[calc(50%+28px)] flex flex-col items-center text-center w-full -translate-y-4 opacity-0">
+                          <p className="font-body uppercase text-ink text-[11px] tracking-widest mb-2 font-medium">{step.title}</p>
+                          <p className="font-body font-light text-muted text-[10px] leading-[1.6] px-2 max-w-[200px] mx-auto whitespace-normal break-keep">{step.desc}</p>
                         </div>
                       </>
                     )}
@@ -309,8 +309,8 @@ export default function HomePage() {
 
 
       {/* CIRCULAR MEMORY SPACE */}
-      <section id="memory-space" className="bg-ink py-16">
-        <div className="px-12 mb-10 flex flex-col items-center text-center">
+      <section id="memory-space" className="bg-ink py-10">
+        <div className="px-12 mb-6 flex flex-col items-center text-center">
           <GoldDivider darkBg className="mb-4 reveal" />
           <p className="section-label" style={{ color: "var(--color-gold)" }}>Portfolio</p>
           <h2 className="section-title text-surface">Our <em className="italic">Memory Space</em></h2>
@@ -333,8 +333,8 @@ export default function HomePage() {
 
 
       {/* IDEAS TEASER */}
-      <section id="ideas-moods" className="py-16 bg-bg">
-        <div className="max-w-[1440px] mx-auto px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <section id="ideas-moods" className="py-10 bg-bg">
+        <div className="max-w-[1440px] mx-auto px-12 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div className="reveal">
             <GoldDivider className="mb-4" />
             <p className="section-label">Inspiration</p>
@@ -390,7 +390,7 @@ export default function HomePage() {
       <GoldDivider variant="section" />
 
       {/* TESTIMONIALS */}
-      <section id="couples-say" className="pt-8">
+      <section id="couples-say" className="pt-4 pb-6">
         <div className="flex flex-col items-center text-center">
           <GoldDivider className="mb-4 reveal" />
           <p className="section-label reveal">Love Stories</p>
@@ -455,7 +455,7 @@ export default function HomePage() {
           <p className="section-label reveal" style={{ color: "var(--color-gold)" }}>Your Story Awaits</p>
           <h2 className="section-title reveal text-gold">Begin Your <em className="italic">Journey With Us</em></h2>
           <GoldDivider darkBg flip className="mt-2 mb-8 reveal" />
-          <p className="subtitle reveal text-surface/60 text-sm tracking-widest mb-12 uppercase">Let's craft the wedding you've always envisioned.</p>
+          <p className="subtitle reveal text-surface/60 text-sm tracking-widest mb-6 uppercase">Let's craft the wedding you've always envisioned.</p>
           <Link href="/contact" className="btn-gold btn-pulse reveal">Start Planning →</Link>
         </div>
       </section>

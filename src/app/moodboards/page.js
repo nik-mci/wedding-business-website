@@ -242,6 +242,88 @@ const moodBoards = [
       "moodboards/Sangeet Option 2 - Crimson Soiree-Moulin Rouge/bd947706a36405f2062982d0756e2f7b.jpg",
       "moodboards/Sangeet Option 2 - Crimson Soiree-Moulin Rouge/e8a3a041b5bf29ebc7bfca40fd52e1f1.jpg"
     ]
+  },
+  { 
+    id: "wedding-painted-gardens", 
+    number: "09", 
+    category: "Wedding", 
+    name: "Painted Gardens", 
+    count: 14, 
+    colors: ["#E8A0BF", "#7CB342", "#F0E68C", "#FFB6C1", "#556B2F"], 
+    tags: ["Floral Canopies", "Pastel Shades", "Spring Theme"], 
+    perfectFor: ["Daytime Weddings", "Garden Venues", "Intimate Ceremonies"], 
+    description: "A breathtaking immersion into a pastel wonderland, featuring vivid floral artistry, delicate pastel fabrics, and the timeless romance of an enchanted garden setting.",
+    images: [
+      "moodboards/Painted Gardens /08d5262255022083a0542b1e0c902b0f.jpg",
+      "moodboards/Painted Gardens /107dd2898e7cae45feba7104ef3ad6bc.jpg",
+      "moodboards/Painted Gardens /1c9ee7807d5cbcd370f3a66164f0de35.jpg",
+      "moodboards/Painted Gardens /37f5c5959d27a4bfa703af3811854b24.jpg",
+      "moodboards/Painted Gardens /4ecdade26aa9005e1065b1d784c80fc6.jpg",
+      "moodboards/Painted Gardens /5379d2df288f1793a7a27ae0e32f1aa2.jpg",
+      "moodboards/Painted Gardens /6bdd8cbef1397d65444972fb30f74e48.jpg",
+      "moodboards/Painted Gardens /88e20ad26551ad0f7561099afe6dc106.jpg",
+      "moodboards/Painted Gardens /89213c2e352755267bf23baaca45c87d.jpg",
+      "moodboards/Painted Gardens /a86d99a6d96dc39b85d038dca32edb44.jpg",
+      "moodboards/Painted Gardens /aaaa721743c2d1108b91ccbd09435aed.jpg",
+      "moodboards/Painted Gardens /b49e5461c510e4b7e3754acabbc3258e.jpg",
+      "moodboards/Painted Gardens /cc0eb57b6fbb92b1a36606e2a58a3183.jpg",
+      "moodboards/Painted Gardens /e6b61a2eed13e8dd3e9ea2c27e35d5ee.jpg"
+    ]
+  },
+  { 
+    id: "wedding-haveli-nights", 
+    number: "10", 
+    category: "Wedding", 
+    name: "Haveli Nights", 
+    count: 14, 
+    colors: ["#191970", "#D4AF37", "#8B0000", "#FF8C00", "#4B0082"], 
+    tags: ["Heritage Vibe", "Royal Glow", "Candlelit Evening"], 
+    perfectFor: ["Royal Receptions", "Palace Courtyards", "Evening Ceremonies"], 
+    description: "An evocative journey into regal heritage. Deep, atmospheric night tones, illuminating candlelight, and the majestic grandeur of a historic haveli setting.",
+    images: [
+      "moodboards/Wedding Option 3 - Haveli Nights/089205cc2256d4f46f3cd7dbbb21cf56.jpg",
+      "moodboards/Wedding Option 3 - Haveli Nights/11e88cee09b767e35d0bb4c96d1c0166.jpg",
+      "moodboards/Wedding Option 3 - Haveli Nights/1c438fdf9313ebacba67886ab2698805.jpg",
+      "moodboards/Wedding Option 3 - Haveli Nights/1fb9b731872a9e6389c899579b48cd47.jpg",
+      "moodboards/Wedding Option 3 - Haveli Nights/2a7bc20ff6a8881f5cb8b15941c74fa0.jpg",
+      "moodboards/Wedding Option 3 - Haveli Nights/333e9b0105b5513aeb2d58fde485a8a8.jpg",
+      "moodboards/Wedding Option 3 - Haveli Nights/4193e81865b32695fde1acb84855055d.jpg",
+      "moodboards/Wedding Option 3 - Haveli Nights/5847ca29c9b1ec11f6e77608b4b46c4b.jpg",
+      "moodboards/Wedding Option 3 - Haveli Nights/6b6796c1711546d88467a8db106dd041.jpg",
+      "moodboards/Wedding Option 3 - Haveli Nights/71c9b5f6d7805669f05d5efcbc9bf322.jpg",
+      "moodboards/Wedding Option 3 - Haveli Nights/83c9bf1b2b9bd012656f78eba9b41a0a.jpg",
+      "moodboards/Wedding Option 3 - Haveli Nights/8b23dc4a80fb2f1a8c750b56c8e553ea.jpg",
+      "moodboards/Wedding Option 3 - Haveli Nights/b0e7a74cbb93625fc00eb7d5a8793b15.jpg",
+      "moodboards/Wedding Option 3 - Haveli Nights/e00321113bc7cd93edfaaaa635ad37be.jpg"
+    ]
+  },
+  { 
+    id: "haldi-rangon-ki-rasleela", 
+    number: "11", 
+    category: "Haldi", 
+    name: "Rangon Ki Rasleela", 
+    count: 15, 
+    colors: ["#FFB300", "#FF6F00", "#E91E63", "#8BC34A", "#FFF3E0"], 
+    tags: ["Vibrant Colors", "Playful Haldi", "Marigold Decor"], 
+    perfectFor: ["Daytime Haldi", "Outdoor Courtyards", "Joyful Gatherings"], 
+    description: "A joyous and colorful explosion of traditional Haldi festivities. Bright marigolds, playful pinks, and warm sunshine tones set the stage for an unforgettable pre-wedding celebration.",
+    images: [
+      "moodboards/Haldi - Rangon Ki Rasleela/112a110cb33b284a68ef4e17d20631c4.jpg",
+      "moodboards/Haldi - Rangon Ki Rasleela/3058732cb7189793a7c740e9dab4323b.jpg",
+      "moodboards/Haldi - Rangon Ki Rasleela/4268a6c9b1127937807437bbe86e384f.jpg",
+      "moodboards/Haldi - Rangon Ki Rasleela/5b2ad1c1eb7e4bb426cf13263897f07a.jpg",
+      "moodboards/Haldi - Rangon Ki Rasleela/61Rhqbks5kL.jpg",
+      "moodboards/Haldi - Rangon Ki Rasleela/864aa6511f8be7e8504476b459e22bb6.jpg",
+      "moodboards/Haldi - Rangon Ki Rasleela/IMG_5704.jpg.webp",
+      "moodboards/Haldi - Rangon Ki Rasleela/a8bab1e59ce95b94cd5fd5dd440d5f73.jpg",
+      "moodboards/Haldi - Rangon Ki Rasleela/a91c08167bec104a437f28e4f17e9d43.jpg",
+      "moodboards/Haldi - Rangon Ki Rasleela/a9eca31d50e3b7fbaadfafb29d64faac.jpg",
+      "moodboards/Haldi - Rangon Ki Rasleela/bbfad1fc8b11a74c75114fbb2a2ccfef.jpg",
+      "moodboards/Haldi - Rangon Ki Rasleela/c385f637fb0673f8d93939e6723fc1ff.jpg",
+      "moodboards/Haldi - Rangon Ki Rasleela/c420584f099719a023a383a5d47b1f64.jpg",
+      "moodboards/Haldi - Rangon Ki Rasleela/e4db54ab9b6e6d15e1fff44bf83986e8.jpg",
+      "moodboards/Haldi - Rangon Ki Rasleela/f451d60e7cbccfcda91b778c7df31cd8.jpg"
+    ]
   }
 ];
 
@@ -312,16 +394,28 @@ export default function MoodBoardsPage() {
   };
 
   const MoodBoardCard = ({ board, index }) => {
-    const isTall = (index % 2 === 0); // Alternate heights
-    const isNudged = board.id === "wedding-emerald-eden" || board.id === "sangeet-crimson-soiree";
+    let isTall = (index % 2 === 0); // Alternate heights
+    
+    let layoutClasses = "";
+    if (board.id === "wedding-royal-indian") {
+      isTall = false; // Override to Short to create a gap for interlocking
+    } else if (board.id === "wedding-emerald-eden" || board.id === "sangeet-crimson-soiree") {
+      layoutClasses = "lg:-mt-[120px]";
+    } else if (board.id === "wedding-painted-gardens") {
+      layoutClasses = "lg:col-start-2 lg:row-start-3 lg:-mt-[240px]";
+      isTall = true;
+    } else if (board.id === "wedding-haveli-nights") {
+      layoutClasses = "lg:col-start-4 lg:row-start-3 lg:-mt-[240px]";
+      isTall = true;
+    } else if (board.id === "haldi-rangon-ki-rasleela") {
+      layoutClasses = "lg:col-start-1 lg:row-start-3 lg:-mt-[120px]";
+      isTall = true; // Tall board filling the gap perfectly
+    }
 
     return (
       <div 
         onClick={() => { setSelectedBoard(board); setShowOverlay(true); }}
-        className={`mood-card group relative bg-[#1A1408] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-[6px] hover:shadow-[0_24px_48px_rgba(0,0,0,0.15)] hover:ring-2 hover:ring-[#C9A234] ${isTall ? 'h-[480px]' : 'h-[360px]'}`}
-        style={{ 
-          marginTop: isNudged ? '-120px' : '0',
-        }}
+        className={`mood-card group relative bg-[#1A1408] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-[6px] hover:shadow-[0_24px_48px_rgba(0,0,0,0.15)] hover:ring-2 hover:ring-[#C9A234] ${isTall ? 'h-[480px]' : 'h-[360px]'} ${layoutClasses}`}
       >
         {/* 2x2 Image Grid */}
         <div className="grid grid-cols-2 grid-rows-2 h-full w-full">

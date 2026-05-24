@@ -8,7 +8,6 @@ import GoldDivider from "@/components/GoldDivider";
 import gsap from "gsap";
 
 export default function PortfolioPage() {
-  const [filter, setFilter] = useState("all");
   const [selectedWedding, setSelectedWedding] = useState(null);
 
   useEffect(() => {
@@ -23,7 +22,7 @@ export default function PortfolioPage() {
         }
       });
     });
-  }, [filter]);
+  }, []);
 
   const weddings = [
     { id: 1, name: "Aanya & Rohan", loc: "Udaipur, India", cat: "india palace", story: "A three-day palace celebration overlooking Lake Pichola. Marigold archways, mirror-work chandeliers, and a lakeside pheras ceremony that left no eye dry.", img: "destination/TSR50973.jpg" },
@@ -37,7 +36,7 @@ export default function PortfolioPage() {
     { id: 9, name: "Ananya & Sid", loc: "Maldives", cat: "international beach", story: "An overwater ceremony at golden hour — the lagoon shimmering below, infinity above.", img: "couple-shots/0G4A4625.jpg" }
   ];
 
-  const filteredWeddings = filter === "all" ? weddings : weddings.filter(w => w.cat.includes(filter));
+  const filteredWeddings = weddings;
 
   return (
     <div className="bg-bg min-h-screen">
@@ -57,17 +56,6 @@ export default function PortfolioPage() {
       </div>
 
       <section style={{ paddingTop: '64px' }}>
-        <div className="filter-bar reveal mb-12 flex gap-3 flex-wrap">
-          {["all", "india", "international", "palace", "beach", "garden"].map((f) => (
-            <button 
-              key={f}
-              className={`filter-pill ${filter === f ? 'active' : ''}`} 
-              onClick={() => setFilter(f)}
-            >
-              <span>{f.charAt(0).toUpperCase() + f.slice(1)}</span>
-            </button>
-          ))}
-        </div>
 
         <div className="wedding-grid">
           {filteredWeddings.map((wedding, i) => (

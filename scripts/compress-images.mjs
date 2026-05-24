@@ -1,22 +1,38 @@
 import sharp from "sharp";
 import { readdir, readFile, stat, writeFile, unlink } from "node:fs/promises";
-import { join, extname, basename, dirname } from "node:path";
+import { join, extname } from "node:path";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { execSync } from "node:child_process";
 
-const ROOT = "public/assets";       // covers photos/, services/, everything
+const DEFAULT_ROOT = "public/assets";
 const SRC_DIR = "src";
 const MAX_WIDTH = 2000;
 const JPEG_QUALITY = 80;
 const WEBP_QUALITY = 80;
 const SKIP_BELOW_BYTES = 150 * 1024; // skip already-small files (<150 KB)
-const DRY_RUN = process.argv.includes("--dry-run");
+
+const argv = process.argv.slice(2);
+const DRY_RUN = argv.includes("--dry-run");
+const pathsFlag = argv.indexOf("--paths");
+const customPaths =
+  pathsFlag >= 0 ? argv.slice(pathsFlag + 1).filter((a) => !a.startsWith("--")) : [];
+const ROOTS = customPaths.length > 0 ? customPaths : [DEFAULT_ROOT];
 
 if (DRY_RUN) console.log("--- DRY RUN — no files will be changed ---\n");
+console.log(`Scope: ${ROOTS.join(", ")}\n`);
 
-async function* walk(dir) {
-  for (const entry of await readdir(dir, { withFileTypes: true })) {
-    const p = join(dir, entry.name);
+async function* walk(target) {
+  if (!existsSync(target)) {
+    console.warn(`SKIP (not found): ${target}`);
+    return;
+  }
+  const info = await stat(target);
+  if (info.isFile()) {
+    yield target;
+    return;
+  }
+  for (const entry of await readdir(target, { withFileTypes: true })) {
+    const p = join(target, entry.name);
     if (entry.isDirectory()) yield* walk(p);
     else yield p;
   }
@@ -51,7 +67,8 @@ let processed = 0;
 let skipped = 0;
 let converted = 0; // PNG → JPEG conversions
 
-for await (const file of walk(ROOT)) {
+for (const root of ROOTS) {
+  for await (const file of walk(root)) {
   const ext = extname(file).toLowerCase();
   if (![".jpg", ".jpeg", ".png", ".webp"].includes(ext)) continue;
 
@@ -123,6 +140,7 @@ for await (const file of walk(ROOT)) {
   console.log(
     `${ext.slice(1).toUpperCase().padEnd(8)} ${file.padEnd(65)} ${fmt(sizeBefore).padStart(8)} → ${fmt(buf.length).padStart(8)}`
   );
+  }
 }
 
 const saved = totalBefore - totalAfter;

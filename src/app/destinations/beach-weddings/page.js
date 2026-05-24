@@ -68,6 +68,33 @@ const beachDestinations = [
   },
   {
     id: "03",
+    name: "Taj Green Cove, Kovalam",
+    location: "KERALA · KOVALAM",
+    desc1: "A breathtaking 10-acre Balinese-inspired retreat on a lush hillside where the backwaters meet the Arabian Sea — secluded, intimate, and entirely distinctive...",
+    img: "beach-wedding/taj-green-cove-kerala.jpg",
+    stats: { rooms: "59", guests: "500+" },
+    writeup: "A breathtaking 10-acre Balinese-inspired retreat on a lush hillside where the backwaters meet the Arabian Sea — secluded, intimate, and entirely distinctive. Unique boat-entry experiences, the world-renowned J Wellness Circle, and Seaside Lawns for sunset ceremonies make it a fairytale destination for those seeking tranquil coastal opulence along Kerala's most celebrated shoreline.",
+    glance: [
+      { label: "Rooms", value: "59" },
+      { label: "Guests", value: "500+" },
+      { label: "Buyout Cost", value: "₹80 Lacs – ₹1.5 Cr" },
+      { label: "Accommodation", value: "₹50 – ₹80 Lacs / Night" },
+      { label: "F&B", value: "₹18 – ₹30 Lacs" },
+      { label: "Decor & Production", value: "₹20 – ₹50 Lacs" },
+    ],
+    slides: [
+      { label: "Hillside Retreat", desc: "Balinese-inspired hillside retreat where backwaters meet the sea.", img: "/assets/photos/beach-wedding/Taj Green Cove Resort & Spa, Kovalam/1d1aab7e1f1cfa43e8058bc1016867a5173c8044-4500x2989.avif" },
+      { label: "Seaside Lawns", desc: "Seaside lawns for sunset wedding ceremonies in Kovalam.", img: "/assets/photos/beach-wedding/Taj Green Cove Resort & Spa, Kovalam/246d5a19334f5f0fcfb0ab48047d07266afda318-1920x1275.avif" },
+      { label: "Infinity Pool", desc: "Panoramic infinity pool overlooking the Arabian Sea.", img: "/assets/photos/beach-wedding/Taj Green Cove Resort & Spa, Kovalam/35d1c79c1d662b92f38afd1de0b46e3f11d2437e-3888x2592.avif" },
+      { label: "Gardens", desc: "Lush tropical gardens cascading down the hillside.", img: "/assets/photos/beach-wedding/Taj Green Cove Resort & Spa, Kovalam/4632caea1c2654cbcf51138007bfa9e34387585e-3600x2701.avif" },
+      { label: "Aerial View", desc: "Aerial view of the resort nestled between the forest and sea.", img: "/assets/photos/beach-wedding/Taj Green Cove Resort & Spa, Kovalam/81d57710dd04d80b7ffb520dfc7723d938b92e54-1920x1280.avif" },
+      { label: "Spa", desc: "The world-renowned J Wellness Circle sanctuary.", img: "/assets/photos/beach-wedding/Taj Green Cove Resort & Spa, Kovalam/940ed470a00aeb7fcf44f782d55da2e102a181c6-1400x1120.avif" },
+      { label: "Backwaters", desc: "Tranquil backwater vistas from the resort's vantage point.", img: "/assets/photos/beach-wedding/Taj Green Cove Resort & Spa, Kovalam/c408bbdd850f17a94e24788fd377e0a86cf95401-1920x1034.avif" },
+      { label: "Kerala Coastline", desc: "The dramatic Kerala coastline framing the resort.", img: "/assets/photos/beach-wedding/Taj Green Cove Resort & Spa, Kovalam/ed23f9f8c4c8b94b59365a65602ee1074f8c97ed-1920x913.avif" },
+    ],
+  },
+  {
+    id: "04",
     name: "Grand Hyatt, Goa",
     location: "GOA · BAMBOLIM BAY",
     desc1: "A magnificent 17th-century Indo-Portuguese inspired estate sprawling across 28 acres of lush tropical gardens along Bambolim Bay — one of Goa's grandest residential wedding properties...",
@@ -95,7 +122,7 @@ const beachDestinations = [
     ],
   },
   {
-    id: "04",
+    id: "05",
     name: "Taj Exotica, Goa",
     location: "GOA · BENAULIM BEACH",
     desc1: "A Mediterranean-inspired oasis across 56 acres of manicured gardens along pristine Benaulim Beach — intimate yet grand, with sun-drenched architecture and private beachfront access...",
@@ -123,7 +150,7 @@ const beachDestinations = [
     ],
   },
   {
-    id: "05",
+    id: "06",
     name: "Taj Cidade de Goa",
     location: "GOA · VAINGUINIM BEACH",
     desc1: "A stunning hillside tribute to Portuguese-inspired architecture — arched corridors, red-tiled roofs, and hand-painted murals frame every celebration with old-world charm and coastal romance...",
@@ -148,7 +175,7 @@ const beachDestinations = [
     ],
   },
   {
-    id: "06",
+    id: "07",
     name: "Caravela Beach Resort, Goa",
     location: "GOA · VARCA BEACH",
     desc1: "A sprawling 24-acre beachfront estate on the pristine white sands of Varca Beach, blending Indo-Portuguese heritage with refined tropical luxury...",
@@ -172,33 +199,6 @@ const beachDestinations = [
       { label: "Villa", desc: "Spacious two-bedroom garden villa for bridal parties.", img: "/assets/photos/beach-wedding/Caravela Beach Resort Goa/2_Bedroom_Garden_Villa_1_vigfqe.webp" },
       { label: "Presidential Villa", desc: "Grand presidential villa with private living quarters.", img: "/assets/photos/beach-wedding/Caravela Beach Resort Goa/Presidential_Villa_Living_Room_05_duktci_yhalfd.webp" },
       { label: "Exterior", desc: "The resort's beachside landscape at the golden hour.", img: "/assets/photos/beach-wedding/Caravela Beach Resort Goa/_P5A7205_edited.webp" },
-    ],
-  },
-  {
-    id: "07",
-    name: "Taj Green Cove, Kovalam",
-    location: "KERALA · KOVALAM",
-    desc1: "A breathtaking 10-acre Balinese-inspired retreat on a lush hillside where the backwaters meet the Arabian Sea — secluded, intimate, and entirely distinctive...",
-    img: "beach-wedding/taj-green-cove-kerala.jpg",
-    stats: { rooms: "59", guests: "500+" },
-    writeup: "A breathtaking 10-acre Balinese-inspired retreat on a lush hillside where the backwaters meet the Arabian Sea — secluded, intimate, and entirely distinctive. Unique boat-entry experiences, the world-renowned J Wellness Circle, and Seaside Lawns for sunset ceremonies make it a fairytale destination for those seeking tranquil coastal opulence along Kerala's most celebrated shoreline.",
-    glance: [
-      { label: "Rooms", value: "59" },
-      { label: "Guests", value: "500+" },
-      { label: "Buyout Cost", value: "₹80 Lacs – ₹1.5 Cr" },
-      { label: "Accommodation", value: "₹50 – ₹80 Lacs / Night" },
-      { label: "F&B", value: "₹18 – ₹30 Lacs" },
-      { label: "Decor & Production", value: "₹20 – ₹50 Lacs" },
-    ],
-    slides: [
-      { label: "Hillside Retreat", desc: "Balinese-inspired hillside retreat where backwaters meet the sea.", img: "/assets/photos/beach-wedding/Taj Green Cove Resort & Spa, Kovalam/1d1aab7e1f1cfa43e8058bc1016867a5173c8044-4500x2989.avif" },
-      { label: "Seaside Lawns", desc: "Seaside lawns for sunset wedding ceremonies in Kovalam.", img: "/assets/photos/beach-wedding/Taj Green Cove Resort & Spa, Kovalam/246d5a19334f5f0fcfb0ab48047d07266afda318-1920x1275.avif" },
-      { label: "Infinity Pool", desc: "Panoramic infinity pool overlooking the Arabian Sea.", img: "/assets/photos/beach-wedding/Taj Green Cove Resort & Spa, Kovalam/35d1c79c1d662b92f38afd1de0b46e3f11d2437e-3888x2592.avif" },
-      { label: "Gardens", desc: "Lush tropical gardens cascading down the hillside.", img: "/assets/photos/beach-wedding/Taj Green Cove Resort & Spa, Kovalam/4632caea1c2654cbcf51138007bfa9e34387585e-3600x2701.avif" },
-      { label: "Aerial View", desc: "Aerial view of the resort nestled between the forest and sea.", img: "/assets/photos/beach-wedding/Taj Green Cove Resort & Spa, Kovalam/81d57710dd04d80b7ffb520dfc7723d938b92e54-1920x1280.avif" },
-      { label: "Spa", desc: "The world-renowned J Wellness Circle sanctuary.", img: "/assets/photos/beach-wedding/Taj Green Cove Resort & Spa, Kovalam/940ed470a00aeb7fcf44f782d55da2e102a181c6-1400x1120.avif" },
-      { label: "Backwaters", desc: "Tranquil backwater vistas from the resort's vantage point.", img: "/assets/photos/beach-wedding/Taj Green Cove Resort & Spa, Kovalam/c408bbdd850f17a94e24788fd377e0a86cf95401-1920x1034.avif" },
-      { label: "Kerala Coastline", desc: "The dramatic Kerala coastline framing the resort.", img: "/assets/photos/beach-wedding/Taj Green Cove Resort & Spa, Kovalam/ed23f9f8c4c8b94b59365a65602ee1074f8c97ed-1920x913.avif" },
     ],
   },
   {
@@ -315,79 +315,6 @@ export default function BeachWeddingsPage() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOverlayOpen, selectedVenue]);
 
-  const ImagePanel = ({ dest }) => (
-    <div className="w-full md:w-[360px] relative flex-shrink-0 p-4 md:p-6 flex items-center justify-center bg-bg h-full group/img">
-      <div className="relative w-full h-full max-w-[320px] md:max-w-none flex flex-col">
-        <div className="absolute top-[-12px] left-[-12px] w-12 h-12 border-t border-l border-[#C8A84B] z-10 pointer-events-none opacity-60 transition-transform duration-700 group-hover/img:scale-110"></div>
-        <div className="absolute bottom-[-12px] right-[-12px] w-12 h-12 border-b border-r border-[#C8A84B] z-10 pointer-events-none opacity-60 transition-transform duration-700 group-hover/img:scale-110"></div>
-
-        <div className="relative w-full flex-grow overflow-hidden shadow-sm min-h-[450px] md:min-h-0 md:h-full">
-          {dest.id === "01" ? (
-            <div className="absolute inset-0">
-              <TiltedCard
-                imageSrc={`/assets/photos/${dest.img}`}
-                altText={dest.name}
-                captionText={dest.name}
-                containerHeight="100%"
-                containerWidth="100%"
-                imageHeight="100%"
-                imageWidth="100%"
-                rotateAmplitude={12}
-                scaleOnHover={1.05}
-                showMobileWarning={false}
-                showTooltip={true}
-              />
-            </div>
-          ) : (
-            <div className="absolute inset-0 scale-110 transition-transform duration-[2s] ease-out group-hover/img:scale-[1.2]">
-              <Image
-                src={`/assets/photos/${dest.img}`}
-                alt={dest.name}
-                fill
-                sizes="(max-width: 768px) 100vw, 360px"
-                {...getBlurProps(`/assets/photos/${dest.img}`)}
-                className="object-cover parallax-img"
-              />
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-
-  const ContentPanel = ({ dest }) => (
-    <div className="flex-grow bg-[#F9F5EF] p-[1.5rem] md:p-[2.5rem] flex flex-col justify-center relative border-l-2 border-[rgba(200,168,75,0.4)] h-full w-full">
-      <h2 className="font-heading text-ink text-4xl md:text-5xl font-light mb-1">
-        {dest.name}
-      </h2>
-      <p className="text-[#C8A84B] text-[11px] tracking-[3px] uppercase font-medium mb-4">
-        {dest.location}
-      </p>
-
-      <p className="text-muted text-[15px] leading-[1.7] font-light mb-6 w-full">
-        {dest.desc1}
-      </p>
-
-      {dest.stats && (
-        <div className="flex flex-wrap gap-3 mb-8">
-          {Object.entries(dest.stats).map(([key, value]) => (
-            <div key={key} className="px-4 py-1.5 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm transition-transform hover:scale-105">
-              <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">{key}:</span>
-              <span className="text-ink text-[11px] font-medium">{value}</span>
-            </div>
-          ))}
-        </div>
-      )}
-
-      <button
-        onClick={() => openVenue(dest)}
-        className="inline-block bg-[#C8A84B] text-[#1a1200] px-[2rem] py-[0.8rem] text-[11px] tracking-[3px] uppercase font-bold transition-all duration-500 self-start border-none hover:bg-[#A8892F] hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(168,137,47,0.25)]"
-      >
-        Explore More About This Venue
-      </button>
-    </div>
-  );
-
   const slides = selectedVenue?.slides || [];
 
   return (
@@ -420,31 +347,63 @@ export default function BeachWeddingsPage() {
       </section>
 
       {/* DESTINATION CARDS */}
-      <section className="p-0 m-0 border-none">
-        <div className="flex flex-col gap-0 p-0 m-0">
-          {beachDestinations.map((dest, i) => {
-            const isEven = i % 2 === 0;
-
-            return (
+      <section className="bg-bg pt-10 pb-16 px-6 md:px-10">
+        <div className="max-w-[1400px] mx-auto">
+          {/* Optional small heading */}
+          <div className="flex flex-col items-center text-center mb-10">
+            <p className="section-label reveal">Our Venues</p>
+            <h2 className="section-title reveal text-ink">Where Your Story Unfolds</h2>
+          </div>
+          {/* Card grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {beachDestinations.map((venue, index) => (
               <div
-                key={dest.id}
-                className="flex flex-col md:grid items-stretch reveal p-0 m-0"
-                style={{ gridTemplateColumns: isEven ? '360px 1fr' : '1fr 360px' }}
+                key={venue.id}
+                className="venue-card-entrance relative h-[320px] rounded-xl overflow-hidden cursor-pointer group bg-[#1A1408]"
+                onClick={() => openVenue(venue)}
               >
-                {isEven ? (
-                  <>
-                    <ImagePanel dest={dest} />
-                    <ContentPanel dest={dest} />
-                  </>
-                ) : (
-                  <>
-                    <ContentPanel dest={dest} />
-                    <ImagePanel dest={dest} />
-                  </>
-                )}
+                {/* Background image */}
+                <div className="absolute inset-0 overflow-hidden">
+                  <Image
+                    src={`/assets/photos/${venue.img}`}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    alt={venue.name}
+                  />
+                </div>
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                {/* Hover tint */}
+                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Gold border on hover */}
+                <div className="absolute inset-0 border-2 border-[#C9A234] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Content pinned to bottom */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-col items-start">
+                  <span className="text-[#C9A234] text-[11px] mb-1.5">✦</span>
+                  <p className="text-[10px] font-body uppercase text-[#C9A234] tracking-[3px] mb-1">
+                    {String(index + 1).padStart(2, '0')}
+                  </p>
+                  <h3 className="font-heading text-white text-[22px] leading-[1.2] mb-1">
+                    {venue.name}
+                  </h3>
+                  <p className="text-white/60 text-[11px] uppercase tracking-[2px] mb-3">
+                    {venue.location}
+                  </p>
+                  <div className="flex gap-2 mb-4">
+                    <span className="px-3 py-1 bg-white/10 border border-[#C8A84B]/30 rounded-full text-[10px] text-white/80">
+                      Rooms: {venue.stats?.rooms || "N/A"}
+                    </span>
+                    <span className="px-3 py-1 bg-white/10 border border-[#C8A84B]/30 rounded-full text-[10px] text-white/80">
+                      Guests: {venue.stats?.guests || "N/A"}
+                    </span>
+                  </div>
+                  <div className="px-4 py-1.5 rounded-full bg-[#C9A234]/15 border border-[#C9A234]/40 text-[10px] text-[#C9A234] uppercase tracking-[2px] group-hover:bg-[#C9A234]/30 transition-colors duration-300">
+                    Explore Venue →
+                  </div>
+                </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </section>
 
@@ -588,7 +547,7 @@ export default function BeachWeddingsPage() {
                     {selectedVenue.location}
                   </div>
 
-                  <h3 className="font-heading text-[44px] text-[#1A1408] leading-[1.05] mt-[8px] text-center md:text-left">
+                  <h3 className="font-heading text-[34px] text-[#1A1408] leading-[1.05] mt-[8px] text-center md:text-left">
                     {selectedVenue.name}
                   </h3>
 

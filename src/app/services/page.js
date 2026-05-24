@@ -28,7 +28,7 @@ const services = [
     tagline: "Every detail considered. Every moment orchestrated.",
     description: "Our dedicated team pays meticulous attention to every detail, orchestrating a flawless journey from the first consultation to the final dance.",
     includes: ["End to End Timeline Mapping", "Budget Architecture & Allocation", "Curated Vendor Matchmaking", "Multi Day Itinerary Design", "On Site Command & Execution", "Post Wedding Wrap & Vendor Settlement"],
-    img: "couple-shots/TSR53067.jpg",
+    img: "services/planning-service.jpg",
     photographer: "Stories by Joseph Radhik"
   },
   {
@@ -38,7 +38,7 @@ const services = [
     tagline: "Environments crafted to reflect your story",
     description: "Every mandap, every centerpiece, every lighting rig is designed to reflect you. We build immersive environments, not just decorations.",
     includes: ["Bespoke Conceptualizing & Mood Boards", "Immersive Floral Artistry", "Custom Scenography & Production", "Strategic Lighting & Soundscaping", "Finer Details & Table Scaping"],
-    img: "services/decoration/haldi_flowers_decor.jpg",
+    img: "services/Designa nd decor 1.jpg",
     photographer: "Vows & Vedas Design Lab"
   },
   {
@@ -76,7 +76,7 @@ const services = [
     number: "07",
     name: "Vendor Management",
     tagline: "Curated network of India's elite artisans",
-    description: "We bring you access to the most exclusive wedding partners — from bespoke couturiers and award-winning caterers to artisanal invitation designers.",
+    description: "We bring you access to the most exclusive wedding partners — from photographers, makeup artists, dj etc, bespoke couturiers and caterers to artisanal invitation designers.",
     includes: ["Elite Network Access", "Comprehensive Contract & Rate Negotiation", "Centralized Communication Hub", "Integrated Timeline & Delivery Schedule", "Financial Tracking & Payment Milestones"],
     img: "couple-shots/hospitality1.jpg",
     photographer: "Vows & Vedas Artisan Network"
@@ -85,10 +85,10 @@ const services = [
     id: "travel-logistics",
     number: "08",
     name: "Travel & Logistics",
-    tagline: "Seamless fleet management and guest transit",
-    description: "We handle the complex movement of hundreds of guests across venues and cities with precision, from luxury airport transfers to venue shuttles.",
-    includes: ["Guest travel & ticket coordination", "Luxury car fleet & coach management", "On-site transport concierge desk", "Real-time transit tracking & communication", "Venue-to-hotel shuttle coordination"],
-    img: "services/transport-logistics.jpg",
+    tagline: "Seamless transport management and guest transit",
+    description: "We handle the complex movement of hundreds of guests across venues and cities with precision, from luxury airport transfers to venue shuttles, while also orchestrating bespoke trousseau shopping, gifting, honeymoon planning, marriage registration, and visa assistance.",
+    includes: ["Guest travel & ticket coordination", "Luxury car transport & coach management", "On-site transport concierge desk", "Real-time transit tracking & communication", "Venue-to-hotel shuttle coordination"],
+    img: "services/Travel and transport.jpeg",
     photographer: "Logistics Excellence"
   },
   {
@@ -404,13 +404,13 @@ export default function ServicesPage() {
               description: "Breathtaking pyrotechnics and cinematic atmospheric effects to elevate your grand entry and celebration moments." 
             },
             { 
-              img: "services/decoration/e-invites and stationary.JPG",
+              img: "services/E-INvites.webp",
               name: "E-Invites", 
               tagline: "Animated Digital Invitations", 
               description: "Custom digital wedding invitations with RSVP tracking and animated reveals." 
             },
             { 
-              img: "services/decoration/haldi_flowers_decor.jpg",
+              img: "services/Home decor 1.jpeg",
               name: "Home Decor", 
               tagline: "Pre & Post Wedding Styling", 
               description: "Bringing the celebration home with elegant floral and lighting designs for your residence." 
@@ -420,6 +420,36 @@ export default function ServicesPage() {
               name: "Website Creation", 
               tagline: "Bespoke Guest Hubs", 
               description: "A bespoke digital hub for your guests with RSVPs, gallery, and travel itineraries." 
+            },
+            { 
+              img: "couple-shots/TSR53127.jpg",
+              name: "Trousseau Shopping", 
+              tagline: "Designer Curation & Wardrobe Styling", 
+              description: "Access exclusive designer previews, personalized shopping trials, and bridal wardrobe styling assistance." 
+            },
+            { 
+              img: "services/mehendi.jpg",
+              name: "Gifting & Favours", 
+              tagline: "Bespoke Curated Memorabilia", 
+              description: "Thoughtfully designed hampers, local artisanal souvenirs, and custom welcome favors for your guests." 
+            },
+            { 
+              img: "destination/pool_venue.jpg",
+              name: "Honeymoon Planning", 
+              tagline: "Luxury Romantic Escapes", 
+              description: "Tailored itineraries, luxury couples' retreats, and private experience curation across global destinations." 
+            },
+            { 
+              img: "destination/hospitality2.jpg",
+              name: "Marriage Registration", 
+              tagline: "Official Registry Assistance", 
+              description: "Laying down smooth paperwork, slot booking, and local registry guidance to officially certify your union." 
+            },
+            { 
+              img: "services/Travel and transport.jpeg",
+              name: "Visa Assistance", 
+              tagline: "Seamless Global Travel Prep", 
+              description: "Dedicated assistance for guest visa processing, documentation support, and embassy appointments." 
             }
           ].map((addon, i) => (
             <AddOnCard key={i} addon={addon} />

@@ -11,8 +11,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutPage() {
   const containerRef = useRef(null);
-  const [expanded, setExpanded] = useState({});
-  const toggleBio = (i) => setExpanded(prev => ({ ...prev, [i]: !prev[i] }));
+  const [expandedBio, setExpandedBio] = useState({});
+  const [expandedTeam, setExpandedTeam] = useState({});
+  const toggleBio = (i) => setExpandedBio(prev => ({ ...prev, [i]: !prev[i] }));
+  const toggleTeam = (i) => setExpandedTeam(prev => ({ ...prev, [i]: !prev[i] }));
 
   useEffect(() => {
     // Reveal animations
@@ -39,7 +41,7 @@ export default function AboutPage() {
       }
     });
 
-    // Count-up animation for stats in GetsHolidays Legacy
+    // Count-up animation for stats in GeTSHolidays Legacy
     const stats = document.querySelectorAll("[data-count]");
     stats.forEach((stat) => {
       const target = parseInt(stat.getAttribute("data-count"));
@@ -84,13 +86,13 @@ export default function AboutPage() {
             <GoldDivider className="mb-3" />
             <p className="hero-left-eyebrow opacity-0 translate-y-6 text-[10px] tracking-[0.5em] uppercase font-medium mb-1" style={{ color: 'var(--color-gold)' }}>Our Story</p>
             <h1 className="hero-left-title opacity-0 translate-y-6 font-heading text-ink text-7xl font-light leading-none tracking-[-0.02em]">
-              <span className="block">Where <em className="italic">Vision</em></span>
+              <span className="block">Where <em className="italic">Design</em></span>
               <span className="flex items-center justify-center gap-3 py-[10px]">
                 <span className="w-8 h-px bg-[#C9A234] opacity-50"></span>
                 <span className="w-[5px] h-[5px] rounded-full bg-[#C9A234] opacity-65 flex-shrink-0"></span>
                 <span className="w-8 h-px bg-[#C9A234] opacity-50"></span>
               </span>
-              <span className="block">Meets <em className="italic">Devotion</em></span>
+              <span className="block">Meets <em className="italic">Detail</em></span>
             </h1>
             <GoldDivider flip className="mt-8" />
           </div>
@@ -134,25 +136,25 @@ export default function AboutPage() {
         </div>
         <div className="p-8 md:p-11 flex flex-col justify-center reveal stagger-1">
           <p className="text-gold text-[10px] tracking-[0.4em] uppercase mb-4 font-medium">What Makes Us Different</p>
-          <h2 className="font-heading text-ink text-5xl md:text-6xl mb-4 leading-[1.1] italic">We don't plan weddings.<br /><em className="not-italic font-light">We build worlds.</em></h2>
+          <h2 className="font-heading text-ink text-5xl md:text-6xl mb-4 leading-[1.1] italic">We don't just plan weddings.</h2>
           <p className="text-muted text-[14px] leading-[1.8] font-light max-w-[460px]">
-            Every Vows & Vedas wedding is shaped by your story, your family, your culture, and your vision — from intimate shores of Goa to royal palaces of Jaipur to clifftops of Santorini. We bring it to life with precision and poetry.
+            Every Vows & Vedas wedding is shaped by your story, your family, your culture, and your vision — from intimate shores of Goa to royal palaces of Jaipur. We bring it to life with precision and poetry.
           </p>
         </div>
       </section>
 
-      {/* SECTION 3 — GetsHolidays LEGACY */}
+      {/* SECTION 3 — GeTSHolidays LEGACY */}
       <section className="bg-[#1a1200] py-8 md:py-10 px-12 relative overflow-hidden">
         <CornerOrnament size={60} inset={20} opacity={0.3} strokeWidth={1.5} />
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 items-center">
           <div className="reveal">
-            <p className="text-gold text-[10px] tracking-[0.4em] uppercase mb-4 font-medium">The GetsHolidays Legacy</p>
+            <p className="text-gold text-[10px] tracking-[0.4em] uppercase mb-4 font-medium">The GeTSHolidays Legacy</p>
             <h2 className="font-heading text-surface text-5xl md:text-6xl leading-[1.1]">37 Years of<br /><em className="italic">Industry Excellence</em></h2>
           </div>
           <div className="reveal stagger-1 flex flex-col justify-center">
             <div className="flex flex-col gap-4 mb-8">
               <p className="text-surface/70 text-[14px] md:text-[15px] leading-[1.7] font-light">
-                We are proud to be part of the GetsHolidays family — a 37-year-old powerhouse in the events and experiences industry, with a team of over 150 dedicated professionals across specialised divisions.
+                We are proud to be part of the GeTSHolidays family — a 37-year-old powerhouse in the events, Travel and experiences industry, with a team of over 150 dedicated professionals across specialised divisions.
               </p>
               <p className="text-surface/70 text-[14px] md:text-[15px] leading-[1.7] font-light">
                 This heritage gives Vows & Vedas an unmatched foundation — the agility of a boutique wedding house backed by the muscle and expertise of an industry leader. From logistics to creative direction, every team that works behind the scenes is best in class.
@@ -187,59 +189,8 @@ export default function AboutPage() {
           <GoldDivider darkBg flip className="mt-2 reveal" />
         </div>
 
-        {/* TIER 1 — The Operational Backbone */}
+        {/* TIER 1 — Your Planning Team */}
         <div className="px-12 pb-8">
-          <div className="flex flex-col items-center text-center mb-6 reveal">
-            <p className="text-[9px] tracking-[0.45em] uppercase font-medium mb-2" style={{ color: 'var(--color-gold)' }}>The Operational Backbone</p>
-            <h3 className="font-heading text-surface text-3xl md:text-4xl font-light">Behind Every <em className="italic">Wedding</em></h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px">
-            {[
-              {
-                name: "Travel & Transport",
-                descriptor: "Fleet & Guest Logistics",
-                desc: "Our dedicated logistics team brings efficient fleet management to your wedding day. Managing everything from travel ticketing to VIP arrivals to welcoming to multi-venue guest shuttles, they ensure perfectly timed, stress-free transit.\n\nWe guarantee your guests experience seamless, hospitality-driven travel from arrival to departure.",
-                image: "/assets/photos/destination/beach-wedding-img.jpg"
-              },
-              {
-                name: "Hotel & Venue Procurement",
-                descriptor: "Luxury Venue Contracting",
-                desc: "Leveraging years of global corporate negotiations, this team secures the finest luxury venues and room blocks at unmatched value. They handle complex contracting, attrition clauses and finer details effortlessly.\n\nThis means elevated insider perks and a completely seamless, legally secure booking experience.",
-                image: "/assets/photos/destination/pool_venue.jpg"
-              },
-              {
-                name: "Operations & Event Production",
-                descriptor: "Production & Execution",
-                desc: "The technical powerhouse, this division converts ambitious creative visions into structurally flawless realities. They manage high-stakes timelines, sound, lighting, and vendor coordination with absolute military precision.\n\nTheir vast experience guarantees your wedding day runs like clockwork, entirely behind the scenes.",
-                image: "/assets/photos/services/decoration/sangeet_decoration.jpg"
-              }
-            ].map((team, i) => (
-              <div key={i} className={`ts-card reveal stagger-${i + 1}`}>
-                <div className="aspect-video overflow-hidden">
-                  <img src={team.image} alt={team.name} className="ts-card-img w-full h-full object-cover" />
-                </div>
-                <div className="h-px bg-[#C9A234]/35"></div>
-                <div className="p-6 md:p-7">
-                  <p className="text-[9px] tracking-[0.45em] uppercase font-medium mb-3" style={{ color: 'var(--color-gold)' }}>{team.descriptor}</p>
-                  <h3 className="font-heading text-surface text-[28px] font-light leading-tight mb-3">{team.name}</h3>
-                  <p className="text-[13px] leading-[1.75] font-light whitespace-pre-line" style={{ color: 'rgba(253,250,245,0.55)' }}>{team.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Bridging sentence */}
-        <div className="py-8 px-12 flex flex-col items-center text-center reveal">
-          <div className="h-px w-16 bg-[#C9A234]/30 mb-6"></div>
-          <p className="font-heading italic text-surface/50 text-[18px] md:text-[20px] leading-[1.7] max-w-lg">
-            And leading all of this — the people you'll actually work with.
-          </p>
-          <div className="h-px w-16 bg-[#C9A234]/30 mt-6"></div>
-        </div>
-
-        {/* TIER 2 — Your Planning Team */}
-        <div className="px-12 pb-10">
           <div className="flex flex-col items-center text-center mb-6 reveal">
             <p className="text-[9px] tracking-[0.45em] uppercase font-medium mb-2" style={{ color: 'var(--color-gold)' }}>Who You'll Work With</p>
             <h3 className="font-heading text-surface text-3xl md:text-4xl font-light">Your Planning <em className="italic">Team</em></h3>
@@ -248,7 +199,7 @@ export default function AboutPage() {
             {[
               {
                 name: "Manmeet Soundh",
-                role: "Creative Director / Creative Direction",
+                role: "Creative Planning",
                 vibe: "Where emotion meets elegance, the extraordinary begins.",
                 bio: "With over two decades of experience in the experiential and luxury wedding industry, Manmeet Soundh is the creative force behind Vows & Vedas, crafting celebrations that beautifully blend emotion, elegance and the art of curating rare moments.\n\nKnown for transforming concepts into timeless wedding experiences, his signature style reflects contemporary luxury, refined aesthetics and detail-driven storytelling.",
                 image: "/assets/photos/about-us/383c1d15-b27d-4b3a-934c-0e9b8db51f7d.JPG",
@@ -256,23 +207,22 @@ export default function AboutPage() {
               },
               {
                 name: "Arunima",
-                role: "Lead Planner / Planning",
+                role: "Planning",
                 vibe: "Precision behind the scenes, magic in every moment.",
                 bio: "A part time side hustle of managing hospitality teams at weddings made her fall in love with bringing couples' dreams to life and making their most special day extra special and stress free. The 7 years of blending corporate precision with on-the-ground execution help her turn complex logistics into effortless, beautiful celebrations.\n\nShe looks at wedding planning through two lenses: impeccable, on-ground hospitality and sharp, strategic organisation. You get the best of both worlds — a beautifully cohesive and a highly personalised experience.",
                 image: "/assets/photos/about-us/40c37516-6448-4c5e-929f-27cd4132fe0e.JPG",
                 imagePosition: "center top"
               },
               {
-                name: "Priya Nair",
-                role: "Destination Specialist",
-                vibe: "The world is full of perfect wedding venues — let me find yours.",
-                bio: "Priya has scouted wedding venues in 14 countries and counting. From alpine resorts in Austria to riad courtyards in Morocco and heritage havelis in Rajasthan, she holds an encyclopaedic knowledge of what makes each location work for a wedding. Priya manages all destination logistics — guest travel programmes, hotel negotiations, local vendor sourcing, and on-ground coordination — and is the reason our destination weddings look effortless.",
+                name: "Rukmini",
+                role: "Design and Decor",
+                vibe: "Every detail tells part of your story.",
+                bio: "Rukmini brings a refined eye for design and decor to every celebration — translating mood, culture, and personal style into spaces that feel intentional, luxurious, and unmistakably yours. From floral language to lighting, textures, and tablescapes, she ensures every visual element works in harmony with your wedding narrative.",
                 image: "/assets/photos/about-us/7184c718-f5e6-4054-b35b-e56bc79213a5.JPG",
                 imagePosition: "center 20%"
               }
             ].map((member, i) => (
               <div key={i} className={`reveal stagger-${i + 1} group`} style={{ background: 'rgba(255,255,255,0.04)', borderRadius: '2px' }}>
-                {/* Square portrait */}
                 <div className="aspect-[1/1] relative overflow-hidden">
                   <img
                     src={member.image}
@@ -289,24 +239,84 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                {/* Info panel */}
                 <div className="pt-5 px-5 pb-5">
                   <h4 className="font-heading text-surface text-xl leading-tight">{member.name}</h4>
                   <p className="text-[9px] tracking-[0.3em] uppercase text-gold mt-1 font-medium">{member.role}</p>
                   <div className="h-px bg-[#C9A234]/30 mt-3"></div>
 
-                  {/* Bio — always visible on mobile, collapsed on desktop */}
-                  <div className={`bio-panel overflow-hidden transition-[max-height] duration-500 ease-in-out${expanded[i] ? ' bio-open' : ''}`}>
+                  <div className={`bio-panel overflow-hidden transition-[max-height] duration-500 ease-in-out${expandedBio[i] ? ' bio-open' : ''}`}>
                     <p className="text-[12px] leading-[1.85] text-surface/60 font-light pt-4 pb-6 whitespace-pre-line">{member.bio}</p>
                   </div>
 
-                  {/* Toggle — desktop only */}
                   <button
                     className="hidden md:block text-[9px] tracking-[0.35em] uppercase font-medium mt-3 bg-transparent border-0 p-0 cursor-pointer bio-toggle"
                     style={{ color: 'var(--color-gold)' }}
                     onClick={() => toggleBio(i)}
                   >
-                    {expanded[i] ? '— Less' : '+ Read more'}
+                    {expandedBio[i] ? '— Less' : '+ Read more'}
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bridging sentence */}
+        <div className="py-8 px-12 flex flex-col items-center text-center reveal">
+          <div className="h-px w-16 bg-[#C9A234]/30 mb-6"></div>
+          <p className="font-heading italic text-surface/50 text-[18px] md:text-[20px] leading-[1.7] max-w-lg">
+            Behind every celebration — the specialised teams that bring it all together.
+          </p>
+          <div className="h-px w-16 bg-[#C9A234]/30 mt-6"></div>
+        </div>
+
+        {/* TIER 2 — The Operational Backbone */}
+        <div className="px-12 pb-10">
+          <div className="flex flex-col items-center text-center mb-6 reveal">
+            <p className="text-[9px] tracking-[0.45em] uppercase font-medium mb-2" style={{ color: 'var(--color-gold)' }}>The Operational Backbone</p>
+            <h3 className="font-heading text-surface text-3xl md:text-4xl font-light">Behind Every <em className="italic">Wedding</em></h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px">
+            {[
+              {
+                name: "Travel & Transport",
+                desc: "Our dedicated logistics team brings efficient fleet management to your wedding day. Managing everything from travel ticketing to VIP arrivals to welcoming to multi-venue guest shuttles, they ensure perfectly timed, stress-free transit.\n\nWe guarantee your guests experience seamless, hospitality-driven travel from arrival to departure.",
+                image: "/assets/photos/destination/beach-wedding-img.jpg"
+              },
+              {
+                name: "Hotel & Venue Procurement",
+                desc: "Leveraging years of global corporate negotiations, this team secures the finest luxury venues and room blocks at unmatched value. They handle complex contracting, attrition clauses and finer details effortlessly.\n\nThis means elevated insider perks and a completely seamless, legally secure booking experience.",
+                image: "/assets/photos/destination/pool_venue.jpg"
+              },
+              {
+                name: "Operations & Event Production",
+                desc: "The technical powerhouse, this division converts ambitious creative visions into structurally flawless realities. They manage high-stakes timelines, sound, lighting, and vendor coordination with absolute military precision.\n\nTheir vast experience guarantees your wedding day runs like clockwork, entirely behind the scenes.",
+                image: "/assets/photos/services/decoration/sangeet_decoration.jpg"
+              }
+            ].map((team, i) => (
+              <div key={i} className={`ts-card reveal stagger-${i + 1}`}>
+                <div className="aspect-video overflow-hidden">
+                  <img src={team.image} alt={team.name} className="ts-card-img w-full h-full object-cover" />
+                </div>
+                <div className="h-px bg-[#C9A234]/35"></div>
+                <div className="p-6 md:p-7">
+                  <h3 className="font-heading text-surface text-[28px] font-light leading-tight mb-3">{team.name}</h3>
+                  {expandedTeam[i] && (
+                    <p
+                      className="text-[13px] leading-[1.75] font-light whitespace-pre-line mb-4"
+                      style={{ color: 'rgba(253,250,245,0.55)' }}
+                    >
+                      {team.desc}
+                    </p>
+                  )}
+                  <button
+                    type="button"
+                    className="text-[9px] tracking-[0.35em] uppercase font-medium bg-transparent border-0 p-0 cursor-pointer bio-toggle"
+                    style={{ color: 'var(--color-gold)' }}
+                    onClick={() => toggleTeam(i)}
+                    aria-expanded={!!expandedTeam[i]}
+                  >
+                    {expandedTeam[i] ? '— Less' : '+ Read more'}
                   </button>
                 </div>
               </div>
@@ -323,9 +333,9 @@ export default function AboutPage() {
           <p className="text-gold text-[10px] tracking-[0.6em] uppercase mb-8 font-medium">Our Promise</p>
           <GoldDivider darkBg className="mb-10" />
           <h2 className="font-heading text-[#FDFAF5] text-[28px] md:text-[34px] leading-[1.7] italic font-light mb-10">
-            'When you choose Vows & Vedas, you are not just hiring a wedding planner. You are gaining a partner — one who will hold your vision with the same care and emotion as you do, from the first conversation to the last dance.'
+            'When you choose Vows & Vedas, you are not just hiring a wedding planner. You are choosing a partner — one who will hold your vision with the same care and emotion as you do, from the first conversation to the last dance.'
           </h2>
-          <p className="text-gold/50 text-[11px] tracking-[0.25em] uppercase font-light mb-12">
+          <p className="text-[#FDFAF5]/90 text-[12px] md:text-[13px] tracking-[0.22em] uppercase font-normal mb-12 leading-[1.9]">
             Because it is not just your wedding. It is your story. And we are here to make sure it is told beautifully.
           </p>
           <Link 

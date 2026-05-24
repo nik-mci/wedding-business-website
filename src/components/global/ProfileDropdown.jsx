@@ -57,7 +57,7 @@ export default function ProfileDropdown() {
       {/* PROFILE ICON BUTTON */}
       <button
         onClick={toggleDropdown}
-        className={`w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 border cursor-pointer overflow-hidden ${
+        className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 border cursor-pointer overflow-hidden ${
           isLoggedIn 
             ? "bg-[#FFF8EC] border-[#C9A234]" 
             : "bg-white border-[#EDE8DC] hover:border-[#C9A234]"
