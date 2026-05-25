@@ -25,15 +25,15 @@ export default function PortfolioPage() {
   }, []);
 
   const weddings = [
-    { id: 1, name: "Aanya & Rohan", loc: "Udaipur, India", cat: "india palace", story: "A three-day palace celebration overlooking Lake Pichola. Marigold archways, mirror-work chandeliers, and a lakeside pheras ceremony that left no eye dry.", img: "destination/TSR50973.jpg" },
-    { id: 2, name: "Meera & Kabir", loc: "Santorini, Greece", cat: "international beach", story: "Against the white-washed backdrop of Oia, this sunset ceremony felt like a painting. From the flower-strewn aisle to the Aegean-blue horizon — pure magic.", img: "destination/TSR50501.jpg" },
-    { id: 3, name: "Priya & Arjun", loc: "Corbett, India", cat: "india garden", story: "Nestled in the foothills of the Himalayas, this intimate garden ceremony blended rustic elegance with forest magic.", img: "destination/TSR50995.jpg" },
-    { id: 4, name: "Rhea & Dev", loc: "Jaisalmer, India", cat: "india palace", story: "A desert wedding beneath ancient sandstone walls. Dunes, firelight, and folk music carried the night.", img: "destination/059A3564.jpg" },
-    { id: 5, name: "Simran & Rishi", loc: "Tuscany, Italy", cat: "international garden", story: "Rolling vineyard hills, terracotta urns, and the warm Tuscan sun — a dreamy Indo-Italian fusion celebration.", img: "destination/TSR50355.jpg" },
-    { id: 6, name: "Kavya & Vivaan", loc: "Goa, India", cat: "india beach", story: "A beachside evening ceremony with lanterns, jasmine garlands, and waves as the soundtrack.", img: "couple-shots/0G4A2282.jpg" },
-    { id: 7, name: "Nisha & Karan", loc: "Bali, Indonesia", cat: "international palace", story: "A cliff-edge ceremony overlooking the Indian Ocean — where every moment felt suspended in time.", img: "couple-shots/TSR53127.jpg" },
-    { id: 8, name: "Tara & Ishaan", loc: "Rishikesh, India", cat: "india garden", story: "A soulful riverside ceremony surrounded by the Himalayas — a wedding that breathed as deeply as the landscape.", img: "destination/TSR50967.jpg" },
-    { id: 9, name: "Ananya & Sid", loc: "Maldives", cat: "international beach", story: "An overwater ceremony at golden hour — the lagoon shimmering below, infinity above.", img: "couple-shots/0G4A4625.jpg" }
+    { id: 1, loc: "Udaipur, India", cat: "india palace", story: "A three-day palace celebration overlooking Lake Pichola. Marigold archways, mirror-work chandeliers, and a lakeside pheras ceremony that left no eye dry.", img: "destination/TSR50973.jpg" },
+    { id: 2, loc: "Santorini, Greece", cat: "international beach", story: "Against the white-washed backdrop of Oia, this sunset ceremony felt like a painting. From the flower-strewn aisle to the Aegean-blue horizon, pure magic.", img: "destination/TSR50501.jpg" },
+    { id: 3, loc: "Corbett, India", cat: "india garden", story: "Nestled in the foothills of the Himalayas, this intimate garden ceremony blended rustic elegance with forest magic.", img: "destination/TSR50995.jpg" },
+    { id: 4, loc: "Jaisalmer, India", cat: "india palace", story: "A desert wedding beneath ancient sandstone walls. Dunes, firelight, and folk music carried the night.", img: "destination/059A3564.jpg" },
+    { id: 5, loc: "Tuscany, Italy", cat: "international garden", story: "Rolling vineyard hills, terracotta urns, and the warm Tuscan sun, a dreamy Indo-Italian fusion celebration.", img: "destination/TSR50355.jpg" },
+    { id: 6, loc: "Goa, India", cat: "india beach", story: "A beachside evening ceremony with lanterns, jasmine garlands, and waves as the soundtrack.", img: "couple-shots/0G4A2282.jpg" },
+    { id: 7, loc: "Bali, Indonesia", cat: "international palace", story: "A cliff-edge ceremony overlooking the Indian Ocean, where every moment felt suspended in time.", img: "couple-shots/TSR53127.jpg" },
+    { id: 8, loc: "Rishikesh, India", cat: "india garden", story: "A soulful riverside ceremony surrounded by the Himalayas, a wedding that breathed as deeply as the landscape.", img: "destination/TSR50967.jpg" },
+    { id: 9, loc: "Maldives", cat: "international beach", story: "An overwater ceremony at golden hour, the lagoon shimmering below, infinity above.", img: "couple-shots/0G4A4625.jpg" }
   ];
 
   const filteredWeddings = weddings;
@@ -67,7 +67,7 @@ export default function PortfolioPage() {
               <div className="wedding-item-inner relative overflow-hidden group">
                 <Image
                   src={`/assets/photos/${wedding.img}`}
-                  alt={wedding.name}
+                  alt={`Wedding in ${wedding.loc}`}
                   width={600}
                   height={800}
                   sizes="(max-width: 768px) 100vw, 33vw"
@@ -76,8 +76,7 @@ export default function PortfolioPage() {
                 />
                 <div className="wed-overlay absolute inset-0 bg-gradient-to-t from-black/85 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-6">
                   <div className="wed-info">
-                    <p className="text-[9px] tracking-[0.4em] uppercase text-gold mb-1">{wedding.loc}</p>
-                    <h4 className="font-heading text-surface text-2xl font-normal">{wedding.name}</h4>
+                    <p className="font-heading text-surface text-2xl font-normal">{wedding.loc}</p>
                   </div>
                 </div>
               </div>
@@ -101,7 +100,7 @@ export default function PortfolioPage() {
             <div className="modal-hero h-[50vh] relative overflow-hidden">
               <Image
                 src={`/assets/photos/${selectedWedding.img}`}
-                alt={selectedWedding.name}
+                alt={`Wedding in ${selectedWedding.loc}`}
                 fill
                 sizes="(max-width: 768px) 100vw, 700px"
                 {...getBlurProps(`/assets/photos/${selectedWedding.img}`)}
@@ -109,8 +108,7 @@ export default function PortfolioPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
               <div className="absolute bottom-8 left-10 right-10">
-                <p className="text-[10px] tracking-[0.4em] text-gold mb-2 uppercase">{selectedWedding.loc}</p>
-                <h2 className="font-heading text-surface text-4xl font-light">{selectedWedding.name}</h2>
+                <h2 className="font-heading text-surface text-4xl font-light">{selectedWedding.loc}</h2>
               </div>
             </div>
             <div className="modal-body p-12">

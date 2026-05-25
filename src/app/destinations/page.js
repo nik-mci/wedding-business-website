@@ -62,7 +62,7 @@ export default function DestinationsPage() {
         <div className="relative z-10 flex flex-col items-center text-center px-6">
           <GoldDivider darkBg className="mb-4" />
           <p className="font-body uppercase text-gold tracking-[0.5em] text-[10px] mb-4">Around the World</p>
-          <h1 className="font-heading font-light text-white leading-[1.05]" style={{ fontSize: "clamp(48px, 7vw, 88px)" }}>Our <em className="italic">Destinations</em></h1>
+          <h1 className="font-heading font-light text-white leading-[1.05]" style={{ fontSize: "clamp(48px, 7vw, 88px)" }}><em className="italic">Destinations</em></h1>
           <GoldDivider darkBg flip className="mt-4" />
         </div>
       </section>

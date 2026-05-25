@@ -115,7 +115,7 @@ export default function AboutPage() {
             <div className="w-1.5 h-1.5 bg-[#C8A84B] rotate-45 shrink-0"></div>
           </div>
           <p className="text-[22px] md:text-[26px] leading-[1.8] text-ink font-light font-heading italic">
-            'Some love stories deserve more than just a wedding. They deserve an experience — one that is as timeless as the vows exchanged and as sacred as the rituals that bind two souls together. At Vows & Vedas, we craft weddings that go beyond the ordinary. Every celebration we design is deeply personal, meticulously planned, and flawlessly executed — because we believe your wedding day should feel exactly the way you always imagined it.'
+            'Some love stories deserve more than just a wedding. They deserve an experience, one that is as timeless as the vows exchanged and as sacred as the rituals that bind two souls together. At Vows & Vedas, we craft weddings that go beyond the ordinary. Every celebration we design is deeply personal, meticulously planned, and flawlessly executed, because we believe your wedding day should feel exactly the way you always imagined it.'
           </p>
         </div>
       </section>
@@ -131,14 +131,14 @@ export default function AboutPage() {
           <p className="text-gold text-[10px] tracking-[0.4em] uppercase mb-4 font-medium">Our Story</p>
           <h2 className="font-heading text-ink text-5xl md:text-6xl mb-4 leading-[1.1]">Born in 2015.<br /><em className="italic">Built on love.</em></h2>
           <p className="text-muted text-[14px] leading-[1.8] font-light max-w-[460px]">
-            Vows & Vedas was born from a singular passion — to redefine the Indian wedding experience. What began as a dream to create deeply meaningful celebrations has grown into one of India's most trusted names in luxury wedding planning. Our journey has been built on love — for detail, for culture, for storytelling, and above all, for the couples who place their trust in us.
+            Vows & Vedas was born from a singular passion to redefine the Indian wedding experience. What began as a dream to create deeply meaningful celebrations has grown into one of India's most trusted names in luxury wedding planning. Our journey has been built on love for detail, for culture, for storytelling, and above all, for the couples who place their trust in us.
           </p>
         </div>
         <div className="p-8 md:p-11 flex flex-col justify-center reveal stagger-1">
           <p className="text-gold text-[10px] tracking-[0.4em] uppercase mb-4 font-medium">What Makes Us Different</p>
           <h2 className="font-heading text-ink text-5xl md:text-6xl mb-4 leading-[1.1] italic">We don't just plan weddings.</h2>
           <p className="text-muted text-[14px] leading-[1.8] font-light max-w-[460px]">
-            Every Vows & Vedas wedding is shaped by your story, your family, your culture, and your vision — from intimate shores of Goa to royal palaces of Jaipur. We bring it to life with precision and poetry.
+            Every Vows & Vedas wedding is shaped by your story, your family, your culture, and your vision, from intimate shores of Goa to royal palaces of Jaipur. We bring it to life with precision and poetry.
           </p>
         </div>
       </section>
@@ -154,10 +154,10 @@ export default function AboutPage() {
           <div className="reveal stagger-1 flex flex-col justify-center">
             <div className="flex flex-col gap-4 mb-8">
               <p className="text-surface/70 text-[14px] md:text-[15px] leading-[1.7] font-light">
-                We are proud to be part of the GeTSHolidays family — a 37-year-old powerhouse in the events, Travel and experiences industry, with a team of over 150 dedicated professionals across specialised divisions.
+                We are proud to be part of the GeTSHolidays family, a 37-year-old powerhouse in the events, Travel and experiences industry, with a team of over 150 dedicated professionals across specialised divisions.
               </p>
               <p className="text-surface/70 text-[14px] md:text-[15px] leading-[1.7] font-light">
-                This heritage gives Vows & Vedas an unmatched foundation — the agility of a boutique wedding house backed by the muscle and expertise of an industry leader. From logistics to creative direction, every team that works behind the scenes is best in class.
+                This heritage gives Vows & Vedas an unmatched foundation: the agility of a boutique wedding house backed by the muscle and expertise of an industry leader. From logistics to creative direction, every team that works behind the scenes is best in class.
               </p>
             </div>
             <div className="flex flex-wrap gap-10 pt-0">
@@ -209,7 +209,7 @@ export default function AboutPage() {
                 name: "Arunima",
                 role: "Planning",
                 vibe: "Precision behind the scenes, magic in every moment.",
-                bio: "A part time side hustle of managing hospitality teams at weddings made her fall in love with bringing couples' dreams to life and making their most special day extra special and stress free. The 7 years of blending corporate precision with on-the-ground execution help her turn complex logistics into effortless, beautiful celebrations.\n\nShe looks at wedding planning through two lenses: impeccable, on-ground hospitality and sharp, strategic organisation. You get the best of both worlds — a beautifully cohesive and a highly personalised experience.",
+                bio: "A part time side hustle of managing hospitality teams at weddings made her fall in love with bringing couples' dreams to life and making their most special day extra special and stress free. The 7 years of blending corporate precision with on-the-ground execution help her turn complex logistics into effortless, beautiful celebrations.\n\nShe looks at wedding planning through two lenses: impeccable, on-ground hospitality and sharp, strategic organisation. You get the best of both worlds: a beautifully cohesive and a highly personalised experience.",
                 image: "/assets/photos/about-us/40c37516-6448-4c5e-929f-27cd4132fe0e.JPG",
                 imagePosition: "center top"
               },
@@ -217,7 +217,7 @@ export default function AboutPage() {
                 name: "Rukmini",
                 role: "Design and Decor",
                 vibe: "Every detail tells part of your story.",
-                bio: "Rukmini brings a refined eye for design and decor to every celebration — translating mood, culture, and personal style into spaces that feel intentional, luxurious, and unmistakably yours. From floral language to lighting, textures, and tablescapes, she ensures every visual element works in harmony with your wedding narrative.",
+                bio: "Rukmini brings a refined eye for design and decor to every celebration, translating mood, culture, and personal style into spaces that feel intentional, luxurious, and unmistakably yours. From floral language to lighting, textures, and tablescapes, she ensures every visual element works in harmony with your wedding narrative.",
                 image: "/assets/photos/about-us/7184c718-f5e6-4054-b35b-e56bc79213a5.JPG",
                 imagePosition: "center 20%"
               }
@@ -253,7 +253,7 @@ export default function AboutPage() {
                     style={{ color: 'var(--color-gold)' }}
                     onClick={() => toggleBio(i)}
                   >
-                    {expandedBio[i] ? '— Less' : '+ Read more'}
+                    {expandedBio[i] ? 'Less' : '+ Read more'}
                   </button>
                 </div>
               </div>
@@ -265,7 +265,7 @@ export default function AboutPage() {
         <div className="py-8 px-12 flex flex-col items-center text-center reveal">
           <div className="h-px w-16 bg-[#C9A234]/30 mb-6"></div>
           <p className="font-heading italic text-surface/50 text-[18px] md:text-[20px] leading-[1.7] max-w-lg">
-            Behind every celebration — the specialised teams that bring it all together.
+            Behind every celebration, the specialised teams that bring it all together.
           </p>
           <div className="h-px w-16 bg-[#C9A234]/30 mt-6"></div>
         </div>
@@ -316,7 +316,7 @@ export default function AboutPage() {
                     onClick={() => toggleTeam(i)}
                     aria-expanded={!!expandedTeam[i]}
                   >
-                    {expandedTeam[i] ? '— Less' : '+ Read more'}
+                    {expandedTeam[i] ? 'Less' : '+ Read more'}
                   </button>
                 </div>
               </div>
@@ -333,7 +333,7 @@ export default function AboutPage() {
           <p className="text-gold text-[10px] tracking-[0.6em] uppercase mb-8 font-medium">Our Promise</p>
           <GoldDivider darkBg className="mb-10" />
           <h2 className="font-heading text-[#FDFAF5] text-[28px] md:text-[34px] leading-[1.7] italic font-light mb-10">
-            'When you choose Vows & Vedas, you are not just hiring a wedding planner. You are choosing a partner — one who will hold your vision with the same care and emotion as you do, from the first conversation to the last dance.'
+            'When you choose Vows & Vedas, you are not just hiring a wedding planner. You are choosing a partner, one who will hold your vision with the same care and emotion as you do, from the first conversation to the last dance.'
           </h2>
           <p className="text-[#FDFAF5]/90 text-[12px] md:text-[13px] tracking-[0.22em] uppercase font-normal mb-12 leading-[1.9]">
             Because it is not just your wedding. It is your story. And we are here to make sure it is told beautifully.
