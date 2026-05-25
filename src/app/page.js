@@ -318,7 +318,7 @@ export default function HomePage() {
         </div>
         <div className="h-[600px] w-full">
           <CircularGallery items={[
-            { image: '/assets/photos/couple-shots/0G4A2282.jpg', text: 'Manya & Siddharth' },
+            { image: '/assets/photos/couple-shots/0G4A2282.jpg', text: 'Manya & Siddhant' },
             { image: '/assets/photos/destination/0G4A1341.jpg', text: 'Royal Palace' },
             { image: '/assets/photos/couple-shots/0G4A5379.jpg', text: 'First Look Forever' },
             { image: '/assets/photos/services/mehendi.jpg', text: 'Mehendi Nights' },

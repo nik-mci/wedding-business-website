@@ -131,7 +131,7 @@ const moodBoards = [
     colors: ["#800000", "#D4AF37", "#5C4033", "#228B22", "#F5F5DC"], 
     tags: ["Palatial Grandeur","Maroon & Gold","Heritage Venues"], 
     perfectFor: ["Grand Receptions","Royal Ceremonies","Historic Palaces"], 
-    description: "A celebration of timeless elegance and palatial grandeur. Rich maroon tones, antique gold accents, and heritage settings create a wedding of regal proportions.",
+    description: "Royal Indian celebrates the richness of India's regal heritage through majestic architecture, ornate detailing, luxurious fabrics and statement décor. Inspired by palace soirées and royal courts, the theme layers deep reds, warm golds, glowing ambers and jewel tones to create an atmosphere that feels grand, immersive and unapologetically luxurious.",
     images: [
       "moodboards/Wedding-Royal Indian/059A6704.jpg",
       "moodboards/Wedding-Royal Indian/059A6706.jpg",
@@ -279,7 +279,7 @@ const moodBoards = [
     colors: ["#191970", "#D4AF37", "#8B0000", "#FF8C00", "#4B0082"], 
     tags: ["Heritage Vibe", "Royal Glow", "Candlelit Evening"], 
     perfectFor: ["Royal Receptions", "Palace Courtyards", "Evening Ceremonies"], 
-    description: "An evocative journey into regal heritage. Deep, atmospheric night tones, illuminating candlelight, and the majestic grandeur of a historic haveli setting.",
+    description: "Haveli Nights draws inspiration from the romance and grandeur of old Indian havelis — layered with rich drapery, glowing lanterns, intricate arches, regal florals and warm candlelight. The palette blends deep jewel tones, antique golds and earthy neutrals to create an atmosphere that feels intimate, opulent and timeless.",
     images: [
       "moodboards/Wedding Option 3 - Haveli Nights/089205cc2256d4f46f3cd7dbbb21cf56.jpg",
       "moodboards/Wedding Option 3 - Haveli Nights/11e88cee09b767e35d0bb4c96d1c0166.jpg",
@@ -306,7 +306,7 @@ const moodBoards = [
     colors: ["#FFB300", "#FF6F00", "#E91E63", "#8BC34A", "#FFF3E0"], 
     tags: ["Vibrant Colors", "Playful Haldi", "Marigold Decor"], 
     perfectFor: ["Daytime Haldi", "Outdoor Courtyards", "Joyful Gatherings"], 
-    description: "A joyous and colorful explosion of traditional Haldi festivities. Bright marigolds, playful pinks, and warm sunshine tones set the stage for an unforgettable pre-wedding celebration.",
+    description: "Rangon Ki Rasleela perfectly captures the spirit of a Haldi celebration — vibrant, playful and full of energy. Inspired by gulal, marigolds, sunshine hues and festive Indian textures, the theme brings together colour, music, florals and joyful chaos to create an atmosphere that is festive, youthful and deeply celebratory.",
     images: [
       "moodboards/Haldi - Rangon Ki Rasleela/112a110cb33b284a68ef4e17d20631c4.jpg",
       "moodboards/Haldi - Rangon Ki Rasleela/3058732cb7189793a7c740e9dab4323b.jpg",

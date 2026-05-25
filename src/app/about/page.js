@@ -12,9 +12,9 @@ gsap.registerPlugin(ScrollTrigger);
 export default function AboutPage() {
   const containerRef = useRef(null);
   const [expandedBio, setExpandedBio] = useState({});
-  const [expandedTeam, setExpandedTeam] = useState({});
+  const [expandedTeam, setExpandedTeam] = useState(null);
   const toggleBio = (i) => setExpandedBio(prev => ({ ...prev, [i]: !prev[i] }));
-  const toggleTeam = (i) => setExpandedTeam(prev => ({ ...prev, [i]: !prev[i] }));
+  const toggleTeam = (i) => setExpandedTeam(prev => (prev === i ? null : i));
 
   useEffect(() => {
     // Reveal animations
@@ -301,7 +301,7 @@ export default function AboutPage() {
                 <div className="h-px bg-[#C9A234]/35"></div>
                 <div className="p-6 md:p-7">
                   <h3 className="font-heading text-surface text-[28px] font-light leading-tight mb-3">{team.name}</h3>
-                  {expandedTeam[i] && (
+                  {expandedTeam === i && (
                     <p
                       className="text-[13px] leading-[1.75] font-light whitespace-pre-line mb-4"
                       style={{ color: 'rgba(253,250,245,0.55)' }}
@@ -314,9 +314,9 @@ export default function AboutPage() {
                     className="text-[9px] tracking-[0.35em] uppercase font-medium bg-transparent border-0 p-0 cursor-pointer bio-toggle"
                     style={{ color: 'var(--color-gold)' }}
                     onClick={() => toggleTeam(i)}
-                    aria-expanded={!!expandedTeam[i]}
+                    aria-expanded={expandedTeam === i}
                   >
-                    {expandedTeam[i] ? 'Less' : '+ Read more'}
+                    {expandedTeam === i ? 'Less' : '+ Read more'}
                   </button>
                 </div>
               </div>
