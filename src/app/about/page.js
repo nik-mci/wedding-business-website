@@ -181,10 +181,10 @@ export default function AboutPage() {
       </section>
 
       {/* SECTION 4+5 — OUR TEAM (unified) */}
-      <section id="our-team" className="bg-ink border border-[#C9A234]/30 rounded-2xl mx-6 md:mx-12 my-8 shadow-[0_0_60px_rgba(0,0,0,0.5)] overflow-hidden">
+      <section id="our-team" className="bg-ink border border-[#C9A234]/30 rounded-2xl mx-3 md:mx-12 my-8 shadow-[0_0_60px_rgba(0,0,0,0.5)] overflow-hidden">
 
         {/* Shared section header */}
-        <div className="pt-8 pb-6 px-5 md:px-12 flex flex-col items-center text-center">
+        <div className="pt-8 pb-6 px-3 md:px-12 flex flex-col items-center text-center">
           <GoldDivider darkBg className="mb-4 reveal" />
           <p className="section-label reveal">The People Behind Vows &amp; Vedas</p>
           <h2 className="section-title reveal text-surface">Our <em className="italic">Team</em></h2>
@@ -192,12 +192,12 @@ export default function AboutPage() {
         </div>
 
         {/* TIER 1 — Your Planning Team */}
-        <div className="px-5 md:px-12 pb-8">
+        <div className="px-3 md:px-12 pb-8">
           <div className="flex flex-col items-center text-center mb-6 reveal">
             <p className="text-[9px] tracking-[0.45em] uppercase font-medium mb-2" style={{ color: 'var(--color-gold)' }}>Who You'll Work With</p>
             <h3 className="font-heading text-surface text-3xl md:text-4xl font-light">Your Planning <em className="italic">Team</em></h3>
           </div>
-          <div className="max-w-5xl mx-auto flex md:grid md:grid-cols-3 gap-4 md:gap-6 items-stretch md:items-start overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-px-5 pb-3 md:pb-0 -mx-5 px-5 md:mx-auto md:px-0">
+          <div className="max-w-5xl mx-auto flex md:grid md:grid-cols-3 gap-4 md:gap-6 items-stretch md:items-start overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-px-3 pb-3 md:pb-0 -mx-3 px-3 md:mx-auto md:px-0">
             {[
               {
                 name: "Manmeet Soundh",
@@ -220,8 +220,8 @@ export default function AboutPage() {
                 role: "Design and Decor",
                 vibe: "Every detail tells part of your story.",
                 bio: "For Rukmini, wedding decor is about creating experiences that feel warm, beautiful and completely personal. With over 7 years in creative event concepts and design, she loves bringing together aesthetics, storytelling and a little bit of magic.",
-                image: "/assets/photos/about-us/Rukmini Image Replace.png",
-                imagePosition: "center 20%"
+                image: "/assets/photos/about-us/rukmini-img-square.jpg",
+                imagePosition: "center 15%"
               }
             ].map((member, i) => (
               <div key={i} className={`reveal stagger-${i + 1} group w-[72vw] max-w-[300px] shrink-0 snap-start md:w-auto md:max-w-none`} style={{ background: 'rgba(255,255,255,0.04)', borderRadius: '2px' }}>
@@ -280,7 +280,7 @@ export default function AboutPage() {
         </div>
 
         {/* Bridging sentence */}
-        <div className="py-8 px-5 md:px-12 flex flex-col items-center text-center reveal">
+        <div className="py-8 px-3 md:px-12 flex flex-col items-center text-center reveal">
           <div className="h-px w-16 bg-[#C9A234]/30 mb-6"></div>
           <p className="font-heading italic text-surface/50 text-[18px] md:text-[20px] leading-[1.7] max-w-lg">
             Behind every celebration, the specialised teams that bring it all together.
@@ -289,35 +289,38 @@ export default function AboutPage() {
         </div>
 
         {/* TIER 2 — The Operational Backbone */}
-        <div className="px-5 md:px-12 pb-10">
+        <div className="px-3 md:px-12 pb-10">
           <div className="flex flex-col items-center text-center mb-6 reveal">
             <p className="text-[9px] tracking-[0.45em] uppercase font-medium mb-2" style={{ color: 'var(--color-gold)' }}>The Operational Backbone</p>
             <h3 className="font-heading text-surface text-3xl md:text-4xl font-light">Behind Every <em className="italic">Wedding</em></h3>
           </div>
-          <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-px items-stretch overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-px-5 pb-3 md:pb-0 -mx-5 px-5 md:mx-0 md:px-0">
+          <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-px items-stretch overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-px-3 pb-3 md:pb-0 -mx-3 px-3 md:mx-0 md:px-0">
             {[
               {
                 name: "Travel & Transport",
                 desc: "Our dedicated logistics team brings efficient fleet management to your wedding day. Managing everything from travel ticketing to VIP arrivals to welcoming to multi-venue guest shuttles, they ensure perfectly timed, stress-free transit.\n\nWe guarantee your guests experience seamless, hospitality-driven travel from arrival to departure.",
                 mobileDesc: "Efficient fleet, ticketing, VIP arrivals and guest shuttles keep every movement calm and perfectly timed.",
-                image: "/assets/photos/destination/beach-wedding-img.jpg"
+                image: "/assets/photos/destination/beach-wedding-img.jpg",
+                imagePosition: "center center"
               },
               {
                 name: "Hotel & Venue Procurement",
                 desc: "Leveraging years of global corporate negotiations, this team secures the finest luxury venues and room blocks at unmatched value. They handle complex contracting, attrition clauses and finer details effortlessly.\n\nThis means elevated insider perks and a completely seamless, legally secure booking experience.",
                 mobileDesc: "Luxury venues, room blocks, contracts and insider perks are handled with seasoned negotiation.",
-                image: "/assets/photos/destination/pool_venue.jpg"
+                image: "/assets/photos/destination/pool_venue.jpg",
+                imagePosition: "center center"
               },
               {
                 name: "Operations & Event Production",
                 desc: "The technical powerhouse, this division converts ambitious creative visions into structurally flawless realities. They manage high-stakes timelines, sound, lighting, and vendor coordination with absolute military precision.\n\nTheir vast experience guarantees your wedding day runs like clockwork, entirely behind the scenes.",
                 mobileDesc: "Production, timelines, sound, lighting and vendors come together with precise behind-the-scenes control.",
-                image: "/assets/photos/services/decoration/sangeet_decoration.jpg"
+                image: "/assets/photos/about-us/operational-team.JPG",
+                imagePosition: "center top"
               }
             ].map((team, i) => (
               <div key={i} className={`ts-card reveal stagger-${i + 1} block w-[72vw] max-w-[300px] shrink-0 snap-start md:w-auto md:max-w-none md:flex md:flex-col md:h-full py-0 md:py-0 border md:border`}>
                 <div className="w-full aspect-[3/4] md:w-auto md:h-auto md:aspect-video overflow-hidden shrink-0">
-                  <img src={team.image} alt={team.name} className="ts-card-img w-full h-full object-cover" />
+                  <img src={team.image} alt={team.name} className="ts-card-img w-full h-full object-cover" style={{ objectPosition: team.imagePosition }} />
                 </div>
                 <div className="hidden md:block h-px bg-[#C9A234]/35"></div>
                 <div className="p-4 md:p-7 flex-1 md:flex md:flex-col">

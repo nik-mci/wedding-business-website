@@ -148,7 +148,7 @@ export default function PortfolioPage() {
           .wedding-grid { columns: 2; }
         }
         @media (max-width: 640px) {
-          .wedding-grid { columns: 2; column-gap: 6px; padding: 0 10px; }
+          .wedding-grid { columns: 2; column-gap: 6px; padding: 0 16px; }
           .wedding-item { margin-bottom: 6px; }
         }
       `}</style>

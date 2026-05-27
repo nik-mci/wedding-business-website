@@ -390,6 +390,58 @@ html, body {
     line-height: 1.05;
   }
 
+  /* ── Mobile: Hero Banner (homepage) ── */
+  @media (max-width: 640px) {
+    .hero-title .word {
+      font-size: clamp(36px, 11vw, 52px);
+      margin-right: 0.15em;
+    }
+    .hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      margin-bottom: 18px;
+    }
+    .hero-subtitle {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      margin-bottom: 32px;
+      padding: 0 8px;
+    }
+    .hero-ctas {
+      gap: 14px;
+    }
+    .btn-gold {
+      padding: 13px 28px;
+      font-size: 10px;
+    }
+    .btn-ghost {
+      padding: 12px 28px;
+      font-size: 10px;
+    }
+  }
+
+  /* ── Mobile: About Page Hero Title ── */
+  @media (max-width: 767px) {
+    .hero-left-title {
+      font-size: 2.6rem !important;
+      line-height: 1.05;
+    }
+  }
+
+  /* ── Mobile: Gallery (Portfolio) Page Hero ── */
+  @media (max-width: 640px) {
+    .page-hero-content {
+      padding: 0 20px;
+    }
+    .page-hero-title {
+      font-size: clamp(36px, 10vw, 48px);
+    }
+    .page-hero-eyebrow {
+      letter-spacing: 0.3em;
+      margin-bottom: 12px;
+    }
+  }
+
   /* Footer */
   .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 48px; margin-bottom: 60px; }
   .footer-logo { @apply font-heading text-surface font-normal; font-size: 26px; letter-spacing: 0.1em; margin-bottom: 16px; }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Mail } from "lucide-react";
 import GoldDivider from "@/components/GoldDivider";
@@ -22,6 +23,7 @@ const weddingMonths = [
 ];
 
 export default function ContactPage() {
+  const router = useRouter();
   const [status, setStatus] = useState("idle"); // idle, loading, success
   const [weddingMonth, setWeddingMonth] = useState("");
   const [weddingYear, setWeddingYear] = useState("");
@@ -42,8 +44,7 @@ export default function ContactPage() {
     e.preventDefault();
     setStatus("loading");
     setTimeout(() => {
-      setStatus("success");
-      setTimeout(() => setStatus("idle"), 3000);
+      router.push("/thank-you");
     }, 2000);
   };
 
