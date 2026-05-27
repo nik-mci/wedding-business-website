@@ -294,7 +294,7 @@ export default function AboutPage() {
             <p className="text-[9px] tracking-[0.45em] uppercase font-medium mb-2" style={{ color: 'var(--color-gold)' }}>The Operational Backbone</p>
             <h3 className="font-heading text-surface text-3xl md:text-4xl font-light">Behind Every <em className="italic">Wedding</em></h3>
           </div>
-          <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-px items-stretch overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-px-3 pb-3 md:pb-0 -mx-3 px-3 md:mx-0 md:px-0">
+          <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-px md:items-start overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-px-3 pb-3 md:pb-0 -mx-3 px-3 md:mx-0 md:px-0">
             {[
               {
                 name: "Travel & Transport",
@@ -318,7 +318,7 @@ export default function AboutPage() {
                 imagePosition: "center top"
               }
             ].map((team, i) => (
-              <div key={i} className={`ts-card reveal stagger-${i + 1} block w-[72vw] max-w-[300px] shrink-0 snap-start md:w-auto md:max-w-none md:flex md:flex-col md:h-full py-0 md:py-0 border md:border`}>
+              <div key={i} className={`ts-card reveal stagger-${i + 1} block w-[72vw] max-w-[300px] shrink-0 snap-start md:w-auto md:max-w-none md:flex md:flex-col md:min-h-[420px] py-0 md:py-0 border md:border`}>
                 <div className="w-full aspect-[3/4] md:w-auto md:h-auto md:aspect-video overflow-hidden shrink-0">
                   <img src={team.image} alt={team.name} className="ts-card-img w-full h-full object-cover" style={{ objectPosition: team.imagePosition }} />
                 </div>

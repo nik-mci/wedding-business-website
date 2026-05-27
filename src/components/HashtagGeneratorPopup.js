@@ -310,12 +310,16 @@ const HashtagGeneratorPopup = () => {
 
       {/* Modal Overlay */}
       {open && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+        <div
+          className="fixed inset-0 z-[200] px-4 py-4"
+          style={{ overflowY: 'scroll', WebkitOverflowScrolling: 'touch' }}
+          data-lenis-prevent
+        >
           {/* Backdrop */}
-          <div className="absolute inset-0 bg-ink/75 backdrop-blur-sm" onClick={() => setOpen(false)} />
+          <div className="fixed inset-0 bg-ink/75 backdrop-blur-sm" onClick={() => setOpen(false)} />
 
           {/* Modal Panel */}
-          <div className="relative z-10 w-full max-w-[700px] max-h-[90vh] overflow-y-auto bg-[#FDFAF5] border border-gold/30 shadow-[0_0_60px_rgba(201,162,52,0.12)]" style={{ borderRadius: '2px' }}>
+          <div className="relative z-10 w-full max-w-[700px] mx-auto bg-[#FDFAF5] border border-gold/30 shadow-[0_0_60px_rgba(201,162,52,0.12)]" style={{ borderRadius: '2px' }}>
             {/* Modal Header */}
             <div className="sticky top-0 z-10 flex items-center justify-between px-8 py-5 bg-[#FDFAF5] border-b border-[#EDE8DC]">
               <div className="flex items-center gap-3">

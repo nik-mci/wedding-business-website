@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Mail } from "lucide-react";
 import GoldDivider from "@/components/GoldDivider";
 import CornerOrnament from "@/components/CornerOrnament";
 
@@ -121,7 +120,7 @@ export default function ContactPage() {
             </div>
 
             <div className="form-group">
-              <label className="form-label" htmlFor="message">Tell Us Your Vision</label>
+              <label className="form-label" htmlFor="message">Tell Us Your Vision <span className="normal-case tracking-normal font-light text-muted" style={{ fontSize: '10px' }}>(Optional)</span></label>
               <textarea className="form-input form-textarea" id="message"></textarea>
             </div>
 
@@ -143,8 +142,11 @@ export default function ContactPage() {
 
           <div className="contact-options grid grid-cols-2 gap-3 sm:gap-4 mt-10 md:mt-12 pt-8 md:pt-10 border-t border-ink/10">
             <Link href="https://wa.me/" className="contact-opt group flex items-center gap-4 border border-ink/10 px-4 py-4 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:bg-[#FDFAF5]">
-              <span className="opt-icon w-11 h-11 md:w-12 md:h-12 border border-ink/15 rounded-full flex items-center justify-center text-ink transition-all duration-300 group-hover:bg-gold group-hover:border-gold group-hover:text-surface" aria-hidden="true">
-                <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
+              <span className="opt-icon w-11 h-11 md:w-12 md:h-12 border border-[#25D366]/40 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-gold group-hover:border-gold" aria-hidden="true">
+                <svg viewBox="0 0 24 24" className="w-5 h-5 group-hover:hidden" fill="#25D366">
+                  <path d="M12.04 2C6.58 2 2.15 6.34 2.15 11.69c0 1.7.46 3.36 1.32 4.82L2 22l5.62-1.43a10.1 10.1 0 0 0 4.42 1.03c5.46 0 9.9-4.34 9.9-9.69S17.5 2 12.04 2Zm0 17.93a8.36 8.36 0 0 1-4.05-1.05l-.29-.16-3.33.85.89-3.17-.18-.31a7.97 7.97 0 0 1-1.25-4.4c0-4.43 3.68-8.03 8.21-8.03 4.54 0 8.22 3.6 8.22 8.03 0 4.44-3.68 8.24-8.22 8.24Zm4.51-6.02c-.25-.12-1.47-.71-1.7-.79-.23-.09-.4-.12-.56.12-.17.24-.64.79-.78.95-.14.16-.29.18-.53.06-.25-.12-1.04-.38-1.98-1.2-.73-.64-1.23-1.44-1.37-1.68-.14-.24-.01-.37.11-.49.11-.11.25-.29.37-.43.12-.14.17-.24.25-.4.08-.16.04-.3-.02-.43-.06-.12-.56-1.32-.77-1.81-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.3-.23.24-.87.83-.87 2.03 0 1.19.89 2.35 1.01 2.51.12.16 1.75 2.62 4.24 3.67.59.25 1.05.4 1.41.51.59.18 1.13.16 1.56.1.47-.07 1.47-.59 1.68-1.15.21-.57.21-1.05.14-1.15-.06-.11-.22-.17-.46-.29Z" />
+                </svg>
+                <svg viewBox="0 0 24 24" className="w-5 h-5 hidden group-hover:block fill-current text-surface" fill="white">
                   <path d="M12.04 2C6.58 2 2.15 6.34 2.15 11.69c0 1.7.46 3.36 1.32 4.82L2 22l5.62-1.43a10.1 10.1 0 0 0 4.42 1.03c5.46 0 9.9-4.34 9.9-9.69S17.5 2 12.04 2Zm0 17.93a8.36 8.36 0 0 1-4.05-1.05l-.29-.16-3.33.85.89-3.17-.18-.31a7.97 7.97 0 0 1-1.25-4.4c0-4.43 3.68-8.03 8.21-8.03 4.54 0 8.22 3.6 8.22 8.03 0 4.44-3.68 8.24-8.22 8.24Zm4.51-6.02c-.25-.12-1.47-.71-1.7-.79-.23-.09-.4-.12-.56.12-.17.24-.64.79-.78.95-.14.16-.29.18-.53.06-.25-.12-1.04-.38-1.98-1.2-.73-.64-1.23-1.44-1.37-1.68-.14-.24-.01-.37.11-.49.11-.11.25-.29.37-.43.12-.14.17-.24.25-.4.08-.16.04-.3-.02-.43-.06-.12-.56-1.32-.77-1.81-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.3-.23.24-.87.83-.87 2.03 0 1.19.89 2.35 1.01 2.51.12.16 1.75 2.62 4.24 3.67.59.25 1.05.4 1.41.51.59.18 1.13.16 1.56.1.47-.07 1.47-.59 1.68-1.15.21-.57.21-1.05.14-1.15-.06-.11-.22-.17-.46-.29Z" />
                 </svg>
               </span>
@@ -154,8 +156,22 @@ export default function ContactPage() {
               </span>
             </Link>
             <Link href="mailto:hello@vowsandvedas.com" className="contact-opt group flex items-center gap-4 border border-ink/10 px-4 py-4 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:bg-[#FDFAF5]">
-              <span className="opt-icon w-11 h-11 md:w-12 md:h-12 border border-ink/15 rounded-full flex items-center justify-center text-ink transition-all duration-300 group-hover:bg-gold group-hover:border-gold group-hover:text-surface" aria-hidden="true">
-                <Mail size={20} strokeWidth={1.8} />
+              <span className="opt-icon w-11 h-11 md:w-12 md:h-12 border border-ink/15 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-gold group-hover:border-gold" aria-hidden="true">
+                {/* Gmail logo */}
+                <svg viewBox="0 0 48 48" className="w-5 h-5 group-hover:hidden" xmlns="http://www.w3.org/2000/svg">
+                  <path fill="#4caf50" d="M45 16.2l-5 2.75-5 4.75L35 40h7c1.657 0 3-1.343 3-3V16.2z"/>
+                  <path fill="#1e88e5" d="M3 16.2l3.614 1.71L13 23.7V40H6c-1.657 0-3-1.343-3-3V16.2z"/>
+                  <polygon fill="#e53935" points="35,11.2 24,19.45 13,11.2 12,17 13,23.7 24,31.45 35,23.7 36,17"/>
+                  <path fill="#c62828" d="M3 12.298V16.2l10 7.5V11.2L9.876 8.859C9.132 8.301 8.228 8 7.298 8 4.924 8 3 9.924 3 12.298z"/>
+                  <path fill="#fbc02d" d="M45 12.298V16.2l-10 7.5V11.2l3.124-2.341C38.868 8.301 39.772 8 40.702 8 43.076 8 45 9.924 45 12.298z"/>
+                </svg>
+                <svg viewBox="0 0 48 48" className="w-5 h-5 hidden group-hover:block" xmlns="http://www.w3.org/2000/svg">
+                  <path fill="white" d="M45 16.2l-5 2.75-5 4.75L35 40h7c1.657 0 3-1.343 3-3V16.2z"/>
+                  <path fill="white" d="M3 16.2l3.614 1.71L13 23.7V40H6c-1.657 0-3-1.343-3-3V16.2z"/>
+                  <polygon fill="white" points="35,11.2 24,19.45 13,11.2 12,17 13,23.7 24,31.45 35,23.7 36,17"/>
+                  <path fill="white" d="M3 12.298V16.2l10 7.5V11.2L9.876 8.859C9.132 8.301 8.228 8 7.298 8 4.924 8 3 9.924 3 12.298z"/>
+                  <path fill="white" d="M45 12.298V16.2l-10 7.5V11.2l3.124-2.341C38.868 8.301 39.772 8 40.702 8 43.076 8 45 9.924 45 12.298z"/>
+                </svg>
               </span>
               <span className="flex flex-col text-left">
                 <span className="opt-label text-[10px] tracking-[0.2em] uppercase font-semibold text-ink">Email</span>

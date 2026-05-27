@@ -68,7 +68,7 @@ export default function DestinationsPage() {
       </section>
 
       {/* DESTINATIONS GRID */}
-      <section className="py-24 px-12">
+      <section className="py-24 px-4 md:px-12">
         <p className="section-label reveal">Where We Work</p>
         <h2 className="section-title reveal">Extraordinary <em className="italic">Locations</em></h2>
         <div className="dest-grid mt-16 grid grid-cols-1 md:grid-cols-2 gap-[12px] max-w-[1400px] mx-auto">
@@ -80,7 +80,7 @@ export default function DestinationsPage() {
                 <p className="dest-region text-[9px] tracking-[0.5em] uppercase text-gold mb-2 font-medium">{dest.region}</p>
                 <h3 className="dest-name font-heading text-surface text-4xl font-light mb-2">{dest.name}</h3>
                 <p className="dest-count text-[10px] text-surface/50 tracking-[0.1em]">{dest.count}</p>
-                <Link href={`/destinations/${dest.slug}`} className="dest-cta inline-block mt-4 px-6 py-2.5 border border-surface/50 text-surface text-[10px] tracking-[0.2em] uppercase opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-100 hover:bg-gold hover:border-gold">Explore →</Link>
+                <Link href={`/destinations/${dest.slug}`} className="dest-cta inline-block mt-4 px-6 py-2.5 border border-surface/50 text-surface text-[10px] tracking-[0.2em] uppercase md:opacity-0 md:translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-300 delay-100 hover:bg-gold hover:border-gold">Explore →</Link>
               </div>
             </div>
           ))}

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --input-type=module)",
+      "Bash(node -e \"require\\('fs'\\).readFileSync\\('src/app/destinations/royal-and-heritage/page.js', 'utf8'\\)\")"
+    ]
+  }
+}
