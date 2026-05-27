@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import NextImage from 'next/image';
 import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform } from 'ogl';
 
 function debounce(func, wait) {
@@ -207,20 +208,37 @@ class Media {
   onResize({ screen, viewport } = {}) {
     if (screen) this.screen = screen;
     if (viewport) this.viewport = viewport;
-    const scale = this.screen.height / 1500;
-    this.plane.scale.y = (this.viewport.height * (900 * scale)) / this.screen.height;
-    this.plane.scale.x = (this.viewport.width * (700 * scale)) / this.screen.width;
+    const isMobile = this.screen.width < 768;
+    this.bend = isMobile ? 1.8 : 3.5;
+    if (isMobile) {
+      this.plane.scale.y = this.viewport.height * 0.70;
+      this.plane.scale.x = this.viewport.width * 0.65;
+    } else {
+      const scale = this.screen.height / 1500;
+      this.plane.scale.y = (this.viewport.height * (900 * scale)) / this.screen.height;
+      this.plane.scale.x = (this.viewport.width * (700 * scale)) / this.screen.width;
+    }
     this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
-    this.widthTotal = (this.plane.scale.x + 2) * this.length;
-    this.x = (this.plane.scale.x + 2) * this.index;
+    const gap = isMobile ? 0.3 : 2;
+    this.widthTotal = (this.plane.scale.x + gap) * this.length;
+    this.x = (this.plane.scale.x + gap) * this.index;
   }
 }
 
 const CircularGallery = ({ items }) => {
   const containerRef = useRef();
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    const mobileQuery = window.matchMedia('(max-width: 767px)');
+    const updateMobileState = () => setIsMobile(mobileQuery.matches);
+    updateMobileState();
+    mobileQuery.addEventListener('change', updateMobileState);
+    return () => mobileQuery.removeEventListener('change', updateMobileState);
+  }, []);
+
+  useEffect(() => {
+    if (!containerRef.current || isMobile) return;
     const container = containerRef.current;
     const renderer = new Renderer({ alpha: true, antialias: true, dpr: Math.min(window.devicePixelRatio, 2) });
     const gl = renderer.gl;
@@ -239,12 +257,14 @@ const CircularGallery = ({ items }) => {
 
     if (!items || !items.length) return;
     const galleryItems = items.concat(items);
+    const isMobileGallery = screen.width < 768;
+    const bend = isMobileGallery ? 1.8 : 3.5;
     const medias = galleryItems.map((data, index) => new Media({
       geometry: planeGeometry, gl, image: data.image, index, length: galleryItems.length,
-      scene, screen, text: data.text, viewport, bend: 3.5, textColor: '#C9A234', borderRadius: 0.08
+      scene, screen, text: data.text, viewport, bend, textColor: '#C9A234', borderRadius: 0.08
     }));
 
-    let scroll = { ease: 0.03, current: 0, target: 0, last: 0 };
+    let scroll = { ease: isMobileGallery ? 0.07 : 0.03, current: 0, target: 0, last: 0 };
     let isDown = false;
     let startX = 0;
 
@@ -273,15 +293,55 @@ const CircularGallery = ({ items }) => {
     };
     update();
 
+    const onResize = () => {
+      screen = { width: container.clientWidth, height: container.clientHeight };
+      renderer.setSize(screen.width, screen.height);
+      camera.perspective({ aspect: screen.width / screen.height });
+      const fov2 = (camera.fov * Math.PI) / 180;
+      const viewportHeight2 = 2 * Math.tan(fov2 / 2) * camera.position.z;
+      viewport = { width: viewportHeight2 * camera.aspect, height: viewportHeight2 };
+      scroll.ease = screen.width < 768 ? 0.07 : 0.03;
+      medias.forEach(m => m.onResize({ screen, viewport }));
+    };
+
+    const resizeObserver = new ResizeObserver(onResize);
+    resizeObserver.observe(container);
+
     return () => {
+      resizeObserver.disconnect();
       cancelAnimationFrame(raf);
       container.removeChild(gl.canvas);
       window.removeEventListener('touchend', onTouchUp);
       window.removeEventListener('mouseup', onTouchUp);
     };
-  }, [items]);
+  }, [items, isMobile]);
 
-  return <div ref={containerRef} className="w-full h-[600px] cursor-grab active:cursor-grabbing overflow-hidden" />;
+  if (isMobile) {
+    return (
+      <div className="w-full h-full overflow-x-auto overflow-y-hidden px-4 pb-4">
+        <div className="flex h-full w-max gap-4">
+          {items.map((item, index) => (
+            <figure key={`${item.image}-${index}`} className="relative h-full w-[72vw] max-w-[290px] shrink-0 overflow-hidden bg-surface/10">
+              <NextImage
+                src={item.image}
+                alt={item.text || "Wedding memory"}
+                fill
+                sizes="72vw"
+                className="object-cover"
+              />
+              {item.text && (
+                <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 to-transparent px-4 pb-4 pt-12 text-center text-[10px] font-medium uppercase tracking-[0.28em] text-gold">
+                  {item.text}
+                </figcaption>
+              )}
+            </figure>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return <div ref={containerRef} className="w-full h-full cursor-grab active:cursor-grabbing overflow-hidden" />;
 };
 
 export default CircularGallery;

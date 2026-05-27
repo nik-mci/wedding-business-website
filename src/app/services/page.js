@@ -357,8 +357,9 @@ export default function ServicesPage() {
                   <h3 className="text-[34px] font-heading text-white leading-[1.1] mt-1.5">{svc.name}</h3>
                   <p className="text-[13px] font-body text-white/60 mt-2 line-clamp-1">{svc.tagline}</p>
                   
-                  <div className="mt-5 px-5 py-2 rounded-full bg-[#C9A234]/15 border border-[#C9A234]/40 backdrop-blur-sm transition-all duration-300 group-hover:bg-[#C9A234] group-hover:text-[#1A1408]">
-                    <span className="text-[11px] font-body uppercase tracking-[0.3em] text-[#C9A234] group-hover:text-[#1A1408]">Explore Service →</span>
+                  <div className="mt-5 inline-flex min-h-[42px] max-w-full items-center justify-center gap-2 rounded-full bg-[#C9A234]/15 border border-[#C9A234]/40 px-5 py-2.5 backdrop-blur-sm transition-all duration-300 group-hover:bg-[#C9A234] group-hover:text-[#1A1408]">
+                    <span className="whitespace-nowrap text-[10px] sm:text-[11px] font-body uppercase tracking-[0.22em] sm:tracking-[0.3em] text-[#C9A234] group-hover:text-[#1A1408]">Explore Service</span>
+                    <span className="shrink-0 text-[14px] leading-none text-[#C9A234] group-hover:text-[#1A1408]">→</span>
                   </div>
                 </div>
 

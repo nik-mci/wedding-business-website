@@ -126,7 +126,7 @@ const HashtagGeneratorPopup = () => {
       <button
         onClick={() => setOpen(true)}
         aria-label="Wedding Hashtag Generator"
-        className="hashtag-btn fixed left-0 top-1/2 z-40 focus:outline-none"
+        className="hashtag-btn fixed left-0 top-1/2 z-40 focus:outline-none scale-75 sm:scale-100 origin-left"
         style={{
           transform: `translateY(-50%) translateX(${visible ? '0px' : '-115%'})`,
           transition: 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)',

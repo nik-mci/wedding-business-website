@@ -2,13 +2,58 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import blurDataUrls, { getBlurProps } from "@/lib/blurDataUrls";
+import { X } from "lucide-react";
+import { getBlurProps } from "@/lib/blurDataUrls";
 import GoldDivider from "@/components/GoldDivider";
 import gsap from "gsap";
 
+const galleryImages = [
+  { id: 1, src: "couple-shots/0G4A5379.jpg", ratio: "4 / 5" },
+  { id: 2, src: "moodboards/Wedding-Royal Indian/059A6704.jpg", ratio: "3 / 4" },
+  { id: 3, src: "moodboards/Mehendi-Tangerine Tales/TSR50228.jpg", ratio: "5 / 4" },
+  { id: 4, src: "services/decoration/mandap_decor.jpg", ratio: "4 / 5" },
+  { id: 5, src: "moodboards/Haldi-Citrus Bloom/059A5790.jpg", ratio: "3 / 4" },
+  { id: 6, src: "couple-shots/059A3486.jpg", ratio: "4 / 5" },
+  { id: 7, src: "moodboards/Sangeet-Disco Shimmer/TSR51040.jpg", ratio: "5 / 4" },
+  { id: 8, src: "moodboards/Wedding Option 2 - Emerald Eden/057eead1696fe154a4fc816f96cb5e32.jpg", ratio: "3 / 4" },
+  { id: 9, src: "services/decoration/haldi_flowers_decor.jpg", ratio: "4 / 5" },
+  { id: 10, src: "couple-shots/0G4A1676.jpg", ratio: "3 / 4" },
+  { id: 11, src: "moodboards/Wedding Option 3 - Haveli Nights/4193e81865b32695fde1acb84855055d.jpg", ratio: "5 / 4" },
+  { id: 12, src: "moodboards/Painted Gardens /08d5262255022083a0542b1e0c902b0f.jpg", ratio: "4 / 5" },
+  { id: 13, src: "moodboards/Haldi - Rangon Ki Rasleela/3058732cb7189793a7c740e9dab4323b.jpg", ratio: "3 / 4" },
+  { id: 14, src: "couple-shots/TSR53178.jpg", ratio: "4 / 5" },
+  { id: 15, src: "services/decoration/sangeet_decoration.jpg", ratio: "5 / 4" },
+  { id: 16, src: "moodboards/Mehendi Option 2 - Tropical Rhapsody/328ca19201f34bd31ee36c23f9b3f34a.jpg", ratio: "3 / 4" },
+  { id: 17, src: "moodboards/Wedding-Royal Indian/059A6996.jpg", ratio: "4 / 5" },
+  { id: 18, src: "couple-shots/0G4A2084.jpg", ratio: "5 / 4" },
+  { id: 19, src: "moodboards/Sangeet Option 2 - Crimson Soiree-Moulin Rouge/225c5a0e016b6ba67426bffd49fb7cd4.jpg", ratio: "3 / 4" },
+  { id: 20, src: "services/decoration/cocktail_decor.jpg", ratio: "4 / 5" },
+  { id: 21, src: "moodboards/Haldi Option 2-Royal Boho/53a84bd999256536b176d705ed6fe6b3.jpg", ratio: "5 / 4" },
+  { id: 22, src: "couple-shots/TSR53067.jpg", ratio: "3 / 4" },
+  { id: 23, src: "moodboards/Wedding Option 2 - Emerald Eden/48f1dd4e3cf859f45a026da3aab8cce5.jpg", ratio: "4 / 5" },
+  { id: 24, src: "moodboards/Mehendi-Tangerine Tales/059A3557.jpg", ratio: "5 / 4" },
+  { id: 25, src: "services/decoration/printables1.jpg", ratio: "3 / 4" },
+  { id: 26, src: "moodboards/Wedding-Royal Indian/0G4A5285.jpg", ratio: "4 / 5" },
+  { id: 27, src: "couple-shots/0G4A4811.jpg", ratio: "3 / 4" },
+  { id: 28, src: "moodboards/Haldi-Citrus Bloom/059A5846.jpg", ratio: "5 / 4" },
+  { id: 29, src: "moodboards/Sangeet-Disco Shimmer/0G4A2327.jpg", ratio: "4 / 5" },
+  { id: 30, src: "services/entertainment/performances.jpg", ratio: "5 / 4" },
+  { id: 31, src: "moodboards/Wedding Option 3 - Haveli Nights/83c9bf1b2b9bd012656f78eba9b41a0a.jpg", ratio: "3 / 4" },
+  { id: 32, src: "couple-shots/059A4274.jpg", ratio: "4 / 5" },
+  { id: 33, src: "moodboards/Painted Gardens /6bdd8cbef1397d65444972fb30f74e48.jpg", ratio: "5 / 4" },
+  { id: 34, src: "services/decoration/059A4328.jpg", ratio: "3 / 4" },
+  { id: 35, src: "moodboards/Mehendi-Tangerine Tales/0G4A1965.jpg", ratio: "4 / 5" },
+  { id: 36, src: "moodboards/Wedding-Royal Indian/TSR53220.jpg", ratio: "5 / 4" },
+  { id: 37, src: "couple-shots/TSR51412.jpg", ratio: "3 / 4" },
+  { id: 38, src: "moodboards/Haldi - Rangon Ki Rasleela/c385f637fb0673f8d93939e6723fc1ff.jpg", ratio: "4 / 5" },
+  { id: 39, src: "services/decoration/e-invites and stationary.JPG", ratio: "5 / 4" },
+  { id: 40, src: "moodboards/Wedding Option 2 - Emerald Eden/fd523b6483fef4a1bfa2a2b028651ccf.jpg", ratio: "3 / 4" },
+  { id: 41, src: "moodboards/Sangeet Option 2 - Crimson Soiree-Moulin Rouge/aa567d8df33ac888bcb35636c1fefd24.jpg", ratio: "4 / 5" },
+  { id: 42, src: "services/decoration/decor1.jpg", ratio: "5 / 4" },
+];
+
 export default function PortfolioPage() {
-  const [selectedWedding, setSelectedWedding] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     // Reveal animations
@@ -24,27 +69,13 @@ export default function PortfolioPage() {
     });
   }, []);
 
-  const weddings = [
-    { id: 1, loc: "Udaipur, India", cat: "india palace", story: "A three-day palace celebration overlooking Lake Pichola. Marigold archways, mirror-work chandeliers, and a lakeside pheras ceremony that left no eye dry.", img: "destination/TSR50973.jpg" },
-    { id: 2, loc: "Santorini, Greece", cat: "international beach", story: "Against the white-washed backdrop of Oia, this sunset ceremony felt like a painting. From the flower-strewn aisle to the Aegean-blue horizon, pure magic.", img: "destination/TSR50501.jpg" },
-    { id: 3, loc: "Corbett, India", cat: "india garden", story: "Nestled in the foothills of the Himalayas, this intimate garden ceremony blended rustic elegance with forest magic.", img: "destination/TSR50995.jpg" },
-    { id: 4, loc: "Jaisalmer, India", cat: "india palace", story: "A desert wedding beneath ancient sandstone walls. Dunes, firelight, and folk music carried the night.", img: "destination/059A3564.jpg" },
-    { id: 5, loc: "Tuscany, Italy", cat: "international garden", story: "Rolling vineyard hills, terracotta urns, and the warm Tuscan sun, a dreamy Indo-Italian fusion celebration.", img: "destination/TSR50355.jpg" },
-    { id: 6, loc: "Goa, India", cat: "india beach", story: "A beachside evening ceremony with lanterns, jasmine garlands, and waves as the soundtrack.", img: "couple-shots/0G4A2282.jpg" },
-    { id: 7, loc: "Bali, Indonesia", cat: "international palace", story: "A cliff-edge ceremony overlooking the Indian Ocean, where every moment felt suspended in time.", img: "couple-shots/TSR53127.jpg" },
-    { id: 8, loc: "Rishikesh, India", cat: "india garden", story: "A soulful riverside ceremony surrounded by the Himalayas, a wedding that breathed as deeply as the landscape.", img: "destination/TSR50967.jpg" },
-    { id: 9, loc: "Maldives", cat: "international beach", story: "An overwater ceremony at golden hour, the lagoon shimmering below, infinity above.", img: "couple-shots/0G4A4625.jpg" }
-  ];
-
-  const filteredWeddings = weddings;
-
   return (
     <div className="bg-bg min-h-screen">
       {/* PAGE HERO */}
       <div className="page-hero">
         <div 
           className="page-hero-bg" 
-          style={{ backgroundImage: "url('/assets/photos/destination/0G4A1341.jpg')", backgroundPosition: "center 20%" }}
+          style={{ backgroundImage: "url('/assets/photos/couple-shots/059A4274.jpg')", backgroundPosition: "center 20%" }}
         ></div>
         <div className="page-hero-overlay"></div>
         <div className="page-hero-content">
@@ -58,27 +89,21 @@ export default function PortfolioPage() {
       <section style={{ paddingTop: '64px' }}>
 
         <div className="wedding-grid">
-          {filteredWeddings.map((wedding, i) => (
+          {galleryImages.map((image) => (
             <div 
-              key={wedding.id} 
+              key={image.id}
               className="wedding-item reveal cursor-none mb-2" 
-              onClick={() => setSelectedWedding(wedding)}
+              onClick={() => setSelectedImage(image)}
             >
-              <div className="wedding-item-inner relative overflow-hidden group">
+              <div className="wedding-item-inner relative overflow-hidden group" style={{ aspectRatio: image.ratio }}>
                 <Image
-                  src={`/assets/photos/${wedding.img}`}
-                  alt={`Wedding in ${wedding.loc}`}
-                  width={600}
-                  height={800}
+                  src={`/assets/photos/${image.src}`}
+                  alt="Wedding gallery"
+                  fill
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  {...getBlurProps(`/assets/photos/${wedding.img}`)}
-                  className="wed-photo w-full transition-all duration-500 group-hover:scale-105 group-hover:saturate-100 filter saturate-0 brightness-[0.85] group-hover:brightness-100"
+                  {...getBlurProps(`/assets/photos/${image.src}`)}
+                  className="wed-photo object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="wed-overlay absolute inset-0 bg-gradient-to-t from-black/85 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-6">
-                  <div className="wed-info">
-                    <p className="font-heading text-surface text-2xl font-normal">{wedding.loc}</p>
-                  </div>
-                </div>
               </div>
             </div>
           ))}
@@ -86,41 +111,29 @@ export default function PortfolioPage() {
       </section>
 
       {/* MODAL */}
-      {selectedWedding && (
-        <div className="fixed inset-0 z-[5000] flex">
+      {selectedImage && (
+        <div className="fixed inset-0 z-[5000] flex items-center justify-center p-4 md:p-8">
           <div 
-            className="absolute inset-0 bg-black/75 transition-opacity duration-400" 
-            onClick={() => setSelectedWedding(null)}
+            className="absolute inset-0 bg-black/85 transition-opacity duration-400" 
+            onClick={() => setSelectedImage(null)}
           ></div>
-          <div className="absolute right-0 top-0 bottom-0 width-[min(700px,90vw)] bg-bg transform translate-x-0 transition-transform duration-500 overflow-y-auto z-[5001]">
+          <div className="relative z-[5001] w-[min(1120px,92vw)] h-[min(82vh,780px)] bg-black">
             <button 
-              className="absolute top-6 right-6 w-11 h-11 bg-surface text-ink flex items-center justify-center text-xl hover:bg-gold hover:text-surface transition-colors cursor-none" 
-              onClick={() => setSelectedWedding(null)}
-            >✕</button>
-            <div className="modal-hero h-[50vh] relative overflow-hidden">
+              className="absolute top-4 right-4 z-[2] w-11 h-11 bg-surface text-ink flex items-center justify-center hover:bg-gold hover:text-surface transition-colors cursor-none" 
+              onClick={() => setSelectedImage(null)}
+              aria-label="Close gallery image"
+            >
+              <X size={20} strokeWidth={1.8} />
+            </button>
+            <div className="relative h-full overflow-hidden">
               <Image
-                src={`/assets/photos/${selectedWedding.img}`}
-                alt={`Wedding in ${selectedWedding.loc}`}
+                src={`/assets/photos/${selectedImage.src}`}
+                alt="Wedding gallery"
                 fill
-                sizes="(max-width: 768px) 100vw, 700px"
-                {...getBlurProps(`/assets/photos/${selectedWedding.img}`)}
-                className="modal-hero-img object-cover animate-kenBurns"
+                sizes="92vw"
+                {...getBlurProps(`/assets/photos/${selectedImage.src}`)}
+                className="modal-hero-img object-contain"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
-              <div className="absolute bottom-8 left-10 right-10">
-                <h2 className="font-heading text-surface text-4xl font-light">{selectedWedding.loc}</h2>
-              </div>
-            </div>
-            <div className="modal-body p-12">
-              <p className="text-[13px] leading-[2] text-muted font-light mb-6">{selectedWedding.story}</p>
-              <Link href="/contact" className="btn-gold">Plan Your Wedding Like This</Link>
-              <div className="modal-gallery flex gap-2 overflow-x-auto mt-8 pb-2">
-                {[1, 2, 3, 4, 5].map((n) => (
-                  <div key={n} className="flex-shrink-0 w-[120px] h-[90px] bg-ink/10 relative">
-                    <Image src={`/assets/photos/${selectedWedding.img}`} alt="gallery" fill sizes="120px" className="object-cover opacity-50" />
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </div>
@@ -128,20 +141,15 @@ export default function PortfolioPage() {
 
       <style jsx>{`
         .wedding-grid { columns: 3; column-gap: 8px; padding: 0 48px; }
-        .filter-pill { padding: 10px 24px; border: 1px solid rgba(0,0,0,0.15); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; cursor: none; background: transparent; color: var(--color-muted); transition: all .35s cubic-bezier(0.25, 0.46, 0.45, 0.94); position: relative; overflow: hidden; }
-        .filter-pill::before { content:''; position:absolute; inset:0; background:var(--color-gold); transform:scaleX(0); transform-origin:left; transition:transform .35s cubic-bezier(0.25, 0.46, 0.45, 0.94); z-index:0; }
-        .filter-pill span { position: relative; z-index: 1; }
-        .filter-pill.active, .filter-pill:hover { color: var(--color-surface); border-color: var(--color-gold); }
-        .filter-pill.active::before, .filter-pill:hover::before { transform: scaleX(1); }
-        
-        @keyframes kenBurns { 0%{transform:scale(1.08)} 100%{transform:scale(1)} }
-        .animate-kenBurns { animation: kenBurns 8s ease-in-out infinite alternate; }
+        .wedding-item { break-inside: avoid; }
+        .wedding-item-inner { background: rgba(26, 20, 8, 0.08); }
 
         @media (max-width: 1024px) {
           .wedding-grid { columns: 2; }
         }
         @media (max-width: 640px) {
-          .wedding-grid { columns: 1; }
+          .wedding-grid { columns: 2; column-gap: 6px; padding: 0 10px; }
+          .wedding-item { margin-bottom: 6px; }
         }
       `}</style>
     </div>

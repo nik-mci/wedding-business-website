@@ -149,7 +149,7 @@ export default function HomePage() {
     <div className="overflow-hidden">
 
       {/* HERO SECTION */}
-      <section id="hero" ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section id="hero" ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden !px-0">
         <video 
           id="hero-bg"
           autoPlay 
@@ -187,8 +187,8 @@ export default function HomePage() {
       <GoldDivider variant="section" />
 
       {/* HOW WE DO IT */}
-      <section id="our-process" ref={processRef} className="overflow-hidden bg-bg pt-6 pb-8">
-        <div className="flex flex-col items-center text-center px-12">
+      <section id="our-process" ref={processRef} className="overflow-hidden bg-bg pt-6 pb-8 !px-0">
+        <div className="flex flex-col items-center text-center px-4 sm:px-8 md:px-12">
           <GoldDivider className="mb-4 reveal" />
           <p className="section-label reveal">Our Process</p>
           <h2 className="section-title reveal text-ink">How We Craft <em className="italic">Your Day</em></h2>
@@ -262,8 +262,8 @@ export default function HomePage() {
         </div>
 
         {/* MOBILE VERTICAL TIMELINE */}
-        <div className="md:hidden relative w-full mt-12 pl-4 pb-8">
-          <div className="absolute top-6 bottom-6 left-[40px] w-[1px] z-0 pointer-events-none">
+        <div className="md:hidden relative w-full mt-6 pl-4 pb-4">
+          <div className="absolute top-5 bottom-8 left-[38px] w-[1px] z-0 pointer-events-none">
             <div className="timeline-line-vertical-progress absolute top-0 left-0 w-[1px] bg-gold origin-top opacity-60" style={{ height: '0%' }}></div>
           </div>
           
@@ -276,30 +276,28 @@ export default function HomePage() {
               { num: "05", title: "Memories", desc: "We capture & preserve every magical moment" }
             ].map((step, i) => {
               return (
-                <div key={i} className="contents">
-                  <div className="timeline-step-vertical flex items-start relative min-h-[100px]">
-                    <div className="step-dot-vert relative z-10 flex items-center justify-center w-[48px] h-[48px] shrink-0 text-gold bg-bg mt-[-4px] opacity-0 scale-0">
-                      <svg width="48" height="48" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0">
+                <div key={i} className="timeline-step-vertical flex items-start relative min-h-[76px]">
+                  {i < 4 && (
+                    <div className="absolute left-0 top-[44px] w-[44px] h-[32px] flex justify-center z-0 pointer-events-none">
+                      <svg width="28" height="32" viewBox="0 0 28 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-70 text-gold">
+                        <path d="M 14 0 L 14 8 C 14 14, 5 14, 5 18 C 5 22, 14 22, 14 28 L 14 32" stroke="currentColor" strokeWidth="1.2" fill="none" />
+                        <circle cx="5" cy="18" r="1.5" fill="currentColor" />
+                      </svg>
+                    </div>
+                  )}
+                  <div className="step-dot-vert relative z-10 flex items-center justify-center w-[44px] h-[44px] shrink-0 text-gold bg-bg opacity-0 scale-0">
+                    <svg width="44" height="44" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0">
                         <path d="M 28 3 L 53 28 L 28 53 L 3 28 Z" stroke="currentColor" strokeWidth="1.5" />
                         <path d="M 28 9 L 47 28 L 28 47 L 9 28 Z" stroke="currentColor" strokeWidth="0.8" opacity="0.6" />
                         <circle cx="3" cy="28" r="2" fill="currentColor" />
                         <circle cx="53" cy="28" r="2" fill="currentColor" />
                       </svg>
-                      <span style={{ fontFamily: "Georgia, serif", fontStyle: "italic", fontSize: "14px", color: "#C8A84B" }} className="relative z-10 bg-bg px-1">{step.num}</span>
-                    </div>
-                    <div className="step-content-vert ml-6 flex flex-col opacity-0 -translate-x-4 pt-2">
-                      <p className="font-body uppercase text-ink text-[13px] tracking-widest mb-1 font-medium">{step.title}</p>
-                      <p className="font-body font-light text-muted text-[11px] leading-[1.6] max-w-[220px] whitespace-normal break-keep">{step.desc}</p>
-                    </div>
+                    <span style={{ fontFamily: "Georgia, serif", fontStyle: "italic", fontSize: "13px", color: "#C8A84B" }} className="relative z-10 bg-bg px-1">{step.num}</span>
                   </div>
-                  {i < 4 && (
-                    <div className="w-[48px] flex justify-center -my-2 z-0">
-                      <svg width="30" height="60" viewBox="0 0 30 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-70" style={{ color: "#C8A84B" }}>
-                        <path d="M 15 0 L 15 15 C 15 25, 5 25, 5 30 C 5 35, 15 35, 15 45 L 15 60" stroke="currentColor" strokeWidth="1.2" fill="none" />
-                        <circle cx="5" cy="30" r="1.5" fill="currentColor" />
-                      </svg>
-                    </div>
-                  )}
+                  <div className="step-content-vert ml-4 flex flex-col opacity-0 -translate-x-4 pt-1.5">
+                    <p className="font-body uppercase text-ink text-[12px] tracking-widest mb-1 font-medium">{step.title}</p>
+                    <p className="font-body font-light text-muted text-[10px] leading-[1.5] max-w-[230px] whitespace-normal break-keep">{step.desc}</p>
+                  </div>
                 </div>
               );
             })}
@@ -309,14 +307,14 @@ export default function HomePage() {
 
 
       {/* CIRCULAR MEMORY SPACE */}
-      <section id="memory-space" className="bg-ink py-10">
-        <div className="px-12 mb-6 flex flex-col items-center text-center">
+      <section id="memory-space" className="bg-ink py-10 !px-0">
+        <div className="px-4 sm:px-8 md:px-12 mb-6 flex flex-col items-center text-center">
           <GoldDivider darkBg className="mb-4 reveal" />
           <p className="section-label" style={{ color: "var(--color-gold)" }}>Portfolio</p>
           <h2 className="section-title text-surface">Our <em className="italic">Memory Space</em></h2>
           <GoldDivider darkBg flip className="mt-2 reveal" />
         </div>
-        <div className="h-[600px] w-full">
+        <div className="h-[340px] sm:h-[450px] md:h-[500px] lg:h-[600px] w-full">
           <CircularGallery items={[
             { image: '/assets/photos/couple-shots/0G4A2282.jpg', text: 'Manya & Siddhant' },
             { image: '/assets/photos/destination/0G4A1341.jpg', text: 'Royal Palace' },
@@ -333,8 +331,8 @@ export default function HomePage() {
 
 
       {/* IDEAS TEASER */}
-      <section id="ideas-moods" className="py-10 bg-bg">
-        <div className="max-w-[1440px] mx-auto px-12 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <section id="ideas-moods" className="py-10 bg-bg !px-0">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div className="reveal">
             <GoldDivider className="mb-4" />
             <p className="section-label">Inspiration</p>
@@ -345,8 +343,28 @@ export default function HomePage() {
             </p>
             <Link href="/moodboards" className="btn-gold">Explore All Moodboards &nbsp;→</Link>
           </div>
-          <div className="flex flex-col items-center">
-            <div className="ideas-mosaic reveal grid grid-cols-2 grid-rows-3 gap-2 h-[500px] w-full">
+          <div className="flex flex-col items-center w-full">
+            {/* Mobile: horizontal scroll strip */}
+            <div className="block md:hidden w-full overflow-x-auto pb-3">
+              <div className="flex gap-3 px-4" style={{ width: 'max-content' }}>
+                {[
+                  { src: "/assets/photos/services/decoration/mandap_decor.jpg", label: "Mandap Design" },
+                  { src: "/assets/photos/services/decoration/sangeet_decoration.jpg", label: "Night Ceremony" },
+                  { src: "/assets/photos/services/decoration/haldi_flowers_decor.jpg", label: "Floral Arch" },
+                  { src: "/assets/photos/couple-shots/TSR53127.jpg", label: "Bridal Look" },
+                  { src: "/assets/photos/couple-shots/059A3486.jpg", label: "Reception Setup" },
+                ].map((item, i) => (
+                  <div key={i} className="relative flex-shrink-0 w-[200px] h-[260px] overflow-hidden group">
+                    <Image src={item.src} alt={item.label} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="200px" />
+                    <div className="absolute inset-0 bg-ink/30" />
+                    <span className="absolute bottom-3 left-3 text-[9px] tracking-[0.3em] uppercase text-surface/80 font-medium">{item.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop: original mosaic grid */}
+            <div className="ideas-mosaic reveal hidden md:grid grid-cols-2 grid-rows-3 gap-2 h-[500px] w-full">
               <div className="mosaic-card row-span-2 relative overflow-hidden group">
                 <Image src="/assets/photos/services/decoration/mandap_decor.jpg" alt="Mandap Design" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-ink/20 group-hover:bg-ink/10 transition-colors"></div>
@@ -390,8 +408,8 @@ export default function HomePage() {
       <GoldDivider variant="section" />
 
       {/* TESTIMONIALS */}
-      <section id="couples-say" className="pt-4 pb-6">
-        <div className="flex flex-col items-center text-center">
+      <section id="couples-say" className="pt-4 pb-6 !px-0">
+        <div className="flex flex-col items-center text-center px-4 sm:px-8">
           <GoldDivider className="mb-4 reveal" />
           <p className="section-label reveal">Love Stories</p>
           <h2 className="section-title reveal">What Our <em className="italic">Couples Say</em></h2>
@@ -425,7 +443,7 @@ export default function HomePage() {
                   <path d="M 135 18 Q 130 18 128 16" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
                 </svg>
                 <div className="testi-stars">★★★★★</div>
-                <p className="testi-quote">"{testi.quote}"</p>
+                <p className="testi-quote line-clamp-4 md:line-clamp-none">"{testi.quote}"</p>
                 <p className="testi-author">{testi.author}</p>
                 <p className="testi-location">{testi.loc}</p>
                 <svg width="180" height="22.5" viewBox="0 0 240 30" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-6 opacity-80" style={{ color: "var(--color-gold)", transform: "scaleY(-1)" }}>
@@ -448,7 +466,7 @@ export default function HomePage() {
       <GoldDivider variant="section" />
 
       {/* FINAL CTA */}
-      <section id="final-cta" className="relative overflow-hidden">
+      <section id="final-cta" className="relative overflow-hidden !px-0">
         <div id="cta-bg" className="absolute inset-[-10%] bg-cover bg-center filter brightness-[0.3] saturate-[0.5]" style={{ backgroundImage: "url('/assets/photos/destination/TSR50355.jpg')" }}></div>
         <div className="relative z-[2] flex flex-col items-center text-center">
           <GoldDivider darkBg className="mb-4 reveal" />

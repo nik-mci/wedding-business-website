@@ -20,7 +20,7 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="fixed bottom-8 right-8 z-[2000]">
+    <div className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[2000]">
       {/* CHAT PANEL */}
       <div className={`absolute bottom-[72px] right-0 w-[320px] bg-white rounded-sm shadow-2xl transition-all duration-350 ease-out overflow-hidden ${isOpen ? 'translate-y-0 scale-100 opacity-100 pointer-events-all' : 'translate-y-4 scale-95 opacity-0 pointer-events-none'}`}>
         <div className="bg-[#1C1C1C] p-5 flex items-center gap-3">

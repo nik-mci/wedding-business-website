@@ -356,10 +356,17 @@ export default function MoodBoardsPage() {
 
   useEffect(() => {
     if (showOverlay) {
-      const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
-      document.body.style.overflow = "hidden";
-      document.body.style.paddingRight = `${scrollBarWidth}px`;
-      document.documentElement.classList.add("lenis-stopped");
+      const isMobileOverlay = window.matchMedia("(max-width: 767px)").matches;
+      if (isMobileOverlay) {
+        document.body.style.overflow = "";
+        document.body.style.paddingRight = "0px";
+        document.documentElement.classList.remove("lenis-stopped");
+      } else {
+        const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+        document.body.style.overflow = "hidden";
+        document.body.style.paddingRight = `${scrollBarWidth}px`;
+        document.documentElement.classList.add("lenis-stopped");
+      }
       if (selectedBoard) window.location.hash = selectedBoard.id;
       
       // Overlay animation
@@ -412,10 +419,12 @@ export default function MoodBoardsPage() {
       isTall = true; // Tall board filling the gap perfectly
     }
 
+    const heightClass = isTall ? "h-[340px] md:h-[480px]" : "h-[340px] md:h-[360px]";
+
     return (
       <div 
         onClick={() => { setSelectedBoard(board); setShowOverlay(true); }}
-        className={`mood-card group relative bg-[#1A1408] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-[6px] hover:shadow-[0_24px_48px_rgba(0,0,0,0.15)] hover:ring-2 hover:ring-[#C9A234] ${isTall ? 'h-[480px]' : 'h-[360px]'} ${layoutClasses}`}
+        className={`mood-card group relative bg-[#1A1408] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-[6px] hover:shadow-[0_24px_48px_rgba(0,0,0,0.15)] hover:ring-2 hover:ring-[#C9A234] ${heightClass} ${layoutClasses}`}
       >
         {/* 2x2 Image Grid */}
         <div className="grid grid-cols-2 grid-rows-2 h-full w-full">
@@ -478,28 +487,31 @@ export default function MoodBoardsPage() {
       {showOverlay && selectedBoard && (
         <div 
           ref={overlayRef}
-          className="fixed inset-0 z-[10000] flex items-center justify-center p-4 md:p-8 opacity-0 overscroll-none"
+          className="fixed inset-0 z-[10000] flex items-start md:items-center justify-center overflow-y-auto p-2 md:p-8 opacity-0 overscroll-contain"
+          data-lenis-prevent
         >
           {/* Backdrop */}
           <div 
             onClick={closeOverlay}
-            className="absolute inset-0 bg-[#0d0d08]/78 backdrop-blur-[4px] touch-none"
+            className="fixed inset-0 bg-[#0d0d08]/78 backdrop-blur-[4px] touch-none"
           />
           
           {/* Panel */}
           <div 
             ref={panelRef}
-            className="relative w-[95vw] md:w-[90vw] h-[90vh] max-w-[1200px] bg-white rounded-[16px] overflow-y-auto md:overflow-hidden flex flex-col md:flex-row shadow-2xl overscroll-contain"
+            className="relative my-2 w-full md:w-[90vw] h-[calc(100dvh-1rem)] md:h-[90vh] max-w-[1200px] bg-white rounded-[16px] overflow-y-scroll md:overflow-hidden flex flex-col md:flex-row shadow-2xl overscroll-contain touch-pan-y"
+            data-lenis-prevent
+            style={{ WebkitOverflowScrolling: "touch" }}
           >
             {/* LEFT COLUMN */}
             <div 
-              className="w-full md:w-[38%] bg-[#FDFAF5] border-r border-[#EDE8DC] p-10 overflow-y-auto custom-scrollbar md:sticky md:top-0 h-auto md:h-full flex flex-col overscroll-contain"
+              className="order-2 md:order-1 w-full md:w-[38%] bg-[#FDFAF5] border-r border-[#EDE8DC] p-5 md:p-10 overflow-visible md:overflow-y-auto custom-scrollbar md:sticky md:top-0 shrink-0 h-auto md:h-full flex flex-col overscroll-contain"
               data-lenis-prevent
             >
               <p className="font-body text-[#E87B3A] text-[10px] uppercase tracking-[0.4em] mb-2">{selectedBoard.category}</p>
-              <h2 className="font-heading text-[#1A1408] text-[44px] leading-[1.1] mb-4">{selectedBoard.name}</h2>
+              <h2 className="font-heading text-[#1A1408] text-[28px] md:text-[44px] leading-[1.1] mb-4">{selectedBoard.name}</h2>
               <div className="w-12 h-[1px] bg-[#C9A234] mb-5"></div>
-              <p className="font-body text-[#9A8F7E] text-[14px] leading-[1.75] mb-7 max-w-[320px] font-light">
+              <p className="font-body text-[#9A8F7E] text-[14px] leading-[1.75] mb-7 max-w-[320px] font-light line-clamp-3 md:line-clamp-none">
                 {selectedBoard.description}
               </p>
 
@@ -545,9 +557,9 @@ export default function MoodBoardsPage() {
             </div>
 
             {/* RIGHT COLUMN AREA */}
-            <div className="w-full md:w-[62%] flex flex-col h-auto md:h-full bg-white overscroll-contain">
+            <div className="order-1 md:order-2 w-full md:w-[62%] flex flex-col h-auto md:h-full bg-white overscroll-contain">
               {/* TOP BAR */}
-              <div className="h-14 border-bottom border-[#EDE8DC] px-6 flex items-center justify-between shrink-0">
+              <div className="sticky top-0 md:static z-20 h-12 md:h-14 border-b border-[#EDE8DC] bg-white px-4 md:px-6 flex items-center justify-between shrink-0">
                 <div className="text-[#9A8F7E] text-[11px] font-body">
                   Mood Boards &nbsp;→&nbsp; <span className="text-[#1A1408]">{selectedBoard.name}</span>
                 </div>
@@ -572,7 +584,7 @@ export default function MoodBoardsPage() {
 
               {/* SCROLLABLE GRID */}
               <div 
-                className="flex-grow overflow-y-auto p-7 custom-scrollbar overscroll-contain"
+                className="overflow-visible md:overflow-y-auto p-3 md:p-7 custom-scrollbar overscroll-contain h-auto md:h-auto md:flex-grow"
                 data-lenis-prevent
               >
                 <div className="columns-2 gap-3 space-y-3">

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-ink text-surface/60 py-20 px-12">
+    <footer className="bg-ink text-surface/60 py-16 px-4 sm:px-8 lg:px-12">
       <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
         <div>
           <p className="font-heading text-2xl text-surface tracking-[0.1em] mb-4">Vows & Vedas</p>

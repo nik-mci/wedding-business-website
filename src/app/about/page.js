@@ -68,7 +68,7 @@ export default function AboutPage() {
     <div ref={containerRef} className="pt-0">
       {/* SPLIT HERO */}
       <section id="about-hero" className="grid grid-cols-1 md:grid-cols-2 min-h-screen p-0">
-        <div className="hero-left bg-bg flex flex-col justify-center items-center text-center p-16 pt-[140px] relative w-full">
+        <div className="hero-left bg-bg flex flex-col justify-center items-center text-center p-8 md:p-16 pt-[100px] md:pt-[140px] relative w-full">
           <CornerOrnament size={44} inset={16} opacity={0.4} />
 
           {/* Decorative vertical motif — anchored near top, clear of content */}
@@ -108,13 +108,13 @@ export default function AboutPage() {
       </section>
 
       {/* SECTION 1 — BRAND INTRO */}
-      <section className="bg-[#FDFAF5] py-8 md:py-10 px-12 relative border-l-4 border-gold/40">
+      <section className="bg-[#FDFAF5] py-6 md:py-10 px-5 md:px-12 relative border-l-4 border-gold/40">
         <div className="max-w-[900px] mx-auto reveal">
-          <div className="flex items-center gap-4 mb-10 opacity-30">
-            <div className="h-[0.5px] bg-[#C8A84B] w-12"></div>
+          <div className="flex items-center gap-3 md:gap-4 mb-5 md:mb-10 opacity-30">
+            <div className="h-[0.5px] bg-[#C8A84B] w-10 md:w-12"></div>
             <div className="w-1.5 h-1.5 bg-[#C8A84B] rotate-45 shrink-0"></div>
           </div>
-          <p className="text-[22px] md:text-[26px] leading-[1.8] text-ink font-light font-heading italic">
+          <p className="text-[21px] md:text-[26px] leading-[1.55] md:leading-[1.8] text-ink font-light font-heading italic">
             'Some love stories deserve more than just a wedding. They deserve an experience, one that is as timeless as the vows exchanged and as sacred as the rituals that bind two souls together. At Vows & Vedas, we craft weddings that go beyond the ordinary. Every celebration we design is deeply personal, meticulously planned, and flawlessly executed, because we believe your wedding day should feel exactly the way you always imagined it.'
           </p>
         </div>
@@ -144,8 +144,10 @@ export default function AboutPage() {
       </section>
 
       {/* SECTION 3 — GeTSHolidays LEGACY */}
-      <section className="bg-[#1a1200] py-8 md:py-10 px-12 relative overflow-hidden">
-        <CornerOrnament size={60} inset={20} opacity={0.3} strokeWidth={1.5} />
+      <section className="bg-[#1a1200] py-8 md:py-10 px-5 md:px-12 relative overflow-hidden">
+        <div className="hidden md:block">
+          <CornerOrnament size={60} inset={20} opacity={0.3} strokeWidth={1.5} />
+        </div>
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 items-center">
           <div className="reveal">
             <p className="text-gold text-[10px] tracking-[0.4em] uppercase mb-4 font-medium">The GeTSHolidays Legacy</p>
@@ -182,7 +184,7 @@ export default function AboutPage() {
       <section id="our-team" className="bg-ink border border-[#C9A234]/30 rounded-2xl mx-6 md:mx-12 my-8 shadow-[0_0_60px_rgba(0,0,0,0.5)] overflow-hidden">
 
         {/* Shared section header */}
-        <div className="pt-8 pb-6 px-12 flex flex-col items-center text-center">
+        <div className="pt-8 pb-6 px-5 md:px-12 flex flex-col items-center text-center">
           <GoldDivider darkBg className="mb-4 reveal" />
           <p className="section-label reveal">The People Behind Vows &amp; Vedas</p>
           <h2 className="section-title reveal text-surface">Our <em className="italic">Team</em></h2>
@@ -190,12 +192,12 @@ export default function AboutPage() {
         </div>
 
         {/* TIER 1 — Your Planning Team */}
-        <div className="px-12 pb-8">
+        <div className="px-5 md:px-12 pb-8">
           <div className="flex flex-col items-center text-center mb-6 reveal">
             <p className="text-[9px] tracking-[0.45em] uppercase font-medium mb-2" style={{ color: 'var(--color-gold)' }}>Who You'll Work With</p>
             <h3 className="font-heading text-surface text-3xl md:text-4xl font-light">Your Planning <em className="italic">Team</em></h3>
           </div>
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 items-start">
+          <div className="max-w-5xl mx-auto flex md:grid md:grid-cols-3 gap-4 md:gap-6 items-stretch md:items-start overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-px-5 pb-3 md:pb-0 -mx-5 px-5 md:mx-auto md:px-0">
             {[
               {
                 name: "Manmeet Soundh",
@@ -217,20 +219,20 @@ export default function AboutPage() {
                 name: "Rukmini",
                 role: "Design and Decor",
                 vibe: "Every detail tells part of your story.",
-                bio: "Rukmini brings a refined eye for design and decor to every celebration, translating mood, culture, and personal style into spaces that feel intentional, luxurious, and unmistakably yours. From floral language to lighting, textures, and tablescapes, she ensures every visual element works in harmony with your wedding narrative.",
-                image: "/assets/photos/about-us/7184c718-f5e6-4054-b35b-e56bc79213a5.JPG",
+                bio: "For Rukmini, wedding decor is about creating experiences that feel warm, beautiful and completely personal. With over 7 years in creative event concepts and design, she loves bringing together aesthetics, storytelling and a little bit of magic.",
+                image: "/assets/photos/about-us/Rukmini Image Replace.png",
                 imagePosition: "center 20%"
               }
             ].map((member, i) => (
-              <div key={i} className={`reveal stagger-${i + 1} group`} style={{ background: 'rgba(255,255,255,0.04)', borderRadius: '2px' }}>
-                <div className="aspect-[1/1] relative overflow-hidden">
+              <div key={i} className={`reveal stagger-${i + 1} group w-[72vw] max-w-[300px] shrink-0 snap-start md:w-auto md:max-w-none`} style={{ background: 'rgba(255,255,255,0.04)', borderRadius: '2px' }}>
+                <div className="aspect-[3/4] md:aspect-[1/1] relative overflow-hidden">
                   <img
                     src={member.image}
                     alt={member.name}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                     style={{ objectPosition: member.imagePosition }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-6">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 hidden md:flex items-end p-6">
                     <div className="translate-y-2 group-hover:translate-y-0 transition-transform duration-400">
                       <p className="font-heading text-surface text-2xl">{member.name}</p>
                       <p className="text-[9px] tracking-[0.3em] text-gold mt-1 uppercase">{member.role}</p>
@@ -239,12 +241,28 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                <div className="pt-5 px-5 pb-5">
-                  <h4 className="font-heading text-surface text-xl leading-tight">{member.name}</h4>
-                  <p className="text-[9px] tracking-[0.3em] uppercase text-gold mt-1 font-medium">{member.role}</p>
+                <div className="pt-4 md:pt-5 px-4 md:px-5 pb-5">
+                  <p className="md:hidden text-[8px] tracking-[0.3em] uppercase text-gold mb-2 font-medium">{member.role}</p>
+                  <h4 className="font-heading text-surface text-[24px] md:text-xl leading-tight">{member.name}</h4>
+                  <p className="md:hidden text-[12px] leading-[1.7] text-surface/60 mt-3 font-light italic">"{member.vibe}"</p>
+                  <p className="hidden md:block text-[9px] tracking-[0.3em] uppercase text-gold mt-1 font-medium">{member.role}</p>
                   <div className="h-px bg-[#C9A234]/30 mt-3"></div>
 
-                  <div className={`bio-panel overflow-hidden transition-[max-height] duration-500 ease-in-out${expandedBio[i] ? ' bio-open' : ''}`}>
+                  {expandedBio[i] && (
+                    <p className="md:hidden text-[12px] leading-[1.75] text-surface/60 font-light pt-4 whitespace-pre-line">{member.bio}</p>
+                  )}
+
+                  <button
+                    type="button"
+                    className="md:hidden text-[9px] tracking-[0.32em] uppercase font-medium mt-4 bg-transparent border-0 p-0 cursor-pointer bio-toggle"
+                    style={{ color: 'var(--color-gold)' }}
+                    onClick={() => toggleBio(i)}
+                    aria-expanded={!!expandedBio[i]}
+                  >
+                    {expandedBio[i] ? 'Less' : '+ Read more'}
+                  </button>
+
+                  <div className={`bio-panel hidden md:block overflow-hidden transition-[max-height] duration-500 ease-in-out${expandedBio[i] ? ' bio-open' : ''}`}>
                     <p className="text-[12px] leading-[1.85] text-surface/60 font-light pt-4 pb-6 whitespace-pre-line">{member.bio}</p>
                   </div>
 
@@ -262,7 +280,7 @@ export default function AboutPage() {
         </div>
 
         {/* Bridging sentence */}
-        <div className="py-8 px-12 flex flex-col items-center text-center reveal">
+        <div className="py-8 px-5 md:px-12 flex flex-col items-center text-center reveal">
           <div className="h-px w-16 bg-[#C9A234]/30 mb-6"></div>
           <p className="font-heading italic text-surface/50 text-[18px] md:text-[20px] leading-[1.7] max-w-lg">
             Behind every celebration, the specialised teams that bring it all together.
@@ -271,39 +289,65 @@ export default function AboutPage() {
         </div>
 
         {/* TIER 2 — The Operational Backbone */}
-        <div className="px-12 pb-10">
+        <div className="px-5 md:px-12 pb-10">
           <div className="flex flex-col items-center text-center mb-6 reveal">
             <p className="text-[9px] tracking-[0.45em] uppercase font-medium mb-2" style={{ color: 'var(--color-gold)' }}>The Operational Backbone</p>
             <h3 className="font-heading text-surface text-3xl md:text-4xl font-light">Behind Every <em className="italic">Wedding</em></h3>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px">
+          <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-px items-stretch overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-px-5 pb-3 md:pb-0 -mx-5 px-5 md:mx-0 md:px-0">
             {[
               {
                 name: "Travel & Transport",
                 desc: "Our dedicated logistics team brings efficient fleet management to your wedding day. Managing everything from travel ticketing to VIP arrivals to welcoming to multi-venue guest shuttles, they ensure perfectly timed, stress-free transit.\n\nWe guarantee your guests experience seamless, hospitality-driven travel from arrival to departure.",
+                mobileDesc: "Efficient fleet, ticketing, VIP arrivals and guest shuttles keep every movement calm and perfectly timed.",
                 image: "/assets/photos/destination/beach-wedding-img.jpg"
               },
               {
                 name: "Hotel & Venue Procurement",
                 desc: "Leveraging years of global corporate negotiations, this team secures the finest luxury venues and room blocks at unmatched value. They handle complex contracting, attrition clauses and finer details effortlessly.\n\nThis means elevated insider perks and a completely seamless, legally secure booking experience.",
+                mobileDesc: "Luxury venues, room blocks, contracts and insider perks are handled with seasoned negotiation.",
                 image: "/assets/photos/destination/pool_venue.jpg"
               },
               {
                 name: "Operations & Event Production",
                 desc: "The technical powerhouse, this division converts ambitious creative visions into structurally flawless realities. They manage high-stakes timelines, sound, lighting, and vendor coordination with absolute military precision.\n\nTheir vast experience guarantees your wedding day runs like clockwork, entirely behind the scenes.",
+                mobileDesc: "Production, timelines, sound, lighting and vendors come together with precise behind-the-scenes control.",
                 image: "/assets/photos/services/decoration/sangeet_decoration.jpg"
               }
             ].map((team, i) => (
-              <div key={i} className={`ts-card reveal stagger-${i + 1}`}>
-                <div className="aspect-video overflow-hidden">
+              <div key={i} className={`ts-card reveal stagger-${i + 1} block w-[72vw] max-w-[300px] shrink-0 snap-start md:w-auto md:max-w-none md:flex md:flex-col md:h-full py-0 md:py-0 border md:border`}>
+                <div className="w-full aspect-[3/4] md:w-auto md:h-auto md:aspect-video overflow-hidden shrink-0">
                   <img src={team.image} alt={team.name} className="ts-card-img w-full h-full object-cover" />
                 </div>
-                <div className="h-px bg-[#C9A234]/35"></div>
-                <div className="p-6 md:p-7">
-                  <h3 className="font-heading text-surface text-[28px] font-light leading-tight mb-3">{team.name}</h3>
+                <div className="hidden md:block h-px bg-[#C9A234]/35"></div>
+                <div className="p-4 md:p-7 flex-1 md:flex md:flex-col">
+                  <h3 className="font-body md:font-heading text-surface text-[12px] md:text-[28px] font-semibold md:font-light leading-tight mb-2 md:mb-3 uppercase md:normal-case tracking-[0.18em] md:tracking-normal">{team.name}</h3>
+                  <p
+                    className="md:hidden text-[12px] leading-[1.6] font-light"
+                    style={{ color: 'rgba(253,250,245,0.58)' }}
+                  >
+                    {team.mobileDesc}
+                  </p>
                   {expandedTeam === i && (
                     <p
-                      className="text-[13px] leading-[1.75] font-light whitespace-pre-line mb-4"
+                      className="md:hidden text-[12px] leading-[1.75] font-light whitespace-pre-line mt-4"
+                      style={{ color: 'rgba(253,250,245,0.58)' }}
+                    >
+                      {team.desc}
+                    </p>
+                  )}
+                  <button
+                    type="button"
+                    className="md:hidden text-[9px] tracking-[0.32em] uppercase font-medium mt-4 bg-transparent border-0 p-0 cursor-pointer bio-toggle"
+                    style={{ color: 'var(--color-gold)' }}
+                    onClick={() => toggleTeam(i)}
+                    aria-expanded={expandedTeam === i}
+                  >
+                    {expandedTeam === i ? 'Less' : '+ Read more'}
+                  </button>
+                  {expandedTeam === i && (
+                    <p
+                      className="hidden md:block text-[13px] leading-[1.75] font-light whitespace-pre-line mb-4"
                       style={{ color: 'rgba(253,250,245,0.55)' }}
                     >
                       {team.desc}
@@ -311,7 +355,7 @@ export default function AboutPage() {
                   )}
                   <button
                     type="button"
-                    className="text-[9px] tracking-[0.35em] uppercase font-medium bg-transparent border-0 p-0 cursor-pointer bio-toggle"
+                    className="hidden md:block text-[9px] tracking-[0.35em] uppercase font-medium bg-transparent border-0 p-0 cursor-pointer bio-toggle md:mt-auto"
                     style={{ color: 'var(--color-gold)' }}
                     onClick={() => toggleTeam(i)}
                     aria-expanded={expandedTeam === i}
@@ -327,7 +371,7 @@ export default function AboutPage() {
       </section>
 
       {/* SECTION 6 — OUR PROMISE */}
-      <section className="bg-[#1a1200] py-16 md:py-20 px-12 relative overflow-hidden flex flex-col items-center text-center">
+      <section className="bg-[#1a1200] py-16 md:py-20 px-5 md:px-12 relative overflow-hidden flex flex-col items-center text-center">
         <CornerOrnament size={80} inset={30} opacity={0.1} />
         <div className="max-w-[800px] reveal flex flex-col items-center">
           <p className="text-gold text-[10px] tracking-[0.6em] uppercase mb-8 font-medium">Our Promise</p>
@@ -356,6 +400,11 @@ export default function AboutPage() {
         .ts-card:hover { border-color: rgba(201,162,52,0.6); transform: translateY(-4px); }
         .ts-card-img { transition: transform .7s ease; }
         .ts-card:hover .ts-card-img { transform: scale(1.04); }
+
+        @media (max-width: 767px) {
+          .ts-card { border: 1px solid rgba(201,162,52,0.22); background: rgba(255,255,255,0.04); border-radius: 2px; transform: none; }
+          .ts-card:hover { border-color: rgba(201,162,52,0.22); transform: none; }
+        }
 
         .bio-panel { max-height: 300px; }
         @media (min-width: 768px) { .bio-panel { max-height: 0; } .bio-panel.bio-open { max-height: 300px; } }
