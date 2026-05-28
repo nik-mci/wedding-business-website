@@ -55,7 +55,7 @@ export default function Navigation() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-[100] flex items-center h-[60px] md:h-[68px] px-4 sm:px-8 lg:px-10 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-[100] flex items-center h-[88px] md:h-[104px] px-4 sm:px-8 lg:px-10 transition-all duration-300 ${
           isTransparent
             ? "bg-transparent"
             : "bg-[#FDFAF5]/96 backdrop-blur-md shadow-sm border-b border-black/8"
@@ -63,16 +63,25 @@ export default function Navigation() {
       >
         {/* Left — Logo */}
         <div className="flex-1 flex items-center">
-          <Link href="/" className="relative h-[44px] w-[140px] md:h-[52px] md:w-[164px] shrink-0 group">
+          <Link
+            href="/"
+            className="relative h-[72px] w-[96px] md:h-[92px] md:w-[122px] shrink-0 transition-transform duration-300 hover:scale-[1.03]"
+          >
+            {/* Transparent nav — white logo on dark hero */}
             <Image
-              src="/assets/photos/V&V_A_PNG.png"
+              src="/assets/photos/logo-8-white.png"
               alt="Vows & Vedas"
               fill
-              sizes="(min-width: 768px) 204px, 178px"
-              className={`object-contain transition-all duration-300 group-hover:scale-[1.03] ${
-                isTransparent ? "brightness-0 invert opacity-90" : ""
-              }`}
               priority
+              className={`object-contain transition-opacity duration-300 ${isTransparent ? 'opacity-100' : 'opacity-0'}`}
+            />
+            {/* Scrolled nav — gold logo on cream nav */}
+            <Image
+              src="/assets/photos/logo-8-gold.png"
+              alt="Vows & Vedas"
+              fill
+              priority
+              className={`object-contain transition-opacity duration-300 ${isTransparent ? 'opacity-0' : 'opacity-100'}`}
             />
           </Link>
         </div>
@@ -160,16 +169,16 @@ export default function Navigation() {
         }`}
         aria-hidden={!mobileOpen}
       >
-        <div className="flex items-center justify-between px-4 py-2 h-[72px] border-b border-ink/8">
-          <Link href="/" className="relative h-[56px] w-[178px]" onClick={() => setMobileOpen(false)}>
+        <div className="flex items-center justify-between px-4 py-2 h-[88px] border-b border-ink/8">
+          <Link href="/" className="relative h-[72px] w-[96px]" onClick={() => setMobileOpen(false)}>
             <Image
-              src="/assets/photos/V&V_A_PNG.png"
+              src="/assets/photos/logo-8-gold.png"
               alt="Vows & Vedas"
               fill
-              sizes="178px"
               className="object-contain"
             />
           </Link>
+
           <button
             type="button"
             onClick={() => setMobileOpen(false)}

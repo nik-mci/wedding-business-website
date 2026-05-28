@@ -7,7 +7,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GoldDivider from "@/components/GoldDivider";
 import CornerOrnament from "@/components/CornerOrnament";
-import blurDataUrls, { getBlurProps } from "@/lib/blurDataUrls";
+import { getBlurProps } from "@/lib/blurDataUrls";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -461,61 +461,6 @@ export default function CitiesMetropolitansPage() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOverlayOpen, selectedVenue]);
 
-  const ImagePanel = ({ dest }) => (
-    <div className="w-full md:w-[360px] relative flex-shrink-0 p-4 md:p-6 flex items-center justify-center bg-bg h-full group/img">
-      <div className="relative w-full h-full max-w-[320px] md:max-w-none flex flex-col">
-        <div className="absolute top-[-12px] left-[-12px] w-12 h-12 border-t border-l border-[#C8A84B] z-10 pointer-events-none opacity-60 transition-transform duration-700 group-hover/img:scale-110"></div>
-        <div className="absolute bottom-[-12px] right-[-12px] w-12 h-12 border-b border-r border-[#C8A84B] z-10 pointer-events-none opacity-60 transition-transform duration-700 group-hover/img:scale-110"></div>
-
-        <div className="relative w-full flex-grow overflow-hidden shadow-sm min-h-[450px] md:min-h-0 md:h-full">
-          <div className="absolute inset-0 scale-110 transition-transform duration-[2s] ease-out group-hover/img:scale-[1.2]">
-            <Image
-              src={`/assets/photos/${dest.img}`}
-              alt={dest.name}
-              fill
-              sizes="(max-width: 768px) 100vw, 360px"
-              {...getBlurProps(`/assets/photos/${dest.img}`)}
-              className="object-cover parallax-img"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  const ContentPanel = ({ dest }) => (
-    <div className="flex-grow bg-[#F9F5EF] p-[1.5rem] md:p-[2.5rem] flex flex-col justify-center relative border-l-2 border-[rgba(200,168,75,0.4)] h-full w-full">
-      <h2 className="font-heading text-ink text-4xl md:text-5xl font-light mb-1">
-        {dest.name}
-      </h2>
-      <p className="text-[#C8A84B] text-[11px] tracking-[3px] uppercase font-medium mb-4">
-        {dest.location}
-      </p>
-
-      <p className="text-muted text-[15px] leading-[1.7] font-light mb-6 w-full">
-        {dest.desc1}
-      </p>
-
-      {dest.stats && (
-        <div className="flex flex-wrap gap-3 mb-8">
-          {Object.entries(dest.stats).map(([key, value]) => (
-            <div key={key} className="px-4 py-1.5 bg-white border border-[#C8A84B]/20 rounded-full flex items-center gap-2 shadow-sm transition-transform hover:scale-105">
-              <span className="text-[#C8A84B] text-[9px] font-bold uppercase tracking-[1px]">{key}:</span>
-              <span className="text-ink text-[11px] font-medium">{value}</span>
-            </div>
-          ))}
-        </div>
-      )}
-
-      <button
-        onClick={() => openVenue(dest)}
-        className="inline-block bg-[#C8A84B] text-[#1a1200] px-[2rem] py-[0.8rem] text-[11px] tracking-[3px] uppercase font-bold transition-all duration-500 self-start border-none hover:bg-[#A8892F] hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(168,137,47,0.25)]"
-      >
-        Explore More About This Venue
-      </button>
-    </div>
-  );
-
   const slides = selectedVenue?.slides || [];
 
   return (
@@ -548,31 +493,56 @@ export default function CitiesMetropolitansPage() {
       </section>
 
       {/* DESTINATION CARDS */}
-      <section className="p-0 m-0 border-none">
-        <div className="flex flex-col gap-0 p-0 m-0">
-          {cityDestinations.map((dest, i) => {
-            const isEven = i % 2 === 0;
-
-            return (
+      <section className="bg-bg pt-10 pb-16 px-6 md:px-10">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="flex flex-col items-center text-center mb-10">
+            <p className="section-label reveal">Our Venues</p>
+            <h2 className="section-title reveal text-ink">Where Your Story Unfolds</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {cityDestinations.map((venue, index) => (
               <div
-                key={dest.id}
-                className="flex flex-col md:grid items-stretch reveal p-0 m-0"
-                style={{ gridTemplateColumns: isEven ? '360px 1fr' : '1fr 360px' }}
+                key={venue.id}
+                className="relative h-[320px] rounded-xl overflow-hidden cursor-pointer group bg-[#1A1408]"
+                onClick={() => openVenue(venue)}
               >
-                {isEven ? (
-                  <>
-                    <ImagePanel dest={dest} />
-                    <ContentPanel dest={dest} />
-                  </>
-                ) : (
-                  <>
-                    <ContentPanel dest={dest} />
-                    <ImagePanel dest={dest} />
-                  </>
-                )}
+                <div className="absolute inset-0 overflow-hidden">
+                  <Image
+                    src={`/assets/photos/${venue.img}`}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    alt={venue.name}
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 border-2 border-[#C9A234] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-col items-start">
+                  <span className="text-[#C9A234] text-[11px] mb-1.5">✦</span>
+                  <p className="text-[10px] font-body uppercase text-[#C9A234] tracking-[3px] mb-1">
+                    {String(index + 1).padStart(2, '0')}
+                  </p>
+                  <h3 className="font-heading text-white text-[22px] leading-[1.2] mb-1">
+                    {venue.name}
+                  </h3>
+                  <p className="text-white/60 text-[11px] uppercase tracking-[2px] mb-3">
+                    {venue.location}
+                  </p>
+                  <div className="flex gap-2 mb-4">
+                    <span className="px-3 py-1 bg-white/10 border border-[#C8A84B]/30 rounded-full text-[10px] text-white/80">
+                      Rooms: {venue.stats?.rooms || "N/A"}
+                    </span>
+                    <span className="px-3 py-1 bg-white/10 border border-[#C8A84B]/30 rounded-full text-[10px] text-white/80">
+                      Guests: {venue.stats?.guests || "N/A"}
+                    </span>
+                  </div>
+                  <div className="px-4 py-1.5 rounded-full bg-[#C9A234]/15 border border-[#C9A234]/40 text-[10px] text-[#C9A234] uppercase tracking-[2px] group-hover:bg-[#C9A234]/30 transition-colors duration-300">
+                    Explore Venue →
+                  </div>
+                </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </section>
 
