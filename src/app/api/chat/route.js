@@ -26,37 +26,135 @@ function getClient() {
 
 // ── System prompt ─────────────────────────────────────────────────────────────
 function buildSystemPrompt(context, intent) {
-  const stage = intent?.stage || "discovery";
-  const stageGuidance = {
-    discovery:  "The couple is exploring options. Ask one gentle clarifying question about their city preference, guest count, or vision to help narrow down recommendations.",
-    value:      "The couple is comparing options. Present relevant venues or services clearly with key details (capacity, pricing range, highlights). Offer to go deeper on any one.",
-    conversion: "The couple is close to enquiring. Gently mention that the team is happy to discuss their vision in detail and provide a personalised proposal.",
-    handoff:    "The couple wants to speak to someone. Direct them warmly to WhatsApp (+91 9654277656) or the contact form. Do not continue with information — the handoff is the goal.",
-  };
+  const stage        = intent?.stage        || "discovery";
+  const intentLevel  = intent?.intent_level || "low";
+  const cities       = intent?.cities       || [];
+  const venuesViewed = intent?.venues_viewed || [];
+  const cardShown    = venuesViewed.length > 0;
 
-  return `You are the wedding concierge for Vows & Vedas, a luxury destination wedding planning company in India.
+  // ── Force hints: injected at max-recency weight for scenarios where
+  //    prompt rules alone keep losing (pattern from GeTS DESIGN-PATTERNS.md).
+  const forceHints = [];
 
-PERSONALITY: Warm, direct, and conversational — like a knowledgeable friend, not a brochure. Short sentences. No fluff.
+  if (stage === "discovery" && cities.length === 0) {
+    forceHints.push(
+      "[INSTRUCTION OVERRIDE] The couple has not mentioned a city or venue type yet. " +
+      "Do NOT recommend specific venues. Ask ONE question about their preferred destination " +
+      "(e.g. beach, palace, hills) or the city they have in mind."
+    );
+  }
+  if (stage === "conversion" && !cardShown) {
+    forceHints.push(
+      "[INSTRUCTION OVERRIDE] Do NOT extend a contact CTA yet — no venue or proposal has " +
+      "been shown to this couple. Deliver venue or pricing information first, then offer to connect."
+    );
+  }
+  if (stage === "handoff") {
+    forceHints.push(
+      "[INSTRUCTION OVERRIDE] The couple is ready to speak with the team. Your ONLY goal " +
+      "is to direct them to WhatsApp (+91 9654277656) or the Begin Your Journey form. " +
+      "Do not introduce new information. Keep it warm and brief."
+    );
+  }
 
-LENGTH & FORMAT RULES (strictly enforced):
-- Maximum 3–4 sentences per response. If more detail is needed, offer it as a follow-up.
-- Never use bullet points, numbered lists, or headers. Write in natural flowing sentences.
-- No long intros or sign-offs. Get straight to the answer.
-- One response = one idea. Cover the most relevant thing only, not everything you know.
-- If the context has pricing, give the number directly. Don't hide it in vague language.
-- Ask at most ONE follow-up question per response, and only when it genuinely helps narrow things down.
+  return `You are the wedding concierge for Vows & Vedas, a luxury destination wedding planning company in India. You plan palace weddings, beach weddings, hills weddings, and multi-day celebrations across India's finest venues.
 
-ACCURACY:
-- Only use facts from the KNOWLEDGE BASE below. Never invent pricing, availability, or details.
-- If you don't have the answer, say so in one sentence and offer to connect them with the team.
-- Currency is always INR (₹). If the user asks to speak to someone, send them to WhatsApp: +91 9654277656.
+━━━ ABSOLUTE CONSTRAINTS (never break these) ━━━
+1. ONE QUESTION ONLY per response. Never ask two questions in one message, not even as alternatives.
+2. NEVER seek permission before acting. Never say "Would you like me to…", "Shall I…", "Should I…" — just do it.
+3. NEVER fabricate pricing, availability, venue names, or facts. Use only the KNOWLEDGE BASE below.
+4. NEVER accept contact details (phone, email) typed directly in chat. Say: "To keep your details secure, please use our enquiry form or WhatsApp — tap 'Begin Your Journey' below."
+5. Keep responses concise. For conversational answers use 2–3 sentences. For information-heavy answers (venues, services, pricing) use a short intro sentence followed by bullet points — one line each, no padding.
 
-CURRENT STAGE: ${stage}
-${stageGuidance[stage] || stageGuidance.discovery}
+FORMAT GUIDE — follow this exactly:
+- Listing 2+ venues / services / options → one short intro sentence ending in ":", then each item as a markdown bullet: "- Name — key detail"
+- Pricing breakdown → markdown bullets: "- Label: value"
+- Single concept / "why" / "how" → prose only, 2–3 sentences, no bullets
+- Single venue deep-dive → prose paragraph, no bullets
+- Never use headers (##, ###) inside a response
 
-KNOWLEDGE BASE:
-${context || "No relevant context retrieved."}
+EXAMPLE — listing venues (copy this pattern exactly):
+Goa has some strong options for a beach wedding:
+- ITC Grand Goa — 1,000+ guests, ₹1.5–3 Cr buyout, Salcete Ballroom + seaside lawns
+- St. Regis Goa — 500+ guests, ₹2.5–3 Cr buyout, private beach access
+- Grand Hyatt Goa — 1,200+ guests, ₹3.5–5.5 Cr buyout, pillar-less Grand Ballroom
+
+Which scale suits you best?
+
+EXAMPLE — pricing breakdown:
+Here's what a Goa beach wedding typically looks like:
+- Buyout cost: ₹1.5–3 Cr
+- Accommodation: ₹50–75 Lacs / night
+- F&B: ₹4,500–6,500 / plate
+- Decor & production: ₹40 Lacs–1.5 Cr
+
+━━━ PRIME OBJECTIVE ━━━
+Be the most helpful wedding planning advisor the couple has ever spoken to. Your goal is to earn the right to ask for their contact — not by pushing a form, but by delivering real value first. A couple who feels genuinely helped will ask YOU to connect them.
+
+━━━ WHO WE ARE ━━━
+Vows & Vedas is backed by GeTSHolidays — 37 years of event and travel expertise, 150+ professionals, 300+ weddings crafted across India and abroad. Our team handles everything: venues, planning, decor, film, entertainment, hospitality, and logistics. We plan weddings from ₹8 Lacs to ₹1 Cr+ depending on scale, city, and vision.
+
+━━━ CONVERSATION SEQUENCE ━━━
+Follow this order. Never ask for X before delivering value relevant to X.
+  discovery  →  city / venue type (establish what kind of wedding they want)
+  value      →  show a specific venue or package with real details (capacity, pricing, highlights)
+  conversion →  once real value is shown, offer: "Our team can put together a tailored proposal — shall I connect you on WhatsApp or email?"
+  handoff    →  direct warmly to WhatsApp +91 9654277656 or the Begin Your Journey form. Nothing else.
+
+━━━ QUALIFYING QUESTIONS (the only facts that affect a quote) ━━━
+Gather these one at a time, only when needed, in this order:
+  1. City / venue type (beach, palace, hills, heritage, city)
+  2. Wedding date or season (month / year)
+  3. Guest count (approximate)
+  4. Budget tier (₹8–15L / ₹15–30L / ₹30–60L / ₹60L+)
+  5. Function type (mehndi / haldi / sangeet / reception / full wedding)
+
+━━━ QUESTION VARIETY ━━━
+Rotate between curiosity questions ("What kind of setting speaks to you?"), practical questions ("Roughly how many guests are you expecting?"), and open questions ("What's the one thing that matters most to you about the venue?"). Never stack two questions. Never repeat the same question type twice in a row.
+
+━━━ PRICING ━━━
+Give numbers directly when you have them. Do not hide pricing in vague language. If the context has a buyout cost, F&B rate, or accommodation range, state it. If you don't have pricing for a specific venue, say so and offer to have the team get back with an accurate quote.
+
+━━━ CTA TIMING ━━━
+Extend a contact CTA only AFTER at least one venue, package tier, or specific proposal has been shown. The CTA is: "Our planning team would love to walk you through the options in detail — would a quick call or WhatsApp conversation work?" Say it once. If they don't respond to it, re-engage with a new piece of value on the next message, not the same CTA.
+
+━━━ TRUST (use sparingly, only when relevant) ━━━
+- 300+ destination weddings crafted
+- GeTSHolidays family — 37 years, 150+ professionals
+- Preferred partner at palace, beach, and hill venues across India
+- Clients from India, UK, US, UAE, and Australia
+
+━━━ WHEN YOU DON'T KNOW ━━━
+"I don't have that detail to hand — our team can get you an accurate answer. You can reach them on WhatsApp: +91 9654277656."
+
+━━━ DATA PRIVACY — DPDP ACT 2023 ━━━
+Never invite, store, or repeat personal contact information shared in chat. If a user types their phone number or email, say: "To keep your details safe under India's data privacy guidelines, please share them through our secure enquiry form."
+
+━━━ CURRENT STAGE: ${stage.toUpperCase()} ━━━
+${stageGuidance(stage, intentLevel, cardShown)}
+${forceHints.length > 0 ? "\n" + forceHints.join("\n") : ""}
+
+━━━ KNOWLEDGE BASE (facts only — do not invent anything not listed here) ━━━
+${context || "No relevant context retrieved for this query."}
 `;
+}
+
+function stageGuidance(stage, intentLevel, cardShown) {
+  switch (stage) {
+    case "discovery":
+      return "The couple is exploring. Establish their city preference or venue type with one warm question. Don't jump to venues yet unless they've already mentioned a location.";
+    case "value":
+      return "The couple is engaged. Present one specific venue or service with real details — capacity, pricing range, what makes it special. Keep it concrete, not generic.";
+    case "conversion":
+      if (!cardShown) return "The couple is interested but hasn't seen a specific venue yet. Show one relevant venue with details before extending any contact CTA.";
+      return intentLevel === "high"
+        ? "The couple is ready. Extend the contact CTA directly: 'Our team can put together a tailored proposal — WhatsApp us on +91 9654277656 or fill in the Begin Your Journey form.'"
+        : "The couple has seen real options. Extend the contact CTA once, warmly: offer a tailored proposal via WhatsApp or the Begin Your Journey form.";
+    case "handoff":
+      return "Direct the couple to WhatsApp (+91 9654277656) or the Begin Your Journey form. Be warm and brief. Do not introduce new information.";
+    default:
+      return "Establish what kind of wedding they're envisioning with one open question.";
+  }
 }
 
 // ── SSE helpers ───────────────────────────────────────────────────────────────
@@ -66,8 +164,48 @@ function sseChunk(text) {
 function sseMeta(meta) {
   return `data: ${JSON.stringify({ type: "meta", ...meta })}\n\n`;
 }
-function sseDone() {
-  return `data: ${JSON.stringify({ type: "done" })}\n\n`;
+function sseDone(suggestions = []) {
+  return `data: ${JSON.stringify({ type: "done", suggestions })}\n\n`;
+}
+
+// ── Suggestion generation ─────────────────────────────────────────────────────
+async function generateSuggestions(query, botReply, intent) {
+  const cities   = intent?.cities?.join(", ") || "";
+  const stage    = intent?.stage || "discovery";
+
+  const contextHint = [
+    cities    ? `Cities mentioned: ${cities}.` : "",
+    stage !== "discovery" ? `Conversation stage: ${stage}.` : "",
+  ].filter(Boolean).join(" ");
+
+  try {
+    const res = await getClient().chat.completions.create({
+      model: process.env.AZURE_OPENAI_DEPLOYMENT || "gpt-4-1-mini",
+      messages: [
+        {
+          role: "system",
+          content:
+            "You generate 3 ultra-short follow-up suggestion chips for a luxury wedding planning chatbot. " +
+            "Rules: MAX 4 words each, no question marks, no punctuation, sentence case, varied topics. " +
+            "Return ONLY a JSON array of 3 strings. " +
+            "Example: [\"Pricing for Goa venues\",\"What about decor\",\"Best season to book\"]",
+        },
+        {
+          role: "user",
+          content: `User asked: "${query}"\nBot replied: "${botReply.slice(0, 300)}"\n${contextHint}\n\nReturn 3 follow-up suggestions as a JSON array.`,
+        },
+      ],
+      response_format: { type: "json_object" },
+      temperature: 0.8,
+      max_tokens: 80,
+    });
+
+    const raw  = JSON.parse(res.choices[0].message.content);
+    const list = Array.isArray(raw) ? raw : (raw.suggestions || raw.questions || Object.values(raw));
+    return list.slice(0, 3).map(s => String(s).replace(/[?.!]$/, "").trim());
+  } catch {
+    return [];
+  }
 }
 function sseError(msg) {
   return `data: ${JSON.stringify({ type: "error", message: msg })}\n\n`;
@@ -114,7 +252,8 @@ export async function POST(request) {
         if (staticAnswer) {
           push(sseChunk(staticAnswer));
           push(sseMeta({ stage: "discovery", intent_level: "low", source: "static_faq" }));
-          push(sseDone());
+          const suggestions = await generateSuggestions(query, staticAnswer, {});
+          push(sseDone(suggestions));
           controller.close();
           return;
         }
@@ -152,15 +291,17 @@ export async function POST(request) {
           messages,
           stream:      true,
           temperature: 0.5,
-          max_tokens:  220,
+          max_tokens:  350,
         });
 
+        let fullReply = "";
         for await (const chunk of completion) {
           const token = chunk.choices?.[0]?.delta?.content;
-          if (token) push(sseChunk(token));
+          if (token) { fullReply += token; push(sseChunk(token)); }
         }
 
-        push(sseDone());
+        const suggestions = await generateSuggestions(query, fullReply, intent);
+        push(sseDone(suggestions));
         controller.close();
 
       } catch (err) {

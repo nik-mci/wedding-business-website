@@ -3,6 +3,48 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 
+// Lightweight markdown renderer — handles bullet lists and paragraphs only
+function BotMessage({ text }) {
+  if (!text) return null;
+
+  const blocks = [];
+  let currentList = [];
+
+  const flushList = () => {
+    if (currentList.length > 0) {
+      blocks.push(
+        <ul key={blocks.length} className="space-y-1 my-1">
+          {currentList.map((item, i) => (
+            <li key={i} className="flex gap-2">
+              <span className="text-[#C9A234] mt-[3px] shrink-0">–</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      );
+      currentList = [];
+    }
+  };
+
+  for (const line of text.split("\n")) {
+    const bulletMatch = line.match(/^[-*]\s+(.+)/);
+    if (bulletMatch) {
+      currentList.push(bulletMatch[1]);
+    } else {
+      flushList();
+      const trimmed = line.trim();
+      if (trimmed) {
+        blocks.push(
+          <p key={blocks.length} className="leading-[1.75]">{trimmed}</p>
+        );
+      }
+    }
+  }
+  flushList();
+
+  return <div className="space-y-1">{blocks}</div>;
+}
+
 const STARTERS = [
   "What wedding venues do you offer in Goa?",
   "Tell me about palace weddings in Rajasthan",
@@ -105,7 +147,11 @@ export default function Chatbot() {
               setMessages(prev => {
                 const updated = [...prev];
                 const last    = updated[updated.length - 1];
-                if (last?.role === "bot") updated[updated.length - 1] = { ...last, streaming: false };
+                if (last?.role === "bot") updated[updated.length - 1] = {
+                  ...last,
+                  streaming: false,
+                  suggestions: event.suggestions || [],
+                };
                 return updated;
               });
             } else if (event.type === "error") {
@@ -265,31 +311,53 @@ export default function Chatbot() {
           </div>
 
           {/* Messages */}
-          <div data-lenis-prevent className="flex-1 min-h-0 overflow-y-auto px-4 py-4 space-y-4 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-[#C9A234]/20">
-            {messages.map((msg, i) => (
-              <div key={i} className={`flex items-end gap-2.5 ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
-                {msg.role === "bot" && (
-                  <span className="w-6 h-6 shrink-0 rounded-full border border-[#C9A234]/40 flex items-center justify-center text-[#C9A234] text-[10px] mb-0.5">✦</span>
-                )}
-                <div
-                  className={`
-                    max-w-[78%] px-4 py-3 text-[13px] leading-[1.75] font-light
-                    ${msg.role === "bot"
-                      ? "bg-[#251C0D] text-[#FDFAF5]/90 rounded-2xl rounded-bl-sm border border-[#C9A234]/10"
-                      : "bg-[#C9A234] text-[#1A1408] rounded-2xl rounded-br-sm font-medium"}
-                  `}
-                >
-                  {/* Typing indicator for empty streaming message */}
-                  {msg.streaming && !msg.text ? (
-                    <span className="flex gap-1 items-center py-0.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234]/60 animate-bounce" style={{ animationDelay: "0ms" }} />
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234]/60 animate-bounce" style={{ animationDelay: "150ms" }} />
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234]/60 animate-bounce" style={{ animationDelay: "300ms" }} />
-                    </span>
-                  ) : msg.text}
+          <div data-lenis-prevent className="flex-1 min-h-0 overflow-y-auto px-4 py-4 space-y-3 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-[#C9A234]/20">
+            {messages.map((msg, i) => {
+              const isLastBotMsg = msg.role === "bot" &&
+                messages.slice(i + 1).every(m => m.role !== "bot");
+              return (
+                <div key={i} className="flex flex-col gap-2">
+                  {/* Message bubble row */}
+                  <div className={`flex items-end gap-2.5 ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
+                    {msg.role === "bot" && (
+                      <span className="w-6 h-6 shrink-0 rounded-full border border-[#C9A234]/40 flex items-center justify-center text-[#C9A234] text-[10px] mb-0.5">✦</span>
+                    )}
+                    <div
+                      className={`
+                        max-w-[78%] px-4 py-3 text-[13px] leading-[1.75] font-light
+                        ${msg.role === "bot"
+                          ? "bg-[#251C0D] text-[#FDFAF5]/90 rounded-2xl rounded-bl-sm border border-[#C9A234]/10"
+                          : "bg-[#C9A234] text-[#1A1408] rounded-2xl rounded-br-sm font-medium"}
+                      `}
+                    >
+                      {msg.streaming && !msg.text ? (
+                        <span className="flex gap-1 items-center py-0.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234]/60 animate-bounce" style={{ animationDelay: "0ms" }} />
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234]/60 animate-bounce" style={{ animationDelay: "150ms" }} />
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234]/60 animate-bounce" style={{ animationDelay: "300ms" }} />
+                        </span>
+                      ) : msg.role === "bot" ? <BotMessage text={msg.text} /> : msg.text}
+                    </div>
+                  </div>
+
+                  {/* Suggestions — only on the latest bot message */}
+                  {isLastBotMsg && !msg.streaming && msg.suggestions?.length > 0 && (
+                    <div className="flex flex-col gap-1.5 ml-9">
+                      {msg.suggestions.map((s, si) => (
+                        <button
+                          key={si}
+                          onClick={() => sendMessage(s)}
+                          disabled={isStreaming}
+                          className="self-start text-[11px] text-[#C9A234]/80 border border-[#C9A234]/25 px-3 py-1.5 rounded-lg hover:bg-[#C9A234]/10 hover:text-[#C9A234] hover:border-[#C9A234]/50 transition-all duration-200 cursor-none disabled:opacity-30 text-left leading-snug"
+                        >
+                          {s}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
 
             {/* Handoff CTA — shown when user is ready to enquire */}
             {showHandoffCta && (
