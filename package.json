@@ -16,6 +16,7 @@
     "compress-images:new:dry": "node scripts/compress-images.mjs --dry-run --paths \"public/assets/photos/moodboards/Haldi - Rangon Ki Rasleela\" \"public/assets/photos/moodboards/Painted Gardens \" \"public/assets/photos/moodboards/Wedding Option 3 - Haveli Nights\" public/assets/photos/services/planning-service.jpg \"public/assets/photos/services/Designa nd decor 1.jpg\""
   },
   "dependencies": {
+    "@azure/communication-email": "^1.1.0",
     "@studio-freight/react-lenis": "^0.0.47",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",

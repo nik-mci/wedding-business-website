@@ -5,7 +5,7 @@ export default function Chatbot() {
     <div className="fixed bottom-6 right-4 sm:bottom-8 sm:right-8 z-[2000] flex flex-col gap-3 items-end">
       {/* WhatsApp */}
       <a
-        href="https://wa.me/91XXXXXXXXXX"
+        href="https://wa.me/919821448292"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
@@ -23,7 +23,7 @@ export default function Chatbot() {
 
       {/* Email */}
       <a
-        href="mailto:hello@vowsandvedas.com"
+        href="mailto:arunima.sethi@getsholidays.com"
         aria-label="Send us an email"
         className="group flex items-center gap-0 hover:gap-3 overflow-hidden transition-all duration-300 cursor-none"
       >
