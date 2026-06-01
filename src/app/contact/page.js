@@ -105,12 +105,12 @@ export default function ContactPage() {
             </div>
 
             <div className="form-group">
-              <label className="form-label" htmlFor="destination">Destination in Mind</label>
+              <label className="form-label" htmlFor="destination">Destination in Mind <span className="normal-case tracking-normal font-light text-muted" style={{ fontSize: '10px' }}>(Optional)</span></label>
               <input type="text" className="form-input" id="destination" name="destination" />
             </div>
 
             <div className="form-group">
-              <label className="form-label" htmlFor="wedding-month">Estimated Wedding Date</label>
+              <label className="form-label" htmlFor="wedding-month">Estimated Wedding Date <span className="normal-case tracking-normal font-light text-muted" style={{ fontSize: '10px' }}>(Optional)</span></label>
               <div className="date-picker-grid" aria-label="Estimated wedding date">
                 <select
                   className="form-input form-select"

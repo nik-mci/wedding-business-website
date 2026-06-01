@@ -5,6 +5,8 @@ const RECIPIENTS = [
   { address: "ruchi.mohotra@wearemci.com",       displayName: "Ruchi Mohotra" },
   { address: "Arunima.sethi@getsholidays.com",   displayName: "Arunima Sethi" },
   { address: "rakesh.bijewar@wearemci.com",      displayName: "Rakesh Bijewar" },
+  { address: "nikhil.arora@wearemci.com",        displayName: "Nikhil Arora" },
+  { address: "anamta.ali@getsholidays.com",      displayName: "Anamta Ali" },
 ];
 
 export async function POST(req) {
