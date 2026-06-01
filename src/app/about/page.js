@@ -300,15 +300,15 @@ export default function AboutPage() {
                 name: "Travel & Transport",
                 desc: "Our dedicated logistics team brings efficient fleet management to your wedding day. Managing everything from travel ticketing to VIP arrivals to welcoming to multi-venue guest shuttles, they ensure perfectly timed, stress-free transit.\n\nWe guarantee your guests experience seamless, hospitality-driven travel from arrival to departure.",
                 mobileDesc: "Efficient fleet, ticketing, VIP arrivals and guest shuttles keep every movement calm and perfectly timed.",
-                image: "/assets/photos/destination/beach-wedding-img.jpg",
-                imagePosition: "center center"
+                image: "/assets/photos/about-us/travel-team.png",
+                imagePosition: "center top"
               },
               {
                 name: "Hotel & Venue Procurement",
                 desc: "Leveraging years of global corporate negotiations, this team secures the finest luxury venues and room blocks at unmatched value. They handle complex contracting, attrition clauses and finer details effortlessly.\n\nThis means elevated insider perks and a completely seamless, legally secure booking experience.",
                 mobileDesc: "Luxury venues, room blocks, contracts and insider perks are handled with seasoned negotiation.",
-                image: "/assets/photos/destination/pool_venue.jpg",
-                imagePosition: "center center"
+                image: "/assets/photos/about-us/hotel-team.jpg",
+                imagePosition: "center top"
               },
               {
                 name: "Operations & Event Production",
