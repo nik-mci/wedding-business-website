@@ -65,11 +65,11 @@ export default function Navigation() {
         <div className="flex-1 flex items-center">
           <Link
             href="/"
-            className="relative h-[72px] w-[96px] md:h-[92px] md:w-[122px] shrink-0 transition-transform duration-300 hover:scale-[1.03]"
+            className="relative h-[40px] w-[187px] md:h-[48px] md:w-[225px] shrink-0 transition-transform duration-300 hover:scale-[1.03]"
           >
             {/* Transparent nav — white logo on dark hero */}
             <Image
-              src="/assets/photos/logo-8-white.png"
+              src="/assets/photos/for -4A.png"
               alt="Vows & Vedas"
               fill
               priority
@@ -77,7 +77,7 @@ export default function Navigation() {
             />
             {/* Scrolled nav — gold logo on cream nav */}
             <Image
-              src="/assets/photos/logo-8-gold.png"
+              src="/assets/photos/for -4.png"
               alt="Vows & Vedas"
               fill
               priority
@@ -170,9 +170,9 @@ export default function Navigation() {
         aria-hidden={!mobileOpen}
       >
         <div className="flex items-center justify-between px-4 py-2 h-[88px] border-b border-ink/8">
-          <Link href="/" className="relative h-[72px] w-[96px]" onClick={() => setMobileOpen(false)}>
+          <Link href="/" className="relative h-[40px] w-[187px]" onClick={() => setMobileOpen(false)}>
             <Image
-              src="/assets/photos/logo-8-gold.png"
+              src="/assets/photos/for -4.png"
               alt="Vows & Vedas"
               fill
               className="object-contain"

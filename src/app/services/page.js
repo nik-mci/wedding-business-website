@@ -178,6 +178,13 @@ export default function ServicesPage() {
   const [hoveredCard, setHoveredCard] = useState(null);
   const lightboxRef = useRef(null);
   const panelRef = useRef(null);
+  const addonsScrollRef = useRef(null);
+
+  const scrollAddons = (dir) => {
+    if (addonsScrollRef.current) {
+      addonsScrollRef.current.scrollBy({ left: dir * 340, behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     // Initial check for hash
@@ -390,7 +397,30 @@ export default function ServicesPage() {
           <h2 className="text-[48px] font-heading text-white leading-tight mb-2">Add-<em className="italic">Ons</em></h2>
           <GoldDivider darkBg flip className="mt-2" />
         </div>
-        <div className="flex overflow-x-auto gap-4 mt-16 max-w-[1280px] mx-auto pb-8 custom-scrollbar scroll-smooth">
+        <div className="relative mt-16 max-w-[1280px] mx-auto">
+          {/* Left arrow */}
+          <button
+            onClick={() => scrollAddons(-1)}
+            aria-label="Scroll left"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center border border-[#C9A234]/40 text-[#C9A234] hover:bg-[#C9A234]/10 transition-colors duration-200 -translate-x-1/2 bg-[#1A1408]/80 backdrop-blur-sm"
+          >
+            <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+
+          {/* Right arrow */}
+          <button
+            onClick={() => scrollAddons(1)}
+            aria-label="Scroll right"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center border border-[#C9A234]/40 text-[#C9A234] hover:bg-[#C9A234]/10 transition-colors duration-200 translate-x-1/2 bg-[#1A1408]/80 backdrop-blur-sm"
+          >
+            <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+
+          <div ref={addonsScrollRef} className="flex overflow-x-auto gap-4 pb-8 custom-scrollbar scroll-smooth px-2">
           {[
             { 
               img: "services/3-d modelling.png",
@@ -455,6 +485,7 @@ export default function ServicesPage() {
           ].map((addon, i) => (
             <AddOnCard key={i} addon={addon} />
           ))}
+          </div>
         </div>
       </section>
 
