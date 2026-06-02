@@ -1,10 +1,9 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import Link from "next/link";
 
 // Lightweight markdown renderer — handles bullet lists, paragraphs, and action markers
-function BotMessage({ text }) {
+function BotMessage({ text, onCtaClick }) {
   if (!text) return null;
 
   const blocks = [];
@@ -43,6 +42,17 @@ function BotMessage({ text }) {
       );
       continue;
     }
+    if (line.trim() === "[DISCOVERY_CALL_LINK]") {
+      flushList();
+      const cls = "inline-flex items-center gap-1.5 mt-2 text-[11px] font-medium tracking-[0.15em] uppercase text-[#1A1408] bg-[#C9A234] px-4 py-2 rounded-full hover:bg-[#C9A234]/90 transition-colors duration-200 cursor-pointer";
+      const idx = blocks.length;
+      blocks.push(
+        onCtaClick
+          ? <button key={idx} onClick={onCtaClick} className={cls}>Schedule a Call →</button>
+          : <a key={idx} href="/contact" className={cls}>Schedule a Call →</a>
+      );
+      continue;
+    }
 
     const bulletMatch = line.match(/^[-*]\s+(.+)/);
     if (bulletMatch) {
@@ -63,10 +73,10 @@ function BotMessage({ text }) {
 }
 
 const STARTERS = [
+  "Show me a sample wedding itinerary",
   "What wedding venues do you offer in Goa?",
   "Tell me about palace weddings in Rajasthan",
   "What services does Vows & Vedas provide?",
-  "How early should we book?",
   "What wedding themes do you offer?",
 ];
 
@@ -84,12 +94,17 @@ export default function Chatbot() {
   const [isStreaming, setIsStreaming]  = useState(false);
   const [accIntent, setAccIntent]     = useState({});
   const [leadCaptured]                = useState(false);
+  const [usedChips, setUsedChips]     = useState([]);
   const messagesEndRef = useRef(null);
   const inputRef       = useRef(null);
   const abortRef       = useRef(null);
+  const sessionIdRef   = useRef(`sess_${Date.now().toString(36)}`);
 
   useEffect(() => {
-    if (open) setTimeout(() => inputRef.current?.focus(), 300);
+    if (open) {
+      setSidebarOpen(false);
+      setTimeout(() => inputRef.current?.focus(), 300);
+    }
   }, [open]);
 
   useEffect(() => {
@@ -105,6 +120,46 @@ export default function Chatbot() {
     messages
       .filter(m => m.role !== "typing")
       .map(m => ({ role: m.role === "bot" ? "assistant" : "user", content: m.text }));
+
+  const saveChatContext = () => {
+    const ctx = {
+      intent_level:  accIntent.intent_level  || "low",
+      cities:        accIntent.cities        || [],
+      venues_viewed: accIntent.venues_viewed || [],
+      stage:         accIntent.stage         || "discovery",
+      wedding_date:  accIntent.wedding_date  || null,
+      budget_tier:   accIntent.budget_tier   || null,
+      last_turns: messages
+        .filter(m => m.role !== "typing" && m.text)
+        .slice(-6)
+        .map(m => ({ role: m.role === "bot" ? "assistant" : "user", content: m.text })),
+      session_id: sessionIdRef.current,
+    };
+    try { sessionStorage.setItem("chatbot_context", JSON.stringify(ctx)); } catch {}
+  };
+
+  const fireLeadNotify = () => {
+    fetch("/api/lead-notify", {
+      method:    "POST",
+      headers:   { "Content-Type": "application/json" },
+      keepalive: true,
+      body: JSON.stringify({
+        source:               "chatbot",
+        accumulated_intent:   accIntent,
+        conversation_history: messages
+          .filter(m => m.role !== "typing" && m.text)
+          .slice(-12)
+          .map(m => ({ role: m.role === "bot" ? "assistant" : "user", content: m.text })),
+        session_id: sessionIdRef.current,
+      }),
+    }).catch(() => {});
+  };
+
+  const handleCtaToContact = () => {
+    saveChatContext();
+    fireLeadNotify();
+    window.location.href = "/contact";
+  };
 
   const sendMessage = async (text) => {
     const trimmed = (text || input).trim();
@@ -131,6 +186,7 @@ export default function Chatbot() {
           conversation_history: historyForApi(),
           accumulated_intent:   accIntent,
           lead_captured:        leadCaptured,
+          used_chips:           usedChips,
         }),
       });
 
@@ -162,13 +218,15 @@ export default function Chatbot() {
             } else if (event.type === "meta") {
               if (event.accumulated_intent) setAccIntent(event.accumulated_intent);
             } else if (event.type === "done") {
+              const newChips = event.suggestions || [];
+              setUsedChips(prev => [...new Set([...prev, ...newChips])]);
               setMessages(prev => {
                 const updated = [...prev];
                 const last    = updated[updated.length - 1];
                 if (last?.role === "bot") updated[updated.length - 1] = {
                   ...last,
                   streaming: false,
-                  suggestions: event.suggestions || [],
+                  suggestions: newChips,
                 };
                 return updated;
               });
@@ -354,25 +412,43 @@ export default function Chatbot() {
                           <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234]/60 animate-bounce" style={{ animationDelay: "150ms" }} />
                           <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234]/60 animate-bounce" style={{ animationDelay: "300ms" }} />
                         </span>
-                      ) : msg.role === "bot" ? <BotMessage text={msg.text} /> : msg.text}
+                      ) : msg.role === "bot" ? <BotMessage text={msg.text} onCtaClick={isLastBotMsg ? handleCtaToContact : undefined} /> : msg.text}
                     </div>
                   </div>
 
                   {/* Suggestions — only on the latest bot message */}
                   {isLastBotMsg && !msg.streaming && msg.suggestions?.length > 0 && (
                     <div className="flex flex-wrap gap-2 mt-1 ml-9">
-                      {msg.suggestions.map((s, si) =>
-                        s === "Speak to the team" ? (
-                          <a
-                            key={si}
-                            href="https://wa.me/919654277656"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-[11px] text-[#1A1408] bg-[#C9A234] border border-[#C9A234] px-3 py-1.5 rounded-md hover:bg-[#C9A234]/90 transition-all duration-200 whitespace-nowrap leading-none font-medium"
-                          >
-                            Speak to the team →
-                          </a>
-                        ) : (
+                      {msg.suggestions.map((s, si) => {
+                        // CTA chips — open /contact or WhatsApp directly
+                        const ctaContactChips = new Set(["Book a discovery call", "Start planning my wedding"]);
+                        const ctaExternalMap  = { "Speak to the team": "https://wa.me/919654277656" };
+                        if (ctaContactChips.has(s)) {
+                          return (
+                            <button
+                              key={si}
+                              onClick={handleCtaToContact}
+                              className="text-[11px] text-[#1A1408] bg-[#C9A234] border border-[#C9A234] px-3 py-1.5 rounded-md hover:bg-[#C9A234]/90 transition-all duration-200 whitespace-nowrap leading-none font-medium"
+                            >
+                              {s} →
+                            </button>
+                          );
+                        }
+                        const externalHref = ctaExternalMap[s];
+                        if (externalHref) {
+                          return (
+                            <a
+                              key={si}
+                              href={externalHref}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[11px] text-[#1A1408] bg-[#C9A234] border border-[#C9A234] px-3 py-1.5 rounded-md hover:bg-[#C9A234]/90 transition-all duration-200 whitespace-nowrap leading-none font-medium"
+                            >
+                              {s} →
+                            </a>
+                          );
+                        }
+                        return (
                           <button
                             key={si}
                             onClick={() => sendMessage(s)}
@@ -381,8 +457,8 @@ export default function Chatbot() {
                           >
                             {s}
                           </button>
-                        )
-                      )}
+                        );
+                      })}
                     </div>
                   )}
                 </div>
@@ -393,13 +469,12 @@ export default function Chatbot() {
             {showHandoffCta && (
               <div className="flex flex-col items-start gap-2 pl-9">
                 <p className="text-[10px] text-[#9A8F7E] tracking-[0.15em] uppercase">Ready to begin?</p>
-                <Link
-                  href="/contact"
-                  onClick={() => setOpen(false)}
+                <button
+                  onClick={() => { saveChatContext(); fireLeadNotify(); setOpen(false); window.location.href = "/contact"; }}
                   className="text-[11px] font-medium tracking-[0.2em] uppercase bg-[#C9A234] text-[#1A1408] px-4 py-2.5 rounded-full hover:bg-[#C9A234]/90 transition-colors duration-200"
                 >
                   Begin Your Journey →
-                </Link>
+                </button>
               </div>
             )}
 
