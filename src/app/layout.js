@@ -5,6 +5,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import LoadingScreen from "@/components/LoadingScreen";
 import Chatbot from "@/components/Chatbot";
+import HashtagGeneratorPopup from "@/components/HashtagGeneratorPopup";
 
 export const metadata = {
   title: "Vows & Vedas — Luxury Destination Weddings",
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
         <LoadingScreen />
         <CustomCursor />
         <Chatbot />
+        <HashtagGeneratorPopup />
         <SmoothScroll>
           <Navigation />
           <main>{children}</main>

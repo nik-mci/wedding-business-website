@@ -6,7 +6,6 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CircularGallery from "@/components/CircularGallery";
-import HashtagGeneratorPopup from "@/components/HashtagGeneratorPopup";
 import GoldDivider from "@/components/GoldDivider";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -478,7 +477,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <HashtagGeneratorPopup />
     </div>
   );
 }

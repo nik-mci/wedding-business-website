@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import html2canvas from 'html2canvas';
 
 const TAB_WORDS = ['#ForUs', '#OurVows', '#JustUs', '#InLove', '#Bliss'];
@@ -9,6 +10,8 @@ const TAB_DELETE = 65;
 const TAB_PAUSE = 1300;
 
 const HashtagGeneratorPopup = () => {
+  const pathname = usePathname();
+  const isHome = pathname === '/';
   const [open, setOpen] = useState(false);
   const [visible, setVisible] = useState(false);
   const [popIn, setPopIn] = useState(false);
@@ -123,10 +126,11 @@ const HashtagGeneratorPopup = () => {
   return (
     <>
       {/* Hashtag Tab — scroll-triggered, spring pop entrance */}
+      {/* On mobile: only render on homepage. On desktop: always render. */}
       <button
         onClick={() => setOpen(true)}
         aria-label="Wedding Hashtag Generator"
-        className="hashtag-btn fixed left-0 top-1/2 z-40 focus:outline-none scale-75 sm:scale-100 origin-left"
+        className={`hashtag-btn fixed left-0 top-1/2 z-40 focus:outline-none scale-75 sm:scale-100 origin-left${!isHome ? ' hidden sm:block' : ''}`}
         style={{
           transform: `translateY(-50%) translateX(${visible ? '0px' : '-115%'})`,
           transition: 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)',
