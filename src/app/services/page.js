@@ -390,7 +390,7 @@ export default function ServicesPage() {
       </div>
 
       {/* ADD-ONS SECTION */}
-      <section id="addons" className="bg-[#1A1408] py-24 px-6 md:px-12">
+      <section id="addons" className="bg-[#1A1408] pt-24 pb-10 px-6 md:px-12">
         <div className="flex flex-col items-center text-center">
           <GoldDivider darkBg className="mb-4" />
           <p className="text-[10px] font-body uppercase text-[#C9A234] tracking-[0.5em] mb-4">Elevate Further</p>
@@ -486,6 +486,46 @@ export default function ServicesPage() {
             <AddOnCard key={i} addon={addon} />
           ))}
           </div>
+        </div>
+      </section>
+
+      {/* PACKAGE RANGES SECTION */}
+      <section className="bg-ink pt-10 pb-12 px-6 md:px-12">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex flex-col items-center text-center mb-12">
+            <p className="text-[9px] tracking-[0.45em] uppercase font-medium mb-3" style={{ color: 'var(--color-gold)' }}>Investment</p>
+            <h2 className="font-heading text-surface text-3xl md:text-4xl font-light">Package <em className="italic">Ranges</em></h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Full Planning */}
+            <div className="border border-[#C9A234]/30 rounded-2xl p-8 md:p-10 flex flex-col gap-4 hover:border-[#C9A234]/60 transition-colors duration-300">
+              <p className="text-[9px] tracking-[0.4em] uppercase font-medium" style={{ color: 'var(--color-gold)' }}>Full Planning</p>
+              <h3 className="font-heading text-surface text-2xl md:text-3xl font-light leading-tight">Complete Wedding<br /><em className="italic">Planning</em></h3>
+              <div className="h-px bg-[#C9A234]/20 my-2" />
+              <p className="font-heading text-[#C9A234] text-3xl md:text-4xl font-light tracking-tight">₹3 – 8 Lakhs</p>
+              <p className="text-[13px] font-light leading-relaxed" style={{ color: 'rgba(253,250,245,0.55)' }}>End-to-end planning, vendor management, and on-ground coordination for your perfect wedding day.</p>
+            </div>
+            {/* Full Luxury / Destination Planning */}
+            <div className="border border-[#C9A234]/30 rounded-2xl p-8 md:p-10 flex flex-col gap-4 hover:border-[#C9A234]/60 transition-colors duration-300" style={{ background: 'linear-gradient(135deg, rgba(201,162,52,0.06) 0%, transparent 60%)' }}>
+              <p className="text-[9px] tracking-[0.4em] uppercase font-medium" style={{ color: 'var(--color-gold)' }}>Full Luxury / Destination</p>
+              <h3 className="font-heading text-surface text-2xl md:text-3xl font-light leading-tight">Luxury &amp; Destination<br /><em className="italic">Planning</em></h3>
+              <div className="h-px bg-[#C9A234]/20 my-2" />
+              <p className="font-heading text-[#C9A234] text-3xl md:text-4xl font-light tracking-tight">₹8 – 15 Lakhs</p>
+              <p className="text-[13px] font-light leading-relaxed" style={{ color: 'rgba(253,250,245,0.55)' }}>Bespoke luxury experiences at India's finest venues and international destinations, crafted with uncompromising attention to detail.</p>
+            </div>
+          </div>
+          <div className="flex justify-center mt-8">
+            <a
+              href="/faq#package-inclusions"
+              className="inline-flex items-center gap-2 border border-[#C9A234]/40 rounded-full px-6 py-2.5 text-[11px] tracking-[0.25em] uppercase font-medium text-[#C9A234] hover:bg-[#C9A234]/10 hover:border-[#C9A234]/70 transition-all duration-300"
+            >
+              <span>Learn about inclusions</span>
+              <svg viewBox="0 0 24 24" className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+          <p className="text-center text-[11px] font-light mt-4" style={{ color: 'rgba(253,250,245,0.35)' }}>Packages are indicative ranges. Final investment is tailored to your specific requirements.</p>
         </div>
       </section>
 
