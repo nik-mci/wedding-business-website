@@ -17,7 +17,7 @@ const hillDestinations = [
     name: "The Westin Himalayas, Rishikesh",
     location: "UTTARAKHAND · RISHIKESH",
     desc1: "A magnificent mountain sanctuary perched on a hillside near Rishikesh, offering breathtaking panoramic views of forested valleys and the holy Ganges River...",
-    img: "hill-weddings/The Westin Himalayas Spa and resort, Uttarakhand.jpeg",
+    img: "hill-weddings/westin-himalayas-uttarakhand.jpeg",
     stats: { rooms: "141", guests: "400+" },
     writeup: "The Westin Resort & Spa, Himalayas, is a magnificent mountain sanctuary perched on a hillside near Rishikesh, offering breathtaking panoramic views of the forested valleys and the holy Ganges River. This ultra-luxury retreat provides a serene and upscale residential experience for destination weddings across its elegantly appointed rooms, suites, and private villas. Celebrations unfold within the grand, pillar-less Grand Ballroom for intimate indoor affairs, or across the spectacular Outdoor Terrace Lawns for a starlit mountain ceremony. Couples are drawn to its signature wellness philosophies, world-class culinary innovation, and dramatic Himalayan backdrop — an ethereal, tranquil, and opulent setting for a fairytale celebration.",
     glance: [
@@ -46,7 +46,7 @@ const hillDestinations = [
     name: "Taj Corbett, Uttarakhand",
     location: "UTTARAKHAND · JIM CORBETT",
     desc1: "A magnificent 61-acre wilderness sanctuary on the banks of the Kosi River, surrounded by the majestic forests of Jim Corbett National Park — rustic yet thoroughly opulent...",
-    img: "hill-weddings/Taj Corbett Spa and Resort, Uttarakhand .jpg",
+    img: "hill-weddings/taj-corbett-uttarakhand.jpg",
     stats: { rooms: "61", guests: "400+" },
     writeup: "Taj Corbett Resort & Spa, Uttarakhand, is a magnificent sanctuary nestled on the banks of the Kosi River, surrounded by the majestic forests of Jim Corbett National Park. This wilderness retreat features elegantly appointed contemporary cottages and suites, providing a rustic yet opulent residential experience for destination weddings. The resort offers versatile event spaces, highlighted by the elegant Jim's Room for indoor celebrations and sprawling, riverside outdoor lawns under a canopy of old-growth trees. Couples are drawn to its unique jungle-safari charm, world-class Taj hospitality, and bespoke outdoor dining experiences — a pristine mountain valley setting that offers a sophisticated, fairytale-like backdrop for a grand, nature-inspired wedding celebration.",
     glance: [
