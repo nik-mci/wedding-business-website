@@ -12,6 +12,7 @@ import { AzureOpenAI } from "openai";
 import { matchStaticFaq } from "@/lib/staticFaqs";
 import { extractIntent }  from "@/lib/intentExtraction";
 import { retrieveContext } from "@/lib/retrieval";
+import { getSuggestions }  from "@/lib/suggestions";
 
 let _client = null;
 function getClient() {
@@ -62,9 +63,10 @@ function buildSystemPrompt(context, intent) {
 ━━━ ABSOLUTE CONSTRAINTS (never break these) ━━━
 1. ONE QUESTION ONLY per response. Never ask two questions in one message, not even as alternatives.
 2. NEVER seek permission before acting. Never say "Would you like me to…", "Shall I…", "Should I…" — just do it.
-3. NEVER fabricate pricing, availability, venue names, or facts. Use only the KNOWLEDGE BASE below.
-4. NEVER accept contact details (phone, email) typed directly in chat. Say: "To keep your details secure, please use our enquiry form or WhatsApp — tap 'Begin Your Journey' below."
-5. Keep responses concise. For conversational answers use 2–3 sentences. For information-heavy answers (venues, services, pricing) use a short intro sentence followed by bullet points — one line each, no padding.
+3. ONLY use facts from the KNOWLEDGE BASE below. Never use your general training knowledge about venues, pricing, or services. If something is not in the knowledge base, say: "I don't have that detail — our team can help directly on WhatsApp: +91 9654277656."
+4. NEVER mention venues, services, destinations, or facts that are not explicitly listed in the KNOWLEDGE BASE below.
+5. NEVER accept contact details (phone, email) typed directly in chat. Say: "To keep your details secure, please use our enquiry form or WhatsApp — tap 'Begin Your Journey' below."
+6. Keep responses concise. For conversational answers use 2–3 sentences. For information-heavy answers (venues, services, pricing) use a short intro sentence followed by bullet points — one line each, no padding.
 
 FORMAT GUIDE — follow this exactly:
 - Listing 2+ venues / services / options → one short intro sentence ending in ":", then each item as a markdown bullet: "- Name — key detail"
@@ -112,8 +114,11 @@ Gather these one at a time, only when needed, in this order:
 ━━━ QUESTION VARIETY ━━━
 Rotate between curiosity questions ("What kind of setting speaks to you?"), practical questions ("Roughly how many guests are you expecting?"), and open questions ("What's the one thing that matters most to you about the venue?"). Never stack two questions. Never repeat the same question type twice in a row.
 
-━━━ PRICING ━━━
-Give numbers directly when you have them. Do not hide pricing in vague language. If the context has a buyout cost, F&B rate, or accommodation range, state it. If you don't have pricing for a specific venue, say so and offer to have the team get back with an accurate quote.
+━━━ PRICING RULE ━━━
+NEVER include pricing when first listing venues for a destination. Show name + one-line description only.
+End venue-listing responses with one short question like "Which one interests you?" — max 5 words.
+Only give pricing when the user explicitly asks for cost, budget, or price of a specific venue.
+If the context has pricing and the user asked for it, give it directly.
 
 ━━━ CTA TIMING ━━━
 Extend a contact CTA only AFTER at least one venue, package tier, or specific proposal has been shown. The CTA is: "Our planning team would love to walk you through the options in detail — would a quick call or WhatsApp conversation work?" Say it once. If they don't respond to it, re-engage with a new piece of value on the next message, not the same CTA.
@@ -123,6 +128,9 @@ Extend a contact CTA only AFTER at least one venue, package tier, or specific pr
 - GeTSHolidays family — 37 years, 150+ professionals
 - Preferred partner at palace, beach, and hill venues across India
 - Clients from India, UK, US, UAE, and Australia
+
+━━━ MOODBOARDS ━━━
+When discussing wedding themes, decor styles, or moodboards, always add [MOODBOARDS_LINK] on a new line at the end of your response. Do not write a URL — just the marker exactly as shown.
 
 ━━━ WHEN YOU DON'T KNOW ━━━
 "I don't have that detail to hand — our team can get you an accurate answer. You can reach them on WhatsApp: +91 9654277656."
@@ -168,45 +176,6 @@ function sseDone(suggestions = []) {
   return `data: ${JSON.stringify({ type: "done", suggestions })}\n\n`;
 }
 
-// ── Suggestion generation ─────────────────────────────────────────────────────
-async function generateSuggestions(query, botReply, intent) {
-  const cities   = intent?.cities?.join(", ") || "";
-  const stage    = intent?.stage || "discovery";
-
-  const contextHint = [
-    cities    ? `Cities mentioned: ${cities}.` : "",
-    stage !== "discovery" ? `Conversation stage: ${stage}.` : "",
-  ].filter(Boolean).join(" ");
-
-  try {
-    const res = await getClient().chat.completions.create({
-      model: process.env.AZURE_OPENAI_DEPLOYMENT || "gpt-4-1-mini",
-      messages: [
-        {
-          role: "system",
-          content:
-            "You generate 3 ultra-short follow-up suggestion chips for a luxury wedding planning chatbot. " +
-            "Rules: MAX 4 words each, no question marks, no punctuation, sentence case, varied topics. " +
-            "Return ONLY a JSON array of 3 strings. " +
-            "Example: [\"Pricing for Goa venues\",\"What about decor\",\"Best season to book\"]",
-        },
-        {
-          role: "user",
-          content: `User asked: "${query}"\nBot replied: "${botReply.slice(0, 300)}"\n${contextHint}\n\nReturn 3 follow-up suggestions as a JSON array.`,
-        },
-      ],
-      response_format: { type: "json_object" },
-      temperature: 0.8,
-      max_tokens: 80,
-    });
-
-    const raw  = JSON.parse(res.choices[0].message.content);
-    const list = Array.isArray(raw) ? raw : (raw.suggestions || raw.questions || Object.values(raw));
-    return list.slice(0, 3).map(s => String(s).replace(/[?.!]$/, "").trim());
-  } catch {
-    return [];
-  }
-}
 function sseError(msg) {
   return `data: ${JSON.stringify({ type: "error", message: msg })}\n\n`;
 }
@@ -252,7 +221,7 @@ export async function POST(request) {
         if (staticAnswer) {
           push(sseChunk(staticAnswer));
           push(sseMeta({ stage: "discovery", intent_level: "low", source: "static_faq" }));
-          const suggestions = await generateSuggestions(query, staticAnswer, {});
+          const suggestions = getSuggestions(query);
           push(sseDone(suggestions));
           controller.close();
           return;
@@ -300,7 +269,12 @@ export async function POST(request) {
           if (token) { fullReply += token; push(sseChunk(token)); }
         }
 
-        const suggestions = await generateSuggestions(query, fullReply, intent);
+        // Inject moodboards button for any theme/decor/moodboard query
+        if (/\b(moodboard|mood board|theme|haldi|mehendi|sangeet|decor style|aesthetic|floral|mandap|palette)\b/i.test(query)) {
+          push(sseChunk("\n[MOODBOARDS_LINK]"));
+        }
+
+        const suggestions = getSuggestions(query);
         push(sseDone(suggestions));
         controller.close();
 
