@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 
-// Lightweight markdown renderer — handles bullet lists and paragraphs only
+// Lightweight markdown renderer — handles bullet lists, paragraphs, and action markers
 function BotMessage({ text }) {
   if (!text) return null;
 
@@ -27,6 +27,23 @@ function BotMessage({ text }) {
   };
 
   for (const line of text.split("\n")) {
+    // Action markers → rendered as buttons
+    if (line.trim() === "[MOODBOARDS_LINK]") {
+      flushList();
+      blocks.push(
+        <a
+          key={blocks.length}
+          href="/moodboards"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 mt-2 text-[11px] font-medium tracking-[0.15em] uppercase text-[#1A1408] bg-[#C9A234] px-4 py-2 rounded-full hover:bg-[#C9A234]/90 transition-colors duration-200"
+        >
+          Browse Moodboards →
+        </a>
+      );
+      continue;
+    }
+
     const bulletMatch = line.match(/^[-*]\s+(.+)/);
     if (bulletMatch) {
       currentList.push(bulletMatch[1]);
@@ -50,6 +67,7 @@ const STARTERS = [
   "Tell me about palace weddings in Rajasthan",
   "What services does Vows & Vedas provide?",
   "How early should we book?",
+  "What wedding themes do you offer?",
 ];
 
 const INITIAL_MESSAGE = {
@@ -342,17 +360,29 @@ export default function Chatbot() {
 
                   {/* Suggestions — only on the latest bot message */}
                   {isLastBotMsg && !msg.streaming && msg.suggestions?.length > 0 && (
-                    <div className="flex flex-col gap-1.5 ml-9">
-                      {msg.suggestions.map((s, si) => (
-                        <button
-                          key={si}
-                          onClick={() => sendMessage(s)}
-                          disabled={isStreaming}
-                          className="self-start text-[11px] text-[#C9A234]/80 border border-[#C9A234]/25 px-3 py-1.5 rounded-lg hover:bg-[#C9A234]/10 hover:text-[#C9A234] hover:border-[#C9A234]/50 transition-all duration-200 cursor-none disabled:opacity-30 text-left leading-snug"
-                        >
-                          {s}
-                        </button>
-                      ))}
+                    <div className="flex flex-wrap gap-2 mt-1 ml-9">
+                      {msg.suggestions.map((s, si) =>
+                        s === "Speak to the team" ? (
+                          <a
+                            key={si}
+                            href="https://wa.me/919654277656"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[11px] text-[#1A1408] bg-[#C9A234] border border-[#C9A234] px-3 py-1.5 rounded-md hover:bg-[#C9A234]/90 transition-all duration-200 whitespace-nowrap leading-none font-medium"
+                          >
+                            Speak to the team →
+                          </a>
+                        ) : (
+                          <button
+                            key={si}
+                            onClick={() => sendMessage(s)}
+                            disabled={isStreaming}
+                            className="text-[11px] text-[#C9A234] border border-[#C9A234]/40 px-3 py-1.5 rounded-md bg-[#C9A234]/5 hover:bg-[#C9A234]/15 hover:border-[#C9A234]/70 transition-all duration-200 cursor-none disabled:opacity-30 whitespace-nowrap leading-none"
+                          >
+                            {s}
+                          </button>
+                        )
+                      )}
                     </div>
                   )}
                 </div>

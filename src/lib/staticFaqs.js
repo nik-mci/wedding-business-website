@@ -6,6 +6,13 @@
 
 const FAQ_TABLE = [
 
+  // ── Wedding themes / moodboards ─────────────────────────────────────────────
+  [
+    /\b(what (wedding |decor |ceremony )?themes?|moodboard|mood board|decor style|wedding style|theme option|what (styles?|look))\b/i,
+    "We have curated moodboards across all wedding functions:\n\nHaldi:\n- Citrus Bloom — citrus tones, marigolds, joyful daytime energy\n- Royal Boho — terracotta, macramé, relaxed bohemian luxe\n- Rangon Ki Rasleela — vibrant gulal colors, festive and playful\n\nMehendi:\n- Tangerine Tales — tangerine hues, lush greens, sun-drenched\n- Tropical Rhapsody — tropical blooms, exotic and colorful\n\nSangeet:\n- Disco Shimmer — glittering mirrors, dance floor energy, indoor ballrooms\n- Crimson Soiree — Moulin Rouge-inspired, crimson velvets, nighttime glamour\n\nWedding:\n- Royal Indian — palatial grandeur, maroon and gold, heritage venues\n- Painted Gardens — pastel floral canopies, daytime garden ceremony\n- Haveli Nights — candlelit haveli romance, jewel tones, evening receptions\n- Emerald Eden — deep greens, organic and intimate, perfect for hill stations\n[MOODBOARDS_LINK]",
+    "",
+  ],
+
   // ── What makes V&V different ────────────────────────────────────────────────
   [
     /\b(different|unique|special|stand out|why (choose|pick|select|you))\b/i,
@@ -37,8 +44,8 @@ const FAQ_TABLE = [
   // ── Budget / pricing ────────────────────────────────────────────────────────
   [
     /\b(budget|cost|price|pricing|how much|charges|fees|package|rate)\b.*\b(wedding|event|destination|plan)/i,
-    "Our weddings span a wide range depending on city, venue, and guest count:\n- ₹8–15 Lacs — intimate celebration\n- ₹15–30 Lacs — mid-scale wedding\n- ₹30–60 Lacs — grand multi-day event\n- ₹60 Lacs to ₹1 Cr+ — palace or large destination wedding",
-    "Share your rough guest count and preferred city and I can give you a much sharper estimate.",
+    "Our planning packages:\n- Full Planning — ₹3–8 Lacs — complete planning from scratch (venue sourcing, vendor negotiations, contract management, design, guest management, site visits, post-wedding settlements)\n- Full Luxury / Destination Planning — ₹8–15 Lacs — same inclusions, elevated for destination weddings with higher scale of execution, detailing, and staff-to-guest ratio\n\nThese are planning fees only — venue costs, decor, catering, and vendors are separate.",
+    "Share your city and rough guest count and I can give you a clearer overall estimate.",
   ],
 
   // ── Guest count ──────────────────────────────────────────────────────────────
@@ -57,7 +64,7 @@ const FAQ_TABLE = [
 
   // ── Decor / design ──────────────────────────────────────────────────────────
   [
-    /\b(decor|decoration|design|flowers|floral|mandap|lighting|theme|aesthetic)\b/i,
+    /\b(decor|decoration|design service|floral service|mandap|lighting service|decor package|about decor|decor option)\b/i,
     "Our design team builds immersive environments from scratch. What's included:\n- Bespoke conceptualising & mood boards\n- Immersive floral artistry\n- Custom scenography & production\n- Strategic lighting & soundscaping\n- Fine table styling & finer details",
     "Happy to discuss a theme or share past work — what style are you drawn to?",
   ],
@@ -72,29 +79,29 @@ const FAQ_TABLE = [
   // ── Rajasthan / palace weddings ─────────────────────────────────────────────
   [
     /\b(rajasthan|palace|fort|heritage|royal|udaipur|jaipur|jodhpur|jaisalmer)\b.*\b(wedding|venue|celebrat)/i,
-    "Rajasthan is our most sought-after destination. Top venues by city:\n- Udaipur — Oberoi Udai Vilas, Taj Lake Palace, Jag Mandir\n- Jaipur — Rambagh Palace, Jai Mahal Palace, Oberoi Raj Vilas\n- Jodhpur — Umaid Bhavan Palace, Ajit Bhawan\nBuyout costs typically range from ₹1.5 Cr to ₹5 Cr+ depending on venue and scale.",
-    "Which city or venue are you most drawn to?",
+    "Rajasthan is our most sought-after destination. Top venues by city:\n- Udaipur — Oberoi Udai Vilas, Taj Lake Palace, Jag Mandir, Shiv Niwas Palace\n- Jaipur — Rambagh Palace, Jai Mahal Palace, Oberoi Raj Vilas\n- Jodhpur — Umaid Bhavan Palace, Ajit Bhawan, Taj Hari Mahal\n- Jaisalmer — Gorbandh Palace, Narain Niwas Fort",
+    "Which city or venue interests you?",
   ],
 
   // ── Goa / beach weddings ────────────────────────────────────────────────────
   [
     /\b(goa|beach|coastal|sea|ocean|sand)\b.*\b(wedding|venue|celebrat)/i,
-    "Goa has some of our most popular beach wedding venues:\n- ITC Grand Goa — 1,000+ guests, ₹1.5–3 Cr buyout\n- St. Regis Goa — 500+ guests, ₹2.5–3 Cr buyout\n- Grand Hyatt Goa — 1,200+ guests, ₹3.5–5.5 Cr buyout\n- Taj Exotica — 450+ guests, ₹2–3.5 Cr buyout\n- Caravela Beach Resort — 600+ guests, ₹1.8–3 Cr buyout\n\nKerala (Taj Green Cove, The Leela Kovalam) is a beautiful alternative for a more intimate feel.",
-    "What's your rough guest count? That'll help me narrow it down.",
+    "Goa has some of our finest beach wedding venues:\n- ITC Grand Goa — Indo-Portuguese estate on Arossim Beach, Cansaulim\n- St. Regis Goa — 49-acre sanctuary on the Sal River with private beach access\n- Grand Hyatt Goa — 28-acre Indo-Portuguese estate on Bambolim Bay\n- Taj Exotica Goa — Mediterranean-inspired retreat on Benaulim Beach\n- Taj Cidade de Goa — Hillside heritage property on Vainguinim Beach\n- Caravela Beach Resort — Sprawling beachfront estate on Varca Beach",
+    "Which one interests you?",
   ],
 
   // ── Kerala weddings ─────────────────────────────────────────────────────────
   [
     /\b(kerala|backwater|kovalam|cochin|kochi|tropical)\b.*\b(wedding|venue|celebrat)/i,
-    "Kerala is stunning for intimate destination weddings. Top picks:\n- Taj Green Cove, Kovalam — 59 rooms, Balinese hillside, ₹80L–1.5 Cr buyout\n- The Leela Kovalam — 188 rooms, India's only clifftop beach resort, ₹2.8–4.5 Cr buyout\n\nKerala weddings typically feature elephant entrances, banana-leaf feasts, and Panchavadyam music.",
-    "Would you like a sample itinerary for a Kerala wedding?",
+    "Kerala is beautiful for intimate destination weddings. Our top venues:\n- Taj Green Cove, Kovalam — Balinese-inspired hillside retreat where backwaters meet the sea\n- The Leela Kovalam — India's only clifftop beach resort with panoramic Arabian Sea views\n- Kumarakom — Serene backwater destination with houseboat arrivals and lush greenery\n- Kochi — Colonial heritage setting with Fort Kochi as a backdrop",
+    "Which setting appeals to you?",
   ],
 
   // ── Hills / mountain weddings ───────────────────────────────────────────────
   [
     /\b(hill|mountain|himalaya|rishikesh|mussoorie|shimla|manali|valley|nature|forest|jungle)\b.*\b(wedding|venue|celebrat)/i,
-    "Great picks for a hills wedding:\n- The Westin Rishikesh — Himalayan valley views, ₹2.5–3.5 Cr buyout\n- Hyatt Regency Dehradun — foothills of the Himalayas, ₹2.2–3.8 Cr buyout\n- The Lalit Grand Palace, Srinagar — Dal Lake, heritage palace setting\n- Taj Corbett — jungle riverside, intimate and nature-immersed",
-    "Which vibe suits you — dramatic Himalayan, lush forest, or lakeside heritage?",
+    "Our hills wedding venues:\n- The Westin Rishikesh — Panoramic Himalayan valley views, riverside setting\n- Hyatt Regency Dehradun — Nestled at the foothills of the Himalayas\n- The Lalit Grand Palace, Srinagar — 1910 royal palace overlooking Dal Lake\n- Taj Corbett — Jungle riverside retreat in the forests of Uttarakhand",
+    "Which venue or vibe suits you?",
   ],
 
   // ── Contact / reach out ─────────────────────────────────────────────────────
