@@ -10,6 +10,12 @@ import HashtagGeneratorPopup from "@/components/HashtagGeneratorPopup";
 export const metadata = {
   title: "Vows & Vedas — Luxury Destination Weddings",
   description: "Crafting timeless ceremonies across the world's most extraordinary destinations.",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "256x256", type: "image/x-icon" },
+    ],
+  },
 };
 
 export default function RootLayout({ children }) {

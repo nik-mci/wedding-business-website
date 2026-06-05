@@ -95,6 +95,7 @@ export default function Chatbot() {
   const [accIntent, setAccIntent]     = useState({});
   const [leadCaptured]                = useState(false);
   const [usedChips, setUsedChips]     = useState([]);
+  const [feedbackGiven, setFeedbackGiven] = useState({});
   const messagesEndRef = useRef(null);
   const inputRef       = useRef(null);
   const abortRef       = useRef(null);
@@ -159,6 +160,24 @@ export default function Chatbot() {
     saveChatContext();
     fireLeadNotify();
     window.location.href = "/contact";
+  };
+
+  const handleFeedback = (vote, msgIndex) => {
+    setFeedbackGiven(prev => ({ ...prev, [msgIndex]: vote }));
+    if (vote === "down") {
+      const botMsg  = messages[msgIndex]?.text || "";
+      const userMsg = messages[msgIndex - 1]?.role === "user" ? messages[msgIndex - 1].text : "";
+      fetch("/api/feedback-alert", {
+        method:    "POST",
+        headers:   { "Content-Type": "application/json" },
+        keepalive: true,
+        body: JSON.stringify({
+          message_text:            botMsg,
+          preceding_user_message:  userMsg,
+          session_id:              sessionIdRef.current,
+        }),
+      }).catch(() => {});
+    }
   };
 
   const sendMessage = async (text) => {
@@ -270,7 +289,7 @@ export default function Chatbot() {
   return (
     <>
       {/* ── Right sidebar: Call / Email / WhatsApp ─────────────────── */}
-      <div className="fixed right-0 top-1/2 -translate-y-1/2 z-[2001]">
+      <div className={`fixed right-0 top-1/2 -translate-y-1/2 z-[2001] ${open ? "hidden sm:block" : ""}`}>
         {sidebarOpen ? (
           <div className="bg-[#1A1408] border border-[#C9A234]/25 border-r-0 rounded-l-2xl flex flex-col items-center shadow-[-8px_0_40px_rgba(0,0,0,0.45)]">
 
@@ -416,6 +435,40 @@ export default function Chatbot() {
                     </div>
                   </div>
 
+                  {/* Feedback thumbs — on all completed bot messages except the welcome */}
+                  {msg.role === "bot" && !msg.streaming && i > 0 && (
+                    <div className="flex items-center gap-2 ml-9">
+                      {feedbackGiven[i] ? (
+                        <span className="text-[10px] text-[#9A8F7E]/60 tracking-[0.1em]">
+                          {feedbackGiven[i] === "up" ? "Glad that helped" : "Thanks for letting us know"}
+                        </span>
+                      ) : (
+                        <>
+                          <button
+                            onClick={() => handleFeedback("up", i)}
+                            aria-label="Helpful"
+                            className="text-[#9A8F7E]/40 hover:text-[#C9A234] transition-colors duration-200"
+                          >
+                            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>
+                              <path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+                            </svg>
+                          </button>
+                          <button
+                            onClick={() => handleFeedback("down", i)}
+                            aria-label="Not helpful"
+                            className="text-[#9A8F7E]/40 hover:text-red-400 transition-colors duration-200"
+                          >
+                            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3H10z"/>
+                              <path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/>
+                            </svg>
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  )}
+
                   {/* Suggestions — only on the latest bot message */}
                   {isLastBotMsg && !msg.streaming && msg.suggestions?.length > 0 && (
                     <div className="flex flex-wrap gap-2 mt-1 ml-9">
@@ -485,7 +538,19 @@ export default function Chatbot() {
           {startersVisible && messages.length === 1 && (
             <div className="px-4 pb-3 shrink-0">
               <p className="text-[#9A8F7E] text-[9px] tracking-[0.22em] uppercase mb-2.5 font-medium">Suggested</p>
-              <div className="flex flex-col gap-2">
+              {/* Mobile: horizontal scroll chips — Desktop: vertical list */}
+              <div className="flex sm:hidden gap-2 overflow-x-auto pb-1 -mx-4 px-4 scrollbar-none">
+                {STARTERS.map((s, i) => (
+                  <button
+                    key={i}
+                    onClick={() => sendMessage(s)}
+                    className="shrink-0 text-left text-[11px] text-[#FDFAF5]/70 border border-[#C9A234]/20 px-3 py-2 rounded-full hover:border-[#C9A234]/60 hover:text-[#FDFAF5] hover:bg-[#C9A234]/5 transition-all duration-200 leading-snug whitespace-nowrap"
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+              <div className="hidden sm:flex flex-col gap-2">
                 {STARTERS.map((s, i) => (
                   <button
                     key={i}
