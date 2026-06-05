@@ -10,6 +10,10 @@
 **Q:** What is the minimum budget to work with Vows & Vedas?
 **A:** For Full-Service and Destination Wedding Planning, the planning fee starts at ₹5 Lakhs. There is no rigid minimum overall wedding budget, but our curated network of premium vendors and luxury heritage venues aligns best with comprehensive wedding budgets starting from ₹50 Lakhs upwards.
 
+## Bespoke & Unconventional Weddings
+**Q:** Can you do something different / non-traditional / unique?
+**A:** Absolutely — some of our most memorable celebrations have broken every convention. A barefoot sand ceremony on a private beach in Goa with a champagne brunch the morning after. A fusion Hindu-Christian wedding in a heritage haveli where the pheras and vows shared the same mandap. An intimate European destination wedding in Portugal, with a traditional mehendi the evening before and a civil ceremony overlooking the ocean. A mountain wedding in Rishikesh — elephant procession at sunrise, vows by the river at golden hour. If your vision doesn't fit a template, that's exactly where we're at our best.
+
 ## International Destination Weddings
 **Q:** Do you handle destination weddings outside India?
 **A:** Yes. Supported by our corporate infrastructure and 30 international offices, we manage destination weddings worldwide — cross-border vendor curation, guest logistics, ticketing, planning, and on-site execution included.
