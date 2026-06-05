@@ -55,7 +55,7 @@ export default function Navigation() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-[100] flex items-center h-[88px] md:h-[104px] px-4 sm:px-8 lg:px-10 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-[100] flex items-center h-[88px] md:h-[104px] px-3 sm:px-6 lg:px-8 transition-all duration-300 ${
           isTransparent
             ? "bg-transparent"
             : "bg-[#FDFAF5]/96 backdrop-blur-md shadow-sm border-b border-black/8"
@@ -65,7 +65,7 @@ export default function Navigation() {
         <div className="flex-1 flex items-center">
           <Link
             href="/"
-            className="relative h-[40px] w-[187px] md:h-[48px] md:w-[225px] shrink-0 transition-transform duration-300 hover:scale-[1.03]"
+            className="relative h-[40px] w-[188px] md:h-[48px] md:w-[226px] shrink-0 transition-transform duration-300 hover:scale-[1.03]"
           >
             {/* Transparent nav — white logo on dark hero */}
             <Image
@@ -170,7 +170,7 @@ export default function Navigation() {
         aria-hidden={!mobileOpen}
       >
         <div className="flex items-center justify-between px-4 py-2 h-[88px] border-b border-ink/8">
-          <Link href="/" className="relative h-[40px] w-[187px]" onClick={() => setMobileOpen(false)}>
+          <Link href="/" className="relative h-[40px] w-[188px]" onClick={() => setMobileOpen(false)}>
             <Image
               src="/assets/photos/for -4.png"
               alt="Vows & Vedas"

@@ -26,6 +26,15 @@ export default function ContactPage() {
   const [status, setStatus] = useState("idle"); // idle, loading, success
   const [weddingMonth, setWeddingMonth] = useState("");
   const [weddingYear, setWeddingYear] = useState("");
+  const [chatbotContext, setChatbotContext] = useState(null);
+
+  useEffect(() => {
+    const raw = sessionStorage.getItem("chatbot_context");
+    if (raw) {
+      try { setChatbotContext(JSON.parse(raw)); } catch {}
+      sessionStorage.removeItem("chatbot_context");
+    }
+  }, []);
   const currentYear = new Date().getFullYear();
   const weddingYears = Array.from({ length: 8 }, (_, index) => currentYear + index);
 
@@ -55,6 +64,7 @@ export default function ContactPage() {
           destination: form.destination.value,
           weddingDate: form.estimatedWeddingDate.value,
           message: form.message.value,
+          chatbotContext,
         }),
       });
       const data = await res.json();

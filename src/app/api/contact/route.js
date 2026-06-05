@@ -1,5 +1,96 @@
 import { EmailClient } from "@azure/communication-email";
 
+function escHtml(str) {
+  return String(str ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function intentBadge(level) {
+  const styles = {
+    high:   { bg: "#E8F5E9", color: "#1B5E20", label: "HIGH" },
+    medium: { bg: "#FBE9E7", color: "#BF360C", label: "MEDIUM" },
+    low:    { bg: "#F5F5F5", color: "#555555", label: "LOW" },
+  };
+  const s = styles[level?.toLowerCase()] ?? styles.low;
+  return `<span style="display:inline-block;background:${s.bg};color:${s.color};border:1px solid ${s.color}40;padding:3px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;">${s.label}</span>`;
+}
+
+function buildChatbotSection(ctx) {
+  if (!ctx) return "";
+
+  const {
+    intent_level  = "low",
+    cities        = [],
+    venues_viewed = [],
+    wedding_date,
+    budget_tier,
+    last_turns    = [],
+    session_id,
+  } = ctx;
+
+  const hasNoIntent = !cities.length && !venues_viewed.length && intent_level === "low";
+
+  const transcriptRows = last_turns.length > 0
+    ? last_turns.map(m => {
+        const isBot = m.role === "assistant";
+        return `
+          <tr style="border-bottom:1px solid #EDE8DC;">
+            <td style="padding:8px 12px;font-size:11px;color:${isBot ? "#9A8F7E" : "#C9A234"};font-weight:700;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;vertical-align:top;width:60px;">${isBot ? "Bot" : "User"}</td>
+            <td style="padding:8px 12px;font-size:13px;color:#1A1408;line-height:1.6;">${escHtml(m.content)}</td>
+          </tr>`;
+      }).join("")
+    : `<tr><td colspan="2" style="padding:12px;font-size:12px;color:#9A8F7E;font-style:italic;">No conversation history</td></tr>`;
+
+  return `
+    <tr>
+      <td colspan="2" style="padding:20px 0 8px;">
+        <div style="border-top:1px solid #EDE8DC;padding-top:20px;">
+          ${hasNoIntent ? `
+          <div style="background:#FFF8E1;border-left:4px solid #FFA000;padding:10px 14px;margin-bottom:16px;border-radius:0 4px 4px 0;">
+            <p style="margin:0;font-size:12px;color:#7A5200;font-weight:600;">⚠ No chatbot intent captured — form submitted without sharing venue or destination preferences in chat.</p>
+          </div>` : ""}
+          <p style="color:#9A8F7E;font-size:10px;text-transform:uppercase;letter-spacing:2px;margin:0 0 12px;font-weight:600;">Chatbot Context</p>
+          <table style="width:100%;border-collapse:collapse;margin-bottom:16px;">
+            <tr>
+              <td style="padding:8px 0;border-bottom:1px solid #EDE8DC;color:#9A8F7E;font-size:11px;text-transform:uppercase;letter-spacing:2px;width:38%;">Intent Level</td>
+              <td style="padding:8px 0;border-bottom:1px solid #EDE8DC;">${intentBadge(intent_level)}</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 0;border-bottom:1px solid #EDE8DC;color:#9A8F7E;font-size:11px;text-transform:uppercase;letter-spacing:2px;">Cities Explored</td>
+              <td style="padding:8px 0;border-bottom:1px solid #EDE8DC;font-size:14px;">${cities.length > 0 ? cities.map(escHtml).join(", ") : "—"}</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 0;border-bottom:1px solid #EDE8DC;color:#9A8F7E;font-size:11px;text-transform:uppercase;letter-spacing:2px;">Venues Viewed</td>
+              <td style="padding:8px 0;border-bottom:1px solid ${!wedding_date && !budget_tier ? "#EDE8DC" : "#EDE8DC"};font-size:14px;">${venues_viewed.length > 0 ? venues_viewed.map(escHtml).join(", ") : "—"}</td>
+            </tr>
+            ${wedding_date ? `
+            <tr>
+              <td style="padding:8px 0;border-bottom:1px solid #EDE8DC;color:#9A8F7E;font-size:11px;text-transform:uppercase;letter-spacing:2px;">Chat: Wedding Date</td>
+              <td style="padding:8px 0;border-bottom:1px solid #EDE8DC;font-size:14px;">${escHtml(wedding_date)}</td>
+            </tr>` : ""}
+            ${budget_tier ? `
+            <tr>
+              <td style="padding:8px 0;border-bottom:1px solid #EDE8DC;color:#9A8F7E;font-size:11px;text-transform:uppercase;letter-spacing:2px;">Budget Tier</td>
+              <td style="padding:8px 0;border-bottom:1px solid #EDE8DC;font-size:14px;">${escHtml(budget_tier)}</td>
+            </tr>` : ""}
+            ${session_id ? `
+            <tr>
+              <td style="padding:8px 0;color:#9A8F7E;font-size:11px;text-transform:uppercase;letter-spacing:2px;">Session</td>
+              <td style="padding:8px 0;font-size:12px;color:#9A8F7E;">${escHtml(session_id)}</td>
+            </tr>` : ""}
+          </table>
+          <p style="color:#9A8F7E;font-size:10px;text-transform:uppercase;letter-spacing:2px;margin:0 0 8px;font-weight:600;">Last ${last_turns.length} Message${last_turns.length !== 1 ? "s" : ""}</p>
+          <div style="background:#F9F6EF;border:1px solid #EDE8DC;border-radius:4px;overflow:hidden;">
+            <table style="width:100%;border-collapse:collapse;">${transcriptRows}</table>
+          </div>
+        </div>
+      </td>
+    </tr>`;
+}
+
 const RECIPIENTS = [
   { address: "samir.kalia@wearemci.com",        displayName: "Samir Kalia" },
   { address: "ruchi.mohotra@wearemci.com",       displayName: "Ruchi Mohotra" },
@@ -12,7 +103,7 @@ const RECIPIENTS = [
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { firstName, lastName, email, phone, destination, weddingDate, message } = body;
+    const { firstName, lastName, email, phone, destination, weddingDate, message, chatbotContext } = body;
 
     const client = new EmailClient(process.env.AZURE_COMMUNICATION_CONNECTION_STRING);
 
@@ -52,9 +143,10 @@ export async function POST(req) {
                 </tr>
                 ${message ? `
                 <tr>
-                  <td style="padding:10px 0;color:#9A8F7E;font-size:11px;text-transform:uppercase;letter-spacing:2px;vertical-align:top;">Vision</td>
-                  <td style="padding:10px 0;font-size:15px;line-height:1.7;">${message}</td>
+                  <td style="padding:10px 0;border-bottom:1px solid #EDE8DC;color:#9A8F7E;font-size:11px;text-transform:uppercase;letter-spacing:2px;vertical-align:top;">Vision</td>
+                  <td style="padding:10px 0;border-bottom:1px solid #EDE8DC;font-size:15px;line-height:1.7;">${escHtml(message)}</td>
                 </tr>` : ""}
+                ${buildChatbotSection(chatbotContext)}
               </table>
             </div>
             <div style="padding:16px 32px;background:#1A1408;text-align:center;">

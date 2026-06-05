@@ -4,6 +4,45 @@
 
 ---
 
+# Extended FAQs
+
+## Minimum Budget & Planning Fee
+**Q:** What is the minimum budget to work with Vows & Vedas?
+**A:** For Full-Service and Destination Wedding Planning, the planning fee starts at ₹5 Lakhs. There is no rigid minimum overall wedding budget, but our curated network of premium vendors and luxury heritage venues aligns best with comprehensive wedding budgets starting from ₹50 Lakhs upwards.
+
+## International Destination Weddings
+**Q:** Do you handle destination weddings outside India?
+**A:** Yes. Supported by our corporate infrastructure and 30 international offices, we manage destination weddings worldwide — cross-border vendor curation, guest logistics, ticketing, planning, and on-site execution included.
+
+## Enquiry to Signing Timeline
+**Q:** What is the typical timeline from enquiry to signing?
+**A:** Our onboarding process ideally spans 15–20 days to ensure we are a perfect fit for your vision:
+1. Initial Discovery (Days 1–5): A detailed consultation to understand your scope, aesthetic direction, and venue preferences.
+2. Custom Proposal (Days 6–10): We present a tailored service outline, tentative budget framework, and fee structure.
+3. Alignment & Signing (Days 11–20): Finalising contract clauses, scope details, and processing the retainer to officially secure your dates on our calendar.
+
+## Weddings Per Year / Calendar Exclusivity
+**Q:** How many weddings do you take on at once?
+**A:** To maintain our boutique standard, we strictly limit our calendar. We take a maximum of one flagship destination or full-service wedding at a time, and two local weddings (Delhi). This ensures our principal planners and senior coordinators are entirely dedicated to your celebration — zero divided attention.
+
+## Non-Hindu / Multi-Faith Ceremonies
+**Q:** Do you work with non-Hindu ceremonies?
+**A:** Absolutely. Our team is experienced with all religions and cultures. We meticulously research the unique cultural nuances, rituals, and structural flow of every ceremony we plan — whether Hindu, Muslim, Sikh, Christian, civil, or fusion — ensuring your personal heritage is flawlessly honoured.
+
+## Customisation
+**Q:** Can we customise an itinerary package?
+**A:** Yes — flexibility is a core pillar of our service. While we offer structured starting points, every contract is ultimately customised. During discovery, we adapt our scope exactly to your needs — whether that means adding multi-city guest hospitality, expanding our design role, or restructuring the entire sequence.
+
+## Last-Minute Vendor Cancellation
+**Q:** What happens if a vendor cancels at the last minute?
+**A:** Because we work with a vetted, elite network of premium partners, last-minute cancellations are exceptionally rare. However, should an emergency occur, we take immediate charge — we maintain active backup relationships with top-tier decor houses, caterers, and artists, and will secure an equivalent pre-vetted replacement without interrupting your experience or adding unexpected costs.
+
+## Planning Fee vs Venue / Vendor Costs
+**Q:** Is the planning fee separate from venue costs?
+**A:** Yes — our professional management and planning fee is completely independent of venue, catering, and vendor costs. We operate on a transparent, fixed fee structure based on your chosen service tier. All payments to venues and third-party vendors are made directly by you, ensuring fully unbiased recommendations, clear contracts, and complete budget visibility.
+
+---
+
 # Moodboards & Wedding Themes
 
 ## About Moodboards
@@ -16,16 +55,19 @@ Vows & Vedas offers a curated library of wedding moodboards covering Haldi, Mehe
 ### Citrus Bloom (Haldi)
 **tags:** Citrus Tones | Marigold Florals | Daytime Haldi
 **perfectFor:** Outdoor Celebrations | Vibrant Themes | Tropical Settings
+**colors:** Orange | Olive Green | Coral | Golden Yellow | Cream
 **description:** A vibrant fusion of citrus tones and sunshine yellows. Fresh marigolds, zesty accents, and a celebration that radiates warmth and joy.
 
 ### Royal Boho (Haldi)
 **tags:** Macramé Decor | Terracotta Accents | Bohemian Luxe
 **perfectFor:** Outdoor Sunsets | Intimate Gatherings | Artistic Themes
+**colors:** Amber | Sage | Terracotta | Sand | Dark Brown
 **description:** A free-spirited blend of regal textures and bohemian charm. Terracotta accents, macramé details, and a relaxed yet opulent atmosphere.
 
 ### Rangon Ki Rasleela (Haldi)
 **tags:** Vibrant Colors | Playful Haldi | Marigold Decor
 **perfectFor:** Daytime Haldi | Outdoor Courtyards | Joyful Gatherings
+**colors:** Gulal Red | Marigold Yellow | Turmeric | Coral | Bright Pink
 **description:** Perfectly captures the spirit of a Haldi celebration — vibrant, playful and full of energy. Inspired by gulal, marigolds, sunshine hues and festive Indian textures. The theme brings together colour, music, florals and joyful chaos to create an atmosphere that is festive, youthful and deeply celebratory.
 
 ## Mehendi Moodboards
@@ -33,11 +75,13 @@ Vows & Vedas offers a curated library of wedding moodboards covering Haldi, Mehe
 ### Tangerine Tales (Mehendi)
 **tags:** Tangerine Tones | Citrus Decor | Bohemian Mehendi
 **perfectFor:** Daytime Celebrations | Vibrant Outdoors | Poolside Parties
+**colors:** Tangerine | Orange | Golden | Olive | Salmon
 **description:** A zesty celebration of color and tradition. Tangerine hues meet lush greens, creating a spirited and sun-drenched mehendi experience.
 
 ### Tropical Rhapsody (Mehendi)
 **tags:** Tropical Florals | Vibrant Greens | Exotic Decor
 **perfectFor:** Beachside Venues | Summer Celebrations | Lush Gardens
+**colors:** Emerald Green | Yellow | Coral Orange | Hot Pink | Teal
 **description:** A lush, exotic escape filled with vibrant tropical blooms and emerald greens. A rhapsody of color that brings the magic of the tropics to your mehendi.
 
 ## Sangeet Moodboards
@@ -45,11 +89,13 @@ Vows & Vedas offers a curated library of wedding moodboards covering Haldi, Mehe
 ### Disco Shimmer (Sangeet)
 **tags:** Night Ceremony | Mirror Decor | High Energy
 **perfectFor:** Large Parties | Indoor Ballrooms | Cocktail Nights
+**colors:** Black | Silver | Indigo | Amber | White
 **description:** Glittering mirrors, pulsing lights, and an energy that doesn't quit. A sangeet designed for the dance floor.
 
 ### Crimson Soiree (Sangeet)
 **tags:** Moulin Rouge Theme | Crimson Velvet | Dramatic Cabaret
 **perfectFor:** Themed Sangeets | Bold Personalities | Nighttime Glamour
+**colors:** Crimson | Dark Maroon | Gold | Rose Gold | Black
 **description:** A seductive fusion of Parisian cabaret and Indian tradition. Crimson velvets, dramatic feathers, and a Moulin Rouge-inspired glamour that sets the stage for an unforgettable night.
 
 ## Wedding Moodboards
@@ -57,21 +103,25 @@ Vows & Vedas offers a curated library of wedding moodboards covering Haldi, Mehe
 ### Royal Indian (Wedding)
 **tags:** Palatial Grandeur | Maroon & Gold | Heritage Venues
 **perfectFor:** Grand Receptions | Royal Ceremonies | Historic Palaces
+**colors:** Maroon | Gold | Dark Brown | Forest Green | Cream
 **description:** Celebrates the richness of India's regal heritage through majestic architecture, ornate detailing, luxurious fabrics and statement décor. Inspired by palace soirées and royal courts — deep reds, warm golds, glowing ambers and jewel tones create an atmosphere that feels grand, immersive and unapologetically luxurious.
 
 ### Emerald Eden (Wedding)
 **tags:** Forest Settings | Moss Palette | Intimate Outdoor
 **perfectFor:** Eco-friendly Weddings | Small Groups | Hill Stations
+**colors:** Deep Teal | Forest Green | Sage | Mint | Champagne
 **description:** Deep greens and quiet moss. A celebration that feels grown, not made — organic, intimate, and deeply connected to nature.
 
 ### Painted Gardens (Wedding)
 **tags:** Floral Canopies | Pastel Shades | Spring Theme
 **perfectFor:** Daytime Weddings | Garden Venues | Intimate Ceremonies
+**colors:** Blush Pink | Leaf Green | Pale Yellow | Light Pink | Dark Olive
 **description:** A breathtaking immersion into a pastel wonderland, featuring vivid floral artistry, delicate pastel fabrics, and the timeless romance of an enchanted garden setting.
 
 ### Haveli Nights (Wedding)
 **tags:** Heritage Vibe | Royal Glow | Candlelit Evening
 **perfectFor:** Royal Receptions | Palace Courtyards | Evening Ceremonies
+**colors:** Deep Jewel Tones | Antique Gold | Earthy Neutrals | Warm Amber | Ivory
 **description:** Draws inspiration from the romance and grandeur of old Indian havelis — layered with rich drapery, glowing lanterns, intricate arches, regal florals and warm candlelight. The palette blends deep jewel tones, antique golds and earthy neutrals to create an atmosphere that feels intimate, opulent and timeless.
 
 ---
@@ -91,6 +141,113 @@ Vows & Vedas offers a curated library of wedding moodboards covering Haldi, Mehe
 **includes:** Venue sourcing and selection | All vendor negotiations | Contract management | Detailed design conceptualisation | Guest management support | Multiple planning meetings | Site visits | Post-wedding vendor settlements
 
 **note:** These are planning fees only and do not include venue costs, vendor costs, decor, catering, or other event expenses. For a full wedding budget estimate, share your city, guest count, and vision and the team can provide a tailored breakdown.
+
+---
+
+# Services
+
+## Core Services Overview
+**Q:** What services does Vows & Vedas offer? / What do you do? / What do you cover?
+**A:** We offer 9 core services and 10 add-ons, covering every aspect of your wedding:
+
+**Core Services:**
+- Venues & Destinations — Global footprint, local expertise — every setting handpicked
+- Planning — Every detail considered. Every moment orchestrated.
+- Design & Decor — Environments crafted to reflect your story
+- Film & Photography — Cinematic storytelling — raw emotion, editorial craft
+- Entertainment — Concert-grade production, curated talent, unforgettable moments
+- Hospitality — White-glove guest management from arrival to departure
+- Vendor Management — Curated network of India's elite artisans
+- Travel & Logistics — Seamless transport management and guest transit
+- Food & Beverage — Bespoke menus and world-class bar curation
+
+**Add-Ons:**
+- 3-D Models — Photorealistic venue visualisation before a single flower is placed
+- SFX & Fireworks — Pyrotechnics and cinematic atmospheric effects for grand entries
+- E-Invites — Custom digital invitations with RSVP tracking and animated reveals
+- Home Decor — Floral and lighting designs for residential celebration spaces
+- Website Creation — Bespoke digital hub with RSVPs, gallery, and travel itineraries
+- Trousseau Shopping — Designer previews, shopping trials, and bridal wardrobe styling
+- Gifting & Favours — Custom hampers, artisanal souvenirs, and welcome favours
+- Honeymoon Planning — Tailored itineraries and luxury couples' retreats globally
+- Marriage Registration — Paperwork, slot booking, and local registry guidance
+- Visa Assistance — Guest visa processing, documentation support, and embassy appointments
+
+## Planning Service
+**Q:** What does the planning service include?
+**A:** Our Planning service covers every detail from start to finish — venue sourcing and selection, all vendor negotiations, contract management, detailed design conceptualisation, guest management support, multiple planning meetings, site visits, and post-wedding vendor settlements.
+
+## Design & Decor Service
+**Q:** What does design and decor include?
+**A:** Our Design & Decor team builds immersive environments from scratch: bespoke conceptualising and moodboards, immersive floral artistry, custom scenography and production, strategic lighting and soundscaping, and fine table styling. Every environment is crafted to reflect your story.
+
+## Film & Photography Service
+**Q:** What does film and photography include?
+**A:** Our Film & Photography service covers editorial and cinematic photographer matchmaking, creative briefing and art direction, comprehensive shot listing and logistics, BTS and real-time content creation, and post-production and archive management. We work with India's finest wedding photographers and cinematographers.
+
+## Entertainment Service
+**Q:** What entertainment do you provide?
+**A:** Our Entertainment service delivers concert-grade production with curated talent — live performances, celebrity artist bookings, sangeet choreography, DJ management, custom sound and lighting production, and fully programmed entertainment experiences. Every moment is designed for impact.
+
+## Hospitality Service
+**Q:** What does the hospitality service include?
+**A:** Our Hospitality service offers white-glove guest management from arrival to departure — airport and venue transfers, VIP arrivals, guest escort coordination, accommodation management, and ensuring every guest feels completely looked after throughout the celebration.
+
+## Vendor Management Service
+**Q:** What does vendor management cover?
+**A:** We maintain a curated network of India's elite artisans and vendors. Our Vendor Management service handles curation, vetting, negotiation, and ongoing management of every third-party supplier — ensuring only the most reliable, premium partners are on your team.
+
+## Travel & Logistics Service
+**Q:** What does travel and logistics include?
+**A:** Our Travel & Logistics service manages seamless transport and guest transit — efficient fleet coordination, ticketing, VIP arrivals, guest shuttles, and all movement planning so every transfer is calm and perfectly timed.
+
+## Food & Beverage Service
+**Q:** What does food and beverage cover?
+**A:** Our Food & Beverage service delivers bespoke menus and world-class bar curation — custom menu design, chef coordination, bar programming, dietary accommodation, and a complete culinary experience tailored to your celebration.
+
+## Venues & Destinations Service
+**Q:** How do you help with venues?
+**A:** Our Venues & Destinations service uses our global footprint and local expertise to handpick every setting. We source venues across India and internationally, negotiate the best terms, manage site visits, and ensure your venue perfectly matches your vision, guest count, and budget.
+
+## Add-On: 3-D Models
+**Q:** What is the 3D venue modelling add-on?
+**A:** We create photorealistic 3D visualisations of your mandap and ballroom layout before a single flower is placed — allowing you to see and approve the complete setup well ahead of the event day.
+
+## Add-On: SFX & Fireworks
+**Q:** Do you do fireworks or special effects?
+**A:** Yes — our SFX & Fireworks add-on delivers breathtaking pyrotechnics and cinematic atmospheric effects for your grand entry and key celebration moments — from sparkler tunnels to aerial fireworks and SFX smoke.
+
+## Add-On: E-Invites
+**Q:** Do you create digital invitations?
+**A:** Yes — custom digital wedding invitations with animated reveals and integrated RSVP tracking, designed to match your wedding aesthetic perfectly.
+
+## Add-On: Home Decor
+**Q:** Can you decorate our home for pre-wedding functions?
+**A:** Yes — our Home Decor add-on brings the celebration home with elegant floral and lighting designs for your residence, ideal for pre-wedding functions hosted at home.
+
+## Add-On: Website Creation
+**Q:** Do you build wedding websites?
+**A:** Yes — we create a bespoke digital hub for your guests, featuring RSVPs, a photo gallery, travel itineraries, and all event information in one elegant, easy-to-navigate place.
+
+## Add-On: Trousseau Shopping
+**Q:** What is trousseau shopping?
+**A:** We provide access to exclusive designer previews, personalised shopping trials, and bridal wardrobe styling assistance — ensuring your trousseau is as extraordinary as your celebration.
+
+## Add-On: Gifting & Favours
+**Q:** Do you handle guest gifting and favours?
+**A:** Yes — we design and curate thoughtfully crafted hampers, local artisanal souvenirs, and custom welcome favours for your guests.
+
+## Add-On: Honeymoon Planning
+**Q:** Do you plan honeymoons?
+**A:** Yes — our Honeymoon Planning add-on offers tailored itineraries, luxury couples' retreats, and private experience curation across global destinations.
+
+## Add-On: Marriage Registration
+**Q:** Do you help with marriage registration?
+**A:** Yes — we guide you through paperwork, slot booking, and local registry guidance to officially certify your union, without any of the bureaucratic stress.
+
+## Add-On: Visa Assistance
+**Q:** Do you help guests with visas?
+**A:** Yes — for destination weddings with international guests, we offer dedicated assistance for guest visa processing, documentation support, and embassy appointments.
 
 ---
 

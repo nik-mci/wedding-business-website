@@ -1,12 +1,21 @@
 /**
- * Curated suggestion chips — always based on the CURRENT query topic.
- * Uses the current query text as primary signal, NOT accumulated conversation history.
+ * Funnel-aware suggestion chips.
+ *
+ * Every chip cluster advances the conversation ONE step forward.
+ * Rule: never suggest more of the same thing the user just explored.
+ *
+ * Funnel stages:
+ *   discovery   → destinations / itineraries
+ *   value       → moodboards / venues
+ *   conversion  → pricing / planning
+ *   enquiry     → discovery call / team contact
  */
 
 // ── Topic detection ────────────────────────────────────────────────────────────
 
 const TOPIC_PATTERNS = [
-  { topic: "moodboard", re: /\b(moodboard|mood board|haldi|mehendi|sangeet theme|decor theme|wedding theme|aesthetic|floral theme|palette|citrus bloom|royal boho|disco shimmer|crimson soiree|painted garden|haveli night|emerald eden|royal indian|rangon|tangerine tales|tropical rhapsody)\b/i },
+  { topic: "itinerary", re: /itinerary|sample wedding|what does.{0,20}wedding look|day.by.day|big fat indian|beachside wedding|celestial kerala|walk me through|plan a (goa|rajasthan|kerala)|customis|tailor.*wedding|sand ceremony|nuptial chain|sagan|chura|baraat|varmala|bidaai|help.*choose.*destination|can.t decide which/i },
+  { topic: "moodboard", re: /moodboard|mood board|\bhaldi\b|\bmehendi\b|sangeet theme|decor theme|wedding themes?|what themes|decor styles?|aesthetic|floral theme|colour palette|color palette|citrus bloom|royal boho|disco shimmer|crimson soiree|painted garden|haveli night|emerald eden|royal indian|rangon|tangerine tales|tropical rhapsody|tell me about (royal|painted|disco|haveli|citrus|crimson|emerald|tropical|rangon|tangerine)/i },
   { topic: "goa",       re: /\bgoa\b|beach\s*wed/i },
   { topic: "rajasthan", re: /\b(rajasthan|udaipur|jaipur|jodhpur|jaisalmer|palace|fort|heritage|royal)\b/i },
   { topic: "kerala",    re: /\b(kerala|kovalam|backwater|kochi|cochin)\b/i },
@@ -15,9 +24,10 @@ const TOPIC_PATTERNS = [
   { topic: "decor",     re: /\b(decor|design|flower|floral|mandap|lighting|theme)\b/i },
   { topic: "photo",     re: /\b(photo|film|video|camera|cinemat|reel)\b/i },
   { topic: "planning",  re: /\b(plan|coordinator|timeline|budget|itinerary)\b/i },
-  { topic: "pricing",   re: /\b(price|cost|budget|how much|pricing|fees|charges)\b/i },
-  { topic: "booking",   re: /\b(book|advance|early|when|lead time)\b/i },
-  { topic: "team",      re: /\b(team|who|contact|speak|manmeet|arunima|rukmini)\b/i },
+  { topic: "pricing",   re: /\b(price|cost|how much|pricing|fees|charges|buyout|package pricing)\b/i },
+  { topic: "booking",   re: /\b(book|advance|early|when|lead time|availability)\b/i },
+  { topic: "team",      re: /\b(team|who|contact|speak|manmeet|arunima|rukmini|discovery call)\b/i },
+  { topic: "planning",  re: /\b(what.s included|planning (cover|include)|planning fee|fee separate|how long to sign|sign and start|take on.{0,10}wedding|one wedding at a time|international wedding|outside india)\b/i },
 ];
 
 function detectTopic(query = "") {
@@ -27,133 +37,201 @@ function detectTopic(query = "") {
   return "general";
 }
 
-// ── Chip pool by topic ────────────────────────────────────────────────────────
+// ── Funnel-advancing chip pools ────────────────────────────────────────────────
+// Each pool's chips move the user ONE step forward, never sideways.
 
-const CONTACT_CHIP = "Speak to the team";
+const NEXT_STEP = {
 
-const CHIPS_BY_TOPIC = {
+  // After itinerary → move to venues + moodboards + customise
+  itinerary: [
+    "Show Goa venues for this",
+    "Show Rajasthan palace venues",
+    "What moodboards suit a Goa wedding",
+    "What moodboards suit a Rajasthan wedding",
+    "Can this be customised",
+    "What does this cost",
+    "Book a discovery call",
+    "Show Kerala venues",
+  ],
+
+  // After moodboard → move to matching venues + budget
   moodboard: [
-    "Sangeet theme for indoor venue",
-    "Haldi theme ideas",
-    "Floral garden wedding theme",
-    "Theme for a palace wedding",
-    "Beach wedding theme",
-    "Decor services explained",
+    "Which venues suit this mood",
+    "Budget for a wedding like this",
+    "Show Rajasthan palace venues",
+    "Show Goa beach venues",
+    "Show Kerala venues",
+    "Book a discovery call",
+    "What does planning cost",
   ],
+
+  // After Goa venues → move to pricing + planning
   goa: [
-    "Pricing for ITC Grand Goa",
-    "Pricing for St Regis Goa",
-    "Pricing for Grand Hyatt Goa",
-    "Best venue for 500+ guests",
-    "Goa vs Kerala beach wedding",
-    "Show Rajasthan venues",
-    "Beach wedding itinerary",
+    "ITC Grand Goa pricing",
+    "Start planning my wedding",
+    "Grand Hyatt Goa pricing",
+    "Book a discovery call",
+    "What moodboards suit a Goa wedding",
+    "Show Rajasthan venues instead",
+    "St Regis Goa pricing",
   ],
+
+  // After Rajasthan venues → pricing + planning
   rajasthan: [
-    "Pricing for Rambagh Palace",
-    "Pricing for Oberoi Udai Vilas",
-    "Pricing for Umaid Bhawan",
-    "Best palace for 200 guests",
-    "Udaipur vs Jaipur for weddings",
-    "Show Goa beach venues",
-    "Palace wedding itinerary",
+    "Rambagh Palace pricing",
+    "Start planning my wedding",
+    "Oberoi Udai Vilas pricing",
+    "Book a discovery call",
+    "What moodboards suit a palace wedding",
+    "Show Goa venues instead",
+    "Umaid Bhawan pricing",
   ],
+
+  // After Kerala venues → pricing + planning
   kerala: [
-    "Pricing for Taj Green Cove",
-    "Pricing for The Leela Kovalam",
-    "Kerala wedding itinerary",
-    "Goa vs Kerala for destination wedding",
-    "Show Rajasthan venues",
-    "How many guests does Leela host",
+    "Taj Green Cove pricing",
+    "Start planning my wedding",
+    "The Leela Kovalam pricing",
+    "Book a discovery call",
+    "What moodboards suit a Kerala wedding",
+    "Show Goa venues instead",
   ],
+
+  // After Hills venues → pricing + planning
   hills: [
-    "Pricing for Westin Rishikesh",
-    "Pricing for Lalit Grand Srinagar",
-    "Best hills venue for 300 guests",
-    "Rishikesh vs Srinagar wedding",
-    "Show Goa beach venues",
-    "Hills wedding itinerary",
+    "Westin Rishikesh pricing",
+    "Start planning my wedding",
+    "Lalit Grand Srinagar pricing",
+    "Book a discovery call",
+    "Show Goa venues instead",
+    "Show Rajasthan venues instead",
   ],
+
+  // After services → move to venues + pricing + conversion
   services: [
-    "Planning package pricing",
+    "What's included in planning",
+    "Show Goa beach venues",
+    "Show Rajasthan palace venues",
+    "Is planning fee separate from venue costs",
+    "Book a discovery call",
+    "How long to sign and start",
+    "Show me a sample itinerary",
+  ],
+
+  // After decor → venues + itinerary
+  decor: [
+    "Which venues suit this mood",
     "Show Goa venues",
     "Show Rajasthan venues",
-    "How early to book",
-    "Budget tiers explained",
+    "Show me a sample itinerary",
+    "Book a discovery call",
   ],
-  decor: [
-    "Show Rajasthan venues",
-    "Show Goa beach venues",
-    "Film and photography options",
-    "What services do you offer",
-    "Budget tiers explained",
-  ],
+
+  // After photo → venues + planning
   photo: [
     "Show Goa venues",
     "Show Rajasthan venues",
-    "What services do you offer",
-    "Budget tiers explained",
-    "How early to book",
+    "What does planning cost",
+    "Book a discovery call",
   ],
+
+  // After planning → pricing + call
   planning: [
-    "How early to book",
-    "Budget tiers explained",
+    "What's included in planning",
+    "Is planning fee separate from venue costs",
+    "How long to sign and start",
+    "Book a discovery call",
     "Show Goa venues",
     "Show Rajasthan venues",
-    "Show Kerala venues",
+    "Do you plan international weddings",
   ],
+
+  // After pricing → next step is always the call
   pricing: [
-    "Budget tiers explained",
-    "Pricing for Goa venues",
-    "Pricing for Rajasthan venues",
-    "What affects the total cost",
+    "Book a discovery call",
+    "Start planning my wedding",
+    "What's included in planning",
+    "Is planning fee separate from venue costs",
+    "How long to sign and start",
     "Show Goa venues",
+    "Show Rajasthan venues",
   ],
+
+  // After booking/availability → call
   booking: [
-    "How early to book",
-    "Best wedding season",
+    "How long to sign and start",
+    "Book a discovery call",
     "Show Goa venues",
-    "Show Rajasthan venues",
-    "Budget tiers explained",
+    "What does planning cost",
+    "Do you take on only one wedding at a time",
+    "Start planning my wedding",
+    "Do you plan international weddings",
   ],
+
+  // After team → nothing to suggest except other entry points
   team: [
-    "What services do you offer",
     "Show Goa venues",
     "Show Rajasthan venues",
-    "How early to book",
+    "Show me a sample itinerary",
+    "What does planning cost",
   ],
+
+  // Default
   general: [
+    "Show me a sample itinerary",
     "Show Goa beach venues",
     "Show Rajasthan palace venues",
-    "Show Kerala venues",
-    "What services do you offer",
-    "Budget tiers explained",
-    "How early to book",
+    "What wedding themes do you offer",
+    "What does planning cost",
+    "Book a discovery call",
   ],
 };
 
-/**
- * Returns 3 chips based on the CURRENT query topic.
- * @param {string} currentQuery - the user's message this turn
- */
-export function getSuggestions(currentQuery = "") {
-  const topic = detectTopic(currentQuery);
-  const pool  = CHIPS_BY_TOPIC[topic] || CHIPS_BY_TOPIC.general;
+// ── Special chips that open WhatsApp or /contact ──────────────────────────────
+// Handled separately in Chatbot.js render
+export const ACTION_CHIPS = {
+  "Book a discovery call":   "/contact",
+  "Start planning my wedding": "/contact",
+  "Speak to the team":       "https://wa.me/919654277656",
+};
 
-  const seen = new Set();
-  const picked = [];
-  for (const chip of pool) {
-    if (!seen.has(chip)) {
-      seen.add(chip);
-      picked.push(chip);
+/**
+ * Returns 3 funnel-advancing chips based on the current query topic.
+ * Filters out chips already shown in this session.
+ */
+export function getSuggestions(currentQuery = "", usedChips = []) {
+  const topic   = detectTopic(currentQuery);
+  const pool    = NEXT_STEP[topic] || NEXT_STEP.general;
+  const usedSet = new Set(usedChips);
+
+  const queryLower = currentQuery.toLowerCase();
+  const filtered = pool.filter(chip => {
+    if (usedSet.has(chip)) return false;
+    // For moodboards: exclude the one just asked about
+    if (topic === "moodboard") {
+      const name = chip.replace(/^(tell me about|which venues suit|budget for) /i, "").toLowerCase();
+      if (queryLower.includes(name)) return false;
     }
+    return true;
+  });
+
+  const picked = [];
+  const seen   = new Set();
+  for (const chip of filtered) {
+    if (!seen.has(chip)) { seen.add(chip); picked.push(chip); }
     if (picked.length === 3) break;
   }
 
-  // If fewer than 3 relevant chips, fill with "Speak to the team" rather than unrelated ones
+  // Fill from general pool if needed (also filtered)
   if (picked.length < 3) {
-    picked.push(CONTACT_CHIP);
+    for (const chip of NEXT_STEP.general) {
+      if (picked.length >= 3) break;
+      if (!usedSet.has(chip) && !seen.has(chip)) { seen.add(chip); picked.push(chip); }
+    }
   }
+
+  // Hard fallback
+  if (picked.length < 3) picked.push("Book a discovery call");
 
   return picked.slice(0, 3);
 }
