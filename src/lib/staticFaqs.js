@@ -84,39 +84,120 @@ const FAQ_TABLE = [
     "I'd love to connect you with our planning team to walk you through this in detail — would you like to schedule a quick call?",
   ],
 
-  // ── Wedding themes / moodboards ─────────────────────────────────────────────
+  // ── Individual moodboard by name — MUST come before general moodboard entry ──
+  [
+    /\bhaveli nights?\b/i,
+    "Haveli Nights is a Wedding moodboard drawing inspiration from the romance and grandeur of old Indian havelis. Rich drapery, glowing lanterns, intricate arches, regal florals, and warm candlelight — the palette blends deep jewel tones, antique golds, and earthy neutrals. Intimate, opulent, and timeless. Perfect for evening receptions in palace courtyards, heritage venues, or candlelit fort settings.\n[MOODBOARDS_LINK]",
+    "Want to see Rajasthan venues that complement this mood?",
+  ],
+  [
+    /\broyal indian\b/i,
+    "Royal Indian is a Wedding moodboard celebrating India's regal heritage — majestic architecture, ornate detailing, luxurious fabrics, and statement décor. Inspired by palace soirées and royal courts, deep reds, warm golds, glowing ambers, and jewel tones create an atmosphere that feels grand, immersive, and unapologetically luxurious. Ideal for large receptions at historic palaces.\n[MOODBOARDS_LINK]",
+    "Want to see palace venues that complement this look?",
+  ],
+  [
+    /\bemerald eden\b/i,
+    "Emerald Eden is a Wedding moodboard rooted in deep greens and quiet moss — a celebration that feels grown, not made. Organic, intimate, and deeply connected to nature. Deep teal, forest green, sage, mint, and champagne make it perfect for small groups, eco-conscious couples, and hill station weddings.\n[MOODBOARDS_LINK]",
+    "Want to see hill station venues that suit this theme?",
+  ],
+  [
+    /\bpainted gardens?\b/i,
+    "Painted Gardens is a Wedding moodboard — a breathtaking immersion into a pastel wonderland. Vivid floral artistry, delicate pastel fabrics, and the timeless romance of an enchanted garden setting. Blush pink, leaf green, pale yellow, light pink, and dark olive — perfect for daytime weddings and garden venues.\n[MOODBOARDS_LINK]",
+    "Want to see outdoor venues that complement this theme?",
+  ],
+  [
+    /\bcitrus bloom\b/i,
+    "Citrus Bloom is a Haldi moodboard — a vibrant fusion of citrus tones and sunshine yellows. Fresh marigolds, zesty accents, and warm joyful energy. The palette is orange, olive green, coral, golden yellow, and cream. Perfect for outdoor daytime Haldi celebrations, vibrant themes, and tropical settings.\n[MOODBOARDS_LINK]",
+    "Want to explore the other Haldi moodboards — Royal Boho or Rangon Ki Rasleela?",
+  ],
+  [
+    /\broyal boho\b/i,
+    "Royal Boho is a Haldi moodboard — a free-spirited blend of regal textures and bohemian charm. Terracotta accents, macramé details, and a relaxed yet opulent atmosphere. Amber, sage, terracotta, sand, and dark brown — ideal for outdoor sunset Haldi ceremonies and intimate gatherings.\n[MOODBOARDS_LINK]",
+    "Want to explore Citrus Bloom or Rangon Ki Rasleela — the other Haldi moodboards?",
+  ],
+  [
+    /\brangon ki rasleela\b/i,
+    "Rangon Ki Rasleela is a Haldi moodboard — vibrant, playful, and full of energy. Inspired by gulal, marigolds, sunshine hues, and festive Indian textures. Gulal red, marigold yellow, turmeric, coral, and bright pink create an atmosphere that is festive, youthful, and deeply celebratory.\n[MOODBOARDS_LINK]",
+    "Want to explore Citrus Bloom or Royal Boho — the other Haldi moodboards?",
+  ],
+  [
+    /\btangerine tales\b/i,
+    "Tangerine Tales is a Mehendi moodboard — a zesty celebration of colour and tradition. Tangerine hues meet lush greens, creating a spirited and sun-drenched experience. Tangerine, orange, golden, olive, and salmon — perfect for daytime celebrations, vibrant outdoors, and poolside parties.\n[MOODBOARDS_LINK]",
+    "Want to explore Tropical Rhapsody — the other Mehendi moodboard?",
+  ],
+  [
+    /\btropical rhapsody\b/i,
+    "Tropical Rhapsody is a Mehendi moodboard — a lush, exotic escape filled with vibrant tropical blooms and emerald greens. Emerald green, yellow, coral orange, hot pink, and teal work beautifully for beachside venues, summer celebrations, and lush garden settings.\n[MOODBOARDS_LINK]",
+    "Want to explore Tangerine Tales — the other Mehendi moodboard?",
+  ],
+  [
+    /\bdisco shimmer\b/i,
+    "Disco Shimmer is a Sangeet moodboard — glittering mirrors, pulsing lights, and an energy that doesn't quit. Designed for the dance floor. Black, silver, indigo, amber, and white create a high-energy atmosphere perfect for large parties, indoor ballrooms, and cocktail nights.\n[MOODBOARDS_LINK]",
+    "Want to explore Crimson Soiree — the other Sangeet moodboard?",
+  ],
+  [
+    /\bcrimson soirée?|\bcrimson soiree\b/i,
+    "Crimson Soiree is a Sangeet moodboard — a seductive fusion of Parisian cabaret and Indian tradition. Crimson velvets, dramatic feathers, and a Moulin Rouge-inspired glamour. Crimson, dark maroon, gold, rose gold, and black — perfect for themed Sangeets, bold personalities, and nighttime glamour.\n[MOODBOARDS_LINK]",
+    "Want to explore Disco Shimmer — the other Sangeet moodboard?",
+  ],
+
+  // ── Function-specific moodboards (before general entry) ──────────────────────
+  [
+    /\bhaldi.{0,30}(moodboards?|themes?|looks?|moods?|styles?|options?|ideas?)|\b(moodboards?|themes?|looks?|moods?|styles?|options?|ideas?).{0,30}haldi/i,
+    "We have three moodboards for the Haldi ceremony:\n- Citrus Bloom — citrus tones, marigolds, sunshine yellows, joyful daytime energy\n- Royal Boho — terracotta accents, macramé details, relaxed bohemian luxe\n- Rangon Ki Rasleela — vibrant gulal colours, marigolds, festive and playful\n[MOODBOARDS_LINK]",
+    "Which of these feels right for your Haldi?",
+  ],
+  [
+    /\b(mehndi|mehendi).{0,30}(moodboards?|themes?|looks?|moods?|styles?|options?|ideas?)|\b(moodboards?|themes?|looks?|moods?|styles?|options?|ideas?).{0,30}(mehndi|mehendi)/i,
+    "We have two moodboards for the Mehendi ceremony:\n- Tangerine Tales — tangerine hues, lush greens, sun-drenched and bohemian\n- Tropical Rhapsody — vibrant tropical blooms, emerald greens, exotic and colourful\n[MOODBOARDS_LINK]",
+    "Which of these feels right for your Mehendi?",
+  ],
+  [
+    /\bsangeet.{0,30}(moodboards?|themes?|looks?|moods?|styles?|options?|ideas?)|\b(moodboards?|themes?|looks?|moods?|styles?|options?|ideas?).{0,30}sangeet/i,
+    "We have two moodboards for the Sangeet:\n- Disco Shimmer — glittering mirrors, pulsing lights, built for the dance floor\n- Crimson Soiree — Moulin Rouge-inspired drama, crimson velvets, nighttime glamour\n[MOODBOARDS_LINK]",
+    "Which of these suits your Sangeet vibe?",
+  ],
+  [
+    /\b(wedding ceremony|reception).{0,30}(moodboards?|themes?|looks?|moods?|styles?|options?|ideas?)|\b(moodboards?|themes?|looks?|moods?|styles?|options?|ideas?).{0,30}(wedding ceremony|reception)/i,
+    "We have four moodboards for the Wedding ceremony:\n- Royal Indian — palatial grandeur, maroon and gold, made for heritage venues\n- Haveli Nights — candlelit haveli romance, jewel tones, glowing lanterns\n- Painted Gardens — pastel floral canopies, daytime garden ceremony\n- Emerald Eden — deep greens, organic and intimate, perfect for hill stations\n[MOODBOARDS_LINK]",
+    "Which of these speaks to your wedding vision?",
+  ],
+
+  // ── General moodboards (all functions) ───────────────────────────────────────
   [
     /moodboard|mood board|wedding themes?|what themes|decor themes?|decor style|wedding style|what (styles?|look)|theme option/i,
     "We have curated moodboards across all wedding functions:\n\nHaldi:\n- Citrus Bloom — citrus tones, marigolds, joyful daytime energy\n- Royal Boho — terracotta, macramé, relaxed bohemian luxe\n- Rangon Ki Rasleela — vibrant gulal colors, festive and playful\n\nMehendi:\n- Tangerine Tales — tangerine hues, lush greens, sun-drenched\n- Tropical Rhapsody — tropical blooms, exotic and colorful\n\nSangeet:\n- Disco Shimmer — glittering mirrors, dance floor energy, indoor ballrooms\n- Crimson Soiree — Moulin Rouge-inspired, crimson velvets, nighttime glamour\n\nWedding:\n- Royal Indian — palatial grandeur, maroon and gold, heritage venues\n- Painted Gardens — pastel floral canopies, daytime garden ceremony\n- Haveli Nights — candlelit haveli romance, jewel tones, evening receptions\n- Emerald Eden — deep greens, organic and intimate, perfect for hill stations\n[MOODBOARDS_LINK]",
     "",
   ],
 
-  // ── Sample itinerary / show me a wedding ────────────────────────────────────
-  [
-    /\b(sample|show me|what does|walk me|take me|give me).{0,30}(itinerary|wedding look|day look|plan|schedule)\b|plan a (goa|rajasthan|kerala|beach|palace|hill)/i,
-    "We have three signature itineraries — each is a starting point and every detail is flexible:\n\n- The Big Fat Indian Wedding — Rajasthan, 4 days. Garland welcome, Sagan, Mehndi & Sangeet, then the grand finale with elephant procession, fireworks and lavish buffet.\n- Exotic Beachside Wedding — Goa, 4 days. Beach arrival, bridal spa rituals, sand ceremony with a live choir, and a champagne villa brunch.\n- Celestial Kerala Union — Kerala, 3 days. Mehndi by the backwaters, elephant-entrance ceremony under a floral pandal, and a farewell feast on banana leaves.\n\nWhich setting speaks to you most?",
-    "",
-  ],
-
-  // ── Goa / beach itinerary ────────────────────────────────────────────────────
-  [
-    /\b(what does|what.s|tell me about|describe|walk).{0,20}(goa|beach).{0,20}(wedding look|wedding like|itinerary|day|plan)\b/i,
-    "Our Goa itinerary is a 4-day beachside celebration:\n\n- Day 1 — Sunkissed Arrival: Transfer to your resort and settle in at leisure.\n- Day 2 — Bridal Rituals: Traditional anointing with scented oils, then a couples' spa at Aguada.\n- Day 3 — The Sand Ceremony: Exchange vows beachside with a live choir, followed by a poolside gala dinner and champagne.\n- Day 4 — Blissful Brunch: First morning of marriage celebrated with a champagne brunch in your decorated villa.\n\nEvery detail is flexible — this is your starting point, not your script.",
-    "Want to see the venues we love for this, or explore the moodboards for a Goa beach wedding?",
-  ],
+  // ── Destination-specific itineraries — MUST come before the generic entry ────
 
   // ── Rajasthan / palace itinerary ─────────────────────────────────────────────
   [
-    /\b(what does|what.s|tell me about|describe|walk).{0,20}(rajasthan|palace|big fat).{0,20}(wedding look|wedding like|itinerary|day|plan)\b|big fat indian wedding/i,
+    /\b(show me|show the|give me|what does|what.s|tell me about|describe|walk).{0,25}(rajasthan|palace|big fat).{0,25}(wedding|itinerary|day|plan)\b|big fat indian wedding/i,
     "Our Rajasthan itinerary is a 4-day grand celebration:\n\n- Day 1 — Royal Welcome: Traditional garland arrival, city tour, and Bachelor's Party in a floral canopy.\n- Day 2 — The Engagement: Sagan function with ring exchange and live Shehnai and Flute music.\n- Day 3 — Mehndi & Sangeet: Celebrity performance, vibrant henna artistry at a theme-decorated venue.\n- Day 4 — The Grand Finale: Haldi and Chura rituals, majestic elephant procession, fireworks, and a lavish buffet dinner.\n\nThis is a template — we can adjust any ceremony, add functions, or change the sequence.",
     "Want to see palace venues for this, or explore the Royal Indian moodboard?",
   ],
 
+  // ── Goa / beach itinerary ────────────────────────────────────────────────────
+  [
+    /\b(show me|show the|give me|what does|what.s|tell me about|describe|walk).{0,25}(goa|beach|beachside).{0,25}(wedding|itinerary|day|plan)\b/i,
+    "Our Goa itinerary is a 4-day beachside celebration:\n\n- Day 1 — Sunkissed Arrival: Transfer to your resort and settle in at leisure.\n- Day 2 — Bridal Rituals: Traditional anointing with scented oils, then a couples' spa at Aguada.\n- Day 3 — The Sand Ceremony: Exchange vows beachside with a live choir, followed by a poolside gala dinner and champagne.\n- Day 4 — Blissful Brunch: First morning of marriage celebrated with a champagne brunch in your decorated villa.\n\nEvery detail is flexible — this is your starting point, not your script.",
+    "Want to see the venues we love for this, or explore the moodboards for a Goa beach wedding?",
+  ],
+
   // ── Kerala itinerary ──────────────────────────────────────────────────────────
   [
-    /\b(what does|what.s|tell me about|describe|walk).{0,20}(kerala|backwater).{0,20}(wedding look|wedding like|itinerary|day|plan)\b/i,
+    /\b(show me|show the|give me|what does|what.s|tell me about|describe|walk).{0,25}(kerala|backwater).{0,25}(wedding|itinerary|day|plan)\b/i,
     "Our Kerala itinerary is a 3-day intimate celebration:\n\n- Day 1 — Backwater Greeting: Arrival at a tropical resort, traditional Mehndi ceremony with South Indian classical music.\n- Day 2 — The Nuptial Chain: Grand entrance on decorated elephants, rituals under a floral pandal with sacred mantras, feast on banana leaves.\n- Day 3 — Tropical Reflection: Relaxation by the backwaters, farewell dinner under the palms.\n\nKerala weddings carry deep cultural beauty — every ritual is arranged with care.",
     "Want to see the venues we use in Kerala, or explore moodboards that suit this setting?",
+  ],
+
+  // ── Generic itinerary (all 3) — AFTER specific destination entries ───────────
+  [
+    /\b(sample|show me|what does|walk me|take me|give me).{0,30}(itinerary|wedding look|day look|plan|schedule)\b|plan a (goa|rajasthan|kerala|beach|palace|hill)/i,
+    "We have three signature itineraries — each is a starting point and every detail is flexible:\n\n- The Big Fat Indian Wedding — Rajasthan, 4 days. Garland welcome, Sagan, Mehndi & Sangeet, then the grand finale with elephant procession, fireworks and lavish buffet.\n- Exotic Beachside Wedding — Goa, 4 days. Beach arrival, bridal spa rituals, sand ceremony with a live choir, and a champagne villa brunch.\n- Celestial Kerala Union — Kerala, 3 days. Mehndi by the backwaters, elephant-entrance ceremony under a floral pandal, and a farewell feast on banana leaves.\n\nWhich setting speaks to you most?",
+    "",
   ],
 
   // ── Customise itinerary ───────────────────────────────────────────────────────
@@ -191,7 +272,7 @@ const FAQ_TABLE = [
 
   // ── Entertainment ────────────────────────────────────────────────────────────
   [
-    /\b(entertainment|performers?|artists?|celebrity|live (music|performances?|band|act)|sangeet (performances?|show|artists?)|dj|choreograph|show)\b/i,
+    /\b(entertainment|performers?|celebrity|live (music|performances?|band|act)|sangeet (performances?|show|artists?)|dj|choreograph)\b/i,
     "Our Entertainment service delivers concert-grade production with curated talent:\n- Live performances and celebrity artist bookings\n- Sangeet choreography programming\n- DJ and music direction\n- Custom sound and lighting production\n- Fully programmed entertainment experiences from entry to finale",
     "Let me know the vibe you're going for — high-energy Bollywood, soulful classical, or something entirely different.",
   ],

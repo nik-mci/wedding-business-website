@@ -65,46 +65,61 @@ const NEXT_STEP = {
     "What does planning cost",
   ],
 
-  // After Goa venues → move to pricing + planning
+  // After Goa venues → pricing + planning
   goa: [
     "ITC Grand Goa pricing",
-    "Start planning my wedding",
+    "St. Regis Goa pricing",
     "Grand Hyatt Goa pricing",
-    "Book a discovery call",
+    "Taj Exotica Goa pricing",
+    "Taj Cidade de Goa pricing",
+    "Caravela Beach Resort pricing",
+    "Compare with another Goa venue",
+    "Start planning my wedding here",
     "What moodboards suit a Goa wedding",
     "Show Rajasthan venues instead",
-    "St Regis Goa pricing",
+    "Book a discovery call",
   ],
 
   // After Rajasthan venues → pricing + planning
   rajasthan: [
-    "Rambagh Palace pricing",
-    "Start planning my wedding",
-    "Oberoi Udai Vilas pricing",
-    "Book a discovery call",
+    "Alila Fort Bishangarh pricing",
+    "Raffles Udaipur pricing",
+    "Fairmont Jaipur pricing",
+    "Six Senses Fort Barwara pricing",
+    "Suryagarh Jaisalmer pricing",
+    "Leela Palace Jaipur pricing",
+    "Ajit Bhawan pricing",
+    "Samode Palace pricing",
+    "ITC Grand Bharat pricing",
+    "Compare with another Rajasthan venue",
+    "Start planning my wedding here",
     "What moodboards suit a palace wedding",
     "Show Goa venues instead",
-    "Umaid Bhawan pricing",
+    "Book a discovery call",
   ],
 
   // After Kerala venues → pricing + planning
   kerala: [
-    "Taj Green Cove pricing",
-    "Start planning my wedding",
+    "Taj Green Cove Kovalam pricing",
     "The Leela Kovalam pricing",
-    "Book a discovery call",
+    "Compare with another Kerala venue",
+    "Start planning my wedding here",
     "What moodboards suit a Kerala wedding",
     "Show Goa venues instead",
+    "Book a discovery call",
   ],
 
   // After Hills venues → pricing + planning
   hills: [
     "Westin Rishikesh pricing",
-    "Start planning my wedding",
-    "Lalit Grand Srinagar pricing",
-    "Book a discovery call",
+    "Lalit Grand Palace Srinagar pricing",
+    "Taj Corbett pricing",
+    "Hyatt Regency Dehradun pricing",
+    "Compare with another hills venue",
+    "Start planning my wedding here",
     "Show Goa venues instead",
     "Show Rajasthan venues instead",
+    "Book a discovery call",
   ],
 
   // After services → move to venues + pricing + conversion

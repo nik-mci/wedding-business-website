@@ -96,6 +96,8 @@ export default function Chatbot() {
   const [leadCaptured]                = useState(false);
   const [usedChips, setUsedChips]     = useState([]);
   const [feedbackGiven, setFeedbackGiven] = useState({});
+  const [unreadCount, setUnreadCount]     = useState(1);
+  const [tooltipVisible, setTooltipVisible] = useState(true);
   const messagesEndRef = useRef(null);
   const inputRef       = useRef(null);
   const abortRef       = useRef(null);
@@ -104,6 +106,7 @@ export default function Chatbot() {
   useEffect(() => {
     if (open) {
       setSidebarOpen(false);
+      setUnreadCount(0);
       setTimeout(() => inputRef.current?.focus(), 300);
     }
   }, [open]);
@@ -591,27 +594,57 @@ export default function Chatbot() {
           </div>
         </div>
 
-        {/* Chat toggle button */}
-        <button
-          onClick={() => setOpen(prev => !prev)}
-          aria-label={open ? "Close chat" : "Open chat"}
-          className="group flex items-center gap-0 hover:gap-3 overflow-hidden transition-all duration-300 cursor-none pointer-events-auto"
-        >
-          <span className="max-w-0 group-hover:max-w-[160px] opacity-0 group-hover:opacity-100 transition-all duration-300 overflow-hidden whitespace-nowrap bg-[#1A1408] text-[#C9A234] text-[10px] font-medium tracking-[0.2em] uppercase px-0 group-hover:px-4 py-3 shadow-lg">
-            {open ? "Close Chat" : "Chat With Us"}
-          </span>
-          <span className={`w-12 h-12 sm:w-14 sm:h-14 border rounded-full flex items-center justify-center shadow-[0_8px_32px_rgba(201,162,52,0.25)] transition-all duration-300 hover:scale-110 active:scale-95 ${open ? "bg-[#C9A234] border-[#C9A234]" : "bg-[#1A1408] border-[#C9A234]/50 group-hover:border-[#C9A234] group-hover:shadow-[0_8px_40px_rgba(201,162,52,0.45)]"}`}>
-            {open ? (
-              <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="#1A1408" strokeWidth="2" strokeLinecap="round">
-                <path d="M18 6L6 18M6 6l12 12"/>
-              </svg>
-            ) : (
-              <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="#C9A234" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-              </svg>
+        {/* Chat toggle — tooltip left, button right */}
+        <div className="flex items-center gap-3 pointer-events-auto">
+
+          {/* Permanent tooltip to the left */}
+          {tooltipVisible && !open && (
+            <div className="relative bg-[#1A1408] border border-[rgba(201,162,52,0.5)] rounded-lg px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.4),0_0_12px_rgba(201,162,52,0.2)] whitespace-nowrap">
+              {/* Close X */}
+              <button
+                onClick={() => setTooltipVisible(false)}
+                className="absolute top-1 right-1.5 text-[#9A8F7E] hover:text-[#C9A234] text-[11px] leading-none cursor-none transition-colors"
+                aria-label="Dismiss"
+              >
+                ✕
+              </button>
+              <p className="font-heading text-[11px] text-[#C9A234] tracking-[0.15em] uppercase font-semibold pr-3">Chat with Mira</p>
+              <p className="text-[9px] text-[#e8d5a3] tracking-[0.08em] opacity-80 mt-0.5">Your Wedding Concierge</p>
+              {/* Arrow pointing right toward the button */}
+              <div className="absolute right-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 bg-[#1A1408] border-r border-t border-[rgba(201,162,52,0.5)] rotate-45" />
+            </div>
+          )}
+
+          {/* Circle button */}
+          <button
+            onClick={() => setOpen(prev => !prev)}
+            aria-label={open ? "Close chat" : "Open chat"}
+            className="relative cursor-none active:scale-95 transition-transform duration-200"
+          >
+            <span className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center ${open ? "bg-[#C9A234] border border-[#C9A234] shadow-[0_0_20px_6px_rgba(201,162,52,0.5)]" : "shadow-[0_0_18px_5px_rgba(201,162,52,0.5)]"}`}>
+              {open ? (
+                <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="#1A1408" strokeWidth="2" strokeLinecap="round">
+                  <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+              ) : (
+                <span className="w-full h-full rounded-full overflow-hidden">
+                  <img
+                    src="/assets/photos/Gemini_Generated_Image_tkd7dstkd7dstkd7.png"
+                    alt="MIRA"
+                    className="w-full h-full object-cover"
+                    style={{ transform: "scale(1.45)", transformOrigin: "center 38%" }}
+                  />
+                </span>
+              )}
+            </span>
+            {!open && unreadCount > 0 && (
+              <span className="absolute -top-1 -right-1 w-[18px] h-[18px] bg-red-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-[#fff8e7] shadow-md z-10 pointer-events-none">
+                {unreadCount}
+              </span>
             )}
-          </span>
-        </button>
+          </button>
+
+        </div>
 
       </div>
     </>
