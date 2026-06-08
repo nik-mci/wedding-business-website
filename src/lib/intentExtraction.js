@@ -30,6 +30,9 @@ function getClient() {
  * @property {string[]} venues_viewed       - names of venues already shown this session
  * @property {string}   selected_venue      - venue explicitly picked by user
  * @property {string}   intent              - "venue_info" | "pricing" | "enquiry" | "general"
+ * @property {string}   category            - "venue-pricing" | "moodboard" | "service" | "itinerary" | "faq" | "package" | "about" | "all"
+ * @property {string}   destination_type    - "beach" | "royal-heritage" | "hills" | "kerala" | "city" | null
+ * @property {string}   query_type          - "specific-item" | "comparison" | "budget-match" | "list" | "general"
  * @property {string}   stage               - "discovery" | "value" | "conversion" | "handoff"
  * @property {string}   intent_level        - "low" | "medium" | "high"
  * @property {string}   user_language       - e.g. "English" | "Hindi"
@@ -52,6 +55,28 @@ Entities to extract:
 - services_needed (array): subset of ["planning", "decor", "photography", "entertainment", "hospitality", "catering", "logistics"]
 - selected_venue (string): EXACT venue name if user explicitly selects or asks for details about one specific venue
 - intent (string): "venue_info" | "pricing" | "enquiry" | "general"
+- category (string): classify the PRIMARY topic of the query:
+    "venue-pricing"  → asking about a specific venue's cost, rooms, capacity, buyout, F&B
+    "moodboard"      → asking about decor themes, moodboards, Haldi/Mehendi/Sangeet/Wedding aesthetics
+    "service"        → asking about what services Vows & Vedas provides (planning, decor, photography, etc.)
+    "itinerary"      → asking about wedding day schedules, day-by-day plans
+    "faq"            → asking about process, timeline, cancellation, customisation, how it works
+    "package"        → asking about planning packages, fees, what's included
+    "about"          → asking about the company, team, history
+    "all"            → general exploration, not specific to one category
+- destination_type (string | null): the destination category relevant to the query:
+    "beach"          → Goa, coastal, sea-facing
+    "royal-heritage" → Rajasthan, palace, fort, heritage
+    "hills"          → Rishikesh, Dehradun, Srinagar, Corbett, Himalayas
+    "kerala"         → Kerala, backwaters, Kovalam
+    "city"           → Delhi, Mumbai, Bangalore, urban hotel venues
+    null             → not destination-specific
+- query_type (string): classify the structure of the query:
+    "specific-item"  → asking about ONE named venue / moodboard / service
+    "comparison"     → comparing two or more options
+    "budget-match"   → asking what fits a given budget
+    "list"           → asking to list all options in a category
+    "general"        → open-ended question or general exploration
 - stage (string): "discovery" (exploring) | "value" (comparing options) | "conversion" (ready to enquire) | "handoff" (asked to speak to a human)
 - intent_level (string): "low" (browsing) | "medium" (interested, gathering info) | "high" (ready to book/enquire)
 - user_language (string): language of the CURRENT message if clearly NOT English — else omit / return "English"
@@ -65,6 +90,8 @@ Entities to extract:
      "tell me about itc grand" → "ITC Grand Goa beach wedding venue rooms capacity pricing buyout"
      "how much does a palace wedding cost" → "palace wedding venue pricing buyout cost Rajasthan Udaipur Jaipur"
      "what do you do for decor" → "Design & Decor services wedding mandap floral centerpiece lighting scenography"
+     "show me Rajasthan itinerary" → "Big Fat Indian Wedding Rajasthan itinerary day-by-day schedule 4 days"
+     "Haveli Nights moodboard" → "Haveli Nights wedding moodboard jewel tones candlelit haveli heritage decor"
 
 Return ONLY valid JSON matching the schema. You MUST include rewritten_query in every response.`;
 
@@ -82,6 +109,9 @@ function fallbackIntent(query) {
     venues_viewed: [],
     selected_venue: "",
     intent: "general",
+    category: "all",
+    destination_type: null,
+    query_type: "general",
     stage: "discovery",
     intent_level: "low",
     user_language: "English",

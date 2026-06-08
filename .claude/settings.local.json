@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(node --input-type=module)",
-      "Bash(node -e \"require\\('fs'\\).readFileSync\\('src/app/destinations/royal-and-heritage/page.js', 'utf8'\\)\")"
+      "Bash(node -e \"require\\('fs'\\).readFileSync\\('src/app/destinations/royal-and-heritage/page.js', 'utf8'\\)\")",
+      "Bash(az communication *)",
+      "Bash(dig TXT vowsandvedas.com +short)",
+      "Bash(dig CNAME selector1-azurecomm-prod-net._domainkey.vowsandvedas.com +short)",
+      "Bash(dig CNAME selector2-azurecomm-prod-net._domainkey.vowsandvedas.com +short)"
     ]
   }
 }

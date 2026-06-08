@@ -170,40 +170,17 @@ const FAQ_TABLE = [
     "",
   ],
 
-  // ── Destination-specific itineraries — MUST come before the generic entry ────
-
-  // ── Rajasthan / palace itinerary ─────────────────────────────────────────────
+  // ── Itinerary / wedding flow ─────────────────────────────────────────────────
   [
-    /\b(show me|show the|give me|what does|what.s|tell me about|describe|walk).{0,25}(rajasthan|palace|big fat).{0,25}(wedding|itinerary|day|plan)\b|big fat indian wedding/i,
-    "Our Rajasthan itinerary is a 4-day grand celebration:\n\n- Day 1 — Royal Welcome: Traditional garland arrival, city tour, and Bachelor's Party in a floral canopy.\n- Day 2 — The Engagement: Sagan function with ring exchange and live Shehnai and Flute music.\n- Day 3 — Mehndi & Sangeet: Celebrity performance, vibrant henna artistry at a theme-decorated venue.\n- Day 4 — The Grand Finale: Haldi and Chura rituals, majestic elephant procession, fireworks, and a lavish buffet dinner.\n\nThis is a template — we can adjust any ceremony, add functions, or change the sequence.",
-    "Want to see palace venues for this, or explore the Royal Indian moodboard?",
-  ],
-
-  // ── Goa / beach itinerary ────────────────────────────────────────────────────
-  [
-    /\b(show me|show the|give me|what does|what.s|tell me about|describe|walk).{0,25}(goa|beach|beachside).{0,25}(wedding|itinerary|day|plan)\b/i,
-    "Our Goa itinerary is a 4-day beachside celebration:\n\n- Day 1 — Sunkissed Arrival: Transfer to your resort and settle in at leisure.\n- Day 2 — Bridal Rituals: Traditional anointing with scented oils, then a couples' spa at Aguada.\n- Day 3 — The Sand Ceremony: Exchange vows beachside with a live choir, followed by a poolside gala dinner and champagne.\n- Day 4 — Blissful Brunch: First morning of marriage celebrated with a champagne brunch in your decorated villa.\n\nEvery detail is flexible — this is your starting point, not your script.",
-    "Want to see the venues we love for this, or explore the moodboards for a Goa beach wedding?",
-  ],
-
-  // ── Kerala itinerary ──────────────────────────────────────────────────────────
-  [
-    /\b(show me|show the|give me|what does|what.s|tell me about|describe|walk).{0,25}(kerala|backwater).{0,25}(wedding|itinerary|day|plan)\b/i,
-    "Our Kerala itinerary is a 3-day intimate celebration:\n\n- Day 1 — Backwater Greeting: Arrival at a tropical resort, traditional Mehndi ceremony with South Indian classical music.\n- Day 2 — The Nuptial Chain: Grand entrance on decorated elephants, rituals under a floral pandal with sacred mantras, feast on banana leaves.\n- Day 3 — Tropical Reflection: Relaxation by the backwaters, farewell dinner under the palms.\n\nKerala weddings carry deep cultural beauty — every ritual is arranged with care.",
-    "Want to see the venues we use in Kerala, or explore moodboards that suit this setting?",
-  ],
-
-  // ── Generic itinerary (all 3) — AFTER specific destination entries ───────────
-  [
-    /\b(sample|show me|what does|walk me|take me|give me).{0,30}(itinerary|wedding look|day look|plan|schedule)\b|plan a (goa|rajasthan|kerala|beach|palace|hill)/i,
-    "We have three signature itineraries — each is a starting point and every detail is flexible:\n\n- The Big Fat Indian Wedding — Rajasthan, 4 days. Garland welcome, Sagan, Mehndi & Sangeet, then the grand finale with elephant procession, fireworks and lavish buffet.\n- Exotic Beachside Wedding — Goa, 4 days. Beach arrival, bridal spa rituals, sand ceremony with a live choir, and a champagne villa brunch.\n- Celestial Kerala Union — Kerala, 3 days. Mehndi by the backwaters, elephant-entrance ceremony under a floral pandal, and a farewell feast on banana leaves.\n\nWhich setting speaks to you most?",
-    "",
+    /\b(sample|show me|what does|walk me|take me|give me|show the|tell me about|describe|what.s).{0,30}(itinerary|wedding (flow|look|day|plan|schedule)|how.*wedding.*structured|functions?)\b|plan a (goa|rajasthan|kerala|beach|palace|hill)|big fat indian wedding|exotic beachside|celestial kerala/i,
+    "Our standard wedding structure is the 2-Day, 4-Function Flow — a proven blueprint designed to build anticipation, honour tradition, and culminate in a breathtaking ceremony:\n\nFunction 1 — Day 1 · Afternoon\nWelcome Lunch & Vibrant Mehendi\nHenna artistry, live music, and an atmosphere of joyful anticipation.\n\nFunction 2 — Day 1 · Evening\nHigh-Energy Sangeet & Afterparty\nChoreographed performances, live artists, and a celebratory afterparty.\n\nFunction 3 — Day 2 · Morning\nIntimate Haldi & Choorah Ceremony\nTurmeric blessings, family traditions, and quiet moments of connection.\n\nFunction 4 — Day 2 · Sunset\nMain Pheras & Formal Reception\nSacred vows, followed by a world-class reception dinner.\n\nEvery detail is flexible — this is your starting point, not your script.",
+    "Which function would you like to explore further, or shall I show you venues?",
   ],
 
   // ── Customise itinerary ───────────────────────────────────────────────────────
   [
-    /\b(customis|customiz|tailor|personalise|personalize|modify|change|adjust|flexible|adapt).{0,20}(itinerary|plan|package|wedding)\b/i,
-    "Absolutely — our itineraries are starting points, not fixed packages. Every detail is flexible: the sequence of ceremonies, the venue, the number of functions, the decor theme, and the duration can all be shaped around your vision.\n\nOnce you tell me which itinerary feels closest to what you have in mind, I can walk you through what we'd typically change and connect you with the team to build the actual plan.",
+    /\b(customis|customiz|tailor|personalise|personalize|modify|change|adjust|flexible|adapt).{0,20}(itinerary|plan|package|wedding|function)\b/i,
+    "Absolutely — the 2-Day 4-Function Flow is a starting point, not a fixed script. We can adjust the sequence of functions, add ceremonies, change the timing, expand to 3 days, or restructure entirely around your vision.\n\nTell me what feels most important to you and we'll shape it from there.",
     "",
   ],
 
@@ -221,9 +198,16 @@ const FAQ_TABLE = [
     "",
   ],
 
+  // ── Something different / unconventional ─────────────────────────────────────
+  [
+    /\b(something (different|unique|unconventional|unusual|non.?traditional|out of the (ordinary|box))|want.{0,15}different|not (traditional|typical|conventional|standard)|break.{0,10}(mould|mold|convention|tradition)|unusual wedding|unique wedding|different kind)\b/i,
+    "We love couples who want to break the mould. \"Different\" can mean a lot of things — a sand ceremony in Goa with no traditional rituals, an intimate elopement in the Himalayas for 20 people, a fusion Hindu-Christian ceremony, or a destination wedding in Europe.\n\nWhat does \"different\" look like in your vision?",
+    "",
+  ],
+
   // ── What makes V&V different ────────────────────────────────────────────────
   [
-    /\b(different|unique|special|stand out|why (choose|pick|select|you))\b/i,
+    /\b(why (choose|pick|select|use|go with) (you|vows|v&v)|what (makes|sets) you (apart|different|special|unique)|stand out|what.s special about you)\b/i,
     "A few things set us apart:\n- Deep cultural knowledge paired with an international design sensibility\n- Every couple gets a dedicated wedding manager — one person, start to finish\n- Backed by GeTSHolidays — 37 years of event expertise, 150+ professionals\n- 300+ weddings crafted across India and abroad",
     "Happy to walk you through how we'd approach your specific wedding.",
   ],
@@ -327,10 +311,12 @@ const FAQ_TABLE = [
   ],
 
   // ── Rajasthan / palace weddings ─────────────────────────────────────────────
+  // City-specific queries (Udaipur, Jaipur, Jodhpur, Jaisalmer) are intentionally
+  // excluded from this pattern — they fall through to the LLM for city-scoped responses.
   [
-    /\b(rajasthan|palace|fort|heritage|royal|udaipur|jaipur|jodhpur|jaisalmer)\b.*\b(wedding|venue|celebrat)/i,
-    "Rajasthan is our most sought-after destination. Top venues by city:\n- Udaipur — Oberoi Udai Vilas, Taj Lake Palace, Jag Mandir, Shiv Niwas Palace\n- Jaipur — Rambagh Palace, Jai Mahal Palace, Oberoi Raj Vilas\n- Jodhpur — Umaid Bhavan Palace, Ajit Bhawan, Taj Hari Mahal\n- Jaisalmer — Gorbandh Palace, Narain Niwas Fort",
-    "Which city or venue interests you?",
+    /\b(rajasthan|palace|fort|heritage|royal)\b.*\b(wedding|venue|celebrat)/i,
+    "Rajasthan is our most sought-after destination for palace and heritage weddings. Our confirmed venues across the region:\n- Jaipur — Leela Palace Jaipur, Hyatt Regency Jaipur, Fairmont Jaipur\n- Near Jaipur — Alila Fort Bishangarh (~45 km), Samode Palace\n- Udaipur — Raffles Udaipur\n- Jodhpur — Ajit Bhawan\n- Jaisalmer — Suryagarh Jaisalmer\n- Ranthambore area — Six Senses Fort Barwara, ITC Grand Bharat",
+    "Which city or style interests you most?",
   ],
 
   // ── Goa / beach weddings ────────────────────────────────────────────────────
@@ -343,7 +329,7 @@ const FAQ_TABLE = [
   // ── Kerala weddings ─────────────────────────────────────────────────────────
   [
     /\b(kerala|backwater|kovalam|cochin|kochi|tropical)\b.*\b(wedding|venue|celebrat)/i,
-    "Kerala is beautiful for intimate destination weddings. Our top venues:\n- Taj Green Cove, Kovalam — Balinese-inspired hillside retreat where backwaters meet the sea\n- The Leela Kovalam — India's only clifftop beach resort with panoramic Arabian Sea views\n- Kumarakom — Serene backwater destination with houseboat arrivals and lush greenery\n- Kochi — Colonial heritage setting with Fort Kochi as a backdrop",
+    "Kerala is beautiful for intimate destination weddings. Our confirmed venues:\n- Taj Green Cove, Kovalam — Balinese-inspired hillside retreat where backwaters meet the sea\n- The Leela Kovalam — India's only clifftop beach resort with panoramic Arabian Sea views",
     "Which setting appeals to you?",
   ],
 
@@ -363,6 +349,19 @@ const FAQ_TABLE = [
 
 ];
 
+// If the query names a specific venue, skip all static FAQs and let the LLM
+// handle it — static answers can't do per-venue pricing or city-scoped details.
+const VENUE_KEYWORDS = [
+  'itc grand goa', 'st. regis', 'st regis', 'grand hyatt goa', 'taj exotica',
+  'taj cidade', 'caravela', 'alila', 'samode', 'raffles udaipur',
+  'fairmont jaipur', 'fairmont sahar', 'ajit bhawan', 'six senses', 'suryagarh',
+  'itc grand bharat', 'westin rishikesh', 'westin himalayas', 'taj corbett',
+  'hyatt regency dehradun', 'hyatt regency jaipur', 'lalit grand palace',
+  'taj green cove', 'leela kovalam', 'leela palace', 'itc maurya',
+  'taj lands end', 'grand hyatt bkc', 'itc gardenia', 'taj west end',
+  'prestige golfshire', 'kings meadow', 'angsana oasis',
+];
+
 /**
  * Returns a static answer string if the query matches, otherwise null.
  * @param {string} query
@@ -370,6 +369,11 @@ const FAQ_TABLE = [
  */
 export function matchStaticFaq(query, leadCaptured = false) {
   if (!query || query.trim().length < 4) return null;
+
+  // Venue-specific queries must go to the LLM — static responses can't price or scope correctly
+  const lq = query.toLowerCase();
+  if (VENUE_KEYWORDS.some(name => lq.includes(name))) return null;
+
   for (const [pattern, body, handoff] of FAQ_TABLE) {
     if (pattern.test(query)) {
       if (leadCaptured || !handoff) return body;

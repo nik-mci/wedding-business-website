@@ -391,9 +391,16 @@ export default function Chatbot() {
           {/* Header */}
           <div className="flex items-center justify-between px-5 py-4 border-b border-[#C9A234]/15 shrink-0">
             <div className="flex items-center gap-3">
-              <span className="text-[#C9A234] text-lg leading-none">✦</span>
+              <span className="w-10 h-10 shrink-0 rounded-full bg-[#1A1408] border border-[#C9A234]/50 overflow-hidden flex items-center justify-center shadow-[0_0_10px_3px_rgba(201,162,52,0.3)]">
+                <img
+                  src="/assets/photos/Gemini_Generated_Image_tkd7dstkd7dstkd7.png"
+                  alt="MIRA"
+                  className="w-full h-full object-cover"
+                  style={{ transform: "scale(1.45)", transformOrigin: "center 38%" }}
+                />
+              </span>
               <div>
-                <p className="font-heading text-[#FDFAF5] text-[17px] leading-tight">Vows &amp; Vedas</p>
+                <p className="font-heading text-[#FDFAF5] text-[17px] leading-tight">MIRA</p>
                 <p className="text-[#9A8F7E] text-[10px] tracking-[0.18em] uppercase font-medium mt-0.5">Wedding Concierge</p>
               </div>
             </div>
@@ -418,7 +425,14 @@ export default function Chatbot() {
                   {/* Message bubble row */}
                   <div className={`flex items-end gap-2.5 ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
                     {msg.role === "bot" && (
-                      <span className="w-6 h-6 shrink-0 rounded-full border border-[#C9A234]/40 flex items-center justify-center text-[#C9A234] text-[10px] mb-0.5">✦</span>
+                      <span className="w-7 h-7 shrink-0 rounded-full bg-[#1A1408] border border-[#C9A234]/50 overflow-hidden flex items-center justify-center mb-0.5 shadow-[0_0_8px_2px_rgba(201,162,52,0.25)]">
+                        <img
+                          src="/assets/photos/Gemini_Generated_Image_tkd7dstkd7dstkd7.png"
+                          alt="MIRA"
+                          className="w-full h-full object-cover"
+                          style={{ transform: "scale(1.45)", transformOrigin: "center 38%" }}
+                        />
+                      </span>
                     )}
                     <div
                       className={`

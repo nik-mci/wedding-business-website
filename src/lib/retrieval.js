@@ -53,8 +53,65 @@ async function embedQuery(text) {
   return res.data[0].embedding;
 }
 
+// ── Category → section label map ─────────────────────────────────────────────
+// Maps intent.category to the section values used in the Azure AI Search index.
+const CATEGORY_SECTION_MAP = {
+  "venue-pricing":  ["venue-pricing", "venues", "venue"],
+  "moodboard":      ["moodboard", "moodboards"],
+  "service":        ["service", "services"],
+  "itinerary":      ["itinerary", "itineraries"],
+  "faq":            ["faq", "faqs"],
+  "package":        ["package", "packages", "planning-packages"],
+  "about":          ["about", "team", "company"],
+};
+
+const DESTINATION_CITY_MAP = {
+  "beach":          ["Goa"],
+  "royal-heritage": ["Jaipur", "Udaipur", "Jodhpur", "Jaisalmer", "Rajasthan"],
+  "hills":          ["Rishikesh", "Dehradun", "Srinagar", "Corbett"],
+  "kerala":         ["Kovalam", "Kochi", "Kerala"],
+  "city":           ["Delhi", "Mumbai", "Bangalore"],
+};
+
+// Build OData filter string from intent
+function buildFilter(intent) {
+  const filters = [];
+
+  // Section / category filter
+  const sections = CATEGORY_SECTION_MAP[intent.category];
+  if (sections?.length) {
+    const clause = sections.map(s => `section eq '${s}'`).join(" or ");
+    filters.push(`(${clause})`);
+  }
+
+  // City filter from destination_type
+  const destCities = DESTINATION_CITY_MAP[intent.destination_type];
+  if (destCities?.length && !intent.selected_venue) {
+    const clause = destCities.map(c => `city eq '${c}'`).join(" or ");
+    filters.push(`(${clause})`);
+  }
+
+  // Specific city filter (overrides destination_type)
+  if (intent.cities?.length === 1 && !intent.selected_venue) {
+    filters.push(`city eq '${intent.cities[0]}'`);
+  }
+
+  return filters.length ? filters.join(" and ") : null;
+}
+
+// Dynamic topK based on query complexity
+function resolveTopK(intent, defaultK = 6) {
+  switch (intent.query_type) {
+    case "comparison":   return 10;
+    case "budget-match": return 8;
+    case "list":         return 8;
+    case "specific-item": return 4;
+    default:             return defaultK;
+  }
+}
+
 // ── Azure AI Search vector query ──────────────────────────────────────────────
-async function vectorSearch(embedding, topK = 30) {
+async function vectorSearch(embedding, topK = 30, filter = null) {
   if (!SEARCH_ENDPOINT || !SEARCH_KEY) {
     console.warn("[retrieval] Azure AI Search not configured — returning empty");
     return [];
@@ -69,6 +126,7 @@ async function vectorSearch(embedding, topK = 30) {
     }],
     select: "id,content,heading,section,city,venue_name,source,url",
     top:    topK,
+    ...(filter ? { filter } : {}),
   };
 
   const res = await fetch(
@@ -177,16 +235,26 @@ export async function retrieveContext(query, intent = {}, { topK = 6 } = {}) {
     return [];
   }
 
-  // Step 3: vector search (fetch more than needed for filtering headroom)
-  const fetchK  = intent.selected_venue ? 50 : 30;
-  const rawDocs = await vectorSearch(embedding, fetchK);
+  // Step 3: resolve dynamic topK + build category filter
+  const resolvedK = resolveTopK(intent, topK);
+  const fetchK    = intent.selected_venue ? 50 : Math.max(resolvedK * 5, 30);
+  const filter    = buildFilter(intent);
 
-  // Step 4: score adjust
+  if (filter) console.log(`[retrieval] applying filter: ${filter}`);
+
+  // Step 4: vector search with filter — fall back to unfiltered if no results
+  let rawDocs = await vectorSearch(embedding, fetchK, filter);
+  if (rawDocs.length === 0 && filter) {
+    console.log("[retrieval] filter returned 0 results — retrying without filter");
+    rawDocs = await vectorSearch(embedding, fetchK, null);
+  }
+
+  // Step 5: score adjust
   const scored = adjustScores(rawDocs, intent);
 
-  // Step 5: deduplicate by venue/heading
+  // Step 6: deduplicate by venue/heading
   const unique = deduplicate(scored);
 
-  // Step 6: sort + cap
-  return unique.sort((a, b) => b.score - a.score).slice(0, topK);
+  // Step 7: sort + cap at resolved topK
+  return unique.sort((a, b) => b.score - a.score).slice(0, resolvedK);
 }
