@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
-import ProfileDropdown from "@/components/global/ProfileDropdown";
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
@@ -130,10 +129,6 @@ export default function Navigation() {
 
         {/* Right — Profile + CTA + Mobile Hamburger */}
         <div className="flex-1 flex items-center justify-end gap-3 sm:gap-4">
-          <div className="hidden md:block">
-            <ProfileDropdown />
-          </div>
-
           <Link
             href="/contact"
             className={`hidden sm:inline-flex items-center text-[9px] lg:text-[10px] uppercase tracking-[0.22em] font-medium px-3 py-[6px] lg:px-4 lg:py-[7px] border transition-all duration-300 overflow-hidden relative group whitespace-nowrap ${
@@ -254,8 +249,7 @@ export default function Navigation() {
           })}
         </ul>
 
-        <div className="px-6 py-5 border-t border-ink/8 flex items-center justify-between gap-4">
-          <ProfileDropdown />
+        <div className="px-6 py-5 border-t border-ink/8 flex items-center justify-end gap-4">
           <Link
             href="/contact"
             className="flex-1 text-center text-[10px] uppercase tracking-[0.22em] font-medium px-4 py-3 border border-gold text-ink hover:bg-gold hover:text-white transition-colors duration-300"
