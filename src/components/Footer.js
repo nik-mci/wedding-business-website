@@ -66,7 +66,7 @@ export default function Footer() {
           <a href="#" className="hover:text-gold transition-colors">Instagram</a>
           <a href="#" className="hover:text-gold transition-colors">Pinterest</a>
           <a href="#" className="hover:text-gold transition-colors">YouTube</a>
-          <a href="https://wa.me/919654277656" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">WhatsApp</a>
+          <a href="/contact" className="hover:text-gold transition-colors">WhatsApp</a>
         </div>
         <p className="uppercase">Privacy · Terms</p>
       </div>
