@@ -91,19 +91,48 @@ function buildChatbotSection(ctx) {
     </tr>`;
 }
 
+const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET_KEY;
+const RECAPTCHA_MIN_SCORE = 0.5;
+
+// Verify a reCAPTCHA v3 token with Google. If no secret is configured the check
+// is skipped (returns ok) so the form keeps working until keys are added in config.
+async function verifyRecaptcha(token) {
+  if (!RECAPTCHA_SECRET) return { ok: true, skipped: true };
+  if (!token) return { ok: false, reason: "missing-token" };
+  try {
+    const res = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ secret: RECAPTCHA_SECRET, response: token }),
+    });
+    const data = await res.json();
+    if (!data.success) return { ok: false, reason: "failed", data };
+    if (typeof data.score === "number" && data.score < RECAPTCHA_MIN_SCORE) {
+      return { ok: false, reason: "low-score", score: data.score };
+    }
+    return { ok: true, score: data.score };
+  } catch {
+    return { ok: false, reason: "error" };
+  }
+}
+
 const RECIPIENTS = [
-  { address: "samir.kalia@wearemci.com",        displayName: "Samir Kalia" },
-  { address: "ruchi.mohotra@wearemci.com",       displayName: "Ruchi Mohotra" },
-  { address: "Arunima.sethi@getsholidays.com",   displayName: "Arunima Sethi" },
-  { address: "rakesh.bijewar@wearemci.com",      displayName: "Rakesh Bijewar" },
-  { address: "nikhil.arora@wearemci.com",        displayName: "Nikhil Arora" },
-  { address: "anamta.ali@getsholidays.com",      displayName: "Anamta Ali" },
+  { address: "info@vowsandvedas.com", displayName: "Vows & Vedas" },
 ];
 
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { firstName, lastName, email, phone, destination, weddingDate, message, chatbotContext } = body;
+    const { firstName, lastName, email, phone, destination, weddingDate, message, chatbotContext, recaptchaToken } = body;
+
+    const recaptcha = await verifyRecaptcha(recaptchaToken);
+    if (!recaptcha.ok) {
+      console.warn("Contact form reCAPTCHA rejected:", recaptcha.reason, recaptcha.score ?? "");
+      return Response.json(
+        { success: false, error: "Your submission could not be verified. Please try again." },
+        { status: 400 }
+      );
+    }
 
     const client = new EmailClient(process.env.AZURE_COMMUNICATION_CONNECTION_STRING);
 

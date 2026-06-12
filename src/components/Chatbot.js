@@ -325,7 +325,7 @@ export default function Chatbot() {
 
             {/* Email / Enquiry */}
             <a
-              href="mailto:arunima.sethi@getsholidays.com"
+              href="mailto:info@vowsandvedas.com"
               aria-label="Email us"
               className="group flex flex-col items-center gap-1.5 px-4 py-3.5 hover:bg-[#251C0D] transition-colors duration-200 w-full"
             >
