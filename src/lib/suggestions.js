@@ -202,12 +202,12 @@ const NEXT_STEP = {
   ],
 };
 
-// ── Special chips that open WhatsApp or /contact ──────────────────────────────
+// ── Special chips that open /contact ─────────────────────────────────────────
 // Handled separately in Chatbot.js render
 export const ACTION_CHIPS = {
   "Book a discovery call":   "/contact",
   "Start planning my wedding": "/contact",
-  "Speak to the team":       "https://wa.me/919654277656",
+  "Speak to the team":       "/contact",
 };
 
 /**

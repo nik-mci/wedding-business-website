@@ -343,7 +343,7 @@ const FAQ_TABLE = [
   // ── Contact / reach out ─────────────────────────────────────────────────────
   [
     /\b(contact|reach|speak|call|whatsapp|email|phone|get in touch|talk to (someone|a (person|human|planner)))\b/i,
-    "You can reach the team here:\n- WhatsApp: +91 9654277656\n- Email: arunima.sethi@getsholidays.com\n- Enquiry form: tap 'Begin Your Journey' below\n\nWe usually respond within 24 hours.",
+    "You can reach the team here:\n- Email: arunima.sethi@getsholidays.com\n- Enquiry form: tap 'Begin Your Journey' below\n\nWe usually respond within 24 hours.",
     "",
   ],
 

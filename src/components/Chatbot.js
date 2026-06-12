@@ -268,7 +268,7 @@ export default function Chatbot() {
           const updated = [...prev];
           updated[updated.length - 1] = {
             role: "bot",
-            text: "Something went wrong. Please try again or reach us on WhatsApp: +91 9654277656",
+            text: "Something went wrong. Please try again or reach us via the Begin Your Journey form.",
             streaming: false,
           };
           return updated;
@@ -311,7 +311,7 @@ export default function Chatbot() {
 
             {/* Call Us */}
             <a
-              href="tel:+919654277656"
+              href="/contact"
               aria-label="Call us"
               className="group flex flex-col items-center gap-1.5 px-4 py-3.5 hover:bg-[#251C0D] transition-colors duration-200 w-full"
             >
@@ -340,9 +340,7 @@ export default function Chatbot() {
 
             {/* WhatsApp */}
             <a
-              href="https://wa.me/919654277656"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/contact"
               aria-label="Chat on WhatsApp"
               className="group flex flex-col items-center gap-1.5 px-4 py-3.5 hover:bg-[#251C0D] transition-colors duration-200 w-full"
             >
@@ -490,9 +488,9 @@ export default function Chatbot() {
                   {isLastBotMsg && !msg.streaming && msg.suggestions?.length > 0 && (
                     <div className="flex flex-wrap gap-2 mt-1 ml-9">
                       {msg.suggestions.map((s, si) => {
-                        // CTA chips — open /contact or WhatsApp directly
-                        const ctaContactChips = new Set(["Book a discovery call", "Start planning my wedding"]);
-                        const ctaExternalMap  = { "Speak to the team": "https://wa.me/919654277656" };
+                        // CTA chips — open /contact directly
+                        const ctaContactChips = new Set(["Book a discovery call", "Start planning my wedding", "Speak to the team"]);
+                        const ctaExternalMap  = {};
                         if (ctaContactChips.has(s)) {
                           return (
                             <button
