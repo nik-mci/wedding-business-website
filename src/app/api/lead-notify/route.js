@@ -1,7 +1,7 @@
 import { EmailClient } from "@azure/communication-email";
 
 const RECIPIENTS = [
-  { address: "anamta.ali@getsholidays.com", displayName: "Anamta Ali" },
+  { address: "info@vowsandvedas.com", displayName: "Vows & Vedas" },
 ];
 
 function escHtml(str) {
