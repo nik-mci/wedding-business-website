@@ -64,9 +64,12 @@ export default function ContactPage() {
   }, []);
 
   const getRecaptchaToken = async () => {
-    if (!RECAPTCHA_SITE_KEY || typeof window === "undefined" || !window.grecaptcha) {
-      return null;
+    if (!RECAPTCHA_SITE_KEY || typeof window === "undefined") return null;
+    // Wait briefly for the reCAPTCHA script to finish loading (up to ~3s).
+    for (let i = 0; i < 30 && !window.grecaptcha?.execute; i++) {
+      await new Promise((r) => setTimeout(r, 100));
     }
+    if (!window.grecaptcha?.execute) return null;
     try {
       return await new Promise((resolve, reject) => {
         window.grecaptcha.ready(() => {

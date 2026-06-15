@@ -92,10 +92,12 @@ function buildChatbotSection(ctx) {
 }
 
 const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET_KEY;
-const RECAPTCHA_MIN_SCORE = 0.5;
+const RECAPTCHA_MIN_SCORE = 0.5; // advisory only — low scores are flagged, never blocked
 
-// Verify a reCAPTCHA v3 token with Google. If no secret is configured the check
-// is skipped (returns ok) so the form keeps working until keys are added in config.
+// Verify a reCAPTCHA v3 token. Lead-safe by design: it blocks the dominant spam
+// vector (missing or forged token) but NEVER rejects a genuine token over its score
+// — a real enquiry must not be lost (v3 routinely scores privacy/incognito users low).
+// Fails open on Google/infra errors, and is skipped entirely when no secret is set.
 async function verifyRecaptcha(token) {
   if (!RECAPTCHA_SECRET) return { ok: true, skipped: true };
   if (!token) return { ok: false, reason: "missing-token" };
@@ -106,13 +108,13 @@ async function verifyRecaptcha(token) {
       body: new URLSearchParams({ secret: RECAPTCHA_SECRET, response: token }),
     });
     const data = await res.json();
-    if (!data.success) return { ok: false, reason: "failed", data };
-    if (typeof data.score === "number" && data.score < RECAPTCHA_MIN_SCORE) {
-      return { ok: false, reason: "low-score", score: data.score };
+    if (data?.success !== true) {
+      return { ok: false, reason: "verify-failed", codes: data?.["error-codes"] };
     }
-    return { ok: true, score: data.score };
+    const score = typeof data.score === "number" ? data.score : null;
+    return { ok: true, score, lowScore: score !== null && score < RECAPTCHA_MIN_SCORE };
   } catch {
-    return { ok: false, reason: "error" };
+    return { ok: true, reason: "verify-error" }; // fail open — never lose a lead to an outage
   }
 }
 
@@ -127,11 +129,14 @@ export async function POST(req) {
 
     const recaptcha = await verifyRecaptcha(recaptchaToken);
     if (!recaptcha.ok) {
-      console.warn("Contact form reCAPTCHA rejected:", recaptcha.reason, recaptcha.score ?? "");
+      console.warn("Contact reCAPTCHA blocked:", recaptcha.reason, recaptcha.codes ?? "");
       return Response.json(
-        { success: false, error: "Your submission could not be verified. Please try again." },
+        { success: false, error: "Your submission could not be verified. Please try again.", code: recaptcha.reason },
         { status: 400 }
       );
+    }
+    if (recaptcha.lowScore) {
+      console.warn("Contact reCAPTCHA low score (allowed):", recaptcha.score);
     }
 
     const client = new EmailClient(process.env.AZURE_COMMUNICATION_CONNECTION_STRING);
