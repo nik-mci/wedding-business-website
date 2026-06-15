@@ -41,6 +41,9 @@ jobs:
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
+        env:
+          # Public reCAPTCHA v3 site key — inlined into the client bundle at build time.
+          NEXT_PUBLIC_RECAPTCHA_SITE_KEY: 6Lf3cSAtAAAAAOAwomhKb8P_2xLlKDK1PB0etLo4
         with:
           azure_static_web_apps_api_token: ${{ steps.swa_token.outputs.token }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
