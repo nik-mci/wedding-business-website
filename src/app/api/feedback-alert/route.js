@@ -5,6 +5,11 @@ const RECIPIENTS = [
   { address: "arunima.sethi@vowsandvedas.com", displayName: "Vows & Vedas" },
 ];
 
+const CC_RECIPIENTS = [
+  { address: "anamta.ali@getsholidays.com", displayName: "Anamta Ali" },
+  { address: "nikhil.arora@wearemci.com",   displayName: "Nikhil Arora" },
+];
+
 function escHtml(str) {
   return String(str ?? "")
     .replace(/&/g, "&amp;")
@@ -65,7 +70,7 @@ export async function POST(req) {
           </div>
         `,
       },
-      recipients: { to: RECIPIENTS },
+      recipients: { to: RECIPIENTS, cc: CC_RECIPIENTS },
     };
 
     const poller = await client.beginSend(emailMessage);

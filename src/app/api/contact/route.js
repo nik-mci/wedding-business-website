@@ -125,6 +125,12 @@ const RECIPIENTS = [
   { address: "arunima.sethi@vowsandvedas.com", displayName: "Vows & Vedas" },
 ];
 
+// CC'd on every enquiry (server-side only, like the recipient above).
+const CC_RECIPIENTS = [
+  { address: "anamta.ali@getsholidays.com", displayName: "Anamta Ali" },
+  { address: "nikhil.arora@wearemci.com",   displayName: "Nikhil Arora" },
+];
+
 export async function POST(req) {
   try {
     const body = await req.json();
@@ -190,6 +196,7 @@ export async function POST(req) {
       },
       recipients: {
         to: RECIPIENTS,
+        cc: CC_RECIPIENTS,
       },
     };
 
