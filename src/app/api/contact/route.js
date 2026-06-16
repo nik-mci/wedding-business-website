@@ -127,17 +127,11 @@ export async function POST(req) {
     const body = await req.json();
     const { firstName, lastName, email, phone, destination, weddingDate, message, chatbotContext, recaptchaToken } = body;
 
+    // MONITOR MODE (temporary): verify and log the reCAPTCHA verdict but DO NOT block —
+    // genuine submissions were failing verification, so we keep the lead funnel open
+    // while confirming the keys. Re-enable blocking once real tokens are confirmed valid.
     const recaptcha = await verifyRecaptcha(recaptchaToken);
-    if (!recaptcha.ok) {
-      console.warn("Contact reCAPTCHA blocked:", recaptcha.reason, recaptcha.codes ?? "");
-      return Response.json(
-        { success: false, error: "Your submission could not be verified. Please try again.", code: recaptcha.reason },
-        { status: 400 }
-      );
-    }
-    if (recaptcha.lowScore) {
-      console.warn("Contact reCAPTCHA low score (allowed):", recaptcha.score);
-    }
+    console.warn("Contact reCAPTCHA verdict:", JSON.stringify(recaptcha));
 
     const client = new EmailClient(process.env.AZURE_COMMUNICATION_CONNECTION_STRING);
 
@@ -200,7 +194,7 @@ export async function POST(req) {
     const result = await poller.pollUntilDone();
 
     if (result.status === "Succeeded") {
-      return Response.json({ success: true });
+      return Response.json({ success: true, recaptcha });
     } else {
       throw new Error(`Email send failed with status: ${result.status}`);
     }
