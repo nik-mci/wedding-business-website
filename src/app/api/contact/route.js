@@ -120,6 +120,9 @@ async function verifyRecaptcha(token) {
 
 const RECIPIENTS = [
   { address: "info@vowsandvedas.com", displayName: "Vows & Vedas" },
+  // Fallback so leads are never lost while info@ is being set up to receive mail
+  // (info@ bounced and was suppressed by ACS). Safe to remove once info@ is verified.
+  { address: "nikhil.arora@wearemci.com", displayName: "Nikhil Arora" },
 ];
 
 export async function POST(req) {
