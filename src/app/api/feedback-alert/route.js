@@ -8,6 +8,7 @@ const RECIPIENTS = [
 const CC_RECIPIENTS = [
   { address: "anamta.ali@getsholidays.com", displayName: "Anamta Ali" },
   { address: "nikhil.arora@wearemci.com",   displayName: "Nikhil Arora" },
+  { address: "rakesh.bijewar@wearemci.com", displayName: "Rakesh Bijewar" },
 ];
 
 function escHtml(str) {
