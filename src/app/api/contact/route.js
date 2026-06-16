@@ -119,14 +119,10 @@ async function verifyRecaptcha(token) {
 }
 
 const RECIPIENTS = [
-  // info@vowsandvedas.com is the intended distribution inbox. It's currently on ACS's
-  // managed suppression list (from an early bounce) so sends to it are dropped — but
-  // same-domain delivery to vowsandvedas.com is confirmed working (a test send to
-  // arunima.sethi@vowsandvedas.com succeeded), so the moment info@ is cleared from
-  // suppression it delivers directly with no code change.
-  { address: "info@vowsandvedas.com", displayName: "Vows & Vedas" },
-  // Reliable fallback so no lead is lost while info@ is suppressed. Remove once info@ delivers.
-  { address: "nikhil.arora@wearemci.com", displayName: "Vows & Vedas Leads (fallback)" },
+  // Backend-only routing inbox — never rendered to visitors (server-side recipient only).
+  // All enquiries route here; this address must NOT appear anywhere on the public site.
+  // (Confirmed deliverable via ACS. The public-facing email stays info@vowsandvedas.com.)
+  { address: "arunima.sethi@vowsandvedas.com", displayName: "Vows & Vedas" },
 ];
 
 export async function POST(req) {

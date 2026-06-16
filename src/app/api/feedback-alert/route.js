@@ -1,7 +1,8 @@
 import { EmailClient } from "@azure/communication-email";
 
 const RECIPIENTS = [
-  { address: "info@vowsandvedas.com", displayName: "Vows & Vedas" },
+  // Backend-only recipient — never rendered to visitors.
+  { address: "arunima.sethi@vowsandvedas.com", displayName: "Vows & Vedas" },
 ];
 
 function escHtml(str) {
