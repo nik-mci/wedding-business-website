@@ -7,6 +7,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CircularGallery from "@/components/CircularGallery";
 import GoldDivider from "@/components/GoldDivider";
+import FeaturedTestimonials from "@/components/Testimonials";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -414,52 +415,7 @@ export default function HomePage() {
           <h2 className="section-title reveal">What Our <em className="italic">Couples Say</em></h2>
           <GoldDivider flip className="mt-2 mb-8 reveal" />
         </div>
-        <div className="overflow-hidden mt-0">
-          <div className="testimonials-track">
-            {[
-              { quote: "Vows & Vedas turned our dream of a Rajasthan palace wedding into a breathtaking reality. Everything you have done for us is more like what we expect a family member to do.", author: "Zara & Samar", loc: "Udaipur Palace, India" },
-              { quote: "Our wedding at the Devi Garh was an unforgettable experience. The hotel was absolutely stunning and the level of service was outstanding.", author: "Sonia & Manlio", loc: "Devi Garh, Rajasthan" },
-              { quote: "The entire wedding and organization was truly amazing! Our dream is to go back to Symphony Beach once again. We will recommend you everywhere we can.", author: "Tivadar & Orsi", loc: "Symphony Beach, Goa" },
-              { quote: "The wedding was spectacular and everything I dreamed and more. Thank you and your team from the bottom of my heart for making my renewal of vows so magical and special.", author: "Cheryl", loc: "Rajasthan" },
-              { quote: "We were really impressed that we managed to organize the entire three-day ceremony from so far away, in such detail. From the painstaking planning to the wonderful memories, the wedding was exceptional.", author: "The UK couple", loc: "Vijay & Team, India" },
-              // Duplicate for infinite scroll
-              { quote: "Vows & Vedas turned our dream of a Rajasthan palace wedding into a breathtaking reality. Everything you have done for us is more like what we expect a family member to do.", author: "Zara & Samar", loc: "Udaipur Palace, India" },
-              { quote: "Our wedding at the Devi Garh was an unforgettable experience. The hotel was absolutely stunning and the level of service was outstanding.", author: "Sonia & Manlio", loc: "Devi Garh, Rajasthan" },
-              { quote: "The entire wedding and organization was truly amazing! Our dream is to go back to Symphony Beach once again. We will recommend you everywhere we can.", author: "Tivadar & Orsi", loc: "Symphony Beach, Goa" },
-              { quote: "The wedding was spectacular and everything I dreamed and more. Thank you and your team from the bottom of my heart for making my renewal of vows so magical and special.", author: "Cheryl", loc: "Rajasthan" },
-              { quote: "We were really impressed that we managed to organize the entire three-day ceremony from so far away, in such detail. From the painstaking planning to the wonderful memories, the wedding was exceptional.", author: "The UK couple", loc: "Vijay & Team, India" }
-            ].map((testi, i) => (
-              <div key={i} className="testi-card">
-                <svg width="180" height="22.5" viewBox="0 0 240 30" fill="none" xmlns="http://www.w3.org/2000/svg" className="mb-6 opacity-80" style={{ color: "var(--color-gold)" }}>
-                  <circle cx="120" cy="15" r="5" stroke="currentColor" strokeWidth="2.5" />
-                  <path d="M 111 15 C 85 22, 50 8, 10 15" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-                  <path d="M 129 15 C 155 22, 190 8, 230 15" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-                  <circle cx="10" cy="15" r="2" fill="currentColor" />
-                  <circle cx="230" cy="15" r="2" fill="currentColor" />
-                  <path d="M 110 21 Q 120 28 130 21" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-                  <circle cx="120" cy="24.5" r="1.5" fill="currentColor" />
-                  <path d="M 105 18 Q 110 18 112 16" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-                  <path d="M 135 18 Q 130 18 128 16" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-                </svg>
-                <div className="testi-stars">★★★★★</div>
-                <p className="testi-quote line-clamp-4 md:line-clamp-none">"{testi.quote}"</p>
-                <p className="testi-author">{testi.author}</p>
-                <p className="testi-location">{testi.loc}</p>
-                <svg width="180" height="22.5" viewBox="0 0 240 30" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-6 opacity-80" style={{ color: "var(--color-gold)", transform: "scaleY(-1)" }}>
-                  <circle cx="120" cy="15" r="5" stroke="currentColor" strokeWidth="2.5" />
-                  <path d="M 111 15 C 85 22, 50 8, 10 15" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-                  <path d="M 129 15 C 155 22, 190 8, 230 15" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-                  <circle cx="10" cy="15" r="2" fill="currentColor" />
-                  <circle cx="230" cy="15" r="2" fill="currentColor" />
-                  <path d="M 110 21 Q 120 28 130 21" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-                  <circle cx="120" cy="24.5" r="1.5" fill="currentColor" />
-                  <path d="M 105 18 Q 110 18 112 16" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-                  <path d="M 135 18 Q 130 18 128 16" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-                </svg>
-              </div>
-            ))}
-          </div>
-        </div>
+        <FeaturedTestimonials />
       </section>
 
       <GoldDivider variant="section" />
