@@ -5,7 +5,7 @@ import Image from "next/image";
 const featured = [
   {
     author: "Sanja & Alexander",
-    location: "Destination Wedding, India",
+    location: "Goa, India",
     image: "/assets/photos/sanja and alexder testimonial.jpg",
     preview:
       "The wedding was a special and one of a kind event. Like a dream or a fairytale. We both remember it with love.",
@@ -51,20 +51,31 @@ const quotes = [
 
 function Overlay({ t, onClose }) {
   useEffect(() => {
+    const scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
     const onKey = (e) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
     return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      window.scrollTo(0, scrollY);
       window.removeEventListener("keydown", onKey);
     };
   }, [onClose]);
 
   return (
     <div
-      className="fixed inset-0 z-[200] flex items-center justify-center bg-black/75 backdrop-blur-sm"
+      className="fixed inset-0 z-[200] flex items-center justify-center bg-black/75 backdrop-blur-sm overflow-hidden"
       style={{ animation: "fadeIn 0.25s ease" }}
       onClick={onClose}
+      onWheel={(e) => e.stopPropagation()}
     >
       <div
         className="relative flex w-[92vw] max-w-5xl h-[85vh] overflow-hidden shadow-2xl"
@@ -80,7 +91,11 @@ function Overlay({ t, onClose }) {
         </button>
 
         {/* Left — full text */}
-        <div className="flex-1 min-h-0 overflow-y-auto p-10 md:p-14 flex flex-col justify-start">
+        <div
+          className="flex-1 min-h-0 overflow-y-auto p-10 md:p-14 flex flex-col justify-start"
+          style={{ overscrollBehavior: "contain" }}
+          onWheel={(e) => e.stopPropagation()}
+        >
           <div className="testi-stars mb-6">★★★★★</div>
           <p className="font-heading text-xl md:text-2xl italic font-light leading-relaxed text-[#f5f0e8] mb-10 whitespace-pre-line">
             "{t.full}"
