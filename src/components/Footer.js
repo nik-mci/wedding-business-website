@@ -63,9 +63,11 @@ export default function Footer() {
       <div className="max-w-[1440px] mx-auto border-t border-surface/10 pt-7 flex flex-col md:flex-row justify-between items-center text-[10px] tracking-widest gap-6">
         <p>© 2025 Vows & Vedas. All rights reserved.</p>
         <div className="flex gap-5 uppercase">
-          <a href="#" className="hover:text-gold transition-colors">Instagram</a>
-          <a href="#" className="hover:text-gold transition-colors">Pinterest</a>
-          <a href="#" className="hover:text-gold transition-colors">YouTube</a>
+          <a href="https://www.instagram.com/vowsandvedas/" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">Instagram</a>
+          <a href="https://www.facebook.com/profile.php?id=61590644336785" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">Facebook</a>
+          <a href="https://in.pinterest.com/0u6w73ufbzaf9911r1d9c3nzvsvupg/" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">Pinterest</a>
+          <a href="http://www.youtube.com/@VowsandVedas" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">YouTube</a>
+          <a href="https://www.linkedin.com/company/125034077/" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">LinkedIn</a>
           <a href="/contact" className="hover:text-gold transition-colors">WhatsApp</a>
         </div>
         <p className="uppercase">Privacy · Terms</p>

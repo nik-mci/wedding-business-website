@@ -174,7 +174,6 @@ const moodBoards = [
       "moodboards/Wedding Option 2 - Emerald Eden/06d11265dcde51dda65ab0dab15728ea.jpg",
       "moodboards/Wedding Option 2 - Emerald Eden/35d8525c2c25bead7cc71f34483b36e2.jpg",
       "moodboards/Wedding Option 2 - Emerald Eden/3d3af56de84158b4cac7311ed463f833.jpg",
-      "moodboards/Wedding Option 2 - Emerald Eden/48f1dd4e3cf859f45a026da3aab8cce5.jpg",
       "moodboards/Wedding Option 2 - Emerald Eden/4ef847e43ac196fadceff2705c8cdcc6.jpg",
       "moodboards/Wedding Option 2 - Emerald Eden/6a0e97ecd181369a324b4d5461336f8d.jpg",
       "moodboards/Wedding Option 2 - Emerald Eden/71cf13928fb4dc5279ea7514d0275022.jpg",
@@ -227,7 +226,6 @@ const moodBoards = [
     description: "A seductive fusion of Parisian cabaret and Indian tradition. Crimson velvets, dramatic feathers, and a Moulin Rouge-inspired glamour that sets the stage for an unforgettable night.",
     images: [
       "moodboards/Sangeet Option 2 - Crimson Soiree-Moulin Rouge/11a31f6f549eba7d5744a4553a32e0bc.jpg",
-      "moodboards/Sangeet Option 2 - Crimson Soiree-Moulin Rouge/225c5a0e016b6ba67426bffd49fb7cd4.jpg",
       "moodboards/Sangeet Option 2 - Crimson Soiree-Moulin Rouge/255965e03eb7463f719142ea3deb10f3.jpg",
       "moodboards/Sangeet Option 2 - Crimson Soiree-Moulin Rouge/271b3b70c9f5930c6d2edef88f074e1c.jpg",
       "moodboards/Sangeet Option 2 - Crimson Soiree-Moulin Rouge/434cd9e19df5597e5fb6dbd355a693d1.jpg",
@@ -309,7 +307,6 @@ const moodBoards = [
     description: "Rangon Ki Rasleela perfectly captures the spirit of a Haldi celebration — vibrant, playful and full of energy. Inspired by gulal, marigolds, sunshine hues and festive Indian textures, the theme brings together colour, music, florals and joyful chaos to create an atmosphere that is festive, youthful and deeply celebratory.",
     images: [
       "moodboards/Haldi - Rangon Ki Rasleela/112a110cb33b284a68ef4e17d20631c4.jpg",
-      "moodboards/Haldi - Rangon Ki Rasleela/3058732cb7189793a7c740e9dab4323b.jpg",
       "moodboards/Haldi - Rangon Ki Rasleela/4268a6c9b1127937807437bbe86e384f.jpg",
       "moodboards/Haldi - Rangon Ki Rasleela/5b2ad1c1eb7e4bb426cf13263897f07a.jpg",
       "moodboards/Haldi - Rangon Ki Rasleela/61Rhqbks5kL.jpg",
@@ -319,7 +316,6 @@ const moodBoards = [
       "moodboards/Haldi - Rangon Ki Rasleela/a91c08167bec104a437f28e4f17e9d43.jpg",
       "moodboards/Haldi - Rangon Ki Rasleela/a9eca31d50e3b7fbaadfafb29d64faac.jpg",
       "moodboards/Haldi - Rangon Ki Rasleela/bbfad1fc8b11a74c75114fbb2a2ccfef.jpg",
-      "moodboards/Haldi - Rangon Ki Rasleela/c385f637fb0673f8d93939e6723fc1ff.jpg",
       "moodboards/Haldi - Rangon Ki Rasleela/c420584f099719a023a383a5d47b1f64.jpg",
       "moodboards/Haldi - Rangon Ki Rasleela/e4db54ab9b6e6d15e1fff44bf83986e8.jpg",
       "moodboards/Haldi - Rangon Ki Rasleela/f451d60e7cbccfcda91b778c7df31cd8.jpg"
