@@ -119,11 +119,14 @@ async function verifyRecaptcha(token) {
 }
 
 const RECIPIENTS = [
-  // Form leads go to this reliable, cross-domain inbox (proven deliverable via ACS).
-  // info@vowsandvedas.com was removed because ACS auto-suppressed it after a hard bounce;
-  // leads reach info@ via a forwarding rule / Google Group on this mailbox instead.
-  // Re-add info@ here once it has been cleared from ACS managed suppression.
-  { address: "nikhil.arora@wearemci.com", displayName: "Vows & Vedas Leads" },
+  // info@vowsandvedas.com is the intended distribution inbox. It's currently on ACS's
+  // managed suppression list (from an early bounce) so sends to it are dropped — but
+  // same-domain delivery to vowsandvedas.com is confirmed working (a test send to
+  // arunima.sethi@vowsandvedas.com succeeded), so the moment info@ is cleared from
+  // suppression it delivers directly with no code change.
+  { address: "info@vowsandvedas.com", displayName: "Vows & Vedas" },
+  // Reliable fallback so no lead is lost while info@ is suppressed. Remove once info@ delivers.
+  { address: "nikhil.arora@wearemci.com", displayName: "Vows & Vedas Leads (fallback)" },
 ];
 
 export async function POST(req) {
