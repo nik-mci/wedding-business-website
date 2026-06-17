@@ -6,18 +6,23 @@
 
 import { AzureOpenAI } from "openai";
 import { DefaultAzureCredential, getBearerTokenProvider } from "@azure/identity";
-import { SearchClient } from "@azure/search-documents";
+import { SearchClient, AzureKeyCredential } from "@azure/search-documents";
 
 const _credential = new DefaultAzureCredential();
 
 let _openai = null;
 function getOpenAI() {
-  if (!_openai) _openai = new AzureOpenAI({
-    endpoint:             process.env.AZURE_OPENAI_ENDPOINT,
-    azureADTokenProvider: getBearerTokenProvider(_credential, "https://cognitiveservices.azure.com/.default"),
-    apiVersion:           process.env.AZURE_OPENAI_API_VERSION || "2024-10-21",
-    deployment:           process.env.AZURE_OPENAI_EMBEDDING_DEPLOYMENT || "text-embedding-3-small",
-  });
+  if (!_openai) {
+    const apiKey = process.env.AZURE_OPENAI_API_KEY;
+    _openai = new AzureOpenAI({
+      endpoint:   process.env.AZURE_OPENAI_ENDPOINT,
+      apiVersion: process.env.AZURE_OPENAI_API_VERSION || "2024-10-21",
+      deployment: process.env.AZURE_OPENAI_EMBEDDING_DEPLOYMENT || "text-embedding-3-small",
+      ...(apiKey
+        ? { apiKey }
+        : { azureADTokenProvider: getBearerTokenProvider(_credential, "https://cognitiveservices.azure.com/.default") }),
+    });
+  }
   return _openai;
 }
 
@@ -26,7 +31,11 @@ const INDEX_NAME      = process.env.AZURE_SEARCH_INDEX_NAME || "vows-vedas-chatb
 
 let _searchClient = null;
 function getSearchClient() {
-  if (!_searchClient) _searchClient = new SearchClient(SEARCH_ENDPOINT, INDEX_NAME, _credential);
+  if (!_searchClient) {
+    const searchKey = process.env.AZURE_SEARCH_API_KEY;
+    const credential = searchKey ? new AzureKeyCredential(searchKey) : _credential;
+    _searchClient = new SearchClient(SEARCH_ENDPOINT, INDEX_NAME, credential);
+  }
   return _searchClient;
 }
 

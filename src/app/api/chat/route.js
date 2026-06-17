@@ -19,12 +19,17 @@ const _credential = new DefaultAzureCredential();
 
 let _client = null;
 function getClient() {
-  if (!_client) _client = new AzureOpenAI({
-    endpoint:             process.env.AZURE_OPENAI_ENDPOINT,
-    azureADTokenProvider: getBearerTokenProvider(_credential, "https://cognitiveservices.azure.com/.default"),
-    apiVersion:           process.env.AZURE_OPENAI_API_VERSION || "2024-10-21",
-    deployment:           process.env.AZURE_OPENAI_DEPLOYMENT  || "gpt-4-1-mini",
-  });
+  if (!_client) {
+    const apiKey = process.env.AZURE_OPENAI_API_KEY;
+    _client = new AzureOpenAI({
+      endpoint:   process.env.AZURE_OPENAI_ENDPOINT,
+      apiVersion: process.env.AZURE_OPENAI_API_VERSION || "2024-10-21",
+      deployment: process.env.AZURE_OPENAI_DEPLOYMENT  || "gpt-4-1-mini",
+      ...(apiKey
+        ? { apiKey }
+        : { azureADTokenProvider: getBearerTokenProvider(_credential, "https://cognitiveservices.azure.com/.default") }),
+    });
+  }
   return _client;
 }
 
