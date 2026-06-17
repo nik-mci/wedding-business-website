@@ -5,10 +5,12 @@ import { trackEvent } from "@/lib/telemetry";
 const _credential = new DefaultAzureCredential();
 let _emailClient = null;
 function getEmailClient() {
-  if (!_emailClient) _emailClient = new EmailClient(
-    process.env.AZURE_COMMUNICATION_ENDPOINT,
-    _credential,
-  );
+  if (!_emailClient) {
+    const endpoint = process.env.AZURE_COMMUNICATION_ENDPOINT;
+    _emailClient = endpoint
+      ? new EmailClient(endpoint, _credential)
+      : new EmailClient(process.env.AZURE_COMMUNICATION_CONNECTION_STRING);
+  }
   return _emailClient;
 }
 
