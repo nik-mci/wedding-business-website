@@ -34,10 +34,17 @@ export default function Footer() {
         <div>
           <p className="text-[10px] uppercase tracking-[0.4em] text-gold font-medium mb-5">Offerings</p>
           <ul className="flex flex-col gap-3">
-            {['Destination Weddings', 'Full Planning', 'Décor & Florals', 'Photography', 'E-Invites', 'Mehendi'].map(item => (
-              <li key={item}>
-                <Link href="/services" className="text-[12px] text-surface/55 hover:text-gold transition-colors font-light">
-                  {item}
+            {[
+              { name: 'Destination Weddings', href: '/services#venues-destinations' },
+              { name: 'Full Planning',        href: '/services#planning' },
+              { name: 'Décor & Florals',      href: '/services#design-decor' },
+              { name: 'Photography',          href: '/services#film-photography' },
+              { name: 'Hospitality',          href: '/services#hospitality' },
+              { name: 'Travel',               href: '/services#travel-logistics' },
+            ].map(item => (
+              <li key={item.name}>
+                <Link href={item.href} className="text-[12px] text-surface/55 hover:text-gold transition-colors font-light">
+                  {item.name}
                 </Link>
               </li>
             ))}
