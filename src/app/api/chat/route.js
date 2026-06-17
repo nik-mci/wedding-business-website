@@ -9,18 +9,21 @@
  */
 
 import { AzureOpenAI } from "openai";
+import { DefaultAzureCredential, getBearerTokenProvider } from "@azure/identity";
 import { matchStaticFaq } from "@/lib/staticFaqs";
 import { extractIntent }  from "@/lib/intentExtraction";
 import { retrieveContext } from "@/lib/retrieval";
 import { getSuggestions }  from "@/lib/suggestions";
 
+const _credential = new DefaultAzureCredential();
+
 let _client = null;
 function getClient() {
   if (!_client) _client = new AzureOpenAI({
-    endpoint:   process.env.AZURE_OPENAI_ENDPOINT,
-    apiKey:     process.env.AZURE_OPENAI_API_KEY,
-    apiVersion: process.env.AZURE_OPENAI_API_VERSION || "2024-10-21",
-    deployment: process.env.AZURE_OPENAI_DEPLOYMENT  || "gpt-4-1-mini",
+    endpoint:             process.env.AZURE_OPENAI_ENDPOINT,
+    azureADTokenProvider: getBearerTokenProvider(_credential, "https://cognitiveservices.azure.com/.default"),
+    apiVersion:           process.env.AZURE_OPENAI_API_VERSION || "2024-10-21",
+    deployment:           process.env.AZURE_OPENAI_DEPLOYMENT  || "gpt-4-1-mini",
   });
   return _client;
 }
@@ -124,17 +127,17 @@ BANGALORE: ITC Gardenia (Buyout ₹3–4.5 Cr | Accommodation ₹2–2.8 Cr/nigh
 9. SCOPE RULE: Vows & Vedas specialises exclusively in weddings and wedding-related celebrations. If asked about corporate events, parties, or unrelated enquiries, politely clarify: "We specialise exclusively in weddings and wedding celebrations — I'm not the right fit for this one, but I'd love to help if you're planning a wedding."
 
 ━━━ FORMAT ━━━
-- Listing 2+ venues / services / options → short intro sentence ending in ":", then markdown bullets: "- Name — key detail"
-- Pricing breakdown → markdown bullets: "- Label: value"
+- Listing 2+ venues / services / options → flowing prose, not bullets or headers. Weave names and details into sentences with connectors ("and", "while", "which"). Never use • or – as list markers. Never use bold category headers like "Haldi:" or "Sangeet:" inside a response.
+- Pricing breakdown → markdown bullets: "- Label: value" (the only permitted use of bullets)
 - Single concept, "why", or "how" → warm prose, 2–3 sentences, no bullets
 - Single venue deep-dive → prose paragraph, no bullets
 - Never use headers inside a response
 
+EXAMPLE — listing moodboards:
+For the Haldi we have three directions — Citrus Bloom, which leans into sunshine yellows and marigolds; Royal Boho, which takes a more relaxed terracotta-and-macramé approach; and Rangon Ki Rasleela, which goes full festive colour.
+
 EXAMPLE — listing venues:
-Goa has some beautiful options for a beach wedding:
-- ITC Grand Goa — Indo-Portuguese estate on Arossim Beach, Cansaulim
-- St. Regis Goa — private beach access on the Sal River
-- Grand Hyatt Goa — 28-acre estate on Bambolim Bay
+Goa has some beautiful options for a beach wedding. ITC Grand Goa is an Indo-Portuguese estate right on Arossim Beach, while St. Regis Goa offers private beach access on the Sal River. Grand Hyatt Goa spreads across 28 acres on Bambolim Bay and suits larger celebrations beautifully.
 
 Which of these feels right for your vision?
 
@@ -171,7 +174,27 @@ End venue-listing responses with one short question — max 5 words.
 Only give pricing when explicitly asked. Never estimate beyond the knowledge base.
 
 ━━━ MOODBOARDS ━━━
-When a user asks about a specific moodboard: (1) describe it richly — 2–4 sentences covering aesthetic, mood, setting, and who it suits; (2) then offer "Want to see venues that complement this mood, or explore other moodboards?" Do NOT list all moodboards when one is asked about.
+Use this decision tree in order — stop at the first rule that matches:
+
+RULE 1 — VENUE QUESTION WITH NAMED MOODBOARD (includes clarifying answers): If the user names a specific moodboard AND the intent is about venues — whether they asked directly ("which venues suit Citrus Bloom") OR they answered a "which moodboard?" follow-up ("citrus bloom" after being asked) → go DIRECTLY to venue recommendations. One sentence explaining why certain venue types suit that moodboard, then 2–3 specific venues from the KB. End with ONE question. Never describe the moodboard in detail when the intent is venues. This rule beats all others.
+
+RULE 2 — VENUE QUESTION WITHOUT NAMED MOODBOARD: If the user asks about venues and does NOT name a specific moodboard → ask "Which moodboard are you thinking about?" NEVER guess from prior context.
+
+RULE 3 — MOODBOARD NAMED, NO VENUE INTENT: If the user names or asks about a moodboard but is NOT asking about venues → describe it richly in 2–4 sentences, then ask "Want to see venues that suit this look, or explore another moodboard?"
+
+MOODBOARD → VENUE PAIRING (apply when Rule 1 fires — never describe the moodboard when recommending venues, this is context for YOU):
+- Citrus Bloom (Haldi) → outdoor venues, tropical/garden settings, Goa beachfront, Kerala, hill stations. KB venues: ITC Grand Goa, Taj Exotica Goa, Taj Green Cove Kovalam, The Leela Kovalam, Westin Himalayas
+- Royal Boho (Haldi) → heritage properties, open courtyards, Rajasthan forts. KB venues: Samode Palace, Ajit Bhawan Jodhpur, Alila Fort Bishangarh
+- Rangon Ki Rasleela (Haldi) → vibrant outdoor spaces, any destination. KB venues: Caravela Beach Resort, Samode Palace, Angsana Oasis
+- Tangerine Tales (Mehendi) → sun-drenched outdoor lawns, Goa, Kerala. KB venues: ITC Grand Goa, St. Regis Goa, Taj Green Cove Kovalam
+- Tropical Rhapsody (Mehendi) → lush garden venues, Kerala, Goa. KB venues: The Leela Kovalam, Taj Exotica Goa, Caravela Beach Resort
+- Disco Shimmer (Sangeet) → large indoor ballrooms, city hotels. KB venues: Grand Hyatt BKC, Leela Palace Delhi, Fairmont Jaipur, ITC Gardenia Bangalore, Grand Hyatt Goa
+- Crimson Soiree (Sangeet) → dramatic indoor spaces, fort venues. KB venues: Alila Fort Bishangarh, Six Senses Fort Barwara, Leela Palace Delhi
+- Royal Indian (Wedding) → palatial heritage venues. KB venues: Leela Palace Jaipur, Fairmont Jaipur, Suryagarh Jaisalmer
+- Painted Gardens (Wedding) → garden/outdoor ceremony venues. KB venues: Taj Corbett, Westin Himalayas, Angsana Oasis, Caravela Beach Resort
+- Haveli Nights (Wedding) → fort and haveli venues. KB venues: Alila Fort Bishangarh, Six Senses Fort Barwara, Samode Palace
+- Emerald Eden (Wedding) → hill station and nature venues. KB venues: Westin Himalayas, Taj Corbett, Hyatt Regency Dehradun, Lalit Grand Palace Srinagar
+
 When discussing wedding themes, decor styles, or moodboards, always add [MOODBOARDS_LINK] on a new line at the end. Do not write a URL — just the marker exactly as shown.
 
 ━━━ ITINERARY FORMAT ━━━
@@ -280,7 +303,7 @@ function sseError(msg) {
 
 // ── Route handler ─────────────────────────────────────────────────────────────
 export async function POST(request) {
-  if (!process.env.AZURE_OPENAI_ENDPOINT || !process.env.AZURE_OPENAI_API_KEY) {
+  if (!process.env.AZURE_OPENAI_ENDPOINT) {
     return new Response(sseError("Service not configured."), {
       headers: { "Content-Type": "text/event-stream" },
     });
@@ -305,6 +328,16 @@ export async function POST(request) {
 
   if (!query?.trim()) {
     return new Response(sseError("Empty query."), {
+      headers: { "Content-Type": "text/event-stream" },
+    });
+  }
+  if (query.trim().length > 500) {
+    return new Response(sseError("Query too long. Please keep it under 500 characters."), {
+      headers: { "Content-Type": "text/event-stream" },
+    });
+  }
+  if (!Array.isArray(conversation_history)) {
+    return new Response(sseError("Invalid request format."), {
       headers: { "Content-Type": "text/event-stream" },
     });
   }

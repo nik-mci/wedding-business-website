@@ -5,21 +5,30 @@
  */
 
 import { AzureOpenAI } from "openai";
+import { DefaultAzureCredential, getBearerTokenProvider } from "@azure/identity";
+import { SearchClient } from "@azure/search-documents";
+
+const _credential = new DefaultAzureCredential();
 
 let _openai = null;
 function getOpenAI() {
   if (!_openai) _openai = new AzureOpenAI({
-    endpoint:   process.env.AZURE_OPENAI_ENDPOINT,
-    apiKey:     process.env.AZURE_OPENAI_API_KEY,
-    apiVersion: process.env.AZURE_OPENAI_API_VERSION || "2024-10-21",
-    deployment: process.env.AZURE_OPENAI_EMBEDDING_DEPLOYMENT || "text-embedding-3-small",
+    endpoint:             process.env.AZURE_OPENAI_ENDPOINT,
+    azureADTokenProvider: getBearerTokenProvider(_credential, "https://cognitiveservices.azure.com/.default"),
+    apiVersion:           process.env.AZURE_OPENAI_API_VERSION || "2024-10-21",
+    deployment:           process.env.AZURE_OPENAI_EMBEDDING_DEPLOYMENT || "text-embedding-3-small",
   });
   return _openai;
 }
 
-const SEARCH_ENDPOINT  = process.env.AZURE_SEARCH_ENDPOINT;
-const SEARCH_KEY       = process.env.AZURE_SEARCH_API_KEY;
-const INDEX_NAME       = process.env.AZURE_SEARCH_INDEX_NAME || "vows-vedas-chatbot";
+const SEARCH_ENDPOINT = process.env.AZURE_SEARCH_ENDPOINT;
+const INDEX_NAME      = process.env.AZURE_SEARCH_INDEX_NAME || "vows-vedas-chatbot";
+
+let _searchClient = null;
+function getSearchClient() {
+  if (!_searchClient) _searchClient = new SearchClient(SEARCH_ENDPOINT, INDEX_NAME, _credential);
+  return _searchClient;
+}
 
 // ── Chip-label → expanded retrieval query ────────────────────────────────────
 // Bare chip labels have too little keyword overlap with the index — expand them.
@@ -112,49 +121,44 @@ function resolveTopK(intent, defaultK = 6) {
 
 // ── Azure AI Search vector query ──────────────────────────────────────────────
 async function vectorSearch(embedding, topK = 30, filter = null) {
-  if (!SEARCH_ENDPOINT || !SEARCH_KEY) {
+  if (!SEARCH_ENDPOINT) {
     console.warn("[retrieval] Azure AI Search not configured — returning empty");
     return [];
   }
 
-  const body = {
-    vectorQueries: [{
-      kind:   "vector",
-      vector: embedding,
-      fields: "embedding",
-      k:      topK,
-    }],
-    select: "id,content,heading,section,city,venue_name,source,url",
-    top:    topK,
-    ...(filter ? { filter } : {}),
-  };
+  try {
+    const searchResults = await getSearchClient().search("*", {
+      vectorSearchOptions: {
+        queries: [{
+          kind:                  "vector",
+          vector:                embedding,
+          fields:                ["embedding"],
+          kNearestNeighborsCount: topK,
+        }],
+      },
+      select: ["id", "content", "heading", "section", "city", "venue_name", "source", "url"],
+      top:    topK,
+      ...(filter ? { filter } : {}),
+    });
 
-  const res = await fetch(
-    `${SEARCH_ENDPOINT}/indexes/${INDEX_NAME}/docs/search?api-version=2024-07-01`,
-    {
-      method:  "POST",
-      headers: { "Content-Type": "application/json", "api-key": SEARCH_KEY },
-      body:    JSON.stringify(body),
+    const docs = [];
+    for await (const result of searchResults.results) {
+      docs.push({
+        content:    result.document.content    ?? "",
+        heading:    result.document.heading    ?? "",
+        section:    result.document.section    ?? "",
+        city:       result.document.city       ?? "",
+        venue_name: result.document.venue_name ?? "",
+        source:     result.document.source     ?? "",
+        url:        result.document.url        ?? "",
+        score:      result.score               ?? 0.1,
+      });
     }
-  );
-
-  if (!res.ok) {
-    const err = await res.text();
-    console.error("[retrieval] search failed:", res.status, err);
+    return docs;
+  } catch (err) {
+    console.error("[retrieval] search failed:", err.message);
     return [];
   }
-
-  const json = await res.json();
-  return (json.value || []).map(doc => ({
-    content:    doc.content,
-    heading:    doc.heading || "",
-    section:    doc.section || "",
-    city:       doc.city    || "",
-    venue_name: doc.venue_name || "",
-    source:     doc.source  || "",
-    url:        doc.url     || "",
-    score:      doc["@search.score"] ?? 0.1,
-  }));
 }
 
 // ── Metadata-based score adjustment ──────────────────────────────────────────

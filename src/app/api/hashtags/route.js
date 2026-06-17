@@ -1,14 +1,16 @@
 import { AzureOpenAI } from "openai";
+import { DefaultAzureCredential, getBearerTokenProvider } from "@azure/identity";
 
+const _credential = new DefaultAzureCredential();
 const apiVersion = process.env.AZURE_OPENAI_API_VERSION || "2024-10-21";
-const deployment = process.env.AZURE_OPENAI_DEPLOYMENT || "gpt-4-1-mini";
+const deployment  = process.env.AZURE_OPENAI_DEPLOYMENT  || "gpt-4-1-mini";
 
 let client;
 function getClient() {
   if (!client) {
     client = new AzureOpenAI({
-      endpoint: process.env.AZURE_OPENAI_ENDPOINT,
-      apiKey: process.env.AZURE_OPENAI_API_KEY,
+      endpoint:             process.env.AZURE_OPENAI_ENDPOINT,
+      azureADTokenProvider: getBearerTokenProvider(_credential, "https://cognitiveservices.azure.com/.default"),
       apiVersion,
       deployment,
     });
@@ -17,7 +19,7 @@ function getClient() {
 }
 
 export async function POST(request) {
-  if (!process.env.AZURE_OPENAI_ENDPOINT || !process.env.AZURE_OPENAI_API_KEY) {
+  if (!process.env.AZURE_OPENAI_ENDPOINT) {
     return Response.json({ error: "Server is not configured" }, { status: 500 });
   }
 
@@ -29,9 +31,14 @@ export async function POST(request) {
   }
 
   const { bride, groom, vibe, loveWord } = body ?? {};
-  if (!bride || !groom || !vibe || !loveWord) {
-    return Response.json({ error: "Missing required fields" }, { status: 400 });
-  }
+  if (!bride || !groom || !vibe || !loveWord)
+    return Response.json({ error: "Missing required fields: bride, groom, vibe, loveWord." }, { status: 400 });
+  if (typeof bride !== "string" || typeof groom !== "string" || typeof vibe !== "string" || typeof loveWord !== "string")
+    return Response.json({ error: "All fields must be strings." }, { status: 400 });
+  if (bride.trim().length > 50 || groom.trim().length > 50)
+    return Response.json({ error: "bride and groom must be under 50 characters." }, { status: 400 });
+  if (vibe.trim().length > 100 || loveWord.trim().length > 50)
+    return Response.json({ error: "vibe must be under 100 characters, loveWord under 50." }, { status: 400 });
 
   const prompt = `Generate 9 unique creative wedding hashtags for a couple.
 Bride: ${bride}

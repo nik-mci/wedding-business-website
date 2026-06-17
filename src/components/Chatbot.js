@@ -2,7 +2,17 @@
 
 import { useState, useRef, useEffect } from "react";
 
-// Lightweight markdown renderer — handles bullet lists, paragraphs, and action markers
+// Render inline markdown: **bold** → gold semibold span
+function renderInline(text) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, i) =>
+    part.startsWith("**") && part.endsWith("**")
+      ? <strong key={i} className="font-semibold text-[#e8d5a3]">{part.slice(2, -2)}</strong>
+      : part
+  );
+}
+
+// Lightweight markdown renderer — handles bold, bullet lists, paragraphs, and action markers
 function BotMessage({ text, onCtaClick }) {
   if (!text) return null;
 
@@ -16,7 +26,7 @@ function BotMessage({ text, onCtaClick }) {
           {currentList.map((item, i) => (
             <li key={i} className="flex gap-2">
               <span className="text-[#C9A234] mt-[3px] shrink-0">–</span>
-              <span>{item}</span>
+              <span>{renderInline(item)}</span>
             </li>
           ))}
         </ul>
@@ -26,7 +36,6 @@ function BotMessage({ text, onCtaClick }) {
   };
 
   for (const line of text.split("\n")) {
-    // Action markers → rendered as buttons
     if (line.trim() === "[MOODBOARDS_LINK]") {
       flushList();
       blocks.push(
@@ -62,7 +71,7 @@ function BotMessage({ text, onCtaClick }) {
       const trimmed = line.trim();
       if (trimmed) {
         blocks.push(
-          <p key={blocks.length} className="leading-[1.75]">{trimmed}</p>
+          <p key={blocks.length} className="leading-[1.75]">{renderInline(trimmed)}</p>
         );
       }
     }
@@ -102,6 +111,15 @@ export default function Chatbot() {
   const inputRef       = useRef(null);
   const abortRef       = useRef(null);
   const sessionIdRef   = useRef(`sess_${Date.now().toString(36)}`);
+
+  const resetConversation = () => {
+    setMessages([INITIAL_MESSAGE]);
+    setInput("");
+    setStartersVisible(true);
+    setAccIntent({});
+    setUsedChips([]);
+    setFeedbackGiven({});
+  };
 
   useEffect(() => {
     if (open) {
@@ -291,6 +309,14 @@ export default function Chatbot() {
 
   return (
     <>
+      {/* ── Mobile backdrop when chat is open ──────────────────────── */}
+      {open && (
+        <div
+          className="fixed inset-0 z-[1999] bg-black/45 sm:hidden"
+          onClick={() => setOpen(false)}
+        />
+      )}
+
       {/* ── Right sidebar: Call / Email / WhatsApp ─────────────────── */}
       <div className={`fixed right-0 top-1/2 -translate-y-1/2 z-[2001] ${open ? "hidden sm:block" : ""}`}>
         {sidebarOpen ? (
@@ -311,7 +337,7 @@ export default function Chatbot() {
 
             {/* Call Us */}
             <a
-              href="/contact"
+              href="tel:+919654277656"
               aria-label="Call us"
               className="group flex flex-col items-center gap-1.5 px-4 py-3.5 hover:bg-[#251C0D] transition-colors duration-200 w-full"
             >
@@ -325,8 +351,8 @@ export default function Chatbot() {
 
             {/* Email / Enquiry */}
             <a
-              href="mailto:arunima.sethi@getsholidays.com"
-              aria-label="Email us"
+              href="/contact"
+              aria-label="Enquiry form"
               className="group flex flex-col items-center gap-1.5 px-4 py-3.5 hover:bg-[#251C0D] transition-colors duration-200 w-full"
             >
               <svg viewBox="0 0 24 24" className="w-5 h-5 text-[#C9A234] group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -340,7 +366,9 @@ export default function Chatbot() {
 
             {/* WhatsApp */}
             <a
-              href="/contact"
+              href="https://wa.me/919654277656"
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="Chat on WhatsApp"
               className="group flex flex-col items-center gap-1.5 px-4 py-3.5 hover:bg-[#251C0D] transition-colors duration-200 w-full"
             >
@@ -402,15 +430,28 @@ export default function Chatbot() {
                 <p className="text-[#9A8F7E] text-[10px] tracking-[0.18em] uppercase font-medium mt-0.5">Wedding Concierge</p>
               </div>
             </div>
-            <button
-              onClick={() => setOpen(false)}
-              aria-label="Close chat"
-              className="w-8 h-8 flex items-center justify-center text-[#9A8F7E] hover:text-[#C9A234] transition-colors duration-200 cursor-none"
-            >
-              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-                <path d="M18 6L6 18M6 6l12 12"/>
-              </svg>
-            </button>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={resetConversation}
+                aria-label="New conversation"
+                title="Start new conversation"
+                className="w-8 h-8 flex items-center justify-center text-[#9A8F7E] hover:text-[#C9A234] transition-colors duration-200 cursor-none"
+              >
+                <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                  <path d="M3 3v5h5"/>
+                </svg>
+              </button>
+              <button
+                onClick={() => setOpen(false)}
+                aria-label="Close chat"
+                className="w-8 h-8 flex items-center justify-center text-[#9A8F7E] hover:text-[#C9A234] transition-colors duration-200 cursor-none"
+              >
+                <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                  <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+              </button>
+            </div>
           </div>
 
           {/* Messages */}
@@ -418,19 +459,25 @@ export default function Chatbot() {
             {messages.map((msg, i) => {
               const isLastBotMsg = msg.role === "bot" &&
                 messages.slice(i + 1).every(m => m.role !== "bot");
+              const prevMsg = i > 0 ? messages[i - 1] : null;
+              const showAvatar = msg.role === "bot" && prevMsg?.role !== "bot";
               return (
-                <div key={i} className="flex flex-col gap-2">
+                <div key={i} className="flex flex-col gap-2 group">
                   {/* Message bubble row */}
                   <div className={`flex items-end gap-2.5 ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
                     {msg.role === "bot" && (
-                      <span className="w-7 h-7 shrink-0 rounded-full bg-[#1A1408] border border-[#C9A234]/50 overflow-hidden flex items-center justify-center mb-0.5 shadow-[0_0_8px_2px_rgba(201,162,52,0.25)]">
-                        <img
-                          src="/assets/photos/Gemini_Generated_Image_tkd7dstkd7dstkd7.png"
-                          alt="MIRA"
-                          className="w-full h-full object-cover"
-                          style={{ transform: "scale(1.45)", transformOrigin: "center 38%" }}
-                        />
-                      </span>
+                      showAvatar ? (
+                        <span className="w-7 h-7 shrink-0 rounded-full bg-[#1A1408] border border-[#C9A234]/50 overflow-hidden flex items-center justify-center mb-0.5 shadow-[0_0_8px_2px_rgba(201,162,52,0.25)]">
+                          <img
+                            src="/assets/photos/Gemini_Generated_Image_tkd7dstkd7dstkd7.png"
+                            alt="MIRA"
+                            className="w-full h-full object-cover"
+                            style={{ transform: "scale(1.45)", transformOrigin: "center 38%" }}
+                          />
+                        </span>
+                      ) : (
+                        <span className="w-7 h-7 shrink-0 mb-0.5" />
+                      )
                     )}
                     <div
                       className={`
@@ -441,18 +488,21 @@ export default function Chatbot() {
                       `}
                     >
                       {msg.streaming && !msg.text ? (
-                        <span className="flex gap-1 items-center py-0.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234]/60 animate-bounce" style={{ animationDelay: "0ms" }} />
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234]/60 animate-bounce" style={{ animationDelay: "150ms" }} />
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234]/60 animate-bounce" style={{ animationDelay: "300ms" }} />
+                        <span className="flex items-center gap-2 py-0.5">
+                          <span className="flex gap-1 items-center">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234] animate-bounce" style={{ animationDelay: "0ms" }} />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234] animate-bounce" style={{ animationDelay: "150ms" }} />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234] animate-bounce" style={{ animationDelay: "300ms" }} />
+                          </span>
+                          <span className="text-[11px] text-[#9A8F7E] italic">Mira is thinking…</span>
                         </span>
                       ) : msg.role === "bot" ? <BotMessage text={msg.text} onCtaClick={isLastBotMsg ? handleCtaToContact : undefined} /> : msg.text}
                     </div>
                   </div>
 
-                  {/* Feedback thumbs — on all completed bot messages except the welcome */}
+                  {/* Feedback thumbs — hover-only on desktop, always visible on mobile */}
                   {msg.role === "bot" && !msg.streaming && i > 0 && (
-                    <div className="flex items-center gap-2 ml-9">
+                    <div className="flex items-center gap-2 ml-9 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200">
                       {feedbackGiven[i] ? (
                         <span className="text-[10px] text-[#9A8F7E]/60 tracking-[0.1em]">
                           {feedbackGiven[i] === "up" ? "Glad that helped" : "Thanks for letting us know"}
@@ -521,7 +571,7 @@ export default function Chatbot() {
                             key={si}
                             onClick={() => sendMessage(s)}
                             disabled={isStreaming}
-                            className="text-[11px] text-[#C9A234] border border-[#C9A234]/40 px-3 py-1.5 rounded-md bg-[#C9A234]/5 hover:bg-[#C9A234]/15 hover:border-[#C9A234]/70 transition-all duration-200 cursor-none disabled:opacity-30 whitespace-nowrap leading-none"
+                            className="text-[11px] text-[#C9A234] border border-[#C9A234]/50 px-3.5 py-1.5 rounded-full bg-[#C9A234]/10 hover:bg-[#C9A234]/20 hover:border-[#C9A234] hover:shadow-[0_0_8px_rgba(201,162,52,0.3)] transition-all duration-200 cursor-none disabled:opacity-30 whitespace-nowrap leading-none"
                           >
                             {s}
                           </button>
@@ -595,14 +645,16 @@ export default function Chatbot() {
                 onClick={() => sendMessage()}
                 disabled={!input.trim()}
                 aria-label="Send message"
-                className="w-7 h-7 flex items-center justify-center text-[#C9A234] disabled:opacity-30 hover:scale-110 transition-all duration-200 cursor-none shrink-0"
+                className={`w-7 h-7 flex items-center justify-center rounded-full transition-all duration-200 cursor-none shrink-0 ${input.trim() ? "bg-[#C9A234] text-[#1A1408] shadow-[0_0_10px_rgba(201,162,52,0.4)] hover:bg-[#C9A234]/90" : "text-[#C9A234]/30"}`}
               >
                 <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/>
                 </svg>
               </button>
             </div>
-            <p className="text-center text-[9px] text-[#9A8F7E]/40 mt-2 tracking-[0.1em]">Powered by Vows &amp; Vedas AI</p>
+            <p className="text-center mt-2">
+              <a href="/contact" className="text-[9px] text-[#C9A234]/50 hover:text-[#C9A234] tracking-[0.12em] uppercase transition-colors duration-200">Speak to a Planner →</a>
+            </p>
           </div>
         </div>
 

@@ -6,6 +6,7 @@ import CustomCursor from "@/components/CustomCursor";
 import LoadingScreen from "@/components/LoadingScreen";
 import Chatbot from "@/components/Chatbot";
 import HashtagGeneratorPopup from "@/components/HashtagGeneratorPopup";
+import PageTracker from "@/components/PageTracker";
 
 export const metadata = {
   title: "Vows & Vedas — Luxury Destination Weddings",
@@ -36,6 +37,7 @@ export default function RootLayout({ children }) {
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PX8XXL2T" height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></noscript>
         {/* End Google Tag Manager (noscript) */}
         <div id="progress-bar"></div>
+        <PageTracker />
         <LoadingScreen />
         <CustomCursor />
         <Chatbot />
