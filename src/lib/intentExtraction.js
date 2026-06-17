@@ -6,14 +6,17 @@
  */
 
 import { AzureOpenAI } from "openai";
+import { DefaultAzureCredential, getBearerTokenProvider } from "@azure/identity";
+
+const _credential = new DefaultAzureCredential();
 
 let _client = null;
 function getClient() {
   if (!_client) _client = new AzureOpenAI({
-    endpoint:   process.env.AZURE_OPENAI_ENDPOINT,
-    apiKey:     process.env.AZURE_OPENAI_API_KEY,
-    apiVersion: process.env.AZURE_OPENAI_API_VERSION || "2024-10-21",
-    deployment: process.env.AZURE_OPENAI_DEPLOYMENT  || "gpt-4-1-mini",
+    endpoint:             process.env.AZURE_OPENAI_ENDPOINT,
+    azureADTokenProvider: getBearerTokenProvider(_credential, "https://cognitiveservices.azure.com/.default"),
+    apiVersion:           process.env.AZURE_OPENAI_API_VERSION || "2024-10-21",
+    deployment:           process.env.AZURE_OPENAI_DEPLOYMENT  || "gpt-4-1-mini",
   });
   return _client;
 }
@@ -92,6 +95,24 @@ Entities to extract:
      "what do you do for decor" → "Design & Decor services wedding mandap floral centerpiece lighting scenography"
      "show me Rajasthan itinerary" → "Big Fat Indian Wedding Rajasthan itinerary day-by-day schedule 4 days"
      "Haveli Nights moodboard" → "Haveli Nights wedding moodboard jewel tones candlelit haveli heritage decor"
+
+CLARIFYING ANSWER RESOLUTION — CRITICAL:
+When the user's message is a short answer (one word, a name, a number) and the previous bot turn was a clarifying question, resolve BOTH the clarifying answer AND the original pending intent together. Never treat a short clarifying answer as a standalone request.
+
+Examples:
+  Bot asked: "Which moodboard are you thinking about?"
+  User replied: "citrus bloom"
+  → intent: "venue_recommendation"
+  → category: "moodboard" (but the underlying need is venue matching)
+  → rewritten_query: "venues that suit Citrus Bloom haldi moodboard outdoor daytime tropical vibrant Goa Kerala hills"
+
+  Bot asked: "What city are you considering?"
+  User replied: "Udaipur"
+  → intent: "venue_info"
+  → cities: ["Udaipur"]
+  → rewritten_query: "wedding venues Udaipur Rajasthan palace lake"
+
+Always check the previous bot turn to determine what question the user is answering before classifying intent.
 
 Return ONLY valid JSON matching the schema. You MUST include rewritten_query in every response.`;
 

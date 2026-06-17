@@ -1,4 +1,16 @@
 import { EmailClient } from "@azure/communication-email";
+import { DefaultAzureCredential } from "@azure/identity";
+import { trackEvent } from "@/lib/telemetry";
+
+const _credential = new DefaultAzureCredential();
+let _emailClient = null;
+function getEmailClient() {
+  if (!_emailClient) _emailClient = new EmailClient(
+    process.env.AZURE_COMMUNICATION_ENDPOINT,
+    _credential,
+  );
+  return _emailClient;
+}
 
 function escHtml(str) {
   return String(str ?? "")
@@ -132,26 +144,44 @@ const CC_RECIPIENTS = [
   { address: "rakesh.bijewar@wearemci.com", displayName: "Rakesh Bijewar" },
 ];
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export async function POST(req) {
+  let body;
+  try { body = await req.json(); } catch {
+    return Response.json({ error: "Invalid request body." }, { status: 400 });
+  }
+
+  const { firstName, lastName, email, phone, destination, weddingDate, message, chatbotContext, recaptchaToken, sourcePagePath, referrerUrl } = body ?? {};
+
+  if (!firstName?.trim())
+    return Response.json({ error: "firstName is required." }, { status: 400 });
+  if (!lastName?.trim())
+    return Response.json({ error: "lastName is required." }, { status: 400 });
+  if (!email?.trim() || !EMAIL_RE.test(email.trim()))
+    return Response.json({ error: "A valid email address is required." }, { status: 400 });
+  if (firstName.trim().length > 50 || lastName.trim().length > 50)
+    return Response.json({ error: "Name must be under 50 characters." }, { status: 400 });
+  if (message && message.length > 2000)
+    return Response.json({ error: "Message must be under 2000 characters." }, { status: 400 });
+  if (chatbotContext !== undefined && (typeof chatbotContext !== "object" || Array.isArray(chatbotContext)))
+    return Response.json({ error: "Invalid chatbotContext." }, { status: 400 });
+
+  const recaptcha = await verifyRecaptcha(recaptchaToken);
+  if (!recaptcha.ok) {
+    console.warn("Contact reCAPTCHA blocked:", recaptcha.reason, recaptcha.codes ?? "");
+    return Response.json(
+      { success: false, error: "Your submission could not be verified. Please try again." },
+      { status: 400 }
+    );
+  }
+  if (recaptcha.lowScore) {
+    console.warn("Contact reCAPTCHA low score (allowed):", recaptcha.score);
+  }
+
   try {
-    const body = await req.json();
-    const { firstName, lastName, email, phone, destination, weddingDate, message, chatbotContext, recaptchaToken } = body;
 
-    // Lead-safe reCAPTCHA gate: reject only bots (missing or forged token); a genuine
-    // token always passes regardless of its score, and Google/infra errors fail open.
-    const recaptcha = await verifyRecaptcha(recaptchaToken);
-    if (!recaptcha.ok) {
-      console.warn("Contact reCAPTCHA blocked:", recaptcha.reason, recaptcha.codes ?? "");
-      return Response.json(
-        { success: false, error: "Your submission could not be verified. Please try again." },
-        { status: 400 }
-      );
-    }
-    if (recaptcha.lowScore) {
-      console.warn("Contact reCAPTCHA low score (allowed):", recaptcha.score);
-    }
-
-    const client = new EmailClient(process.env.AZURE_COMMUNICATION_CONNECTION_STRING);
+    const client = getEmailClient();
 
     const emailMessage = {
       senderAddress: process.env.AZURE_SENDER_ADDRESS,
@@ -187,6 +217,15 @@ export async function POST(req) {
                   <td style="padding:10px 0;border-bottom:1px solid #EDE8DC;color:#9A8F7E;font-size:11px;text-transform:uppercase;letter-spacing:2px;">Wedding Date</td>
                   <td style="padding:10px 0;border-bottom:1px solid #EDE8DC;font-size:15px;">${weddingDate || "—"}</td>
                 </tr>
+                <tr>
+                  <td style="padding:10px 0;border-bottom:1px solid #EDE8DC;color:#9A8F7E;font-size:11px;text-transform:uppercase;letter-spacing:2px;">Enquiry Source</td>
+                  <td style="padding:10px 0;border-bottom:1px solid #EDE8DC;font-size:13px;">${sourcePagePath ? `<a href="${escHtml(sourcePagePath)}" style="color:#C9A234;">${escHtml(sourcePagePath)}</a>` : "—"}</td>
+                </tr>
+                ${referrerUrl ? `
+                <tr>
+                  <td style="padding:10px 0;border-bottom:1px solid #EDE8DC;color:#9A8F7E;font-size:11px;text-transform:uppercase;letter-spacing:2px;">External Referrer</td>
+                  <td style="padding:10px 0;border-bottom:1px solid #EDE8DC;font-size:13px;color:#5a5a5a;word-break:break-all;"><a href="${escHtml(referrerUrl)}" style="color:#C9A234;">${escHtml(referrerUrl)}</a></td>
+                </tr>` : ""}
                 ${message ? `
                 <tr>
                   <td style="padding:10px 0;border-bottom:1px solid #EDE8DC;color:#9A8F7E;font-size:11px;text-transform:uppercase;letter-spacing:2px;vertical-align:top;">Vision</td>
@@ -212,11 +251,81 @@ export async function POST(req) {
     const poller = await client.beginSend(emailMessage);
     const result = await poller.pollUntilDone();
 
-    if (result.status === "Succeeded") {
-      return Response.json({ success: true });
-    } else {
+    if (result.status !== "Succeeded") {
       throw new Error(`Email send failed with status: ${result.status}`);
     }
+
+    // Fire-and-forget telemetry — never awaited so it can't block the response
+    trackEvent("EnquirySubmitted", {
+      sourcePagePath:     sourcePagePath || "",
+      referrerUrl:        referrerUrl    || "",
+      destination:        destination    || "",
+      weddingDate:        weddingDate    || "",
+      hasMessage:         !!message,
+      hasChatbotContext:  !!chatbotContext,
+      intentLevel:        chatbotContext?.intent_level        || "none",
+      citiesExplored:     chatbotContext?.cities              || [],
+      venuesViewed:       chatbotContext?.venues_viewed       || [],
+      budgetTier:         chatbotContext?.budget_tier         || "",
+      sessionId:          chatbotContext?.session_id          || "",
+    });
+
+    // Confirmation email to the enquirer
+    let confirmationError = null;
+    try {
+      const confirmationMessage = {
+        senderAddress: process.env.AZURE_SENDER_ADDRESS,
+        replyTo: [{ address: "info@vowsandvedas.com", displayName: "Vows & Vedas" }],
+        content: {
+          subject: "We've received your enquiry — Vows & Vedas",
+          html: `
+            <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #1A1408;">
+              <div style="background: #1A1408; padding: 32px; text-align: center;">
+                <p style="color: #C9A234; margin: 0 0 8px; font-size: 10px; letter-spacing: 0.5em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; font-weight: 500;">Vows &amp; Vedas</p>
+                <h1 style="color: #FDFAF5; margin: 0; font-weight: 300; font-size: 28px; letter-spacing: 2px;">Thank You, ${escHtml(firstName)}</h1>
+              </div>
+              <div style="padding: 40px 32px; background: #FDFAF5; border: 1px solid #EDE8DC;">
+                <p style="font-size: 16px; line-height: 1.8; color: #1A1408; margin: 0 0 24px;">
+                  We've received your enquiry and are delighted to begin this journey with you. Our planning team will be in touch within <strong>24–48 hours</strong> to explore your vision and put together a tailored proposal.
+                </p>
+                <div style="border-left: 2px solid #C9A234; padding-left: 20px; margin: 28px 0;">
+                  <p style="font-size: 13px; color: #9A8F7E; margin: 0 0 16px; text-transform: uppercase; letter-spacing: 2px; font-size: 10px;">What happens next</p>
+                  <p style="font-size: 14px; line-height: 1.8; color: #1A1408; margin: 0 0 10px;">
+                    <strong style="color: #C9A234;">1.</strong> Our team reviews your enquiry and gathers the best options for your celebration.
+                  </p>
+                  <p style="font-size: 14px; line-height: 1.8; color: #1A1408; margin: 0 0 10px;">
+                    <strong style="color: #C9A234;">2.</strong> We reach out to schedule a short discovery call — no obligation, just a conversation.
+                  </p>
+                  <p style="font-size: 14px; line-height: 1.8; color: #1A1408; margin: 0;">
+                    <strong style="color: #C9A234;">3.</strong> You receive a personalised proposal built around your vision, destination, and budget.
+                  </p>
+                </div>
+                <p style="font-size: 14px; line-height: 1.8; color: #9A8F7E; margin: 28px 0 0;">
+                  In the meantime, feel free to explore our <a href="https://vowsandvedas.com/moodboards" style="color: #C9A234; text-decoration: none;">moodboards</a> and <a href="https://vowsandvedas.com/destinations" style="color: #C9A234; text-decoration: none;">destinations</a> for inspiration. If you have any questions, simply reply to this email.
+                </p>
+              </div>
+              <div style="padding: 20px 32px; background: #1A1408; text-align: center;">
+                <p style="color: #C9A234; margin: 0; font-size: 10px; letter-spacing: 3px; text-transform: uppercase;">
+                  Vows &amp; Vedas · Curating Rare Moments
+                </p>
+              </div>
+            </div>
+          `,
+        },
+        recipients: {
+          to: [{ address: email.trim(), displayName: `${firstName} ${lastName}` }],
+        },
+      };
+      const confirmPoller = await client.beginSend(confirmationMessage);
+      const confirmResult = await confirmPoller.pollUntilDone();
+      if (confirmResult.status !== "Succeeded") {
+        confirmationError = `Confirmation send status: ${confirmResult.status}`;
+      }
+    } catch (confirmErr) {
+      confirmationError = confirmErr.message;
+    }
+
+    return Response.json({ success: true, confirmationError });
   } catch (err) {
     console.error("Contact form error:", err);
     return Response.json({ success: false, error: err.message }, { status: 500 });

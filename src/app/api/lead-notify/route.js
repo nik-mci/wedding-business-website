@@ -1,4 +1,15 @@
 import { EmailClient } from "@azure/communication-email";
+import { DefaultAzureCredential } from "@azure/identity";
+
+const _credential = new DefaultAzureCredential();
+let _emailClient = null;
+function getEmailClient() {
+  if (!_emailClient) _emailClient = new EmailClient(
+    process.env.AZURE_COMMUNICATION_ENDPOINT,
+    _credential,
+  );
+  return _emailClient;
+}
 
 const RECIPIENTS = [
   // Backend-only recipient — never rendered to visitors.
@@ -30,13 +41,23 @@ function intentBadge(level) {
 }
 
 export async function POST(req) {
+  let body;
+  try { body = await req.json(); } catch {
+    return Response.json({ error: "Invalid request body." }, { status: 400 });
+  }
+
+  const {
+    accumulated_intent   = {},
+    conversation_history = [],
+    session_id           = "unknown",
+  } = body ?? {};
+
+  if (typeof accumulated_intent !== "object" || Array.isArray(accumulated_intent))
+    return Response.json({ error: "accumulated_intent must be an object." }, { status: 400 });
+  if (!Array.isArray(conversation_history))
+    return Response.json({ error: "conversation_history must be an array." }, { status: 400 });
+
   try {
-    const body = await req.json();
-    const {
-      accumulated_intent    = {},
-      conversation_history  = [],
-      session_id            = "unknown",
-    } = body;
 
     const {
       intent_level  = "low",
@@ -61,7 +82,7 @@ export async function POST(req) {
         }).join("")
       : `<tr><td colspan="2" style="padding:12px;font-size:12px;color:#9A8F7E;font-style:italic;">No conversation history available</td></tr>`;
 
-    const client = new EmailClient(process.env.AZURE_COMMUNICATION_CONNECTION_STRING);
+    const client = getEmailClient();
 
     const emailMessage = {
       senderAddress: process.env.AZURE_SENDER_ADDRESS,

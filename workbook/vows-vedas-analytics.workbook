@@ -1,0 +1,413 @@
+{
+  "version": "Notebook/1.0",
+  "isLocked": false,
+  "items": [
+    {
+      "type": 1,
+      "content": {
+        "json": "# Vows & Vedas — Enquiry Analytics\n---\nReal-time intelligence on every CTA click, form submission, and chatbot conversation. All data is sourced from the `EnquirySubmitted` custom event logged by the contact API.\n\n> **How to use:** Set your Application Insights resource and time range using the controls above, then scroll through each section."
+      },
+      "name": "header-text"
+    },
+    {
+      "type": 9,
+      "content": {
+        "version": "KqlParameterItem/1.0",
+        "crossComponentResources": [],
+        "parameters": [
+          {
+            "id": "time-range-param",
+            "version": "KqlParameterItem/1.0",
+            "name": "TimeRange",
+            "label": "Time Range",
+            "type": 4,
+            "isRequired": true,
+            "value": {
+              "durationMs": 2592000000
+            },
+            "typeSettings": {
+              "selectableValues": [
+                { "durationMs": 86400000,   "createdTime": "2020-01-01T00:00:00.000Z", "isInitialTime": false, "grain": 1, "useDashboardTimeRange": false },
+                { "durationMs": 604800000,  "createdTime": "2020-01-01T00:00:00.000Z", "isInitialTime": false, "grain": 1, "useDashboardTimeRange": false },
+                { "durationMs": 2592000000, "createdTime": "2020-01-01T00:00:00.000Z", "isInitialTime": false, "grain": 1, "useDashboardTimeRange": false },
+                { "durationMs": 7776000000, "createdTime": "2020-01-01T00:00:00.000Z", "isInitialTime": false, "grain": 1, "useDashboardTimeRange": false }
+              ]
+            }
+          }
+        ],
+        "style": "pills",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components"
+      },
+      "name": "parameters-time"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## Overview"
+      },
+      "name": "section-overview"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where name == 'EnquirySubmitted'\n| where timestamp {TimeRange}\n| summarize\n    TotalEnquiries     = count(),\n    HighIntent         = countif(tostring(customDimensions.intentLevel) == 'high'),\n    ChatbotAssisted    = countif(tobool(customDimensions.hasChatbotContext) == true),\n    WithDestination    = countif(isnotempty(tostring(customDimensions.destination)))\n| extend\n    HighIntentPct      = round(100.0 * HighIntent    / TotalEnquiries, 1),\n    ChatbotPct         = round(100.0 * ChatbotAssisted / TotalEnquiries, 1),\n    DestinationPct     = round(100.0 * WithDestination / TotalEnquiries, 1)\n| project\n    ['Total Enquiries']        = TotalEnquiries,\n    ['High Intent']            = HighIntent,\n    ['High Intent %']          = strcat(tostring(HighIntentPct), '%'),\n    ['Chatbot Assisted']       = ChatbotAssisted,\n    ['Chatbot Assist Rate']    = strcat(tostring(ChatbotPct), '%'),\n    ['Shared Destination']     = WithDestination,\n    ['Destination Rate']       = strcat(tostring(DestinationPct), '%')",
+        "size": 3,
+        "title": "KPI Summary",
+        "timeContext": { "durationMs": 0 },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "tiles",
+        "tileSettings": {
+          "titleContent":     { "columnMatch": "column", "formatter": 1 },
+          "leftContent":      { "columnMatch": "value",  "formatter": 12, "formatOptions": { "palette": "auto" } },
+          "showBorder":       true,
+          "size":             "auto"
+        }
+      },
+      "name": "kpi-tiles"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where name == 'EnquirySubmitted'\n| where timestamp {TimeRange}\n| summarize Enquiries = count() by bin(timestamp, 1d)\n| order by timestamp asc",
+        "size": 0,
+        "title": "Daily Enquiry Trend",
+        "timeContext": { "durationMs": 0 },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "areachart",
+        "chartSettings": {
+          "xAxis":    "timestamp",
+          "yAxis":    ["Enquiries"],
+          "seriesLabelSettings": [{ "seriesName": "Enquiries", "color": "C9A234" }]
+        }
+      },
+      "name": "daily-trend"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## Enquiry Sources\nWhich pages on the site drove users to submit the contact form."
+      },
+      "name": "section-sources"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where name == 'EnquirySubmitted'\n| where timestamp {TimeRange}\n| extend rawPath = tostring(customDimensions.sourcePagePath)\n| extend PageLabel = case(\n    rawPath == '/',                                'Homepage',\n    rawPath startswith '/destinations/',           strcat('Destination: ', extract('/destinations/([^/?#]+)', 1, rawPath)),\n    rawPath == '/destinations',                    'Destinations Hub',\n    rawPath startswith '/services',                'Services',\n    rawPath startswith '/about',                   'About',\n    rawPath startswith '/moodboards',              'Moodboards',\n    rawPath startswith '/faq',                     'FAQ',\n    rawPath == '/contact',                         'Direct to Contact',\n    isempty(rawPath),                              'Unknown / Direct',\n    rawPath\n  )\n| summarize\n    Enquiries   = count(),\n    HighIntent  = countif(tostring(customDimensions.intentLevel) == 'high'),\n    WithChatbot = countif(tobool(customDimensions.hasChatbotContext) == true)\n  by PageLabel\n| extend HighIntentPct = round(100.0 * HighIntent / Enquiries, 1)\n| order by Enquiries desc",
+        "size": 0,
+        "title": "Enquiries by Source Page",
+        "timeContext": { "durationMs": 0 },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "barchart",
+        "chartSettings": {
+          "xAxis":    "PageLabel",
+          "yAxis":    ["Enquiries"],
+          "seriesLabelSettings": [{ "seriesName": "Enquiries", "color": "C9A234" }]
+        }
+      },
+      "name": "source-page-bar"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where name == 'EnquirySubmitted'\n| where timestamp {TimeRange}\n| extend rawPath = tostring(customDimensions.sourcePagePath)\n| extend PageLabel = case(\n    rawPath == '/',                                'Homepage',\n    rawPath startswith '/destinations/',           strcat('Destination: ', extract('/destinations/([^/?#]+)', 1, rawPath)),\n    rawPath == '/destinations',                    'Destinations Hub',\n    rawPath startswith '/services',                'Services',\n    rawPath startswith '/about',                   'About',\n    rawPath startswith '/moodboards',              'Moodboards',\n    rawPath startswith '/faq',                     'FAQ',\n    rawPath == '/contact',                         'Direct to Contact',\n    isempty(rawPath),                              'Unknown / Direct',\n    rawPath\n  )\n| summarize\n    Enquiries        = count(),\n    ['High Intent']  = countif(tostring(customDimensions.intentLevel) == 'high'),\n    ['With Chatbot'] = countif(tobool(customDimensions.hasChatbotContext) == true)\n  by ['Source Page'] = PageLabel\n| extend ['High Intent %'] = strcat(tostring(round(100.0 * ['High Intent'] / Enquiries, 1)), '%')\n| order by Enquiries desc",
+        "size": 1,
+        "title": "Source Page Detail",
+        "timeContext": { "durationMs": 0 },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table",
+        "gridSettings": {
+          "formatters": [
+            { "columnMatch": "Enquiries",      "formatter": 4, "formatOptions": { "palette": "blue" } },
+            { "columnMatch": "High Intent %",  "formatter": 18, "formatOptions": { "thresholdsOptions": "icons", "thresholdsGrid": [{ "operator": ">=", "thresholdValue": "30", "representation": "success" }, { "operator": "Default", "thresholdValue": null, "representation": "2" }] } }
+          ]
+        }
+      },
+      "name": "source-page-table"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where name == 'EnquirySubmitted'\n| where timestamp {TimeRange}\n| extend ref = tostring(customDimensions.referrerUrl)\n| where isnotempty(ref)\n| extend domain = extract('^https?://([^/?#]+)', 1, ref)\n| summarize Enquiries = count() by ['External Referrer Domain'] = domain\n| order by Enquiries desc\n| take 20",
+        "size": 1,
+        "title": "External Referrer Domains (Google, Instagram, etc.)",
+        "timeContext": { "durationMs": 0 },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table",
+        "gridSettings": {
+          "formatters": [
+            { "columnMatch": "Enquiries", "formatter": 4, "formatOptions": { "palette": "orange" } }
+          ]
+        }
+      },
+      "name": "external-referrers"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## Intent Quality\nHow engaged are the leads coming through the contact form?"
+      },
+      "name": "section-intent"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where name == 'EnquirySubmitted'\n| where timestamp {TimeRange}\n| extend intentLevel = tostring(customDimensions.intentLevel)\n| extend Level = case(\n    intentLevel == 'high',   'High',\n    intentLevel == 'medium', 'Medium',\n    intentLevel == 'low',    'Low',\n    'No Chatbot'\n  )\n| summarize Count = count() by Level",
+        "size": 3,
+        "title": "Intent Level Distribution",
+        "timeContext": { "durationMs": 0 },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "piechart",
+        "chartSettings": {
+          "seriesLabelSettings": [
+            { "seriesName": "High",        "color": "green" },
+            { "seriesName": "Medium",      "color": "orange" },
+            { "seriesName": "Low",         "color": "gray" },
+            { "seriesName": "No Chatbot",  "color": "lightBlue" }
+          ]
+        }
+      },
+      "name": "intent-pie"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where name == 'EnquirySubmitted'\n| where timestamp {TimeRange}\n| extend rawPath = tostring(customDimensions.sourcePagePath)\n| extend PageLabel = case(\n    rawPath == '/',                                'Homepage',\n    rawPath startswith '/destinations/',           strcat('Destination: ', extract('/destinations/([^/?#]+)', 1, rawPath)),\n    rawPath == '/destinations',                    'Destinations Hub',\n    rawPath startswith '/services',                'Services',\n    rawPath startswith '/moodboards',              'Moodboards',\n    isempty(rawPath),                              'Unknown',\n    rawPath\n  )\n| extend Level = case(\n    tostring(customDimensions.intentLevel) == 'high',   'High',\n    tostring(customDimensions.intentLevel) == 'medium', 'Medium',\n    'Low / None'\n  )\n| summarize Count = count() by PageLabel, Level\n| order by PageLabel asc, Level asc",
+        "size": 1,
+        "title": "Intent Level by Source Page",
+        "timeContext": { "durationMs": 0 },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table",
+        "gridSettings": {
+          "formatters": [
+            { "columnMatch": "Count", "formatter": 4, "formatOptions": { "palette": "greenRed" } }
+          ]
+        }
+      },
+      "name": "intent-by-source"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## Destinations\nWhat wedding destinations are leads asking about?"
+      },
+      "name": "section-destinations"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where name == 'EnquirySubmitted'\n| where timestamp {TimeRange}\n| extend dest = tostring(customDimensions.destination)\n| where isnotempty(dest) and dest != ''\n| summarize Enquiries = count(), HighIntent = countif(tostring(customDimensions.intentLevel) == 'high') by Destination = dest\n| extend ['High Intent %'] = strcat(tostring(round(100.0 * HighIntent / Enquiries, 1)), '%')\n| order by Enquiries desc\n| take 20",
+        "size": 0,
+        "title": "Top Destinations Requested",
+        "timeContext": { "durationMs": 0 },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "barchart",
+        "chartSettings": {
+          "xAxis": "Destination",
+          "yAxis": ["Enquiries"]
+        }
+      },
+      "name": "destinations-bar"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where name == 'EnquirySubmitted'\n| where timestamp {TimeRange}\n| extend cities = tostring(customDimensions.citiesExplored)\n| where isnotempty(cities) and cities != ''\n| mv-expand City = split(cities, ', ')\n| summarize Mentions = count() by tostring(City)\n| order by Mentions desc\n| take 20",
+        "size": 1,
+        "title": "Cities Explored in Chatbot",
+        "timeContext": { "durationMs": 0 },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table",
+        "gridSettings": {
+          "formatters": [
+            { "columnMatch": "Mentions", "formatter": 4, "formatOptions": { "palette": "blue" } }
+          ]
+        }
+      },
+      "name": "chatbot-cities"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## Wedding Timeline\nWhen are couples planning to get married?"
+      },
+      "name": "section-timeline"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where name == 'EnquirySubmitted'\n| where timestamp {TimeRange}\n| extend wDate = tostring(customDimensions.weddingDate)\n| where isnotempty(wDate) and wDate != ''\n| extend wYear = extract('(20[0-9]{2})', 1, wDate)\n| where isnotempty(wYear)\n| summarize Enquiries = count() by ['Wedding Year'] = wYear\n| order by ['Wedding Year'] asc",
+        "size": 3,
+        "title": "Enquiries by Planned Wedding Year",
+        "timeContext": { "durationMs": 0 },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "barchart",
+        "chartSettings": {
+          "xAxis": "Wedding Year",
+          "yAxis": ["Enquiries"]
+        }
+      },
+      "name": "wedding-year-bar"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where name == 'EnquirySubmitted'\n| where timestamp {TimeRange}\n| extend wDate = tostring(customDimensions.weddingDate)\n| where isnotempty(wDate) and wDate != ''\n| extend wMonth = extract('^(January|February|March|April|May|June|July|August|September|October|November|December)', 1, wDate)\n| where isnotempty(wMonth)\n| summarize Enquiries = count() by Month = wMonth\n| extend SortKey = case(\n    Month == 'January',   1, Month == 'February',  2,\n    Month == 'March',     3, Month == 'April',      4,\n    Month == 'May',       5, Month == 'June',       6,\n    Month == 'July',      7, Month == 'August',     8,\n    Month == 'September', 9, Month == 'October',   10,\n    Month == 'November', 11, 12\n  )\n| order by SortKey asc\n| project Month, Enquiries",
+        "size": 3,
+        "title": "Enquiries by Planned Wedding Month",
+        "timeContext": { "durationMs": 0 },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "barchart",
+        "chartSettings": {
+          "xAxis": "Month",
+          "yAxis": ["Enquiries"]
+        }
+      },
+      "name": "wedding-month-bar"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## Chatbot Performance\nHow effectively does the chatbot assist and qualify leads before they submit the form?"
+      },
+      "name": "section-chatbot"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where name == 'EnquirySubmitted'\n| where timestamp {TimeRange}\n| summarize\n    Total            = count(),\n    WithChatbot      = countif(tobool(customDimensions.hasChatbotContext) == true),\n    NoChatbot        = countif(tobool(customDimensions.hasChatbotContext) != true)\n| extend\n    ['Chatbot Assist Rate'] = strcat(tostring(round(100.0 * WithChatbot / Total, 1)), '%'),\n    ['Without Chatbot %']   = strcat(tostring(round(100.0 * NoChatbot   / Total, 1)), '%')\n| project\n    ['Total Enquiries']         = Total,\n    ['Via Chatbot']             = WithChatbot,\n    ['Direct (No Chatbot)']     = NoChatbot,\n    ['Chatbot Assist Rate'],\n    ['Without Chatbot %']",
+        "size": 3,
+        "title": "Chatbot vs Direct Conversion",
+        "timeContext": { "durationMs": 0 },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "tiles",
+        "tileSettings": {
+          "showBorder": true,
+          "size": "auto"
+        }
+      },
+      "name": "chatbot-assist-tiles"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where name == 'EnquirySubmitted'\n| where timestamp {TimeRange}\n| extend hasChatbot = tobool(customDimensions.hasChatbotContext)\n| extend Channel = iif(hasChatbot == true, 'Chatbot-Assisted', 'Direct')\n| extend intentLevel = tostring(customDimensions.intentLevel)\n| extend Level = case(\n    intentLevel == 'high',   'High',\n    intentLevel == 'medium', 'Medium',\n    'Low / None'\n  )\n| summarize Count = count() by Channel, Level\n| order by Channel asc, Level asc",
+        "size": 1,
+        "title": "Intent Level by Channel",
+        "timeContext": { "durationMs": 0 },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table",
+        "gridSettings": {
+          "formatters": [
+            { "columnMatch": "Count", "formatter": 4, "formatOptions": { "palette": "greenRed" } }
+          ]
+        }
+      },
+      "name": "intent-by-channel"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where name == 'EnquirySubmitted'\n| where timestamp {TimeRange}\n| extend venues = tostring(customDimensions.venuesViewed)\n| where isnotempty(venues) and venues != ''\n| mv-expand Venue = split(venues, ', ')\n| summarize Mentions = count() by tostring(Venue)\n| order by Mentions desc\n| take 20",
+        "size": 1,
+        "title": "Venues Viewed in Chatbot",
+        "timeContext": { "durationMs": 0 },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table",
+        "gridSettings": {
+          "formatters": [
+            { "columnMatch": "Mentions", "formatter": 4, "formatOptions": { "palette": "blue" } }
+          ]
+        }
+      },
+      "name": "chatbot-venues"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where name == 'EnquirySubmitted'\n| where timestamp {TimeRange}\n| extend budgetTier = tostring(customDimensions.budgetTier)\n| where isnotempty(budgetTier) and budgetTier != ''\n| summarize Enquiries = count() by ['Budget Tier'] = budgetTier\n| order by Enquiries desc",
+        "size": 3,
+        "title": "Budget Tier Distribution",
+        "timeContext": { "durationMs": 0 },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "piechart"
+      },
+      "name": "budget-tier-pie"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## Raw Enquiries\nMost recent form submissions with all tracked fields."
+      },
+      "name": "section-raw"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where name == 'EnquirySubmitted'\n| where timestamp {TimeRange}\n| extend\n    SourcePage       = tostring(customDimensions.sourcePagePath),\n    ExternalReferrer = tostring(customDimensions.referrerUrl),\n    Destination      = tostring(customDimensions.destination),\n    WeddingDate      = tostring(customDimensions.weddingDate),\n    IntentLevel      = tostring(customDimensions.intentLevel),\n    ChatbotAssisted  = tobool(customDimensions.hasChatbotContext),\n    HasMessage       = tobool(customDimensions.hasMessage),\n    BudgetTier       = tostring(customDimensions.budgetTier),\n    CitiesExplored   = tostring(customDimensions.citiesExplored),\n    SessionId        = tostring(customDimensions.sessionId)\n| project\n    Timestamp        = timestamp,\n    SourcePage,\n    ExternalReferrer,\n    Destination,\n    WeddingDate,\n    IntentLevel,\n    ChatbotAssisted,\n    HasMessage,\n    BudgetTier,\n    CitiesExplored,\n    SessionId\n| order by Timestamp desc\n| take 100",
+        "size": 1,
+        "title": "Recent Enquiries (last 100)",
+        "timeContext": { "durationMs": 0 },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table",
+        "gridSettings": {
+          "formatters": [
+            { "columnMatch": "IntentLevel",     "formatter": 18, "formatOptions": { "thresholdsOptions": "colors", "thresholdsGrid": [{ "operator": "==", "thresholdValue": "high", "representation": "green", "text": "HIGH" }, { "operator": "==", "thresholdValue": "medium", "representation": "orange", "text": "MED" }, { "operator": "Default", "thresholdValue": null, "representation": "gray", "text": "{0}" }] } },
+            { "columnMatch": "ChatbotAssisted", "formatter": 18, "formatOptions": { "thresholdsOptions": "icons",  "thresholdsGrid": [{ "operator": "==", "thresholdValue": "true",  "representation": "success" }, { "operator": "Default", "thresholdValue": null, "representation": "2" }] } }
+          ]
+        }
+      },
+      "name": "raw-table"
+    }
+  ],
+  "fallbackResourceIds": [],
+  "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
+}

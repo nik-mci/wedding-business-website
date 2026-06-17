@@ -188,11 +188,16 @@ export default function ServicesPage() {
 
   useEffect(() => {
     // Initial check for hash
-    const hash = window.location.hash.replace("#", "");
-    if (hash) {
-      const service = services.find(s => s.id === hash);
-      if (service) setSelectedService(service);
-    }
+    const openFromHash = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (hash) {
+        const service = services.find(s => s.id === hash);
+        if (service) setSelectedService(service);
+      }
+    };
+
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
 
     let ctx = gsap.context(() => {
       // Entrance animation for grid cards
@@ -216,7 +221,10 @@ export default function ServicesPage() {
       }
     });
     
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      window.removeEventListener("hashchange", openFromHash);
+    };
   }, []);
 
   useEffect(() => {
