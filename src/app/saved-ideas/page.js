@@ -62,9 +62,6 @@ export default async function SavedIdeasPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-5">
                     <p className="font-heading text-white text-lg font-normal">{item.ideaTitle}</p>
                   </div>
-                  <span className="absolute bottom-5 left-5 z-[1] text-[9px] tracking-[0.3em] uppercase text-[#C9A234]/90 font-medium bg-black/40 px-2 py-1 backdrop-blur-sm">
-                    {item.ideaTag}
-                  </span>
                   <span className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-[#C9A234] text-white text-sm">
                     ♥
                   </span>
