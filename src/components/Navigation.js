@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
+import ProfileDropdown from "@/components/global/ProfileDropdown";
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
@@ -143,6 +144,10 @@ export default function Navigation() {
             <div className="absolute inset-0 bg-gold translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-300 ease-out" />
           </Link>
 
+          <div className="hidden md:block">
+            <ProfileDropdown />
+          </div>
+
           <button
             type="button"
             onClick={() => setMobileOpen(true)}
@@ -249,7 +254,8 @@ export default function Navigation() {
           })}
         </ul>
 
-        <div className="px-6 py-5 border-t border-ink/8 flex items-center justify-end gap-4">
+        <div className="px-6 py-5 border-t border-ink/8 flex items-center gap-4">
+          <ProfileDropdown />
           <Link
             href="/contact"
             className="flex-1 text-center text-[10px] uppercase tracking-[0.22em] font-medium px-4 py-3 border border-gold text-ink hover:bg-gold hover:text-white transition-colors duration-300"

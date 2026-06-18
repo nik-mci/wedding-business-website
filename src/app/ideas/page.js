@@ -12,8 +12,26 @@ export default function IdeasPage() {
   const [selectedIdea, setSelectedIdea] = useState(null);
   const [savedIdeas, setSavedIdeas] = useState(new Set());
   const [placeholderIdx, setPlaceholderIdx] = useState(0);
+  const [sessionUser, setSessionUser] = useState(undefined); // undefined = loading
 
   const placeholders = ['Search floral decor...', 'Search mandap designs...', 'Search bridal looks...', 'Search destination ideas...', 'Search lighting moods...'];
+
+  // Load session + persisted saves on mount
+  useEffect(() => {
+    fetch("/api/auth/session")
+      .then((r) => r.json())
+      .then(async (data) => {
+        setSessionUser(data.user ?? null);
+        if (data.user) {
+          const res = await fetch("/api/user/saved-ideas");
+          if (res.ok) {
+            const { savedIdeas: saved } = await res.json();
+            setSavedIdeas(new Set(saved.map((s) => s.ideaId)));
+          }
+        }
+      })
+      .catch(() => setSessionUser(null));
+  }, []);
 
   useEffect(() => {
     // Reveal animations
@@ -36,14 +54,39 @@ export default function IdeasPage() {
     return () => clearInterval(interval);
   }, []);
 
-  const toggleSave = (e, id) => {
+  const toggleSave = async (e, idea) => {
     e.stopPropagation();
+    // Guest: prompt sign-in
+    if (!sessionUser) {
+      window.dispatchEvent(new CustomEvent("openProfileDropdown"));
+      return;
+    }
+    const id = idea.id;
+    const isSaved = savedIdeas.has(id);
+    // Optimistic update
     setSavedIdeas(prev => {
       const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
+      if (isSaved) next.delete(id); else next.add(id);
       return next;
     });
+    try {
+      if (isSaved) {
+        await fetch(`/api/user/saved-ideas/${id}`, { method: "DELETE" });
+      } else {
+        await fetch("/api/user/saved-ideas", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ideaId: id, ideaTitle: idea.title, ideaTag: idea.tag, ideaImg: idea.img }),
+        });
+      }
+    } catch {
+      // Revert on error
+      setSavedIdeas(prev => {
+        const next = new Set(prev);
+        if (isSaved) next.add(id); else next.delete(id);
+        return next;
+      });
+    }
   };
 
   const ideas = [
@@ -132,7 +175,7 @@ export default function IdeasPage() {
                   </div>
                   <button 
                     className={`idea-save absolute top-3 right-3 z-[3] w-8 h-8 flex items-center justify-center rounded-full opacity-0 translate-y-[-4px] scale-[0.8] transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 cursor-none ${isSaved ? 'bg-gold text-surface scale-100 opacity-100 translate-y-0' : 'bg-black/30 text-surface'}`}
-                    onClick={(e) => toggleSave(e, idea.id)}
+                    onClick={(e) => toggleSave(e, idea)}
                   >
                     {isSaved ? '♥' : '♡'}
                   </button>

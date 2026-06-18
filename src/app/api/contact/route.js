@@ -1,6 +1,9 @@
+import { randomUUID } from "crypto";
 import { EmailClient } from "@azure/communication-email";
 import { DefaultAzureCredential } from "@azure/identity";
 import { trackEvent } from "@/lib/telemetry";
+import { getSession } from "@/lib/session";
+import { getEnquiriesContainer } from "@/lib/cosmos";
 
 const _credential = new DefaultAzureCredential();
 let _emailClient = null;
@@ -256,6 +259,22 @@ export async function POST(req) {
     if (result.status !== "Succeeded") {
       throw new Error(`Email send failed with status: ${result.status}`);
     }
+
+    // Fire-and-forget: save enquiry to DB if user is logged in
+    getSession().then((session) => {
+      if (!session) return;
+      return getEnquiriesContainer().items.create({
+        id: randomUUID(),
+        userId: session.sub,
+        email: email.trim(),
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        destination: destination ?? "",
+        weddingDate: weddingDate ?? "",
+        message: message ?? "",
+        submittedAt: new Date().toISOString(),
+      });
+    }).catch((err) => console.error("Enquiry DB save error:", err));
 
     // Fire-and-forget telemetry — never awaited so it can't block the response
     trackEvent("EnquirySubmitted", {
