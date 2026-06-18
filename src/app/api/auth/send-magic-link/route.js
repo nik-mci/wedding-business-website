@@ -81,7 +81,7 @@ export async function POST(req) {
   }
 
   // Send email
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://vowsandvedas.com";
+  const baseUrl = process.env.AUTH_BASE_URL || "https://vowsandvedas.com";
   const magicLink = `${baseUrl}/api/auth/verify?token=${token}`;
 
   try {

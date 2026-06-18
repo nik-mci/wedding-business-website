@@ -2,10 +2,15 @@ import { NextResponse } from "next/server";
 import { getAuthTokensContainer, getUsersContainer } from "@/lib/cosmos";
 import { setSessionCookie } from "@/lib/session";
 
+function siteUrl(path) {
+  const base = process.env.AUTH_BASE_URL || "https://vowsandvedas.com";
+  return `${base}${path}`;
+}
+
 export async function GET(request) {
   const token = request.nextUrl.searchParams.get("token");
   if (!token) {
-    return NextResponse.redirect(new URL("/?auth=invalid", request.url));
+    return NextResponse.redirect(siteUrl("/?auth=invalid"));
   }
 
   let tokenDoc;
@@ -18,11 +23,11 @@ export async function GET(request) {
     tokenDoc = resources[0];
   } catch (err) {
     console.error("Cosmos token lookup error:", err);
-    return NextResponse.redirect(new URL("/?auth=error", request.url));
+    return NextResponse.redirect(siteUrl("/?auth=error"));
   }
 
   if (!tokenDoc || tokenDoc.expiresAt < Date.now()) {
-    return NextResponse.redirect(new URL("/?auth=expired", request.url));
+    return NextResponse.redirect(siteUrl("/?auth=expired"));
   }
 
   // Delete token (one-time use)
@@ -39,11 +44,11 @@ export async function GET(request) {
     user = resource;
   } catch (err) {
     console.error("Cosmos user fetch error:", err);
-    return NextResponse.redirect(new URL("/?auth=error", request.url));
+    return NextResponse.redirect(siteUrl("/?auth=error"));
   }
 
   if (!user) {
-    return NextResponse.redirect(new URL("/?auth=invalid", request.url));
+    return NextResponse.redirect(siteUrl("/?auth=invalid"));
   }
 
   // Set session cookie
@@ -54,5 +59,5 @@ export async function GET(request) {
     lastName: user.lastName ?? "",
   });
 
-  return NextResponse.redirect(new URL("/", request.url));
+  return NextResponse.redirect(siteUrl("/"));
 }
