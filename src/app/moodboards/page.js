@@ -327,9 +327,59 @@ export default function MoodBoardsPage() {
   const [selectedBoard, setSelectedBoard] = useState(null);
   const [showOverlay, setShowOverlay] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [sessionUser, setSessionUser] = useState(undefined);
+  const [savedImgs, setSavedImgs] = useState(new Set());
   const gridRef = useRef(null);
   const overlayRef = useRef(null);
   const panelRef = useRef(null);
+
+  // Load session + persisted saves on mount
+  useEffect(() => {
+    fetch("/api/auth/session")
+      .then((r) => r.json())
+      .then(async (data) => {
+        setSessionUser(data.user ?? null);
+        if (data.user) {
+          const res = await fetch("/api/user/saved-ideas");
+          if (res.ok) {
+            const { savedIdeas } = await res.json();
+            setSavedImgs(new Set(savedIdeas.map((s) => s.ideaId)));
+          }
+        }
+      })
+      .catch(() => setSessionUser(null));
+  }, []);
+
+  const toggleImgSave = async (e, img, board) => {
+    e.stopPropagation();
+    if (!sessionUser) {
+      window.dispatchEvent(new CustomEvent("openProfileDropdown"));
+      return;
+    }
+    const isSaved = savedImgs.has(img);
+    setSavedImgs(prev => {
+      const next = new Set(prev);
+      if (isSaved) next.delete(img); else next.add(img);
+      return next;
+    });
+    try {
+      if (isSaved) {
+        await fetch(`/api/user/saved-ideas?ideaId=${encodeURIComponent(img)}`, { method: "DELETE" });
+      } else {
+        await fetch("/api/user/saved-ideas", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ideaId: img, ideaTitle: board.name, ideaTag: board.category, ideaImg: img }),
+        });
+      }
+    } catch {
+      setSavedImgs(prev => {
+        const next = new Set(prev);
+        if (isSaved) next.add(img); else next.delete(img);
+        return next;
+      });
+    }
+  };
 
   useEffect(() => {
     // Check for hash on load
@@ -344,7 +394,7 @@ export default function MoodBoardsPage() {
 
     // Grid entrance animation
     const cards = gridRef.current.querySelectorAll(".mood-card");
-    gsap.fromTo(cards, 
+    gsap.fromTo(cards,
       { opacity: 0, y: 24 },
       { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: "power2.out" }
     );
@@ -584,21 +634,31 @@ export default function MoodBoardsPage() {
                 data-lenis-prevent
               >
                 <div className="columns-2 gap-3 space-y-3">
-                  {selectedBoard.images.map((img, i) => (
-                    <div key={i} className="relative group rounded-[8px] overflow-hidden break-inside-avoid">
-                      <Image
-                        src={`/assets/photos/${img}`}
-                        alt="Mood board detail"
-                        width={400}
-                        height={i % 2 === 0 ? 500 : 300}
-                        sizes="(max-width: 768px) 50vw, 22vw"
-                        className="w-full object-cover rounded-[8px] transition-all duration-500 blur-none hover:ring-1 hover:ring-[#C9A234]"
-                      />
-                      <div className="absolute top-3 right-3 w-7 h-7 bg-white/90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-90 group-hover:scale-100 translate-y-1 group-hover:translate-y-0">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A234" strokeWidth="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                  {selectedBoard.images.map((img, i) => {
+                    const isSaved = savedImgs.has(img);
+                    return (
+                      <div key={i} className="relative group rounded-[8px] overflow-hidden break-inside-avoid">
+                        <Image
+                          src={`/assets/photos/${img}`}
+                          alt="Mood board detail"
+                          width={400}
+                          height={i % 2 === 0 ? 500 : 300}
+                          sizes="(max-width: 768px) 50vw, 22vw"
+                          className="w-full object-cover rounded-[8px] transition-all duration-500 blur-none hover:ring-1 hover:ring-[#C9A234]"
+                        />
+                        <button
+                          onClick={(e) => toggleImgSave(e, img, selectedBoard)}
+                          className={`absolute top-3 right-3 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 text-[15px] leading-none
+                            ${isSaved
+                              ? "bg-[#C9A234] text-white opacity-100 scale-100"
+                              : "bg-white/90 text-[#9A8F7E] opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 translate-y-1 group-hover:translate-y-0"
+                            }`}
+                        >
+                          {isSaved ? "♥" : "♡"}
+                        </button>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 {/* YOU MIGHT ALSO LIKE */}
