@@ -4,7 +4,6 @@ import { DefaultAzureCredential } from "@azure/identity";
 import { trackEvent } from "@/lib/telemetry";
 import { getSession } from "@/lib/session";
 import { getEnquiriesContainer } from "@/lib/cosmos";
-import { appendLead } from "@/lib/sheets";
 
 const _credential = new DefaultAzureCredential();
 let _emailClient = null;
@@ -260,23 +259,6 @@ export async function POST(req) {
     if (result.status !== "Succeeded") {
       throw new Error(`Email send failed with status: ${result.status}`);
     }
-
-    // Fire-and-forget: append lead row to SharePoint Excel
-    appendLead([
-      new Date().toISOString(),
-      "Contact Form",
-      firstName.trim(),
-      lastName.trim(),
-      email.trim(),
-      phone || "",
-      destination || "",
-      weddingDate || "",
-      chatbotContext?.budget_tier   || "",
-      chatbotContext?.intent_level  || "",
-      (chatbotContext?.venues_viewed ?? []).join(", "),
-      message || "",
-      chatbotContext?.session_id    || "",
-    ]).catch((err) => console.error("Excel append error:", err));
 
     // Fire-and-forget: save enquiry to DB if user is logged in
     getSession().then((session) => {
