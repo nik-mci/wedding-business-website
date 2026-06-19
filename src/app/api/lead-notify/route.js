@@ -1,5 +1,6 @@
 import { EmailClient } from "@azure/communication-email";
 import { DefaultAzureCredential } from "@azure/identity";
+import { appendLead } from "@/lib/sheets";
 
 const _credential = new DefaultAzureCredential();
 let _emailClient = null;
@@ -160,6 +161,23 @@ export async function POST(req) {
 
     const poller = await client.beginSend(emailMessage);
     await poller.pollUntilDone();
+
+    // Fire-and-forget: append chatbot lead row to SharePoint Excel
+    appendLead([
+      new Date().toISOString(),
+      "Chatbot Lead",
+      "",
+      "",
+      "",
+      "",
+      cities.join(", "),
+      wedding_date  || "",
+      budget_tier   || "",
+      intent_level  || "",
+      venues_viewed.join(", "),
+      stage         || "discovery",
+      session_id    || "",
+    ]).catch((err) => console.error("Excel append error (lead-notify):", err));
 
     return Response.json({ success: true });
   } catch (err) {
