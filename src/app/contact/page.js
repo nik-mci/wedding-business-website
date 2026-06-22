@@ -305,9 +305,9 @@ export default function ContactPage() {
                 href="https://wa.me/919654277656"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="contact-opt group flex items-center gap-4 border border-ink/10 rounded-[4px] px-4 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/60 hover:bg-[#FAF7F2] hover:shadow-[0_4px_24px_rgba(201,162,52,0.1)]"
+                className="contact-opt group flex flex-col items-center text-center sm:flex-row sm:text-left gap-2 sm:gap-4 border border-ink/10 rounded-[4px] px-3 py-4 sm:px-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/60 hover:bg-[#FAF7F2] hover:shadow-[0_4px_24px_rgba(201,162,52,0.1)]"
               >
-                <span className="opt-icon w-11 h-11 md:w-12 md:h-12 bg-[#F5F0E8] border border-[#25D366]/30 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-gold group-hover:border-gold shrink-0" aria-hidden="true">
+                <span className="opt-icon w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-[#F5F0E8] border border-[#25D366]/30 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-gold group-hover:border-gold shrink-0" aria-hidden="true">
                   <svg viewBox="0 0 24 24" className="w-5 h-5 group-hover:hidden" fill="#25D366">
                     <path d="M12.04 2C6.58 2 2.15 6.34 2.15 11.69c0 1.7.46 3.36 1.32 4.82L2 22l5.62-1.43a10.1 10.1 0 0 0 4.42 1.03c5.46 0 9.9-4.34 9.9-9.69S17.5 2 12.04 2Zm0 17.93a8.36 8.36 0 0 1-4.05-1.05l-.29-.16-3.33.85.89-3.17-.18-.31a7.97 7.97 0 0 1-1.25-4.4c0-4.43 3.68-8.03 8.21-8.03 4.54 0 8.22 3.6 8.22 8.03 0 4.44-3.68 8.24-8.22 8.24Zm4.51-6.02c-.25-.12-1.47-.71-1.7-.79-.23-.09-.4-.12-.56.12-.17.24-.64.79-.78.95-.14.16-.29.18-.53.06-.25-.12-1.04-.38-1.98-1.2-.73-.64-1.23-1.44-1.37-1.68-.14-.24-.01-.37.11-.49.11-.11.25-.29.37-.43.12-.14.17-.24.25-.4.08-.16.04-.3-.02-.43-.06-.12-.56-1.32-.77-1.81-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.3-.23.24-.87.83-.87 2.03 0 1.19.89 2.35 1.01 2.51.12.16 1.75 2.62 4.24 3.67.59.25 1.05.4 1.41.51.59.18 1.13.16 1.56.1.47-.07 1.47-.59 1.68-1.15.21-.57.21-1.05.14-1.15-.06-.11-.22-.17-.46-.29Z" />
                   </svg>
@@ -315,17 +315,17 @@ export default function ContactPage() {
                     <path d="M12.04 2C6.58 2 2.15 6.34 2.15 11.69c0 1.7.46 3.36 1.32 4.82L2 22l5.62-1.43a10.1 10.1 0 0 0 4.42 1.03c5.46 0 9.9-4.34 9.9-9.69S17.5 2 12.04 2Zm0 17.93a8.36 8.36 0 0 1-4.05-1.05l-.29-.16-3.33.85.89-3.17-.18-.31a7.97 7.97 0 0 1-1.25-4.4c0-4.43 3.68-8.03 8.21-8.03 4.54 0 8.22 3.6 8.22 8.03 0 4.44-3.68 8.24-8.22 8.24Zm4.51-6.02c-.25-.12-1.47-.71-1.7-.79-.23-.09-.4-.12-.56.12-.17.24-.64.79-.78.95-.14.16-.29.18-.53.06-.25-.12-1.04-.38-1.98-1.2-.73-.64-1.23-1.44-1.37-1.68-.14-.24-.01-.37.11-.49.11-.11.25-.29.37-.43.12-.14.17-.24.25-.4.08-.16.04-.3-.02-.43-.06-.12-.56-1.32-.77-1.81-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.3-.23.24-.87.83-.87 2.03 0 1.19.89 2.35 1.01 2.51.12.16 1.75 2.62 4.24 3.67.59.25 1.05.4 1.41.51.59.18 1.13.16 1.56.1.47-.07 1.47-.59 1.68-1.15.21-.57.21-1.05.14-1.15-.06-.11-.22-.17-.46-.29Z" />
                   </svg>
                 </span>
-                <span className="flex flex-col text-left">
+                <span className="flex flex-col items-center sm:items-start">
                   <span className="opt-label text-[10px] tracking-[0.2em] uppercase font-semibold text-ink">WhatsApp</span>
-                  <span className="text-[12px] text-muted mt-1">Quick message</span>
+                  <span className="text-[11px] text-muted mt-0.5">Quick message</span>
                 </span>
               </Link>
 
               <Link
                 href="mailto:info@vowsandvedas.com"
-                className="contact-opt group flex items-center gap-4 border border-ink/10 rounded-[4px] px-4 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/60 hover:bg-[#FAF7F2] hover:shadow-[0_4px_24px_rgba(201,162,52,0.1)]"
+                className="contact-opt group flex flex-col items-center text-center sm:flex-row sm:text-left gap-2 sm:gap-4 border border-ink/10 rounded-[4px] px-3 py-4 sm:px-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/60 hover:bg-[#FAF7F2] hover:shadow-[0_4px_24px_rgba(201,162,52,0.1)]"
               >
-                <span className="opt-icon w-11 h-11 md:w-12 md:h-12 bg-[#F5F0E8] border border-ink/10 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-gold group-hover:border-gold shrink-0" aria-hidden="true">
+                <span className="opt-icon w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-[#F5F0E8] border border-ink/10 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-gold group-hover:border-gold shrink-0" aria-hidden="true">
                   <svg viewBox="0 0 48 48" className="w-5 h-5 group-hover:hidden" xmlns="http://www.w3.org/2000/svg">
                     <path fill="#4caf50" d="M45 16.2l-5 2.75-5 4.75L35 40h7c1.657 0 3-1.343 3-3V16.2z"/>
                     <path fill="#1e88e5" d="M3 16.2l3.614 1.71L13 23.7V40H6c-1.657 0-3-1.343-3-3V16.2z"/>
@@ -341,9 +341,9 @@ export default function ContactPage() {
                     <path fill="white" d="M45 12.298V16.2l-10 7.5V11.2l3.124-2.341C38.868 8.301 39.772 8 40.702 8 43.076 8 45 9.924 45 12.298z"/>
                   </svg>
                 </span>
-                <span className="flex flex-col text-left">
+                <span className="flex flex-col items-center sm:items-start">
                   <span className="opt-label text-[10px] tracking-[0.2em] uppercase font-semibold text-ink">Email</span>
-                  <span className="text-[12px] text-muted mt-1">Write to us</span>
+                  <span className="text-[11px] text-muted mt-0.5">Write to us</span>
                 </span>
               </Link>
             </div>
