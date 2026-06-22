@@ -42,10 +42,6 @@ export default function CustomCursor() {
     };
   }, []);
 
-  if (typeof window !== 'undefined' && window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
-    return null;
-  }
-
   return (
     <>
       <div
