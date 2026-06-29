@@ -414,12 +414,18 @@ export async function POST(request) {
           return;
         }
 
-        // ── Step 2: Intent extraction ────────────────────────────────────────
-        const intent = await extractIntent(query, conversation_history, accumulated_intent);
+        // ── Steps 2 + 3: Intent extraction & RAG retrieval in parallel ──────
+        // RAG runs with the raw query while intent extracts concurrently.
+        // If intent produces a better rewritten_query, a second targeted search runs.
+        const [intent, rawDocs] = await Promise.all([
+          extractIntent(query, conversation_history, accumulated_intent),
+          retrieveContext(query, accumulated_intent, { topK: 6 }),
+        ]);
 
-        // ── Step 3: RAG retrieval ────────────────────────────────────────────
-        const searchQuery = intent.rewritten_query || query;
-        const docs = await retrieveContext(searchQuery, intent, { topK: 6 });
+        const rewritten = intent.rewritten_query;
+        const docs = (rewritten && rewritten.toLowerCase() !== query.toLowerCase())
+          ? await retrieveContext(rewritten, intent, { topK: 6 })
+          : rawDocs;
 
         const context = docs.length > 0
           ? docs.map((d, i) =>
@@ -443,7 +449,7 @@ export async function POST(request) {
         ];
 
         const genController = new AbortController();
-        const genTimeout = setTimeout(() => genController.abort(), 20000);
+        const genTimeout = setTimeout(() => genController.abort(), 30000);
 
         let fullReply = "";
         let streamBuf = "";       // trailing buffer — holds back last N chars to catch partial marker

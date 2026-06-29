@@ -139,6 +139,8 @@ export default function Chatbot() {
       setSidebarOpen(false);
       setUnreadCount(0);
       setTimeout(() => inputRef.current?.focus(), 300);
+      // Pre-warm the API and Azure OpenAI so first message responds instantly
+      fetch("/api/warm").catch(() => {});
     }
   }, [open]);
 
@@ -148,7 +150,7 @@ export default function Chatbot() {
 
   useEffect(() => {
     if (!isStreaming) { setSlowResponse(false); return; }
-    const t = setTimeout(() => setSlowResponse(true), 20000);
+    const t = setTimeout(() => setSlowResponse(true), 30000);
     return () => clearTimeout(t);
   }, [isStreaming]);
 
@@ -316,7 +318,8 @@ export default function Chatbot() {
               if (event.accumulated_intent) {
                 setAccIntent(event.accumulated_intent);
                 if (
-                  event.accumulated_intent.intent_level === "high" &&
+                  (event.accumulated_intent.intent_level === "high" ||
+                    (event.accumulated_intent.intent_level === "medium" && messages.length >= 6)) &&
                   !leadFiredRef.current
                 ) {
                   leadFiredRef.current = true;
