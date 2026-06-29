@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Loader2, Check, Mail, Landmark, MessageSquare } from "lucide-react";
+import { Loader2, Check } from "lucide-react";
 import AccountLayout from "@/components/AccountLayout";
 
 const PREFS = [
@@ -9,19 +9,16 @@ const PREFS = [
     key: "inspiration",
     label: "Inspiration & Mood Board Updates",
     description: "New mood boards, wedding trends, and curated ideas delivered to your inbox.",
-    Icon: Mail,
   },
   {
     key: "offers",
     label: "Special Offers & New Venues",
     description: "Be the first to hear about exclusive venue launches and seasonal packages.",
-    Icon: Landmark,
   },
   {
     key: "enquiryUpdates",
     label: "Enquiry Status Updates",
     description: "Get notified when our team responds to your planning enquiry.",
-    Icon: MessageSquare,
   },
 ];
 
@@ -101,21 +98,13 @@ export default function NotificationsPage() {
           borderRadius: "2px",
         }}
       >
-        {PREFS.map(({ key, label, description, Icon }, idx) => (
+        {PREFS.map(({ key, label, description }, idx) => (
           <div
             key={key}
             className={`px-8 py-6 flex items-center gap-6 ${
               idx < PREFS.length - 1 ? "border-b border-[rgba(201,162,52,0.12)]" : ""
             }`}
           >
-            {/* Icon */}
-            <div
-              className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-              style={{ background: "rgba(201,162,52,0.1)" }}
-            >
-              <Icon size={16} className="text-[#C9A234]" />
-            </div>
-
             {/* Text */}
             <div className="flex-1 min-w-0">
               <p className="font-heading text-[15px] font-light text-[#1A1408] leading-snug mb-1">

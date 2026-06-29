@@ -51,14 +51,14 @@ export default function AccountLayout({ children, userName, userEmail, unauthed,
     <div className="pt-[104px] min-h-screen bg-[#FDFAF5]" style={BG_STYLE}>
       {/* Mobile tab bar */}
       <div className="lg:hidden border-b border-[#EDE8DC] bg-[#FDFAF5]">
-        <div className="max-w-[1100px] mx-auto px-4 flex">
+        <div className="max-w-[1100px] mx-auto px-4 flex flex-nowrap overflow-x-auto">
           {NAV_ITEMS.map(({ href, label }) => {
             const active = pathname === href;
             return (
               <Link
                 key={href}
                 href={href}
-                className={`flex-1 text-center py-3 text-[9px] uppercase tracking-[0.2em] border-b-2 transition-colors duration-200 ${
+                className={`flex-1 text-center py-3 text-[9px] uppercase tracking-[0.2em] border-b-2 transition-colors duration-200 whitespace-nowrap ${
                   active
                     ? "border-[#C9A234] text-[#1A1408]"
                     : "border-transparent text-[#9A8F7E] hover:text-[#C9A234]"
