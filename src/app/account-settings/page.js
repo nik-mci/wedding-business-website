@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { Loader2 } from "lucide-react";
+import { Loader2, Lock } from "lucide-react";
+import AccountLayout from "@/components/AccountLayout";
 
 export default function AccountSettingsPage() {
   const [authed, setAuthed] = useState(true);
@@ -11,10 +11,9 @@ export default function AccountSettingsPage() {
   const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState(null);
 
-  // Use session API — reads JWT cookie, no Cosmos call, instant
   useEffect(() => {
     fetch("/api/auth/session")
-      .then(r => r.json())
+      .then((r) => r.json())
       .then(({ user }) => {
         if (!user) setAuthed(false);
         else setUser(user);
@@ -35,115 +34,192 @@ export default function AccountSettingsPage() {
     }
   }
 
-  if (!authed) {
-    return (
-      <div className="pt-[104px] min-h-screen bg-[#FDFAF5] flex items-center justify-center">
-        <div className="text-center">
-          <p className="font-heading text-2xl font-light text-[#1A1408] mb-3">Sign in to view account settings</p>
-          <button
-            onClick={() => window.dispatchEvent(new CustomEvent("openProfileDropdown"))}
-            className="text-[10px] uppercase tracking-[0.3em] font-medium px-6 py-3 bg-[#C9A234] text-white hover:opacity-90 transition-opacity"
-          >
-            Sign In
-          </button>
-        </div>
-      </div>
-    );
-  }
+  const displayName = user?.name || user?.firstName
+    ? [user?.firstName, user?.lastName].filter(Boolean).join(" ")
+    : undefined;
 
   return (
-    <div className="pt-[104px] min-h-screen bg-[#FDFAF5]">
-      <div className="max-w-[860px] mx-auto px-6 lg:px-12 py-10">
+    <AccountLayout
+      userName={displayName}
+      userEmail={user?.email}
+      unauthed={!authed}
+      onSignIn={() => window.dispatchEvent(new CustomEvent("openProfileDropdown"))}
+    >
+      {/* Page heading */}
+      <div className="mb-7">
+        <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A234] mb-1 font-medium">
+          My Account
+        </p>
+        <h1 className="font-heading text-[42px] font-light text-[#1A1408] leading-none">
+          Account Settings
+        </h1>
+        <div className="mt-3 w-[60px] h-px bg-[#C9A234]" />
+      </div>
 
-        {/* Header */}
-        <div className="mb-6">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A234] mb-1.5 font-medium">My Account</p>
-          <h1 className="font-heading text-[36px] font-light text-[#1A1408] leading-tight">Account Settings</h1>
-        </div>
-
-        <div className="bg-white border border-[#EDE8DC] shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
-
-          {/* Account Details */}
-          <div className="px-6 py-5 border-b border-[#EDE8DC]">
-            <p className="text-[9px] uppercase tracking-[0.4em] text-[#C9A234] font-bold mb-4">Account Details</p>
-            <div className="divide-y divide-[#EDE8DC] border border-[#EDE8DC]">
-              <Row label="Email Address">
-                {user ? (
-                  <>
-                    <span className="font-body text-[13px] text-[#1A1408] break-all">{user.email}</span>
-                    <span className="text-[10px] text-[#9A8F7E] ml-2 shrink-0">(read-only)</span>
-                  </>
-                ) : (
-                  <div className="h-4 w-48 bg-[#F0EBE1] rounded animate-pulse" />
-                )}
-              </Row>
-            </div>
-            <p className="text-[11px] text-[#9A8F7E] mt-3 leading-relaxed">
-              Your email address is used to send your sign-in link and cannot be changed. To use a different email, create a new account.
-            </p>
+      {/* Profile summary banner */}
+      {user && (
+        <div
+          className="mb-6 px-6 py-4 flex items-center gap-4"
+          style={{
+            background: "rgba(28,15,10,0.03)",
+            border: "1px solid rgba(201,162,52,0.2)",
+            borderRadius: "2px",
+          }}
+        >
+          <div
+            className="w-9 h-9 rounded-full bg-[#C9A234] flex items-center justify-center shrink-0"
+          >
+            <span className="font-heading text-[14px] font-light text-white">
+              {(displayName || user.email || "A")[0].toUpperCase()}
+            </span>
           </div>
-
-          {/* Danger Zone */}
-          <div className="px-6 py-5">
-            <p className="text-[9px] uppercase tracking-[0.4em] text-[#C9A234] font-bold mb-4">Danger Zone</p>
-            <div className="border border-[#F0D0C8] p-5">
-              <p className="font-body text-[13px] font-semibold text-[#1A1408] mb-1">Delete Account</p>
-              <p className="font-body text-[12px] text-[#9A8F7E] leading-relaxed mb-4">
-                Permanently removes your account, saved ideas, and all enquiries. This cannot be undone.
+          <div className="min-w-0">
+            {displayName && (
+              <p className="font-heading text-[15px] font-light text-[#1A1408] leading-snug">
+                {displayName}
               </p>
+            )}
+            <p className="text-[12px] text-[#9A8F7E] leading-snug truncate">{user.email}</p>
+          </div>
+        </div>
+      )}
 
-              {!confirmDelete ? (
-                <button
-                  onClick={() => setConfirmDelete(true)}
-                  className="h-9 px-5 border border-[#E87B3A] text-[#E87B3A] font-body text-[11px] uppercase tracking-[0.25em] font-bold hover:bg-[#FFF3E0] transition-colors"
+      <div
+        className="bg-[#FDFAF5]"
+        style={{
+          border: "1px solid rgba(201,162,52,0.25)",
+          boxShadow: "0 4px 40px rgba(28,15,10,0.07)",
+          borderRadius: "2px",
+        }}
+      >
+        {/* Account Details */}
+        <div className="px-10 pt-9 pb-8 border-b border-[rgba(201,162,52,0.15)]">
+          <SectionHeader>Account Details</SectionHeader>
+
+          <div className="mt-6">
+            <label className="block text-[10px] uppercase tracking-[0.18em] text-[#8B7355] mb-2">
+              Email Address
+            </label>
+            <div className="relative flex items-center">
+              {user ? (
+                <span
+                  className="w-full font-body text-[13px] text-[#1A1408] pb-2 pr-6 block"
+                  style={{ borderBottom: "1px solid rgba(201,162,52,0.3)" }}
                 >
-                  Delete Account
-                </button>
+                  {user.email}
+                </span>
               ) : (
-                <div className="flex flex-col gap-3">
-                  <p className="font-body text-[12px] text-[#E87B3A] font-semibold">Are you sure? This will erase everything permanently.</p>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <button
-                      onClick={handleDelete}
-                      disabled={deleting}
-                      className="h-9 px-5 bg-[#E87B3A] text-white font-body text-[11px] uppercase tracking-[0.25em] font-bold hover:opacity-90 transition-opacity disabled:opacity-60 flex items-center gap-2"
-                    >
-                      {deleting ? <><Loader2 size={13} className="animate-spin" /> Deleting…</> : "Yes, Delete"}
-                    </button>
-                    <button
-                      onClick={() => setConfirmDelete(false)}
-                      disabled={deleting}
-                      className="h-9 px-5 border border-[#EDE8DC] text-[#9A8F7E] font-body text-[11px] uppercase tracking-[0.25em] hover:border-[#C9A234] hover:text-[#C9A234] transition-colors"
-                    >
-                      Cancel
-                    </button>
-                  </div>
+                <div
+                  className="w-full pb-2 block"
+                  style={{ borderBottom: "1px solid rgba(201,162,52,0.3)" }}
+                >
+                  <div className="h-4 w-48 bg-[rgba(201,162,52,0.12)] rounded animate-pulse" />
                 </div>
               )}
-
-              {error && <p className="font-body text-[12px] text-[#E87B3A] mt-3">{error}</p>}
+              <Lock
+                size={12}
+                className="absolute right-0 bottom-2.5 text-[#C9A234] shrink-0"
+              />
             </div>
+            <p className="text-[11px] text-[#8B7355] italic mt-2.5 leading-relaxed">
+              Your email is used for sign-in and cannot be changed. To use a different address, create a new account.
+            </p>
           </div>
         </div>
 
-        <div className="mt-6 flex gap-6">
-          <Link href="/profile" className="text-[11px] uppercase tracking-[0.25em] text-[#9A8F7E] hover:text-[#C9A234] transition-colors">
-            ← My Profile
-          </Link>
-          <Link href="/notifications" className="text-[11px] uppercase tracking-[0.25em] text-[#C9A234] hover:opacity-70 transition-opacity">
-            Notifications →
-          </Link>
+        {/* Danger Zone */}
+        <div className="px-10 pt-8 pb-9">
+          <SectionHeader danger>Danger Zone</SectionHeader>
+
+          <div
+            className="mt-6 p-5"
+            style={{
+              border: "1px solid rgba(180,50,50,0.2)",
+              background: "rgba(180,50,50,0.03)",
+              borderRadius: "2px",
+            }}
+          >
+            <p
+              className="font-body text-[12px] uppercase tracking-[0.15em] mb-1"
+              style={{ color: "#8B2020" }}
+            >
+              Delete Account
+            </p>
+            <p className="font-body text-[12px] text-[#9A8F7E] leading-relaxed mb-4">
+              Permanently removes your account, saved ideas, and all enquiries. This cannot be undone.
+            </p>
+
+            {!confirmDelete ? (
+              <button
+                onClick={() => setConfirmDelete(true)}
+                className="h-9 px-5 font-body text-[10px] uppercase tracking-[0.25em] transition-all duration-200 hover:bg-[#8B2020] hover:text-white"
+                style={{
+                  border: "1px solid #8B2020",
+                  color: "#8B2020",
+                  background: "transparent",
+                  borderRadius: "2px",
+                }}
+              >
+                Delete Account
+              </button>
+            ) : (
+              <div className="flex flex-col gap-3">
+                <p className="font-body text-[12px] font-semibold" style={{ color: "#8B2020" }}>
+                  Are you sure? This will erase everything permanently.
+                </p>
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    onClick={handleDelete}
+                    disabled={deleting}
+                    className="h-9 px-5 bg-[#8B2020] text-white font-body text-[10px] uppercase tracking-[0.25em] transition-opacity hover:opacity-90 disabled:opacity-60 flex items-center gap-2"
+                    style={{ borderRadius: "2px" }}
+                  >
+                    {deleting ? (
+                      <><Loader2 size={13} className="animate-spin" /> Deleting…</>
+                    ) : (
+                      "Yes, Delete"
+                    )}
+                  </button>
+                  <button
+                    onClick={() => setConfirmDelete(false)}
+                    disabled={deleting}
+                    className="h-9 px-5 font-body text-[10px] uppercase tracking-[0.25em] text-[#9A8F7E] transition-all duration-200 hover:text-[#1A1408]"
+                    style={{
+                      border: "1px solid #EDE8DC",
+                      background: "transparent",
+                      borderRadius: "2px",
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {error && (
+              <p className="font-body text-[12px] text-[#E87B3A] mt-3">{error}</p>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </AccountLayout>
   );
 }
 
-function Row({ label, children }) {
+function SectionHeader({ children, danger }) {
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center px-4 py-3 gap-1 sm:gap-4">
-      <span className="text-[10px] uppercase tracking-[0.2em] text-[#9A8F7E] shrink-0 sm:w-[130px]">{label}</span>
-      <div className="flex items-center flex-1 min-w-0">{children}</div>
+    <div>
+      <p
+        className="text-[10px] uppercase tracking-[0.3em] font-medium flex items-center gap-2"
+        style={{ color: danger ? "#8B2020" : "#1A1408" }}
+      >
+        <span className="text-[8px]" style={{ color: danger ? "#8B2020" : "#C9A234" }}>◆</span>
+        {children}
+      </p>
+      <div
+        className="mt-2 h-px"
+        style={{ background: danger ? "rgba(180,50,50,0.2)" : "rgba(201,162,52,0.25)" }}
+      />
     </div>
   );
 }
