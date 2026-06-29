@@ -208,7 +208,7 @@ const FAQ_TABLE = [
   // ── What makes V&V different ────────────────────────────────────────────────
   [
     /\b(why (choose|pick|select|use|go with) (you|vows|v&v)|what (makes|sets) you (apart|different|special|unique)|stand out|what.s special about you)\b/i,
-    "A few things set us apart:\n- Deep cultural knowledge paired with an international design sensibility\n- Every couple gets a dedicated wedding manager — one person, start to finish\n- Backed by GeTSHolidays — 37 years of event expertise, 150+ professionals\n- 300+ weddings crafted across India and abroad",
+    "A few things set us apart:\n- Deep cultural knowledge paired with an international design sensibility\n- Every couple gets a dedicated wedding manager — one person, start to finish\n- Backed by GeTSHolidays — 37+ years of event expertise, 150+ professionals (figures as of our latest update)\n- 300+ weddings crafted across India and abroad",
     "Happy to walk you through how we'd approach your specific wedding.",
   ],
 

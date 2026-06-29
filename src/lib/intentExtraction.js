@@ -121,6 +121,25 @@ Always check the previous bot turn to determine what question the user is answer
 
 Return ONLY valid JSON matching the schema. You MUST include rewritten_query in every response.`;
 
+const GREETING_RE = /^(hi+|hello+|hey+|ok+|okay|thanks?|thank\s*you|great|nice|cool|sure|yes|no|nope|yep|got\s*it|sounds?\s*good|alright|perfect|wonderful|lovely|awesome|amazing)[\s!.?]*$/i;
+
+function tryQuickIntent(query, accumulatedIntent = {}) {
+  const q = query.trim();
+
+  if (GREETING_RE.test(q)) {
+    return {
+      ...fallbackIntent(q),
+      ...accumulatedIntent,
+      intent:         "general",
+      category:       "all",
+      rewritten_query: "",
+      intent_level:   accumulatedIntent.intent_level || "low",
+    };
+  }
+
+  return null;
+}
+
 /** Neutral fallback intent returned when extraction fails. */
 function fallbackIntent(query) {
   return {
@@ -155,6 +174,9 @@ function fallbackIntent(query) {
 export async function extractIntent(query, history = [], accumulatedIntent = {}) {
   if (!query?.trim()) return fallbackIntent(query);
 
+  const quick = tryQuickIntent(query, accumulatedIntent);
+  if (quick) return quick;
+
   const historyStr = history
     .slice(-6)  // last 3 turns (6 messages) is enough context
     .map(m => `${m.role === "user" ? "User" : "Assistant"}: ${m.content}`)
@@ -177,7 +199,7 @@ export async function extractIntent(query, history = [], accumulatedIntent = {})
       ],
       response_format: { type: "json_object" },
       temperature: 0,
-      max_tokens: 400,
+      max_tokens: 250,
     });
 
     const raw = JSON.parse(response.choices[0].message.content);
