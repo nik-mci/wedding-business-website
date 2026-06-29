@@ -370,8 +370,8 @@ const FAQ_TABLE = [
 
   // ── Contact / reach out ─────────────────────────────────────────────────────
   [
-    /\b(contact|reach|speak|call|whatsapp|email|phone|get in touch|talk to (someone|a (person|human|planner)))\b/i,
-    "You can reach the team here:\n- Email: info@vowsandvedas.com\n- Enquiry form: tap 'Begin Your Journey' below\n\nWe usually respond within 24 hours.",
+    /\b(contact|reach out|speak|call|whatsapp|email|phone|get in touch|talk to|connect with|how (do i|to|can i) (contact|reach|connect|speak|talk|get in touch))\b/i,
+    "You can reach the Vows & Vedas team directly:\n- **Email** — info@vowsandvedas.com\n- **WhatsApp / Call** — +91 96542 77656\n- **Enquiry form** — tap 'Speak to a Planner' below or visit our contact page\n\nWe usually respond within 24 hours.",
     "",
   ],
 
