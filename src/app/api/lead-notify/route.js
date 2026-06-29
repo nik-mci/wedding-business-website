@@ -52,6 +52,9 @@ export async function POST(req) {
     accumulated_intent   = {},
     conversation_history = [],
     session_id           = "unknown",
+    name                 = "",
+    contact              = "",
+    source               = "",
   } = body ?? {};
 
   if (typeof accumulated_intent !== "object" || Array.isArray(accumulated_intent))
@@ -89,7 +92,7 @@ export async function POST(req) {
     const emailMessage = {
       senderAddress: process.env.AZURE_SENDER_ADDRESS,
       content: {
-        subject: `[Chatbot Lead] ${intent_level?.toUpperCase() || "LOW"} Intent — ${cities.length > 0 ? cities.join(", ") : "No destination yet"}`,
+        subject: `[Chatbot Lead] ${intent_level?.toUpperCase() || "LOW"} Intent${name ? ` — ${name}` : ""} — ${cities.length > 0 ? cities.join(", ") : "No destination yet"}`,
         html: `
           <div style="font-family:Georgia,serif;max-width:640px;margin:0 auto;color:#1A1408;">
             <div style="background:#1A1408;padding:22px 32px;text-align:center;">
@@ -107,6 +110,19 @@ export async function POST(req) {
 
             <div style="padding:28px 32px;background:#FDFAF5;border:1px solid #EDE8DC;">
               <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
+                ${name || contact ? `
+                <tr>
+                  <td style="padding:10px 0;border-bottom:1px solid #EDE8DC;color:#9A8F7E;font-size:11px;text-transform:uppercase;letter-spacing:2px;width:38%;">Name</td>
+                  <td style="padding:10px 0;border-bottom:1px solid #EDE8DC;font-size:14px;font-weight:600;">${escHtml(name) || "—"}</td>
+                </tr>
+                <tr>
+                  <td style="padding:10px 0;border-bottom:1px solid #EDE8DC;color:#9A8F7E;font-size:11px;text-transform:uppercase;letter-spacing:2px;">Phone / Email</td>
+                  <td style="padding:10px 0;border-bottom:1px solid #EDE8DC;font-size:14px;font-weight:600;">${escHtml(contact) || "—"}</td>
+                </tr>
+                <tr>
+                  <td style="padding:10px 0;border-bottom:1px solid #EDE8DC;color:#9A8F7E;font-size:11px;text-transform:uppercase;letter-spacing:2px;">Source</td>
+                  <td style="padding:10px 0;border-bottom:1px solid #EDE8DC;font-size:12px;color:#9A8F7E;">${escHtml(source) || "chatbot"}</td>
+                </tr>` : ""}
                 <tr>
                   <td style="padding:10px 0;border-bottom:1px solid #EDE8DC;color:#9A8F7E;font-size:11px;text-transform:uppercase;letter-spacing:2px;width:38%;">Intent Level</td>
                   <td style="padding:10px 0;border-bottom:1px solid #EDE8DC;">${intentBadge(intent_level)}</td>
