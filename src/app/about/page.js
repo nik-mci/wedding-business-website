@@ -2,7 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import GoldDivider from "@/components/GoldDivider";
+import { getBlurProps } from "@/lib/blurDataUrls";
 import CornerOrnament from "@/components/CornerOrnament";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -226,11 +228,14 @@ export default function AboutPage() {
             ].map((member, i) => (
               <div key={i} className={`reveal stagger-${i + 1} group w-[72vw] max-w-[300px] shrink-0 snap-start md:w-auto md:max-w-none`} style={{ background: 'rgba(255,255,255,0.04)', borderRadius: '2px' }}>
                 <div className="aspect-[3/4] md:aspect-[1/1] relative overflow-hidden">
-                  <img
+                  <Image
                     src={member.image}
                     alt={member.name}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                     style={{ objectPosition: member.imagePosition }}
+                    sizes="(max-width: 768px) 72vw, 33vw"
+                    {...getBlurProps(member.image)}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 hidden md:flex items-end p-6">
                     <div className="translate-y-2 group-hover:translate-y-0 transition-transform duration-400">
@@ -319,8 +324,8 @@ export default function AboutPage() {
               }
             ].map((team, i) => (
               <div key={i} className={`ts-card reveal stagger-${i + 1} block w-[72vw] max-w-[300px] shrink-0 snap-start md:w-auto md:max-w-none md:flex md:flex-col md:min-h-[420px] py-0 md:py-0 border md:border`}>
-                <div className="w-full aspect-[3/4] md:w-auto md:h-auto md:aspect-video overflow-hidden shrink-0">
-                  <img src={team.image} alt={team.name} className="ts-card-img w-full h-full object-cover" style={{ objectPosition: team.imagePosition }} />
+                <div className="w-full aspect-[3/4] md:w-auto md:h-auto md:aspect-video overflow-hidden shrink-0 relative">
+                  <Image src={team.image} alt={team.name} fill className="ts-card-img object-cover" style={{ objectPosition: team.imagePosition }} sizes="(max-width: 768px) 72vw, 33vw" {...getBlurProps(team.image)} />
                 </div>
                 <div className="hidden md:block h-px bg-[#C9A234]/35"></div>
                 <div className="p-4 md:p-7 flex-1 md:flex md:flex-col">
