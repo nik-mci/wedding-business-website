@@ -6,7 +6,8 @@
       "Bash(az communication *)",
       "Bash(dig TXT vowsandvedas.com +short)",
       "Bash(dig CNAME selector1-azurecomm-prod-net._domainkey.vowsandvedas.com +short)",
-      "Bash(dig CNAME selector2-azurecomm-prod-net._domainkey.vowsandvedas.com +short)"
+      "Bash(dig CNAME selector2-azurecomm-prod-net._domainkey.vowsandvedas.com +short)",
+      "Bash(npm install *)"
     ]
   }
 }

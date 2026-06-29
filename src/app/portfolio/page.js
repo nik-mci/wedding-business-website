@@ -5,7 +5,6 @@ import Image from "next/image";
 import { X } from "lucide-react";
 import { getBlurProps } from "@/lib/blurDataUrls";
 import GoldDivider from "@/components/GoldDivider";
-import gsap from "gsap";
 
 const galleryImages = [
   { id: 1, src: "couple-shots/0G4A5379.jpg", ratio: "4 / 5" },
@@ -52,17 +51,12 @@ export default function PortfolioPage() {
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
-    // Reveal animations
-    const reveals = document.querySelectorAll(".reveal");
-    reveals.forEach((el) => {
-      gsap.to(el, {
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          onEnter: () => el.classList.add("visible"),
-        }
-      });
-    });
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); }),
+      { threshold: 0.15 }
+    );
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
   return (

@@ -68,7 +68,7 @@ export default function Footer() {
       </div>
 
       <div className="max-w-[1440px] mx-auto border-t border-surface/10 pt-7 flex flex-col md:flex-row justify-between items-center text-[10px] tracking-widest gap-6">
-        <p>© 2025 Vows & Vedas. All rights reserved.</p>
+        <p>© 2026 Vows & Vedas. All rights reserved.</p>
         <div className="flex gap-5 uppercase">
           <a href="https://www.instagram.com/vowsandvedas/" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">Instagram</a>
           <a href="https://www.facebook.com/profile.php?id=61590644336785" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">Facebook</a>
