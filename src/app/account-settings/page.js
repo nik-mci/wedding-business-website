@@ -5,22 +5,21 @@ import Link from "next/link";
 import { Loader2 } from "lucide-react";
 
 export default function AccountSettingsPage() {
-  const [loading, setLoading] = useState(true);
   const [authed, setAuthed] = useState(true);
   const [user, setUser] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState(null);
 
+  // Use session API — reads JWT cookie, no Cosmos call, instant
   useEffect(() => {
-    fetch("/api/user/profile")
-      .then(async (r) => {
-        if (r.status === 401) { setAuthed(false); return; }
-        const { user } = await r.json();
-        setUser(user);
+    fetch("/api/auth/session")
+      .then(r => r.json())
+      .then(({ user }) => {
+        if (!user) setAuthed(false);
+        else setUser(user);
       })
-      .catch(() => setError("Failed to load account details."))
-      .finally(() => setLoading(false));
+      .catch(() => setAuthed(false));
   }, []);
 
   async function handleDelete() {
@@ -36,23 +35,14 @@ export default function AccountSettingsPage() {
     }
   }
 
-  if (loading) {
-    return (
-      <div className="pt-[104px] min-h-screen bg-[#FDFAF5] flex items-center justify-center">
-        <Loader2 size={24} className="text-[#C9A234] animate-spin" />
-      </div>
-    );
-  }
-
   if (!authed) {
     return (
       <div className="pt-[104px] min-h-screen bg-[#FDFAF5] flex items-center justify-center">
         <div className="text-center">
-          <p className="font-heading text-2xl font-light text-[#1A1408] mb-4">Sign in to view account settings</p>
-          <p className="text-[14px] text-[#9A8F7E] mb-8">You need to be signed in to access this page.</p>
+          <p className="font-heading text-2xl font-light text-[#1A1408] mb-3">Sign in to view account settings</p>
           <button
             onClick={() => window.dispatchEvent(new CustomEvent("openProfileDropdown"))}
-            className="inline-flex items-center text-[10px] uppercase tracking-[0.3em] font-medium px-6 py-3 bg-[#C9A234] text-white hover:opacity-90 transition-opacity"
+            className="text-[10px] uppercase tracking-[0.3em] font-medium px-6 py-3 bg-[#C9A234] text-white hover:opacity-90 transition-opacity"
           >
             Sign In
           </button>
@@ -61,72 +51,69 @@ export default function AccountSettingsPage() {
     );
   }
 
-  const memberSince = user?.createdAt
-    ? new Date(user.createdAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })
-    : null;
-
   return (
     <div className="pt-[104px] min-h-screen bg-[#FDFAF5]">
-      <div className="max-w-[720px] mx-auto px-6 lg:px-12 py-10">
+      <div className="max-w-[860px] mx-auto px-6 lg:px-12 py-10">
 
         {/* Header */}
-        <div className="mb-7 border-b border-[#EDE8DC] pb-5">
+        <div className="mb-6">
           <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A234] mb-1.5 font-medium">My Account</p>
-          <h1 className="font-heading text-4xl font-light text-[#1A1408]">Account Settings</h1>
+          <h1 className="font-heading text-[36px] font-light text-[#1A1408] leading-tight">Account Settings</h1>
         </div>
 
-        <div className="flex flex-col gap-6">
+        <div className="bg-white border border-[#EDE8DC] shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
 
           {/* Account Details */}
-          <section>
-            <p className="text-[9px] uppercase tracking-[0.4em] text-[#9A8F7E] font-bold mb-3">Account Details</p>
-            <div className="bg-white border border-[#EDE8DC] divide-y divide-[#EDE8DC]">
+          <div className="px-6 py-5 border-b border-[#EDE8DC]">
+            <p className="text-[9px] uppercase tracking-[0.4em] text-[#C9A234] font-bold mb-4">Account Details</p>
+            <div className="divide-y divide-[#EDE8DC] border border-[#EDE8DC]">
               <Row label="Email Address">
-                <span className="font-body text-[13px] text-[#1A1408]">{user?.email}</span>
-                <span className="text-[10px] text-[#9A8F7E] ml-2">(read-only)</span>
+                {user ? (
+                  <>
+                    <span className="font-body text-[13px] text-[#1A1408] break-all">{user.email}</span>
+                    <span className="text-[10px] text-[#9A8F7E] ml-2 shrink-0">(read-only)</span>
+                  </>
+                ) : (
+                  <div className="h-4 w-48 bg-[#F0EBE1] rounded animate-pulse" />
+                )}
               </Row>
-              {memberSince && (
-                <Row label="Member Since">
-                  <span className="font-body text-[13px] text-[#1A1408]">{memberSince}</span>
-                </Row>
-              )}
             </div>
-            <p className="text-[11px] text-[#9A8F7E] mt-2.5 leading-relaxed">
+            <p className="text-[11px] text-[#9A8F7E] mt-3 leading-relaxed">
               Your email address is used to send your sign-in link and cannot be changed. To use a different email, create a new account.
             </p>
-          </section>
+          </div>
 
           {/* Danger Zone */}
-          <section>
-            <p className="text-[9px] uppercase tracking-[0.4em] text-[#9A8F7E] font-bold mb-3">Danger Zone</p>
-            <div className="border border-[#F0D0C8] bg-white p-5">
-              <h3 className="font-body text-[14px] font-semibold text-[#1A1408] mb-1">Delete Account</h3>
-              <p className="font-body text-[13px] text-[#9A8F7E] leading-relaxed mb-4">
+          <div className="px-6 py-5">
+            <p className="text-[9px] uppercase tracking-[0.4em] text-[#C9A234] font-bold mb-4">Danger Zone</p>
+            <div className="border border-[#F0D0C8] p-5">
+              <p className="font-body text-[13px] font-semibold text-[#1A1408] mb-1">Delete Account</p>
+              <p className="font-body text-[12px] text-[#9A8F7E] leading-relaxed mb-4">
                 Permanently removes your account, saved ideas, and all enquiries. This cannot be undone.
               </p>
 
               {!confirmDelete ? (
                 <button
                   onClick={() => setConfirmDelete(true)}
-                  className="h-10 px-6 border border-[#E87B3A] text-[#E87B3A] font-body text-[11px] uppercase tracking-[0.25em] font-bold hover:bg-[#FFF3E0] transition-colors"
+                  className="h-9 px-5 border border-[#E87B3A] text-[#E87B3A] font-body text-[11px] uppercase tracking-[0.25em] font-bold hover:bg-[#FFF3E0] transition-colors"
                 >
                   Delete Account
                 </button>
               ) : (
                 <div className="flex flex-col gap-3">
-                  <p className="font-body text-[13px] text-[#E87B3A] font-semibold">Are you sure? This will erase everything permanently.</p>
-                  <div className="flex items-center gap-3">
+                  <p className="font-body text-[12px] text-[#E87B3A] font-semibold">Are you sure? This will erase everything permanently.</p>
+                  <div className="flex flex-wrap items-center gap-2">
                     <button
                       onClick={handleDelete}
                       disabled={deleting}
-                      className="h-10 px-6 bg-[#E87B3A] text-white font-body text-[11px] uppercase tracking-[0.25em] font-bold hover:opacity-90 transition-opacity disabled:opacity-60 flex items-center gap-2"
+                      className="h-9 px-5 bg-[#E87B3A] text-white font-body text-[11px] uppercase tracking-[0.25em] font-bold hover:opacity-90 transition-opacity disabled:opacity-60 flex items-center gap-2"
                     >
                       {deleting ? <><Loader2 size={13} className="animate-spin" /> Deleting…</> : "Yes, Delete"}
                     </button>
                     <button
                       onClick={() => setConfirmDelete(false)}
                       disabled={deleting}
-                      className="h-10 px-6 border border-[#EDE8DC] text-[#9A8F7E] font-body text-[11px] uppercase tracking-[0.25em] hover:border-[#C9A234] hover:text-[#C9A234] transition-colors"
+                      className="h-9 px-5 border border-[#EDE8DC] text-[#9A8F7E] font-body text-[11px] uppercase tracking-[0.25em] hover:border-[#C9A234] hover:text-[#C9A234] transition-colors"
                     >
                       Cancel
                     </button>
@@ -136,15 +123,15 @@ export default function AccountSettingsPage() {
 
               {error && <p className="font-body text-[12px] text-[#E87B3A] mt-3">{error}</p>}
             </div>
-          </section>
+          </div>
         </div>
 
-        <div className="mt-8 pt-5 border-t border-[#EDE8DC] flex gap-8">
-          <Link href="/profile" className="text-[11px] uppercase tracking-[0.25em] text-[#C9A234] hover:opacity-70 transition-opacity">
+        <div className="mt-6 flex gap-6">
+          <Link href="/profile" className="text-[11px] uppercase tracking-[0.25em] text-[#9A8F7E] hover:text-[#C9A234] transition-colors">
             ← My Profile
           </Link>
           <Link href="/notifications" className="text-[11px] uppercase tracking-[0.25em] text-[#C9A234] hover:opacity-70 transition-opacity">
-            Notification Preferences →
+            Notifications →
           </Link>
         </div>
       </div>
@@ -154,9 +141,9 @@ export default function AccountSettingsPage() {
 
 function Row({ label, children }) {
   return (
-    <div className="flex items-center justify-between px-5 py-3.5 gap-4">
-      <span className="text-[10px] uppercase tracking-[0.2em] text-[#9A8F7E] shrink-0 w-[130px]">{label}</span>
-      <div className="flex items-center flex-1">{children}</div>
+    <div className="flex flex-col sm:flex-row sm:items-center px-4 py-3 gap-1 sm:gap-4">
+      <span className="text-[10px] uppercase tracking-[0.2em] text-[#9A8F7E] shrink-0 sm:w-[130px]">{label}</span>
+      <div className="flex items-center flex-1 min-w-0">{children}</div>
     </div>
   );
 }
