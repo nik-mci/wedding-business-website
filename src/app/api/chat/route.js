@@ -74,7 +74,8 @@ function buildSystemPrompt(context, intent) {
       "been shown to this couple. Deliver venue or pricing information first, then offer to connect."
     );
   }
-  if (ctaShouldFire) {
+  if (ctaShouldFire && !hasNonKbCity) {
+    // Skip when a non-KB city is present — that forceHint already handles the CTA
     forceHints.push(
       "[INSTRUCTION OVERRIDE] The couple has shown clear planning intent (pricing question, specific venue, date, or guest count). " +
       "After answering their question, you MUST end your response with these two lines on new paragraphs:\n" +
