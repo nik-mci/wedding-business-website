@@ -26,8 +26,8 @@ export default function NotificationsPage() {
   const [loading, setLoading] = useState(true);
   const [authed, setAuthed] = useState(true);
   const [prefs, setPrefs] = useState({ inspiration: true, offers: true, enquiryUpdates: true });
-  const [saving, setSaving] = useState(null); // key of the pref being saved
-  const [saved, setSaved] = useState(null);   // key of last saved pref
+  const [saving, setSaving] = useState(null);
+  const [saved, setSaved] = useState(null);
   const [error, setError] = useState(null);
   const savedTimer = useRef(null);
 
@@ -66,23 +66,14 @@ export default function NotificationsPage() {
     }
   }
 
-  if (loading) {
-    return (
-      <div className="pt-[104px] min-h-screen bg-[#FDFAF5] flex items-center justify-center">
-        <Loader2 size={24} className="text-[#C9A234] animate-spin" />
-      </div>
-    );
-  }
-
   if (!authed) {
     return (
       <div className="pt-[104px] min-h-screen bg-[#FDFAF5] flex items-center justify-center">
         <div className="text-center">
-          <p className="font-heading text-2xl font-light text-[#1A1408] mb-4">Sign in to manage notifications</p>
-          <p className="text-[14px] text-[#9A8F7E] mb-8">You need to be signed in to access this page.</p>
+          <p className="font-heading text-2xl font-light text-[#1A1408] mb-3">Sign in to manage notifications</p>
           <button
             onClick={() => window.dispatchEvent(new CustomEvent("openProfileDropdown"))}
-            className="inline-flex items-center text-[10px] uppercase tracking-[0.3em] font-medium px-6 py-3 bg-[#C9A234] text-white hover:opacity-90 transition-opacity"
+            className="text-[10px] uppercase tracking-[0.3em] font-medium px-6 py-3 bg-[#C9A234] text-white hover:opacity-90 transition-opacity"
           >
             Sign In
           </button>
@@ -93,27 +84,27 @@ export default function NotificationsPage() {
 
   return (
     <div className="pt-[104px] min-h-screen bg-[#FDFAF5]">
-      <div className="max-w-[720px] mx-auto px-6 lg:px-12 py-10">
+      <div className="max-w-[860px] mx-auto px-6 lg:px-12 py-10">
 
         {/* Header */}
-        <div className="mb-7 border-b border-[#EDE8DC] pb-5">
+        <div className="mb-6">
           <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A234] mb-1.5 font-medium">My Account</p>
-          <h1 className="font-heading text-4xl font-light text-[#1A1408]">Notifications</h1>
+          <h1 className="font-heading text-[36px] font-light text-[#1A1408] leading-tight">Notifications</h1>
           <p className="text-[13px] text-[#9A8F7E] mt-1">Choose which emails you'd like to receive from us.</p>
         </div>
 
-        <div className="flex flex-col gap-3">
+        <div className="bg-white border border-[#EDE8DC] shadow-[0_2px_16px_rgba(0,0,0,0.04)] divide-y divide-[#EDE8DC]">
           {PREFS.map(({ key, label, description }) => (
-            <div key={key} className="bg-white border border-[#EDE8DC] px-6 py-5 flex items-center justify-between gap-6">
+            <div key={key} className="px-6 py-4 flex items-center gap-6">
               <div className="flex-1 min-w-0">
-                <p className="font-body text-[14px] font-semibold text-[#1A1408] mb-0.5">{label}</p>
+                <p className="font-body text-[13px] font-semibold text-[#1A1408] mb-0.5">{label}</p>
                 <p className="font-body text-[12px] text-[#9A8F7E] leading-relaxed">{description}</p>
               </div>
-              <div className="flex items-center gap-3 shrink-0">
-                {saved === key && (
-                  <Check size={13} className="text-[#5A8A5A]" />
-                )}
-                {saving === key ? (
+              <div className="flex items-center gap-2 shrink-0">
+                {saved === key && <Check size={13} className="text-[#5A8A5A]" />}
+                {loading ? (
+                  <div className="w-11 h-6 bg-[#F0EBE1] rounded-full animate-pulse" />
+                ) : saving === key ? (
                   <Loader2 size={16} className="text-[#C9A234] animate-spin" />
                 ) : (
                   <button
@@ -134,16 +125,17 @@ export default function NotificationsPage() {
               </div>
             </div>
           ))}
+          <div className="px-6 py-3 bg-[#FDFAF5]">
+            <p className="text-[11px] text-[#9A8F7E] leading-relaxed">
+              Changes save automatically. Turning off enquiry updates will not affect any planning already in progress.
+            </p>
+          </div>
         </div>
 
         {error && <p className="font-body text-[12px] text-[#E87B3A] mt-3">{error}</p>}
 
-        <p className="text-[11px] text-[#9A8F7E] mt-4 leading-relaxed">
-          Changes save automatically. Turning off enquiry updates will not affect any planning already in progress.
-        </p>
-
-        <div className="mt-8 pt-5 border-t border-[#EDE8DC]">
-          <Link href="/account-settings" className="text-[11px] uppercase tracking-[0.25em] text-[#C9A234] hover:opacity-70 transition-opacity">
+        <div className="mt-6 flex gap-6">
+          <Link href="/account-settings" className="text-[11px] uppercase tracking-[0.25em] text-[#9A8F7E] hover:text-[#C9A234] transition-colors">
             ← Account Settings
           </Link>
         </div>
