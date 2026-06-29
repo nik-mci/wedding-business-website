@@ -6,6 +6,13 @@
 
 const FAQ_TABLE = [
 
+  // ── All venues / venue listing ───────────────────────────────────────────────
+  [
+    /\b(all venues?|list.{0,15}venues?|what.{0,20}venues?.{0,20}(have|offer|got|available)|show.{0,15}venues?|venues?.{0,20}(list|all|available|have|offer)|which venues?|every venue|what properties|all properties)\b/i,
+    "Here's an overview of the venues we feature across our destinations:\n\n**Goa** — ITC Grand Goa, St. Regis Goa, Grand Hyatt Goa, Taj Exotica Goa, Taj Cidade de Goa, Caravela Beach Resort\n\n**Rajasthan** — Leela Palace Jaipur, Hyatt Regency Jaipur, Fairmont Jaipur, Alila Fort Bishangarh, Samode Palace, Raffles Udaipur, Ajit Bhawan Jodhpur, Six Senses Fort Barwara, Suryagarh Jaisalmer, ITC Grand Bharat\n\n**Kerala** — Taj Green Cove Kovalam, The Leela Kovalam\n\n**Hill Stations** — Westin Himalayas Rishikesh, Taj Corbett, Hyatt Regency Dehradun, Lalit Grand Palace Srinagar\n\n**Delhi** — Leela Palace Delhi, ITC Maurya, Fairmont Sahar\n\n**Mumbai** — Taj Lands End, Grand Hyatt BKC\n\n**Bangalore** — ITC Gardenia, Taj West End, Prestige Golfshire, Kings Meadow, Angsana Oasis\n\nBeyond these, we plan weddings at any destination worldwide — just tell us where you have in mind and we'll curate the right options.",
+    "Which destination or style interests you most?",
+  ],
+
   // ── Minimum budget ───────────────────────────────────────────────────────────
   [
     /\b(min(imum)? budget|minimum cost|minimum (to|for) work|starting budget|start from|how much to start|least (budget|amount)|budget (to|for) (work|start|plan|begin))\b/i,
@@ -349,9 +356,16 @@ const FAQ_TABLE = [
 
   // ── Hills / mountain weddings ───────────────────────────────────────────────
   [
-    /\b(hill|mountain|himalaya|rishikesh|mussoorie|shimla|manali|valley|nature|forest|jungle)\b.*\b(wedding|venue|celebrat)/i,
-    "Our hills wedding venues:\n- The Westin Rishikesh — Panoramic Himalayan valley views, riverside setting\n- Hyatt Regency Dehradun — Nestled at the foothills of the Himalayas\n- The Lalit Grand Palace, Srinagar — 1910 royal palace overlooking Dal Lake\n- Taj Corbett — Jungle riverside retreat in the forests of Uttarakhand",
-    "Which venue or vibe suits you?",
+    /\b(hill station|hill wedding|hills? venue|hills? option|mountain wedding|himalaya|rishikesh|dehradun|srinagar|corbett)\b|\b(hill|mountain|nature|forest|jungle)\b.*\b(wedding|venue|celebrat|option|suggest|any|show)/i,
+    "Our hill station wedding venues — all confirmed:\n- **Taj Corbett** (Uttarakhand) — Jungle riverside retreat, our most intimate and affordable hill option. Buyout ₹80 Lacs–1 Cr\n- **Lalit Grand Palace, Srinagar** (Kashmir) — 1910 royal palace overlooking Dal Lake. Buyout ₹1.6–2.8 Cr\n- **Hyatt Regency Dehradun** — At the foothills of the Himalayas with valley views. Buyout ₹2.2–3.8 Cr\n- **Westin Himalayas, Rishikesh** — Panoramic Himalayan valley, riverside setting. Buyout ₹2.5–3.5 Cr",
+    "Would you like detailed pricing for any of these?",
+  ],
+
+  // ── Budget / cheap / affordable venues ──────────────────────────────────────
+  [
+    /\b(cheap|budget|affordable|low.cost|economical|inexpensive|value.for.money|pocket.friendly|cost.effective).{0,30}(venue|wedding|option|place|property|resort|hotel)|\b(suggest|show|list|recommend).{0,20}(cheap|budget|affordable|low.cost|economical).{0,20}venue/i,
+    "Here are our most budget-friendly venues by region — all with confirmed pricing:\n\n**Rajasthan (Heritage)**\n- Ajit Bhawan, Jodhpur — ₹45–75 Lacs buyout (most affordable palace property)\n- Samode Palace — ₹70 Lacs–1.2 Cr buyout\n\n**Bangalore**\n- Kings Meadow — ₹45–70 Lacs buyout\n- Angsana Oasis — ₹50–85 Lacs buyout\n\n**Hills**\n- Taj Corbett, Uttarakhand — ₹80 Lacs–1 Cr buyout\n\n**Kerala**\n- Taj Green Cove, Kovalam — ₹80 Lacs–1.5 Cr buyout\n\nAll buyout figures are venue-hire only — F&B, decor, and planning fees are separate.",
+    "Which destination or setting appeals to you most?",
   ],
 
   // ── Contact / reach out ─────────────────────────────────────────────────────

@@ -59,7 +59,8 @@ function buildSystemPrompt(context, intent) {
   const nonKbCities = cities.filter(c => !KB_CITIES.includes(c.toLowerCase()));
   const hasNonKbCity = nonKbCities.length > 0;
 
-  if (stage === "discovery" && cities.length === 0) {
+  const isDirectQuestion = intent?.category && intent.category !== "all";
+  if (stage === "discovery" && cities.length === 0 && !isDirectQuestion) {
     forceHints.push(
       "[INSTRUCTION OVERRIDE] The couple is in early discovery — no destination specified yet. " +
       "Ask ONE open, emotionally warm question about their wedding vision — what it looks, feels, or sounds like. " +
@@ -415,17 +416,11 @@ export async function POST(request) {
         }
 
         // ── Steps 2 + 3: Intent extraction & RAG retrieval in parallel ──────
-        // RAG runs with the raw query while intent extracts concurrently.
-        // If intent produces a better rewritten_query, a second targeted search runs.
-        const [intent, rawDocs] = await Promise.all([
+        // Both run concurrently — saves 3-4s vs sequential. No second search.
+        const [intent, docs] = await Promise.all([
           extractIntent(query, conversation_history, accumulated_intent),
           retrieveContext(query, accumulated_intent, { topK: 6 }),
         ]);
-
-        const rewritten = intent.rewritten_query;
-        const docs = (rewritten && rewritten.toLowerCase() !== query.toLowerCase())
-          ? await retrieveContext(rewritten, intent, { topK: 6 })
-          : rawDocs;
 
         const context = docs.length > 0
           ? docs.map((d, i) =>
@@ -433,11 +428,11 @@ export async function POST(request) {
             ).join("\n\n---\n\n")
           : "";
 
-        // Push meta before streaming text (lets UI update stage indicator)
+        // Push meta before streaming so the UI updates stage / intent level
         push(sseMeta({
-          stage:        intent.stage,
-          intent_level: intent.intent_level,
-          cities:       intent.cities,
+          stage:              intent.stage,
+          intent_level:       intent.intent_level,
+          cities:             intent.cities,
           accumulated_intent: intent,
         }));
 
