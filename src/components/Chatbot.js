@@ -81,12 +81,12 @@ function BotMessage({ text, onCtaClick }) {
   return <div className="space-y-1">{blocks}</div>;
 }
 
+const GET_QUOTE_LABEL = "Get a Quote";
+
 const STARTERS = [
-  "Show me a sample wedding itinerary",
-  "What wedding venues do you offer in Goa?",
-  "Tell me about palace weddings in Rajasthan",
+  GET_QUOTE_LABEL,
   "What services does Vows & Vedas provide?",
-  "What wedding themes do you offer?",
+  "Show me a sample wedding itinerary",
 ];
 
 const INITIAL_MESSAGE = {
@@ -104,13 +104,20 @@ export default function Chatbot() {
   const [accIntent, setAccIntent]     = useState({});
   const [leadCaptured]                = useState(false);
   const [usedChips, setUsedChips]     = useState([]);
+  const [slowResponse, setSlowResponse]   = useState(false);
   const [feedbackGiven, setFeedbackGiven] = useState({});
   const [unreadCount, setUnreadCount]     = useState(1);
   const [tooltipVisible, setTooltipVisible] = useState(true);
-  const messagesEndRef = useRef(null);
-  const inputRef       = useRef(null);
-  const abortRef       = useRef(null);
-  const sessionIdRef   = useRef(`sess_${Date.now().toString(36)}`);
+  const [showLeadForm, setShowLeadForm]   = useState(false);
+  const [leadName, setLeadName]           = useState("");
+  const [leadContact, setLeadContact]     = useState("");
+  const [leadSubmitted, setLeadSubmitted] = useState(false);
+  const [leadError, setLeadError]         = useState("");
+  const messagesEndRef  = useRef(null);
+  const inputRef        = useRef(null);
+  const abortRef        = useRef(null);
+  const sessionIdRef    = useRef(`sess_${Date.now().toString(36)}`);
+  const leadFiredRef    = useRef(false);
 
   const resetConversation = () => {
     setMessages([INITIAL_MESSAGE]);
@@ -119,6 +126,12 @@ export default function Chatbot() {
     setAccIntent({});
     setUsedChips([]);
     setFeedbackGiven({});
+    setShowLeadForm(false);
+    setLeadName("");
+    setLeadContact("");
+    setLeadSubmitted(false);
+    setLeadError("");
+    leadFiredRef.current = false;
   };
 
   useEffect(() => {
@@ -132,6 +145,12 @@ export default function Chatbot() {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  useEffect(() => {
+    if (!isStreaming) { setSlowResponse(false); return; }
+    const t = setTimeout(() => setSlowResponse(true), 20000);
+    return () => clearTimeout(t);
+  }, [isStreaming]);
 
   useEffect(() => {
     window.toggleChat = () => setOpen(prev => !prev);
@@ -175,6 +194,44 @@ export default function Chatbot() {
         session_id: sessionIdRef.current,
       }),
     }).catch(() => {});
+  };
+
+  const isValidContact = (val) => {
+    const v = val.trim();
+    if (!v) return false;
+    if (v.includes("@")) return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+    const digits = v.replace(/[\s\-\(\)\+]/g, "");
+    return /^\d{7,15}$/.test(digits);
+  };
+
+  const submitLead = () => {
+    if (!leadName.trim() && !leadContact.trim()) {
+      setLeadError("Please share your name or contact details.");
+      return;
+    }
+    if (leadContact.trim() && !isValidContact(leadContact)) {
+      setLeadError("Please enter a valid phone number (e.g. +91 98765 43210) or email address.");
+      return;
+    }
+    setLeadError("");
+    fetch("/api/lead-notify", {
+      method:    "POST",
+      headers:   { "Content-Type": "application/json" },
+      keepalive: true,
+      body: JSON.stringify({
+        source:               "chatbot_inline_form",
+        name:                 leadName.trim(),
+        contact:              leadContact.trim(),
+        accumulated_intent:   accIntent,
+        conversation_history: messages
+          .filter(m => m.role !== "typing" && m.text)
+          .slice(-12)
+          .map(m => ({ role: m.role === "bot" ? "assistant" : "user", content: m.text })),
+        session_id: sessionIdRef.current,
+      }),
+    }).catch(() => {});
+    setLeadSubmitted(true);
+    setShowLeadForm(false);
   };
 
   const handleCtaToContact = () => {
@@ -256,7 +313,16 @@ export default function Chatbot() {
                 return updated;
               });
             } else if (event.type === "meta") {
-              if (event.accumulated_intent) setAccIntent(event.accumulated_intent);
+              if (event.accumulated_intent) {
+                setAccIntent(event.accumulated_intent);
+                if (
+                  event.accumulated_intent.intent_level === "high" &&
+                  !leadFiredRef.current
+                ) {
+                  leadFiredRef.current = true;
+                  setShowLeadForm(true);
+                }
+              }
             } else if (event.type === "done") {
               const newChips = event.suggestions || [];
               setUsedChips(prev => [...new Set([...prev, ...newChips])]);
@@ -286,7 +352,7 @@ export default function Chatbot() {
           const updated = [...prev];
           updated[updated.length - 1] = {
             role: "bot",
-            text: "Something went wrong. Please try again or reach us via the Begin Your Journey form.",
+            text: "Something went wrong. Please try again or tap 'SPEAK TO A PLANNER' below to reach us directly.",
             streaming: false,
           };
           return updated;
@@ -488,13 +554,23 @@ export default function Chatbot() {
                       `}
                     >
                       {msg.streaming && !msg.text ? (
-                        <span className="flex items-center gap-2 py-0.5">
-                          <span className="flex gap-1 items-center">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234] animate-bounce" style={{ animationDelay: "0ms" }} />
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234] animate-bounce" style={{ animationDelay: "150ms" }} />
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234] animate-bounce" style={{ animationDelay: "300ms" }} />
+                        <span className="flex flex-col gap-1.5 py-0.5">
+                          <span className="flex items-center gap-2">
+                            <span className="flex gap-1 items-center">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234] animate-bounce" style={{ animationDelay: "0ms" }} />
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234] animate-bounce" style={{ animationDelay: "150ms" }} />
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#C9A234] animate-bounce" style={{ animationDelay: "300ms" }} />
+                            </span>
+                            <span className="text-[11px] text-[#9A8F7E] italic">Mira is thinking…</span>
                           </span>
-                          <span className="text-[11px] text-[#9A8F7E] italic">Mira is thinking…</span>
+                          {slowResponse && (
+                            <span className="text-[10px] text-[#9A8F7E]/70 leading-snug">
+                              Taking longer than usual —{" "}
+                              <button onClick={handleCtaToContact} className="text-[#C9A234] underline underline-offset-2 cursor-pointer">
+                                speak to a planner now
+                              </button>
+                            </span>
+                          )}
                         </span>
                       ) : msg.role === "bot" ? <BotMessage text={msg.text} onCtaClick={isLastBotMsg ? handleCtaToContact : undefined} /> : msg.text}
                     </div>
@@ -539,9 +615,8 @@ export default function Chatbot() {
                     <div className="flex flex-wrap gap-2 mt-1 ml-9">
                       {msg.suggestions.map((s, si) => {
                         // CTA chips — open /contact directly
-                        const ctaContactChips = new Set(["Book a discovery call", "Start planning my wedding", "Speak to the team"]);
-                        const ctaExternalMap  = {};
-                        if (ctaContactChips.has(s)) {
+                        const isCtaChip = /book.*call|discovery call|start planning|speak to.*team|connect.*team|schedule.*call|planning team|get in touch/i.test(s);
+                        if (isCtaChip) {
                           return (
                             <button
                               key={si}
@@ -550,20 +625,6 @@ export default function Chatbot() {
                             >
                               {s} →
                             </button>
-                          );
-                        }
-                        const externalHref = ctaExternalMap[s];
-                        if (externalHref) {
-                          return (
-                            <a
-                              key={si}
-                              href={externalHref}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-[11px] text-[#1A1408] bg-[#C9A234] border border-[#C9A234] px-3 py-1.5 rounded-md hover:bg-[#C9A234]/90 transition-all duration-200 whitespace-nowrap leading-none font-medium"
-                            >
-                              {s} →
-                            </a>
                           );
                         }
                         return (
@@ -602,30 +663,98 @@ export default function Chatbot() {
           {/* Starter prompts */}
           {startersVisible && messages.length === 1 && (
             <div className="px-4 pb-3 shrink-0">
-              <p className="text-[#9A8F7E] text-[9px] tracking-[0.22em] uppercase mb-2.5 font-medium">Suggested</p>
-              {/* Mobile: horizontal scroll chips — Desktop: vertical list */}
+              <p className="text-[#9A8F7E] text-[9px] tracking-[0.22em] uppercase mb-2 font-medium">Suggested</p>
+              {/* Mobile: horizontal scroll chips */}
               <div className="flex sm:hidden gap-2 overflow-x-auto pb-1 -mx-4 px-4 scrollbar-none">
                 {STARTERS.map((s, i) => (
                   <button
                     key={i}
-                    onClick={() => sendMessage(s)}
-                    className="shrink-0 text-left text-[11px] text-[#FDFAF5]/70 border border-[#C9A234]/20 px-3 py-2 rounded-full hover:border-[#C9A234]/60 hover:text-[#FDFAF5] hover:bg-[#C9A234]/5 transition-all duration-200 leading-snug whitespace-nowrap"
+                    onClick={() => s === GET_QUOTE_LABEL ? setShowLeadForm(true) : sendMessage(s)}
+                    className={`shrink-0 text-left text-[11px] px-3 py-2 rounded-full transition-all duration-200 leading-snug whitespace-nowrap ${
+                      s === GET_QUOTE_LABEL
+                        ? "bg-[#C9A234] text-[#1A1408] font-medium"
+                        : "text-[#FDFAF5]/70 border border-[#C9A234]/20 hover:border-[#C9A234]/60 hover:text-[#FDFAF5] hover:bg-[#C9A234]/5"
+                    }`}
                   >
                     {s}
                   </button>
                 ))}
               </div>
-              <div className="hidden sm:flex flex-col gap-2">
+              {/* Desktop: Get a Quote full-width, then 2-col grid for the rest */}
+              <div className="hidden sm:flex flex-col gap-1.5">
                 {STARTERS.map((s, i) => (
                   <button
                     key={i}
-                    onClick={() => sendMessage(s)}
-                    className="text-left text-[12px] text-[#FDFAF5]/70 border border-[#C9A234]/20 px-3.5 py-2.5 rounded-xl hover:border-[#C9A234]/60 hover:text-[#FDFAF5] hover:bg-[#C9A234]/5 transition-all duration-200 cursor-none leading-snug"
+                    onClick={() => s === GET_QUOTE_LABEL ? setShowLeadForm(true) : sendMessage(s)}
+                    className={`text-left text-[11px] px-3 py-2 rounded-lg transition-all duration-200 cursor-none leading-snug ${
+                      s === GET_QUOTE_LABEL
+                        ? "bg-[#C9A234] text-[#1A1408] font-medium"
+                        : "text-[#FDFAF5]/70 border border-[#C9A234]/20 hover:border-[#C9A234]/60 hover:text-[#FDFAF5] hover:bg-[#C9A234]/5"
+                    }`}
                   >
                     {s}
                   </button>
                 ))}
               </div>
+            </div>
+          )}
+
+          {/* Inline lead capture form — appears on high-intent, stays in chat */}
+          {showLeadForm && !leadSubmitted && (
+            <div className="px-4 py-3 border-t border-[#C9A234]/20 bg-[#1A1408] shrink-0">
+              {/* Header row */}
+              <div className="flex items-center justify-between mb-2.5">
+                <p className="text-[9px] text-[#9A8F7E] uppercase tracking-[0.18em]">
+                  Want our team to reach out?
+                </p>
+                <button
+                  onClick={() => setShowLeadForm(false)}
+                  aria-label="Dismiss"
+                  className="text-[#9A8F7E]/50 hover:text-[#9A8F7E] transition-colors duration-200 leading-none"
+                >
+                  <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                  </svg>
+                </button>
+              </div>
+              {/* Inputs row */}
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={leadName}
+                  onChange={e => { setLeadName(e.target.value); setLeadError(""); }}
+                  placeholder="Your name"
+                  className="flex-1 min-w-0 bg-[#251C0D] border border-[#C9A234]/20 text-[#FDFAF5] text-[12px] placeholder:text-[#9A8F7E]/50 rounded-lg px-3 py-2 outline-none focus:border-[#C9A234]/50 transition-colors duration-200"
+                />
+                <input
+                  type="text"
+                  value={leadContact}
+                  onChange={e => { setLeadContact(e.target.value); setLeadError(""); }}
+                  onKeyDown={e => e.key === "Enter" && submitLead()}
+                  placeholder="WhatsApp / email"
+                  className="flex-1 min-w-0 bg-[#251C0D] border border-[#C9A234]/20 text-[#FDFAF5] text-[12px] placeholder:text-[#9A8F7E]/50 rounded-lg px-3 py-2 outline-none focus:border-[#C9A234]/50 transition-colors duration-200"
+                />
+                <button
+                  onClick={submitLead}
+                  disabled={!leadName.trim() && !leadContact.trim()}
+                  className="shrink-0 w-9 h-9 flex items-center justify-center rounded-full bg-[#C9A234] text-[#1A1408] hover:bg-[#C9A234]/90 transition-colors duration-200 disabled:opacity-30"
+                  aria-label="Submit"
+                >
+                  <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </button>
+              </div>
+              {leadError && (
+                <p className="text-[10px] text-red-400/80 mt-1.5 leading-snug">{leadError}</p>
+              )}
+            </div>
+          )}
+          {leadSubmitted && (
+            <div className="px-4 py-2.5 border-t border-[#C9A234]/20 bg-[#1A1408] shrink-0">
+              <p className="text-[10px] text-[#C9A234]/80 tracking-[0.12em]">
+                Thank you — our team will be in touch within 24 hours.
+              </p>
             </div>
           )}
 
@@ -652,9 +781,15 @@ export default function Chatbot() {
                 </svg>
               </button>
             </div>
-            <p className="text-center mt-2">
-              <a href="/contact" className="text-[9px] text-[#C9A234]/50 hover:text-[#C9A234] tracking-[0.12em] uppercase transition-colors duration-200">Speak to a Planner →</a>
-            </p>
+            <a
+              href="/contact"
+              className="mt-2.5 flex items-center justify-center gap-1.5 w-full py-2 rounded-lg border border-[#C9A234]/60 bg-[#C9A234]/10 text-[#C9A234] text-[10px] font-medium tracking-[0.18em] uppercase hover:bg-[#C9A234]/20 hover:border-[#C9A234] transition-all duration-200 shadow-[0_0_10px_rgba(201,162,52,0.15)]"
+            >
+              <svg viewBox="0 0 24 24" className="w-3 h-3 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.93a16 16 0 0 0 6.29 6.29l.93-.88a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              Speak to a Planner
+            </a>
           </div>
         </div>
 
