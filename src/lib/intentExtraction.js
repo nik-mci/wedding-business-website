@@ -86,7 +86,10 @@ Entities to extract:
     "list"           → asking to list all options in a category
     "general"        → open-ended question or general exploration
 - stage (string): "discovery" (exploring) | "value" (comparing options) | "conversion" (ready to enquire) | "handoff" (asked to speak to a human)
-- intent_level (string): "low" (browsing) | "medium" (interested, gathering info) | "high" (ready to book/enquire)
+- intent_level (string):
+    "low"    → casual browsing, no personal wedding mentioned
+    "medium" → asking about pricing, comparing options, curious but generic
+    "high"   → user mentions THEIR OWN wedding ("my wedding", "our wedding", "I'm interested in planning", "we're getting married", "I want to plan"), OR has shared a destination/date/budget for a real wedding — even at the very first message. Any real prospect with a real wedding = high.
 - user_language (string): language of the CURRENT message if clearly NOT English — else omit / return "English"
 - rewritten_query (string) **MANDATORY**: A clean, dense, search-optimised string for querying the wedding knowledge base.
   Rules for rewritten_query:

@@ -22,7 +22,7 @@ const FAQ_TABLE = [
 
   // ── Enquiry to signing timeline ──────────────────────────────────────────────
   [
-    /\b(how long|timeline|process|onboarding|how does it work|what happens after|next step|signing|contract)\b.*\b(enquir|start|begin|sign|book)\b|\b(enquir|start|begin).*\b(how long|timeline|process)\b/i,
+    /\b(how long|timeline|process|onboarding|how does it work|what happens after|next step|signing|contract)\b.*\b(enquir|start(ed|ing)?|begin|sign|book|work with)\b|\b(enquir|start|begin|get started)\b.*\b(how long|timeline|process)\b|\bhow long.{0,30}(get started|to start|to begin|take to start|to work)\b/i,
     "Our onboarding process ideally spans 15–20 days to ensure we are a perfect fit for your vision:\n1. Initial Discovery (Days 1–5): A detailed consultation to understand your scope, aesthetic direction, and venue preferences.\n2. Custom Proposal (Days 6–10): We present a tailored service outline, tentative budget framework, and fee structure.\n3. Alignment & Signing (Days 11–20): Finalising contract clauses, scope details, and processing the retainer to officially secure your dates on our calendar.",
     "I'd love to connect you with our planning team to start this process — would you like to schedule a quick call?",
   ],
@@ -75,6 +75,20 @@ const FAQ_TABLE = [
     /moodboard.{0,30}(hill|mountain|forest|jungle)|(hill|mountain|forest).{0,30}moodboard/i,
     "For a hills wedding, these moodboards complement the setting:\n\nWedding:\n- Emerald Eden — deep greens, forest tones, organic and intimate — built for hill stations\n- Haveli Nights — jewel tones and warm candlelight work beautifully in mountain evenings\n\nHaldi:\n- Royal Boho — terracotta and sage, relaxed outdoor feel\n\nSangeet:\n- Disco Shimmer — high energy for an indoor ballroom evening\n[MOODBOARDS_LINK]",
     "Which function are you most focused on styling first?",
+  ],
+
+  // ── Partial / venue-only planning ───────────────────────────────────────────
+  [
+    /\b(partial planning|partial (service|package)|venue.only|venue only|coordination only|day.of coordination|already (booked|have) (a )?venue|have a venue|booked venue|just coordination|just (need|want) (coordination|coordinator|execution|on.ground))\b|\bhow does partial\b/i,
+    "Partial planning is for couples who have already secured a venue or booked some vendors and need Vows & Vedas to step in, fill the gaps, and take ownership of execution:\n- We audit what's already in place and identify what's missing\n- Source and negotiate any remaining vendors\n- Manage all contracts and coordination going forward\n- Handle complete on-ground execution across every function\n- Ensure the vision stays consistent even when you've mixed vendors\n\nIt's ideal if you've done some groundwork but want a professional team to bring it all together flawlessly.",
+    "The fee for partial planning depends on how much is already in place and what we need to take over. I'd love to connect you with our planning team for a precise scope — shall I arrange that?",
+  ],
+
+  // ── Full planning vs partial comparison ─────────────────────────────────────
+  [
+    /\b(difference|compare|vs\.?|versus|which (is|should|do)|what('s| is) (better|right|best)|full (vs|or) partial|partial (vs|or) full)\b.{0,40}\b(planning|service|package)\b|\bfull.?service (vs|or) partial\b/i,
+    "Here's how our planning tiers work:\n\n**Full Planning (₹3–8 Lacs)** — We handle everything from scratch: venue sourcing, all vendor negotiations, contract management, design, guest management, site visits, and post-wedding settlements. Best if you're starting fresh.\n\n**Destination / Luxury Planning (₹8–15 Lacs)** — Same full-service scope, elevated for large-scale destination weddings with a higher staff-to-guest ratio and more intensive on-ground presence.\n\n**Partial Planning** — You've already booked a venue or some vendors; we step in, fill the gaps, coordinate everything, and take complete ownership of execution. Fee depends on scope.\n\n**Venue-Only Sourcing** — If you just need us to find and secure the right venue, we can do that too.",
+    "Which tier feels closest to what you need? I can connect you with the planning team to confirm the right fit.",
   ],
 
   // ── What's included in planning ──────────────────────────────────────────────
