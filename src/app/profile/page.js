@@ -108,21 +108,21 @@ export default function ProfilePage() {
 
   return (
     <div className="pt-[104px] min-h-screen bg-[#FDFAF5]">
-      <div className="max-w-[720px] mx-auto px-6 lg:px-12 py-16">
+      <div className="max-w-[720px] mx-auto px-6 lg:px-12 py-10">
 
         {/* Header */}
-        <div className="mb-12 border-b border-[#EDE8DC] pb-8">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A234] mb-3 font-medium">My Account</p>
+        <div className="mb-7 border-b border-[#EDE8DC] pb-5">
+          <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A234] mb-1.5 font-medium">My Account</p>
           <h1 className="font-heading text-4xl font-light text-[#1A1408]">My Profile</h1>
-          <p className="text-[13px] text-[#9A8F7E] mt-2">Tell us about you and your wedding.</p>
+          <p className="text-[13px] text-[#9A8F7E] mt-1">Tell us about you and your wedding.</p>
         </div>
 
-        <form onSubmit={handleSave} className="flex flex-col gap-10">
+        <form onSubmit={handleSave} className="flex flex-col gap-6">
 
           {/* About You */}
           <section>
-            <p className="text-[9px] uppercase tracking-[0.4em] text-[#9A8F7E] font-bold mb-5">About You</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <p className="text-[9px] uppercase tracking-[0.4em] text-[#9A8F7E] font-bold mb-3">About You</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <Field label="First Name" value={form.firstName} onChange={(v) => set("firstName", v)} placeholder="Your first name" />
               <Field label="Last Name" value={form.lastName} onChange={(v) => set("lastName", v)} placeholder="Your last name" />
               <div className="sm:col-span-2">
@@ -133,8 +133,8 @@ export default function ProfilePage() {
 
           {/* Your Wedding */}
           <section>
-            <p className="text-[9px] uppercase tracking-[0.4em] text-[#9A8F7E] font-bold mb-5">Your Wedding</p>
-            <div className="flex flex-col gap-5">
+            <p className="text-[9px] uppercase tracking-[0.4em] text-[#9A8F7E] font-bold mb-3">Your Wedding</p>
+            <div className="flex flex-col gap-3">
 
               <div>
                 <label className="block text-[10px] uppercase tracking-[0.2em] text-[#9A8F7E] mb-1.5">Wedding Date</label>
@@ -146,7 +146,7 @@ export default function ProfilePage() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <SelectField
                   label="Guest Count"
                   value={form.guestCount}
@@ -164,7 +164,7 @@ export default function ProfilePage() {
               </div>
 
               <div>
-                <label className="block text-[10px] uppercase tracking-[0.2em] text-[#9A8F7E] mb-3">Wedding Style</label>
+                <label className="block text-[10px] uppercase tracking-[0.2em] text-[#9A8F7E] mb-2">Wedding Style</label>
                 <div className="flex flex-wrap gap-2">
                   {STYLE_TAGS.map((tag) => {
                     const active = form.preferredStyle.includes(tag);
@@ -189,7 +189,7 @@ export default function ProfilePage() {
           </section>
 
           {/* Save */}
-          <div className="flex items-center gap-4 pt-4 border-t border-[#EDE8DC]">
+          <div className="flex items-center gap-4 pt-3 border-t border-[#EDE8DC]">
             <button
               type="submit"
               disabled={saving}
@@ -212,7 +212,7 @@ export default function ProfilePage() {
           </div>
         </form>
 
-        <div className="mt-12 pt-8 border-t border-[#EDE8DC]">
+        <div className="mt-8 pt-5 border-t border-[#EDE8DC]">
           <Link href="/my-enquiries" className="text-[11px] uppercase tracking-[0.25em] text-[#C9A234] hover:opacity-70 transition-opacity">
             View My Enquiries →
           </Link>

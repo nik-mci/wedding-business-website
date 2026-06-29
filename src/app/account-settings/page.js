@@ -67,19 +67,19 @@ export default function AccountSettingsPage() {
 
   return (
     <div className="pt-[104px] min-h-screen bg-[#FDFAF5]">
-      <div className="max-w-[720px] mx-auto px-6 lg:px-12 py-16">
+      <div className="max-w-[720px] mx-auto px-6 lg:px-12 py-10">
 
         {/* Header */}
-        <div className="mb-12 border-b border-[#EDE8DC] pb-8">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A234] mb-3 font-medium">My Account</p>
+        <div className="mb-7 border-b border-[#EDE8DC] pb-5">
+          <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A234] mb-1.5 font-medium">My Account</p>
           <h1 className="font-heading text-4xl font-light text-[#1A1408]">Account Settings</h1>
         </div>
 
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-6">
 
           {/* Account Details */}
           <section>
-            <p className="text-[9px] uppercase tracking-[0.4em] text-[#9A8F7E] font-bold mb-5">Account Details</p>
+            <p className="text-[9px] uppercase tracking-[0.4em] text-[#9A8F7E] font-bold mb-3">Account Details</p>
             <div className="bg-white border border-[#EDE8DC] divide-y divide-[#EDE8DC]">
               <Row label="Email Address">
                 <span className="font-body text-[13px] text-[#1A1408]">{user?.email}</span>
@@ -90,21 +90,18 @@ export default function AccountSettingsPage() {
                   <span className="font-body text-[13px] text-[#1A1408]">{memberSince}</span>
                 </Row>
               )}
-              <Row label="Sign-in Method">
-                <span className="font-body text-[13px] text-[#1A1408]">Magic Link</span>
-              </Row>
             </div>
-            <p className="text-[11px] text-[#9A8F7E] mt-3 leading-relaxed">
+            <p className="text-[11px] text-[#9A8F7E] mt-2.5 leading-relaxed">
               Your email address is used to send your sign-in link and cannot be changed. To use a different email, create a new account.
             </p>
           </section>
 
           {/* Danger Zone */}
           <section>
-            <p className="text-[9px] uppercase tracking-[0.4em] text-[#9A8F7E] font-bold mb-5">Danger Zone</p>
-            <div className="border border-[#F0D0C8] bg-white p-6">
+            <p className="text-[9px] uppercase tracking-[0.4em] text-[#9A8F7E] font-bold mb-3">Danger Zone</p>
+            <div className="border border-[#F0D0C8] bg-white p-5">
               <h3 className="font-body text-[14px] font-semibold text-[#1A1408] mb-1">Delete Account</h3>
-              <p className="font-body text-[13px] text-[#9A8F7E] leading-relaxed mb-5">
+              <p className="font-body text-[13px] text-[#9A8F7E] leading-relaxed mb-4">
                 Permanently removes your account, saved ideas, and all enquiries. This cannot be undone.
               </p>
 
@@ -142,7 +139,7 @@ export default function AccountSettingsPage() {
           </section>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-[#EDE8DC] flex gap-8">
+        <div className="mt-8 pt-5 border-t border-[#EDE8DC] flex gap-8">
           <Link href="/profile" className="text-[11px] uppercase tracking-[0.25em] text-[#C9A234] hover:opacity-70 transition-opacity">
             ← My Profile
           </Link>
