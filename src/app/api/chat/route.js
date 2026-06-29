@@ -494,16 +494,17 @@ export async function POST(request) {
           clearTimeout(genTimeout);
         } catch (genErr) {
           clearTimeout(genTimeout);
-          if (genErr.name === "AbortError" || genErr.name === "TimeoutError" || genErr.code === "ERR_CANCELED") {
-            push(sseChunk(fullReply
-              ? "\n\n*(Response timed out — please tap 'SPEAK TO A PLANNER' below to reach us directly.)*"
-              : "I'm sorry, this is taking longer than usual. Please try again in a moment or tap 'SPEAK TO A PLANNER' below to speak with our team directly."
-            ));
-            push(sseDone(getSuggestions(query, used_chips, intent)));
-            controller.close();
-            return;
-          }
-          throw genErr;
+          // Handle all generation errors gracefully — never let them bubble to "Something went wrong"
+          const isTimeout = genErr.name === "AbortError" || genErr.name === "TimeoutError" || genErr.code === "ERR_CANCELED";
+          push(sseChunk(fullReply
+            ? "\n\n*(Something went wrong — please tap 'SPEAK TO A PLANNER' below or try again.)*"
+            : isTimeout
+              ? "I'm sorry, this is taking longer than usual. Please try again in a moment or tap 'SPEAK TO A PLANNER' below to speak with our team directly."
+              : "I'm having trouble responding right now. Please try again or tap 'SPEAK TO A PLANNER' below to reach us directly."
+          ));
+          push(sseDone(getSuggestions(query, used_chips, intent)));
+          controller.close();
+          return;
         }
 
         // Parse LLM-generated chips from fullReply
