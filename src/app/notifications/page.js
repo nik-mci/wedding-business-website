@@ -93,13 +93,13 @@ export default function NotificationsPage() {
 
   return (
     <div className="pt-[104px] min-h-screen bg-[#FDFAF5]">
-      <div className="max-w-[720px] mx-auto px-6 lg:px-12 py-16">
+      <div className="max-w-[720px] mx-auto px-6 lg:px-12 py-10">
 
         {/* Header */}
-        <div className="mb-12 border-b border-[#EDE8DC] pb-8">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A234] mb-3 font-medium">My Account</p>
+        <div className="mb-7 border-b border-[#EDE8DC] pb-5">
+          <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A234] mb-1.5 font-medium">My Account</p>
           <h1 className="font-heading text-4xl font-light text-[#1A1408]">Notifications</h1>
-          <p className="text-[13px] text-[#9A8F7E] mt-2">Choose which emails you'd like to receive from us.</p>
+          <p className="text-[13px] text-[#9A8F7E] mt-1">Choose which emails you'd like to receive from us.</p>
         </div>
 
         <div className="flex flex-col gap-3">
@@ -136,13 +136,13 @@ export default function NotificationsPage() {
           ))}
         </div>
 
-        {error && <p className="font-body text-[12px] text-[#E87B3A] mt-4">{error}</p>}
+        {error && <p className="font-body text-[12px] text-[#E87B3A] mt-3">{error}</p>}
 
-        <p className="text-[11px] text-[#9A8F7E] mt-6 leading-relaxed">
+        <p className="text-[11px] text-[#9A8F7E] mt-4 leading-relaxed">
           Changes save automatically. Turning off enquiry updates will not affect any planning already in progress.
         </p>
 
-        <div className="mt-12 pt-8 border-t border-[#EDE8DC]">
+        <div className="mt-8 pt-5 border-t border-[#EDE8DC]">
           <Link href="/account-settings" className="text-[11px] uppercase tracking-[0.25em] text-[#C9A234] hover:opacity-70 transition-opacity">
             ← Account Settings
           </Link>
