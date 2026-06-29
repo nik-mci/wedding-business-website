@@ -121,7 +121,8 @@ export async function POST(req) {
         to: [{ address: email }],
       },
     });
-    await poller.pollUntilDone();
+    // Don't await — return immediately; email delivery continues in background
+    poller.pollUntilDone().catch(err => console.error("Magic link delivery error:", err));
   } catch (err) {
     console.error("Magic link email send error:", err);
     return Response.json({ error: "Failed to send email. Please try again." }, { status: 500 });
