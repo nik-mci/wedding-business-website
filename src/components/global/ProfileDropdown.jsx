@@ -154,9 +154,9 @@ function LoggedInContent({ user, initials, onSignOut, isMobile }) {
       {/* Account */}
       <div className="py-2">
         <p className="px-5 py-2 text-[9px] uppercase tracking-[0.3em] text-[#9A8F7E] font-bold">Account</p>
-        <DropdownItem icon={<User size={16} />} label="My Profile" />
-        <DropdownItem icon={<Settings size={16} />} label="Account Settings" />
-        <DropdownItem icon={<Bell size={16} />} label="Notifications" />
+        <DropdownItem icon={<User size={16} />} label="My Profile" href="/profile" />
+        <DropdownItem icon={<Settings size={16} />} label="Account Settings" href="/account-settings" />
+        <DropdownItem icon={<Bell size={16} />} label="Notifications" href="/notifications" />
       </div>
 
       {/* Saved */}
