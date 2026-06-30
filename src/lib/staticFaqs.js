@@ -84,6 +84,13 @@ const FAQ_TABLE = [
     "Which function are you most focused on styling first?",
   ],
 
+  // ── Planning packages / tiers ───────────────────────────────────────────────
+  [
+    /\b(discover|explore|tell me about|what are|show me|about|explain).{0,20}\b(planning packages?|packages?|planning tiers?|service tiers?|planning options?)\b|\b(planning packages?|packages? (you offer|available|do you have)|what packages)\b/i,
+    "We offer three planning tiers:\n\n**Full Planning — ₹3–8 Lacs**\nComplete end-to-end planning from scratch — venue sourcing, all vendor negotiations, contract management, design conceptualisation, guest management, site visits, and post-wedding settlements. Best for couples starting fresh.\n\n**Destination / Luxury Planning — ₹8–15 Lacs**\nSame full-service scope, elevated for large-scale destination weddings — higher staff-to-guest ratio, more intensive on-ground presence, and elevated detailing.\n\n**Partial Planning**\nYou've already secured a venue or some vendors — we step in, fill the gaps, and take full ownership of coordination and execution. Fee depends on scope.\n\nAll planning fees are separate from venue, catering, decor, and vendor costs.",
+    "Which tier sounds closest to what you need?",
+  ],
+
   // ── Partial / venue-only planning ───────────────────────────────────────────
   [
     /\b(partial planning|partial (service|package)|venue.only|venue only|coordination only|day.of coordination|already (booked|have) (a )?venue|have a venue|booked venue|just coordination|just (need|want) (coordination|coordinator|execution|on.ground))\b|\bhow does partial\b/i,
@@ -359,6 +366,20 @@ const FAQ_TABLE = [
     /\b(hill station|hill wedding|hills? venue|hills? option|mountain wedding|himalaya|rishikesh|dehradun|srinagar|corbett)\b|\b(hill|mountain|nature|forest|jungle)\b.*\b(wedding|venue|celebrat|option|suggest|any|show)/i,
     "Our hill station wedding venues — all confirmed:\n- **Taj Corbett** (Uttarakhand) — Jungle riverside retreat, our most intimate and affordable hill option. Buyout ₹80 Lacs–1 Cr\n- **Lalit Grand Palace, Srinagar** (Kashmir) — 1910 royal palace overlooking Dal Lake. Buyout ₹1.6–2.8 Cr\n- **Hyatt Regency Dehradun** — At the foothills of the Himalayas with valley views. Buyout ₹2.2–3.8 Cr\n- **Westin Himalayas, Rishikesh** — Panoramic Himalayan valley, riverside setting. Buyout ₹2.5–3.5 Cr",
     "Would you like detailed pricing for any of these?",
+  ],
+
+  // ── Book / schedule a discovery call ────────────────────────────────────────
+  [
+    /\b(book|schedule|arrange|set up|fix).{0,20}(discovery call|call|consultation|meeting|appointment)|\bdiscovery call\b/i,
+    "To book a discovery call with our planning team, you can:\n- **WhatsApp / Call** — +91 96542 77656\n- **Email** — info@vowsandvedas.com\n- **Enquiry form** — tap 'Speak to a Planner' below\n\nOur team usually responds within 24 hours to schedule a time that works for you.",
+    "",
+  ],
+
+  // ── Sample itinerary ─────────────────────────────────────────────────────────
+  [
+    /\b(sample|example|show me|view|see).{0,15}(itinerary|schedule|timeline|day.by.day|wedding flow|wedding programme)|\b(wedding itinerary|itinerary for|what.*itinerary)\b/i,
+    "Here's a sample **2-Day, 4-Function** destination wedding flow:\n\n**Day 1**\n- Morning: Haldi ceremony (outdoor, intimate)\n- Afternoon: Mehendi with live music and décor\n- Evening: Sangeet — performances, dance, dinner\n\n**Day 2**\n- Morning: Pre-wedding rituals\n- Afternoon/Evening: Wedding ceremony and grand reception\n\nEach function has its own décor theme, guest experience arc, and F&B programme. For a 3-day or 5-day itinerary, or a single-function event, the structure adapts fully to your preference.",
+    "Would you like to explore décor themes for any of these functions?",
   ],
 
   // ── Budget / cheap / affordable venues ──────────────────────────────────────
