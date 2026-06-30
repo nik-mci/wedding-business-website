@@ -111,7 +111,7 @@ export default function ProfilePage() {
           <div className="bg-white border border-[#EDE8DC] shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
 
             {/* About You */}
-            <div className="px-6 py-5 border-b border-[#EDE8DC]">
+            <div className="px-6 py-7 border-b border-[#EDE8DC]">
               <p className="text-[9px] uppercase tracking-[0.4em] text-[#C9A234] font-bold mb-4">About You</p>
               {loading ? (
                 <Skeleton rows={2} />
@@ -127,7 +127,7 @@ export default function ProfilePage() {
             </div>
 
             {/* Your Wedding */}
-            <div className="px-6 py-5 border-b border-[#EDE8DC]">
+            <div className="px-6 py-7 border-b border-[#EDE8DC]">
               <p className="text-[9px] uppercase tracking-[0.4em] text-[#C9A234] font-bold mb-4">Your Wedding</p>
               {loading ? (
                 <Skeleton rows={3} />
@@ -139,7 +139,7 @@ export default function ProfilePage() {
                       type="date"
                       value={form.weddingDate}
                       onChange={(e) => set("weddingDate", e.target.value)}
-                      className="h-10 px-3 border border-[#EDE8DC] font-body text-[13px] text-[#1A1408] focus:outline-none focus:border-[#C9A234] transition-colors bg-[#FDFAF5] w-full sm:w-56"
+                      className="h-10 px-3 border border-[#EDE8DC] font-body text-[13px] text-[#1A1408] focus:outline-none focus:border-[#C9A234] transition-colors bg-[#FDFAF5] w-full"
                     />
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -173,25 +173,25 @@ export default function ProfilePage() {
             </div>
 
             {/* Save bar */}
-            <div className="px-6 py-4 bg-[#FDFAF5] flex items-center gap-4">
-              <button
-                type="submit"
-                disabled={saving || loading}
-                className="h-10 px-7 bg-[#C9A234] text-white font-body text-[11px] uppercase tracking-[0.3em] font-bold transition-opacity hover:opacity-90 disabled:opacity-50 flex items-center gap-2"
-              >
-                {saving ? <><Loader2 size={13} className="animate-spin" /> Saving…</> : "Save Profile"}
-              </button>
+            <div className="px-6 py-5 bg-[#FDFAF5] flex items-center justify-end gap-4">
               {saved && (
                 <span className="flex items-center gap-1.5 text-[12px] text-[#5A8A5A] font-body">
                   <Check size={13} /> Saved
                 </span>
               )}
               {error && <span className="text-[12px] text-[#E87B3A] font-body">{error}</span>}
+              <button
+                type="submit"
+                disabled={saving || loading}
+                className="h-10 px-7 min-w-[180px] bg-[#C9A234] text-white font-body text-[11px] uppercase tracking-[0.3em] font-bold transition-opacity hover:opacity-90 disabled:opacity-50 flex items-center justify-center gap-2"
+              >
+                {saving ? <><Loader2 size={13} className="animate-spin" /> Saving…</> : "Save Profile"}
+              </button>
             </div>
           </div>
         </form>
 
-        <div className="mt-6 flex gap-6">
+        <div className="mt-6 flex justify-between">
           <Link href="/my-enquiries" className="text-[11px] uppercase tracking-[0.25em] text-[#C9A234] hover:opacity-70 transition-opacity">
             My Enquiries →
           </Link>
