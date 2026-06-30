@@ -86,7 +86,7 @@ const FAQ_TABLE = [
 
   // ── Planning packages / tiers ───────────────────────────────────────────────
   [
-    /\b(discover|explore|tell me about|what are|show me|about|explain).{0,20}\b(planning packages?|packages?|planning tiers?|service tiers?|planning options?)\b|\b(planning packages?|packages? (you offer|available|do you have)|what packages)\b/i,
+    /\bpackages?\b|\bplanning tiers?\b|\bservice tiers?\b|\bplanning options?\b/i,
     "We offer three planning tiers:\n\n**Full Planning — ₹3–8 Lacs**\nComplete end-to-end planning from scratch — venue sourcing, all vendor negotiations, contract management, design conceptualisation, guest management, site visits, and post-wedding settlements. Best for couples starting fresh.\n\n**Destination / Luxury Planning — ₹8–15 Lacs**\nSame full-service scope, elevated for large-scale destination weddings — higher staff-to-guest ratio, more intensive on-ground presence, and elevated detailing.\n\n**Partial Planning**\nYou've already secured a venue or some vendors — we step in, fill the gaps, and take full ownership of coordination and execution. Fee depends on scope.\n\nAll planning fees are separate from venue, catering, decor, and vendor costs.",
     "Which tier sounds closest to what you need?",
   ],
@@ -370,14 +370,14 @@ const FAQ_TABLE = [
 
   // ── Book / schedule a discovery call ────────────────────────────────────────
   [
-    /\b(book|schedule|arrange|set up|fix).{0,20}(discovery call|call|consultation|meeting|appointment)|\bdiscovery call\b/i,
+    /\bdiscovery call\b|\b(book|schedule|arrange).{0,20}(call|consultation|meeting|appointment)|\bhow (do i|to|can i) (book|schedule|connect|get in touch|reach|speak|talk)\b/i,
     "To book a discovery call with our planning team, you can:\n- **WhatsApp / Call** — +91 96542 77656\n- **Email** — info@vowsandvedas.com\n- **Enquiry form** — tap 'Speak to a Planner' below\n\nOur team usually responds within 24 hours to schedule a time that works for you.",
     "",
   ],
 
   // ── Sample itinerary ─────────────────────────────────────────────────────────
   [
-    /\b(sample|example|show me|view|see).{0,15}(itinerary|schedule|timeline|day.by.day|wedding flow|wedding programme)|\b(wedding itinerary|itinerary for|what.*itinerary)\b/i,
+    /\bitinerary\b|\bday.by.day\b|\bwedding (schedule|timeline|flow|programme)\b/i,
     "Here's a sample **2-Day, 4-Function** destination wedding flow:\n\n**Day 1**\n- Morning: Haldi ceremony (outdoor, intimate)\n- Afternoon: Mehendi with live music and décor\n- Evening: Sangeet — performances, dance, dinner\n\n**Day 2**\n- Morning: Pre-wedding rituals\n- Afternoon/Evening: Wedding ceremony and grand reception\n\nEach function has its own décor theme, guest experience arc, and F&B programme. For a 3-day or 5-day itinerary, or a single-function event, the structure adapts fully to your preference.",
     "Would you like to explore décor themes for any of these functions?",
   ],
