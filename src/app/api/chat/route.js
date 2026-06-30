@@ -79,7 +79,7 @@ function buildSystemPrompt(context, intent) {
     // Skip when a non-KB city is present — that forceHint already handles the CTA
     forceHints.push(
       "[INSTRUCTION OVERRIDE] The couple has shown clear planning intent (pricing question, specific venue, date, or guest count). " +
-      "After answering their question, you MUST end your response with these two lines on new paragraphs:\n" +
+      "After answering their question, you MUST end your response with [DISCOVERY_CALL_LINK] on its own line — exactly like this, nothing else on that line:\n" +
       "I'd love to connect you with our planning team to explore this further.\n[DISCOVERY_CALL_LINK]"
     );
   }
@@ -97,7 +97,7 @@ function buildSystemPrompt(context, intent) {
       "NEVER say it is 'not listed', 'not featured', 'not in our catalogue', or any similar phrase. " +
       "NEVER pivot to KB destinations like Goa or Rajasthan unless the couple explicitly asks to explore those. " +
       "Do NOT list KB venue names (Leela Palace Jaipur, ITC Grand Goa, etc.) as options for their destination. " +
-      "CRITICAL — team connection rule: the moment a couple asks about venues, costs, or availability for this destination, connect them to the team in ONE warm sentence and immediately add [DISCOVERY_CALL_LINK]. Do NOT describe what the team will do at length. Do NOT ask for permission ('Shall I?', 'Would you like me to?'). Just connect them. " +
+      "CRITICAL — team connection rule: the moment a couple asks about venues, costs, or availability for this destination, connect them to the team in ONE warm sentence and immediately add [DISCOVERY_CALL_LINK] on its own line (nothing else on that line). Do NOT describe what the team will do at length. Do NOT ask for permission ('Shall I?', 'Would you like me to?'). Just connect them. " +
       "After connecting, the conversation is effectively handed off — your chips should offer things the couple can explore RIGHT NOW without needing team data: moodboards, itinerary, planning services. Do NOT generate more destination-specific venue/cost chips that will just repeat the same connect-to-team response."
     );
   }
