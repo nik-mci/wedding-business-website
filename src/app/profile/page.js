@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Loader2, Check, CalendarDays } from "lucide-react";
+import Link from "next/link";
 import AccountLayout from "@/components/AccountLayout";
 
 const GUEST_OPTIONS = ["Under 50", "50–100", "100–200", "200–400", "400+"];
@@ -81,11 +82,8 @@ export default function ProfilePage() {
     }
   }
 
-  const userName = [form.firstName, form.lastName].filter(Boolean).join(" ") || undefined;
-
   return (
     <AccountLayout
-      userName={userName}
       unauthed={!authed}
       onSignIn={() => window.dispatchEvent(new CustomEvent("openProfileDropdown"))}
     >
@@ -228,6 +226,14 @@ export default function ProfilePage() {
           </div>
         </div>
       </form>
+      <div className="mt-6 flex gap-6">
+        <Link href="/my-enquiries" className="text-[11px] uppercase tracking-[0.25em] text-[#C9A234] hover:opacity-70 transition-opacity">
+          My Enquiries →
+        </Link>
+        <Link href="/account-settings" className="text-[11px] uppercase tracking-[0.25em] text-[#9A8F7E] hover:text-[#C9A234] transition-colors">
+          Account Settings →
+        </Link>
+      </div>
     </AccountLayout>
   );
 }
