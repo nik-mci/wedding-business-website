@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Loader2, Lock } from "lucide-react";
+import Link from "next/link";
 import AccountLayout from "@/components/AccountLayout";
 
 export default function AccountSettingsPage() {
@@ -34,14 +35,8 @@ export default function AccountSettingsPage() {
     }
   }
 
-  const displayName = user?.name || user?.firstName
-    ? [user?.firstName, user?.lastName].filter(Boolean).join(" ")
-    : undefined;
-
   return (
     <AccountLayout
-      userName={displayName}
-      userEmail={user?.email}
       unauthed={!authed}
       onSignIn={() => window.dispatchEvent(new CustomEvent("openProfileDropdown"))}
     >
@@ -55,34 +50,6 @@ export default function AccountSettingsPage() {
         </h1>
         <div className="mt-3 w-[60px] h-px bg-[#C9A234]" />
       </div>
-
-      {/* Profile summary banner */}
-      {user && (
-        <div
-          className="mb-6 px-6 py-4 flex items-center gap-4"
-          style={{
-            background: "rgba(28,15,10,0.03)",
-            border: "1px solid rgba(201,162,52,0.2)",
-            borderRadius: "2px",
-          }}
-        >
-          <div
-            className="w-9 h-9 rounded-full bg-[#C9A234] flex items-center justify-center shrink-0"
-          >
-            <span className="font-heading text-[14px] font-light text-white">
-              {(displayName || user.email || "A")[0].toUpperCase()}
-            </span>
-          </div>
-          <div className="min-w-0">
-            {displayName && (
-              <p className="font-heading text-[15px] font-light text-[#1A1408] leading-snug">
-                {displayName}
-              </p>
-            )}
-            <p className="text-[12px] text-[#9A8F7E] leading-snug truncate">{user.email}</p>
-          </div>
-        </div>
-      )}
 
       <div
         className="bg-[#FDFAF5]"
@@ -201,6 +168,14 @@ export default function AccountSettingsPage() {
             )}
           </div>
         </div>
+      </div>
+      <div className="mt-6 flex gap-6">
+        <Link href="/profile" className="text-[11px] uppercase tracking-[0.25em] text-[#9A8F7E] hover:text-[#C9A234] transition-colors">
+          ← My Profile
+        </Link>
+        <Link href="/notifications" className="text-[11px] uppercase tracking-[0.25em] text-[#C9A234] hover:opacity-70 transition-opacity">
+          Notifications →
+        </Link>
       </div>
     </AccountLayout>
   );

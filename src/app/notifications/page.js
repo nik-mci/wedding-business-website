@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Loader2, Check } from "lucide-react";
+import Link from "next/link";
 import AccountLayout from "@/components/AccountLayout";
 
 const PREFS = [
@@ -163,6 +164,12 @@ export default function NotificationsPage() {
       {error && (
         <p className="font-body text-[12px] text-[#E87B3A] mt-3">{error}</p>
       )}
+
+      <div className="mt-6 flex gap-6">
+        <Link href="/account-settings" className="text-[11px] uppercase tracking-[0.25em] text-[#9A8F7E] hover:text-[#C9A234] transition-colors">
+          ← Account Settings
+        </Link>
+      </div>
     </AccountLayout>
   );
 }
