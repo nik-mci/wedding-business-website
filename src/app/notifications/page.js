@@ -1,9 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Loader2, Check } from "lucide-react";
 import Link from "next/link";
-import AccountLayout from "@/components/AccountLayout";
+import { Loader2, Check } from "lucide-react";
 
 const PREFS = [
   {
@@ -67,109 +66,80 @@ export default function NotificationsPage() {
     }
   }
 
-  return (
-    <AccountLayout
-      unauthed={!authed}
-      onSignIn={() => window.dispatchEvent(new CustomEvent("openProfileDropdown"))}
-    >
-      {/* Page heading */}
-      <div className="mb-7">
-        <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A234] mb-1 font-medium">
-          My Account
-        </p>
-        <h1 className="font-heading text-[42px] font-light text-[#1A1408] leading-none">
-          Notifications
-        </h1>
-        <div className="mt-3 w-[60px] h-px bg-[#C9A234]" />
-      </div>
-
-      {/* Intro */}
-      <div className="mb-6 flex items-start gap-3">
-        <span className="text-[#C9A234] text-[10px] tracking-[0.3em] mt-1">◆</span>
-        <p className="font-heading text-[16px] font-light text-[#9A8F7E] leading-relaxed">
-          Choose which emails you'd like to receive from us.
-        </p>
-      </div>
-
-      <div
-        className="bg-[#FDFAF5]"
-        style={{
-          border: "1px solid rgba(201,162,52,0.25)",
-          boxShadow: "0 4px 40px rgba(28,15,10,0.07)",
-          borderRadius: "2px",
-        }}
-      >
-        {PREFS.map(({ key, label, description }, idx) => (
-          <div
-            key={key}
-            className={`px-8 py-6 flex items-center gap-6 ${
-              idx < PREFS.length - 1 ? "border-b border-[rgba(201,162,52,0.12)]" : ""
-            }`}
+  if (!authed) {
+    return (
+      <div className="pt-[104px] min-h-screen bg-[#FDFAF5] flex items-center justify-center">
+        <div className="text-center">
+          <p className="font-heading text-2xl font-light text-[#1A1408] mb-3">Sign in to manage notifications</p>
+          <button
+            onClick={() => window.dispatchEvent(new CustomEvent("openProfileDropdown"))}
+            className="text-[10px] uppercase tracking-[0.3em] font-medium px-6 py-3 bg-[#C9A234] text-white hover:opacity-90 transition-opacity"
           >
-            {/* Text */}
-            <div className="flex-1 min-w-0">
-              <p className="font-heading text-[15px] font-light text-[#1A1408] leading-snug mb-1">
-                {label}
-              </p>
-              <p className="font-body text-[12px] text-[#9A8F7E] leading-relaxed">
-                {description}
-              </p>
-            </div>
-
-            {/* Toggle */}
-            <div className="flex items-center gap-2.5 shrink-0">
-              {saved === key && (
-                <Check size={13} className="text-[#5A8A5A]" />
-              )}
-              {loading ? (
-                <div className="w-11 h-6 bg-[rgba(201,162,52,0.15)] rounded-full animate-pulse" />
-              ) : saving === key ? (
-                <Loader2 size={16} className="text-[#C9A234] animate-spin" />
-              ) : (
-                <button
-                  onClick={() => toggle(key)}
-                  role="switch"
-                  aria-checked={prefs[key]}
-                  aria-label={label}
-                  className={`relative w-11 h-6 rounded-full transition-colors duration-200 focus:outline-none ${
-                    prefs[key] ? "bg-[#C9A234]" : "bg-[#D8D0C4]"
-                  }`}
-                >
-                  <span
-                    className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm transition-transform duration-200 ${
-                      prefs[key] ? "translate-x-5" : "translate-x-0"
-                    }`}
-                  />
-                </button>
-              )}
-            </div>
-          </div>
-        ))}
-
-        {/* Disclaimer */}
-        <div
-          className="mx-6 mb-6 mt-2 px-4 py-3"
-          style={{
-            background: "rgba(201,162,52,0.06)",
-            borderLeft: "2px solid #C9A234",
-            borderRadius: "1px",
-          }}
-        >
-          <p className="text-[11px] text-[#8B7355] italic leading-relaxed">
-            Changes save automatically. Turning off enquiry updates will not affect any planning already in progress.
-          </p>
+            Sign In
+          </button>
         </div>
       </div>
+    );
+  }
 
-      {error && (
-        <p className="font-body text-[12px] text-[#E87B3A] mt-3">{error}</p>
-      )}
+  return (
+    <div className="pt-[104px] min-h-screen bg-[#FDFAF5]">
+      <div className="max-w-[860px] mx-auto px-6 lg:px-12 py-10">
 
-      <div className="mt-6 flex gap-6">
-        <Link href="/account-settings" className="text-[11px] uppercase tracking-[0.25em] text-[#9A8F7E] hover:text-[#C9A234] transition-colors">
-          ← Account Settings
-        </Link>
+        {/* Header */}
+        <div className="mb-6">
+          <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A234] mb-1.5 font-medium">My Account</p>
+          <h1 className="font-heading text-[36px] font-light text-[#1A1408] leading-tight">Notifications</h1>
+          <p className="text-[13px] text-[#9A8F7E] mt-1">Choose which emails you'd like to receive from us.</p>
+        </div>
+
+        <div className="bg-white border border-[#EDE8DC] shadow-[0_2px_16px_rgba(0,0,0,0.04)] divide-y divide-[#EDE8DC]">
+          {PREFS.map(({ key, label, description }) => (
+            <div key={key} className="px-6 py-4 flex items-center gap-6">
+              <div className="flex-1 min-w-0">
+                <p className="font-body text-[13px] font-semibold text-[#1A1408] mb-0.5">{label}</p>
+                <p className="font-body text-[12px] text-[#9A8F7E] leading-relaxed">{description}</p>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                {saved === key && <Check size={13} className="text-[#5A8A5A]" />}
+                {loading ? (
+                  <div className="w-11 h-6 bg-[#F0EBE1] rounded-full animate-pulse" />
+                ) : saving === key ? (
+                  <Loader2 size={16} className="text-[#C9A234] animate-spin" />
+                ) : (
+                  <button
+                    onClick={() => toggle(key)}
+                    role="switch"
+                    aria-checked={prefs[key]}
+                    className={`relative w-11 h-6 rounded-full transition-colors duration-200 focus:outline-none ${
+                      prefs[key] ? "bg-[#C9A234]" : "bg-[#EDE8DC]"
+                    }`}
+                  >
+                    <span
+                      className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm transition-transform duration-200 ${
+                        prefs[key] ? "translate-x-5" : "translate-x-0"
+                      }`}
+                    />
+                  </button>
+                )}
+              </div>
+            </div>
+          ))}
+          <div className="px-6 py-3 bg-[#FDFAF5]">
+            <p className="text-[11px] text-[#9A8F7E] leading-relaxed">
+              Changes save automatically. Turning off enquiry updates will not affect any planning already in progress.
+            </p>
+          </div>
+        </div>
+
+        {error && <p className="font-body text-[12px] text-[#E87B3A] mt-3">{error}</p>}
+
+        <div className="mt-6 flex gap-6">
+          <Link href="/account-settings" className="text-[11px] uppercase tracking-[0.25em] text-[#9A8F7E] hover:text-[#C9A234] transition-colors">
+            ← Account Settings
+          </Link>
+        </div>
       </div>
-    </AccountLayout>
+    </div>
   );
 }
