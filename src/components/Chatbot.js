@@ -51,15 +51,18 @@ function BotMessage({ text, onCtaClick }) {
       );
       continue;
     }
-    if (line.trim() === "[DISCOVERY_CALL_LINK]") {
+    if (line.includes("[DISCOVERY_CALL_LINK]")) {
       flushList();
       const cls = "inline-flex items-center gap-1.5 mt-2 text-[11px] font-medium tracking-[0.15em] uppercase text-[#1A1408] bg-[#C9A234] px-4 py-2 rounded-full hover:bg-[#C9A234]/90 transition-colors duration-200 cursor-pointer";
+      const parts = line.split("[DISCOVERY_CALL_LINK]");
+      if (parts[0].trim()) blocks.push(<p key={blocks.length} className="leading-[1.75]">{renderInline(parts[0].trim())}</p>);
       const idx = blocks.length;
       blocks.push(
         onCtaClick
           ? <button key={idx} onClick={onCtaClick} className={cls}>Schedule a Call →</button>
           : <a key={idx} href="/contact" className={cls}>Schedule a Call →</a>
       );
+      if (parts[1]?.trim()) blocks.push(<p key={blocks.length} className="leading-[1.75]">{renderInline(parts[1].trim())}</p>);
       continue;
     }
 
