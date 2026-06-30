@@ -66,12 +66,12 @@ export default function AccountSettingsPage() {
           {/* Account Details */}
           <div className="px-6 py-5 border-b border-[#EDE8DC]">
             <p className="text-[9px] uppercase tracking-[0.4em] text-[#C9A234] font-bold mb-4">Account Details</p>
-            <div className="divide-y divide-[#EDE8DC] border border-[#EDE8DC]">
+            <div className="divide-y divide-[#EDE8DC] border border-dashed border-[#EDE8DC] bg-[#f5f3ef]">
               <Row label="Email Address">
                 {user ? (
                   <>
-                    <span className="font-body text-[13px] text-[#1A1408] break-all">{user.email}</span>
-                    <span className="text-[10px] text-[#9A8F7E] ml-2 shrink-0">(read-only)</span>
+                    <span className="font-body text-[13px] text-[#9A8F7E] break-all">{user.email}</span>
+                    <span className="ml-2 shrink-0 text-[10px] text-[#9A8F7E] bg-[#ede8df] px-2 py-0.5 rounded">read-only</span>
                   </>
                 ) : (
                   <div className="h-4 w-48 bg-[#F0EBE1] rounded animate-pulse" />
@@ -85,8 +85,8 @@ export default function AccountSettingsPage() {
 
           {/* Danger Zone */}
           <div className="px-6 py-5">
-            <p className="text-[9px] uppercase tracking-[0.4em] text-[#C9A234] font-bold mb-4">Danger Zone</p>
-            <div className="border border-[#F0D0C8] p-5">
+            <p className="text-[9px] uppercase tracking-[0.4em] text-[#C9A234] font-bold mb-4">⚠️ Danger Zone</p>
+            <div className="border border-[#e53e3e] p-5">
               <p className="font-body text-[13px] font-semibold text-[#1A1408] mb-1">Delete Account</p>
               <p className="font-body text-[12px] text-[#9A8F7E] leading-relaxed mb-4">
                 Permanently removes your account, saved ideas, and all enquiries. This cannot be undone.
@@ -95,18 +95,18 @@ export default function AccountSettingsPage() {
               {!confirmDelete ? (
                 <button
                   onClick={() => setConfirmDelete(true)}
-                  className="h-9 px-5 border border-[#E87B3A] text-[#E87B3A] font-body text-[11px] uppercase tracking-[0.25em] font-bold hover:bg-[#FFF3E0] transition-colors"
+                  className="h-9 px-5 border border-[#e53e3e] text-[#e53e3e] font-body text-[11px] uppercase tracking-[0.25em] font-bold hover:bg-[#e53e3e] hover:text-white transition-colors"
                 >
                   Delete Account
                 </button>
               ) : (
                 <div className="flex flex-col gap-3">
-                  <p className="font-body text-[12px] text-[#E87B3A] font-semibold">Are you sure? This will erase everything permanently.</p>
+                  <p className="font-body text-[12px] text-[#e53e3e] font-semibold">Are you sure? This will erase everything permanently.</p>
                   <div className="flex flex-wrap items-center gap-2">
                     <button
                       onClick={handleDelete}
                       disabled={deleting}
-                      className="h-9 px-5 bg-[#E87B3A] text-white font-body text-[11px] uppercase tracking-[0.25em] font-bold hover:opacity-90 transition-opacity disabled:opacity-60 flex items-center gap-2"
+                      className="h-9 px-5 bg-[#e53e3e] text-white font-body text-[11px] uppercase tracking-[0.25em] font-bold hover:opacity-90 transition-opacity disabled:opacity-60 flex items-center gap-2"
                     >
                       {deleting ? <><Loader2 size={13} className="animate-spin" /> Deleting…</> : "Yes, Delete"}
                     </button>
@@ -121,12 +121,12 @@ export default function AccountSettingsPage() {
                 </div>
               )}
 
-              {error && <p className="font-body text-[12px] text-[#E87B3A] mt-3">{error}</p>}
+              {error && <p className="font-body text-[12px] text-[#e53e3e] mt-3">{error}</p>}
             </div>
           </div>
         </div>
 
-        <div className="mt-6 flex gap-6">
+        <div className="mt-6 flex justify-between">
           <Link href="/profile" className="text-[11px] uppercase tracking-[0.25em] text-[#9A8F7E] hover:text-[#C9A234] transition-colors">
             ← My Profile
           </Link>

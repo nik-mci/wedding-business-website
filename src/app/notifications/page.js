@@ -95,7 +95,7 @@ export default function NotificationsPage() {
 
         <div className="bg-white border border-[#EDE8DC] shadow-[0_2px_16px_rgba(0,0,0,0.04)] divide-y divide-[#EDE8DC]">
           {PREFS.map(({ key, label, description }) => (
-            <div key={key} className="px-6 py-4 flex items-center gap-6">
+            <div key={key} className="px-6 py-5 flex items-center gap-6">
               <div className="flex-1 min-w-0">
                 <p className="font-body text-[13px] font-semibold text-[#1A1408] mb-0.5">{label}</p>
                 <p className="font-body text-[12px] text-[#9A8F7E] leading-relaxed">{description}</p>
@@ -125,18 +125,24 @@ export default function NotificationsPage() {
               </div>
             </div>
           ))}
-          <div className="px-6 py-3 bg-[#FDFAF5]">
-            <p className="text-[11px] text-[#9A8F7E] leading-relaxed">
-              Changes save automatically. Turning off enquiry updates will not affect any planning already in progress.
-            </p>
-          </div>
+        </div>
+
+        {/* Auto-save note — standalone info block below card */}
+        <div className="mt-3 flex items-start gap-2 bg-[#f7f5f0] rounded-md px-4 py-3">
+          <span className="text-[13px] shrink-0">ℹ️</span>
+          <p className="text-[11px] text-[#9A8F7E] leading-relaxed">
+            Changes save automatically. Turning off enquiry updates will not affect any planning already in progress.
+          </p>
         </div>
 
         {error && <p className="font-body text-[12px] text-[#E87B3A] mt-3">{error}</p>}
 
-        <div className="mt-6 flex gap-6">
+        <div className="mt-6 flex justify-between">
           <Link href="/account-settings" className="text-[11px] uppercase tracking-[0.25em] text-[#9A8F7E] hover:text-[#C9A234] transition-colors">
             ← Account Settings
+          </Link>
+          <Link href="/profile" className="text-[11px] uppercase tracking-[0.25em] text-[#C9A234] hover:opacity-70 transition-opacity">
+            My Profile →
           </Link>
         </div>
       </div>
