@@ -2,23 +2,30 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Loader2, Check } from "lucide-react";
+import { Loader2, Check, Sparkles, Building2, MessageSquare } from "lucide-react";
+import AccountHero from "@/components/AccountHero";
 
 const PREFS = [
   {
     key: "inspiration",
     label: "Inspiration & Mood Board Updates",
     description: "New mood boards, wedding trends, and curated ideas delivered to your inbox.",
+    Icon: Sparkles,
+    recommended: true,
   },
   {
     key: "offers",
     label: "Special Offers & New Venues",
     description: "Be the first to hear about exclusive venue launches and seasonal packages.",
+    Icon: Building2,
+    recommended: false,
   },
   {
     key: "enquiryUpdates",
     label: "Enquiry Status Updates",
     description: "Get notified when our team responds to your planning enquiry.",
+    Icon: MessageSquare,
+    recommended: false,
   },
 ];
 
@@ -47,7 +54,6 @@ export default function NotificationsPage() {
     setPrefs((prev) => ({ ...prev, [key]: next }));
     setSaving(key);
     setError(null);
-
     try {
       const res = await fetch("/api/user/notifications", {
         method: "PATCH",
@@ -68,12 +74,12 @@ export default function NotificationsPage() {
 
   if (!authed) {
     return (
-      <div className="pt-[104px] min-h-screen bg-[#FDFAF5] flex items-center justify-center">
+      <div className="pt-[104px] min-h-screen bg-[#FAF7F2] flex items-center justify-center">
         <div className="text-center">
-          <p className="font-heading text-2xl font-light text-[#1A1408] mb-3">Sign in to manage notifications</p>
+          <p className="font-heading text-2xl font-light text-[#1C1712] mb-3">Sign in to manage notifications</p>
           <button
             onClick={() => window.dispatchEvent(new CustomEvent("openProfileDropdown"))}
-            className="text-[10px] uppercase tracking-[0.3em] font-medium px-6 py-3 bg-[#C9A234] text-white hover:opacity-90 transition-opacity"
+            className="text-[10px] uppercase tracking-[0.3em] font-medium px-6 py-3 bg-[#B8962E] text-[#FAF7F2] hover:opacity-90 transition-opacity"
           >
             Sign In
           </button>
@@ -83,68 +89,121 @@ export default function NotificationsPage() {
   }
 
   return (
-    <div className="pt-[104px] min-h-screen bg-[#FDFAF5]">
-      <div className="max-w-[860px] mx-auto px-6 lg:px-12 py-10">
+    <div className="pt-[104px] min-h-screen bg-[#FAF7F2]">
+      <AccountHero
+        title="Notifications"
+        subtitle="Curate the updates that arrive in your inbox"
+      />
 
-        {/* Header */}
-        <div className="mb-6">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A234] mb-1.5 font-medium">My Account</p>
-          <h1 className="font-heading text-[36px] font-light text-[#1A1408] leading-tight">Notifications</h1>
-          <p className="text-[13px] text-[#9A8F7E] mt-1">Choose which emails you'd like to receive from us.</p>
-        </div>
+      <div className="max-w-[800px] mx-auto px-6 md:px-12 py-10 flex flex-col gap-4">
 
-        <div className="bg-white border border-[#EDE8DC] shadow-[0_2px_16px_rgba(0,0,0,0.04)] divide-y divide-[#EDE8DC]">
-          {PREFS.map(({ key, label, description }) => (
-            <div key={key} className="px-6 py-5 flex items-center gap-6">
-              <div className="flex-1 min-w-0">
-                <p className="font-body text-[13px] font-semibold text-[#1A1408] mb-0.5">{label}</p>
-                <p className="font-body text-[12px] text-[#9A8F7E] leading-relaxed">{description}</p>
-              </div>
-              <div className="flex items-center gap-2 shrink-0">
-                {saved === key && <Check size={13} className="text-[#5A8A5A]" />}
-                {loading ? (
-                  <div className="w-11 h-6 bg-[#F0EBE1] rounded-full animate-pulse" />
-                ) : saving === key ? (
-                  <Loader2 size={16} className="text-[#C9A234] animate-spin" />
-                ) : (
-                  <button
-                    onClick={() => toggle(key)}
-                    role="switch"
-                    aria-checked={prefs[key]}
-                    className={`relative w-11 h-6 rounded-full transition-colors duration-200 focus:outline-none ${
-                      prefs[key] ? "bg-[#C9A234]" : "bg-[#EDE8DC]"
-                    }`}
-                  >
-                    <span
-                      className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm transition-transform duration-200 ${
-                        prefs[key] ? "translate-x-5" : "translate-x-0"
-                      }`}
-                    />
-                  </button>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
+        {PREFS.map(({ key, label, description, Icon, recommended }) => (
+          <NotificationCard
+            key={key}
+            label={label}
+            description={description}
+            Icon={Icon}
+            recommended={recommended}
+            checked={prefs[key]}
+            saving={saving === key}
+            saved={saved === key}
+            loading={loading}
+            onToggle={() => toggle(key)}
+          />
+        ))}
 
-        {/* Auto-save note — standalone info block below card */}
-        <div className="mt-3 flex items-start gap-2 bg-[#f7f5f0] rounded-md px-4 py-3">
-          <span className="text-[13px] shrink-0">ℹ️</span>
-          <p className="text-[11px] text-[#9A8F7E] leading-relaxed">
+        {/* Info bar */}
+        <div
+          className="flex items-start gap-3 px-5 py-4 mt-2"
+          style={{
+            background: "rgba(184,150,46,0.08)",
+            borderLeft: "3px solid #B8962E",
+            borderRadius: "0 4px 4px 0",
+          }}
+        >
+          <span className="text-[14px] shrink-0 text-[#B8962E] font-medium">ℹ</span>
+          <p className="text-[12px] text-[#9A8F7E] italic leading-relaxed">
             Changes save automatically. Turning off enquiry updates will not affect any planning already in progress.
           </p>
         </div>
 
-        {error && <p className="font-body text-[12px] text-[#E87B3A] mt-3">{error}</p>}
+        {error && <p className="font-body text-[12px] text-red-500">{error}</p>}
 
-        <div className="mt-6 flex justify-between">
-          <Link href="/account-settings" className="text-[11px] uppercase tracking-[0.25em] text-[#9A8F7E] hover:text-[#C9A234] transition-colors">
+        {/* Bottom nav */}
+        <div
+          className="pt-6 mt-2 flex justify-between"
+          style={{ borderTop: "1px solid rgba(184,150,46,0.15)" }}
+        >
+          <Link href="/account-settings" className="text-[11px] uppercase tracking-[0.25em] text-[#9A8F7E] hover:text-[#B8962E] transition-colors">
             ← Account Settings
           </Link>
-          <Link href="/profile" className="text-[11px] uppercase tracking-[0.25em] text-[#C9A234] hover:opacity-70 transition-opacity">
+          <Link href="/profile" className="text-[11px] uppercase tracking-[0.25em] text-[#B8962E] hover:opacity-70 transition-opacity">
             My Profile →
           </Link>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function NotificationCard({ label, description, Icon, recommended, checked, saving, saved, loading, onToggle }) {
+  return (
+    <div
+      className="bg-white rounded-lg p-6 md:p-8 flex items-center gap-6 transition-all duration-200 hover:bg-[rgba(184,150,46,0.04)] border border-[rgba(184,150,46,0.2)] hover:border-[rgba(184,150,46,0.45)]"
+    >
+      {/* Icon */}
+      <div
+        className="w-12 h-12 rounded-full flex items-center justify-center shrink-0"
+        style={{
+          background: "rgba(184,150,46,0.1)",
+          border: "1px solid rgba(184,150,46,0.2)",
+        }}
+      >
+        <Icon size={18} className="text-[#B8962E]" />
+      </div>
+
+      {/* Text */}
+      <div className="flex-1 min-w-0">
+        <div className="flex flex-wrap items-center gap-2 mb-1">
+          <p className="font-heading text-[17px] font-light text-[#1C1712]">{label}</p>
+          {recommended && (
+            <span
+              className="text-[9px] uppercase tracking-[0.15em] text-[#B8962E] px-2 py-0.5"
+              style={{ border: "1px solid rgba(184,150,46,0.5)", borderRadius: "2px" }}
+            >
+              Recommended
+            </span>
+          )}
+        </div>
+        <p className="font-body text-[13px] text-[#9A8F7E] leading-relaxed">{description}</p>
+      </div>
+
+      {/* Toggle */}
+      <div className="flex items-center gap-2 shrink-0">
+        {saved && <Check size={13} className="text-[#5A8A5A]" />}
+        <span className="text-[9px] uppercase tracking-[0.2em] text-[#9A8F7E] w-5 text-right">
+          {checked ? "On" : "Off"}
+        </span>
+        {loading ? (
+          <div className="w-11 h-6 bg-[#F0EBE1] rounded-full animate-pulse" />
+        ) : saving ? (
+          <Loader2 size={16} className="text-[#B8962E] animate-spin" />
+        ) : (
+          <button
+            onClick={onToggle}
+            role="switch"
+            aria-checked={checked}
+            aria-label={label}
+            className="relative w-11 h-6 rounded-full transition-colors duration-300 focus:outline-none"
+            style={{ background: checked ? "#B8962E" : "#D1CBC4" }}
+          >
+            <span
+              className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm transition-transform duration-300 ${
+                checked ? "translate-x-5" : "translate-x-0"
+              }`}
+            />
+          </button>
+        )}
       </div>
     </div>
   );
