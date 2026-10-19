@@ -1,5 +1,7 @@
 import { AzureOpenAI } from "openai";
 import { DefaultAzureCredential, getBearerTokenProvider } from "@azure/identity";
+// Relative, not "@/lib/telemetry", so test/hashtags.test.mjs can import this route under plain Node.
+import { trackEvent } from "../../../lib/telemetry.js";
 
 const _credential = new DefaultAzureCredential();
 const apiVersion = process.env.AZURE_OPENAI_API_VERSION || "2024-10-21";
@@ -8,11 +10,14 @@ const deployment  = process.env.AZURE_OPENAI_DEPLOYMENT  || "gpt-4-1-mini";
 let client;
 function getClient() {
   if (!client) {
+    const apiKey = process.env.AZURE_OPENAI_API_KEY;
     client = new AzureOpenAI({
-      endpoint:             process.env.AZURE_OPENAI_ENDPOINT,
-      azureADTokenProvider: getBearerTokenProvider(_credential, "https://cognitiveservices.azure.com/.default"),
+      endpoint: process.env.AZURE_OPENAI_ENDPOINT,
       apiVersion,
       deployment,
+      ...(apiKey
+        ? { apiKey }
+        : { azureADTokenProvider: getBearerTokenProvider(_credential, "https://cognitiveservices.azure.com/.default") }),
     });
   }
   return client;
@@ -76,9 +81,11 @@ Rules:
       return Response.json({ error: "Unexpected model response" }, { status: 502 });
     }
 
+    await trackEvent("HashtagGenerated", { vibe });
     return Response.json({ hashtags });
   } catch (err) {
     console.error("Hashtag generation failed:", err);
+    await trackEvent("HashtagGenerationFailed", { error: err?.message || String(err) });
     return Response.json({ error: "Generation failed" }, { status: 500 });
   }
 }
