@@ -8,11 +8,14 @@ const deployment  = process.env.AZURE_OPENAI_DEPLOYMENT  || "gpt-4-1-mini";
 let client;
 function getClient() {
   if (!client) {
+    const apiKey = process.env.AZURE_OPENAI_API_KEY;
     client = new AzureOpenAI({
-      endpoint:             process.env.AZURE_OPENAI_ENDPOINT,
-      azureADTokenProvider: getBearerTokenProvider(_credential, "https://cognitiveservices.azure.com/.default"),
+      endpoint: process.env.AZURE_OPENAI_ENDPOINT,
       apiVersion,
       deployment,
+      ...(apiKey
+        ? { apiKey }
+        : { azureADTokenProvider: getBearerTokenProvider(_credential, "https://cognitiveservices.azure.com/.default") }),
     });
   }
   return client;
